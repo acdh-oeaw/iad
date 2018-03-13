@@ -7,8 +7,45 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-from .forms import PeriodForm
-from .models import Period
+from .forms import PeriodForm, AltNameForm
+from .models import Period, AltName
+
+
+class AltNameDetailView(DetailView):
+    model = AltName
+    template_name = 'archiv/altname_detail.html'
+
+
+class AltNameCreate(CreateView):
+
+    model = AltName
+    form_class = AltNameForm
+    template_name = 'archiv/altname_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AltNameCreate, self).dispatch(*args, **kwargs)
+
+
+class AltNameUpdate(UpdateView):
+
+    model = AltName
+    form_class = AltNameForm
+    template_name = 'archiv/altname_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AltNameUpdate, self).dispatch(*args, **kwargs)
+
+
+class AltNameDelete(DeleteView):
+    model = AltName
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_period')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AltNameDelete, self).dispatch(*args, **kwargs)
 
 
 class PeriodDetailView(DetailView):

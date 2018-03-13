@@ -4,6 +4,19 @@ from entities.models import *
 from archiv.models import *
 
 
+class AltNameTable(tables.Table):
+    label = tables.LinkColumn(
+        'archiv:altname_detail',
+        args=[A('pk')], verbose_name='Name'
+    )
+    language = tables.Column()
+
+    class Meta:
+        model = AltName
+        sequence = ('label', 'language')
+        attrs = {"class": "table table-responsive table-hover"}
+
+
 class PeriodTable(tables.Table):
     id = tables.LinkColumn(
         'archiv:period_detail',

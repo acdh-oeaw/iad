@@ -12,4 +12,12 @@ urlpatterns = [
         name='period_edit'),
     url(r'^period/delete/(?P<pk>[0-9]+)$', views.PeriodDelete.as_view(),
         name='period_delete'),
+    url(r'^altname/detail/(?P<pk>[0-9]+)$', views.AltNameDetailView.as_view(),
+        name='altname_detail'),
+    url(r'^altname/create/$', views.AltNameCreate.as_view(),
+        name='altname_create'),
+    url(r'^altname/edit/(?P<pk>[0-9]+)$', views.AltNameUpdate.as_view(),
+        name='altname_edit'),
+    url(r'^altname/delete/(?P<pk>[0-9]+)$', views.AltNameDelete.as_view(),
+        name='altname_delete'),
 ]

@@ -4,6 +4,7 @@ from . import views
 app_name = 'browsing'
 
 urlpatterns = [
+    url(r'archivaltnames/$', views.AltNameListView.as_view(), name='browse_archivaltnames'),
     url(r'places/$', views.PlaceListView.as_view(), name='browse_places'),
     url(r'places-rdf/$', views.PlaceRDFView.as_view(), name='rdf_places'),
     url(r'altnames/$', views.AlternativeNameListView.as_view(), name='browse_altnames'),

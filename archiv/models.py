@@ -14,6 +14,37 @@ class AltName(IdProvider):
         blank=True, null=True, max_length=3,
         verbose_name="ISO639")
 
+    def __str__(self):
+        if self.language:
+            return "{} ({})".format(self.label, self.language)
+        else:
+            return "{}".format(self.label)
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_archivaltnames')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:altname_create')
+
+    def get_next(self):
+        next = AltName.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = AltName.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:altname_detail', kwargs={'pk': self.id}
+        )
+
 
 class IadBaseClass(IdProvider):
     """A class for shared properties"""
