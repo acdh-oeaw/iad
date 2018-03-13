@@ -4,6 +4,14 @@ from . import views
 app_name = 'archiv'
 
 urlpatterns = [
+    url(r'^site/detail/(?P<pk>[0-9]+)$', views.SiteDetailView.as_view(),
+        name='site_detail'),
+    url(r'^site/create/$', views.SiteCreate.as_view(),
+        name='site_create'),
+    url(r'^site/edit/(?P<pk>[0-9]+)$', views.SiteUpdate.as_view(),
+        name='site_edit'),
+    url(r'^site/delete/(?P<pk>[0-9]+)$', views.SiteDelete.as_view(),
+        name='site_delete'),
     url(r'^period/detail/(?P<pk>[0-9]+)$', views.PeriodDetailView.as_view(),
         name='period_detail'),
     url(r'^period/create/$', views.PeriodCreate.as_view(),

@@ -4,6 +4,22 @@ from entities.models import *
 from archiv.models import *
 
 
+class SiteTable(tables.Table):
+    id = tables.LinkColumn(
+        'archiv:site_detail',
+        args=[A('pk')], verbose_name='ID'
+    )
+    name = tables.LinkColumn(
+        'archiv:site_detail',
+        args=[A('pk')], verbose_name='Name'
+    )
+
+    class Meta:
+        model = Site
+        sequence = ('id', 'name',)
+        attrs = {"class": "table table-responsive table-hover"}
+
+
 class ResearchEventTable(tables.Table):
     id = tables.LinkColumn(
         'archiv:researchevent_detail',
