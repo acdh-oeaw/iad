@@ -1,6 +1,25 @@
 import django_tables2 as tables
 from django_tables2.utils import A
 from entities.models import *
+from archiv.models import *
+
+
+class PeriodTable(tables.Table):
+    id = tables.LinkColumn(
+        'archiv:period_detail',
+        args=[A('pk')], verbose_name='ID'
+    )
+    name = tables.LinkColumn(
+        'archiv:period_detail',
+        args=[A('pk')], verbose_name='Name'
+    )
+    start_date = tables.Column()
+    end_date = tables.Column()
+
+    class Meta:
+        model = Period
+        sequence = ('id', 'name',)
+        attrs = {"class": "table table-responsive table-hover"}
 
 
 class PersonTable(tables.Table):

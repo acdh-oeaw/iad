@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.contrib.gis.db import models
 from idprovider.models import IdProvider
 from entities.models import Place
@@ -29,7 +30,7 @@ class IadBaseClass(IdProvider):
         help_text="Any other official identifier of this entity."
     )
     description = models.TextField(
-        blank=True, null=True, help_text="Description of the object."
+        blank=True, null=True, verbose_name="Description of the object."
     )
     comment = models.TextField(
         blank=True, null=True, help_text="""Any noteworthy general information about the object
@@ -56,6 +57,31 @@ class Period(IadBaseClass):
         blank=True, null=True, max_length=250,
         verbose_name="Link to some norm data record like period io"
     )
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_periods')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:period_create')
+
+    def get_next(self):
+        next = Period.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Period.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:period_detail', kwargs={'pk': self.id}
+        )
 
 
 class ResearchEvent(IadBaseClass):

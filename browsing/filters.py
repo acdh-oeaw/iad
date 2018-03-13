@@ -1,6 +1,8 @@
 import django_filters
 from dal import autocomplete
+from archiv.models import Period
 from entities.models import Place, AlternativeName, Institution, Person
+
 
 django_filters.filters.LOOKUP_TYPES = [
     ('', '---------'),
@@ -17,6 +19,18 @@ django_filters.filters.LOOKUP_TYPES = [
     ('icontains', 'Contains (case insensitive)'),
     ('not_contains', 'Does not contain'),
 ]
+
+
+class PeriodListFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Period._meta.get_field('name').help_text,
+        label=Period._meta.get_field('name').verbose_name
+        )
+
+    class Meta:
+        model = Period
+        exclude = ['polygon']
 
 
 class PersonListFilter(django_filters.FilterSet):

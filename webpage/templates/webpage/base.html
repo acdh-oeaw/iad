@@ -91,6 +91,13 @@
                             </a>
                         {% endif %}
                         <ul class="dropdown-menu">
+                            {% nav_menu app='archiv' as links %}
+                            {% for x in links %}
+                                <li>
+                                    <a href="{{ x.link}}">{{ x.name }}</a>
+                                </li>
+                            {% endfor %}
+                            <li role="separator" class="divider"></li>
                             {% nav_menu app='entities' as links %}
                             {% for x in links %}
                                 <li>
