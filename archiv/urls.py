@@ -20,4 +20,12 @@ urlpatterns = [
         name='altname_edit'),
     url(r'^altname/delete/(?P<pk>[0-9]+)$', views.AltNameDelete.as_view(),
         name='altname_delete'),
+    url(r'^researchevent/detail/(?P<pk>[0-9]+)$', views.ResearchEventDetailView.as_view(),
+        name='researchevent_detail'),
+    url(r'^researchevent/create/$', views.ResearchEventCreate.as_view(),
+        name='researchevent_create'),
+    url(r'^researchevent/edit/(?P<pk>[0-9]+)$', views.ResearchEventUpdate.as_view(),
+        name='researchevent_edit'),
+    url(r'^researchevent/delete/(?P<pk>[0-9]+)$', views.ResearchEventDelete.as_view(),
+        name='researchevent_delete'),
 ]

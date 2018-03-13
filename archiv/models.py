@@ -77,8 +77,8 @@ class IadBaseClass(IdProvider):
     )
     polygon = models.MultiPolygonField(blank=True, null=True, srid=4326)
 
-    def __str__(self):
-        return "{}".format(self.name)
+    class Meta:
+        abstract = True
 
 
 class Period(IadBaseClass):
@@ -114,9 +114,39 @@ class Period(IadBaseClass):
             'archiv:period_detail', kwargs={'pk': self.id}
         )
 
+    def __str__(self):
+        return "{}".format(self.name)
 
 class ResearchEvent(IadBaseClass):
-    pass
+    """Please Provide some Information about this Class"""
+
+    def __str__(self):
+        return self.name
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_researchevents')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:researchevent_create')
+
+    def get_next(self):
+        next = ResearchEvent.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = ResearchEvent.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:researchevent_detail', kwargs={'pk': self.id}
+        )
 
 
 class Site(IadBaseClass):
@@ -124,10 +154,6 @@ class Site(IadBaseClass):
     administrative information about the area where past human activity has been recognized.
     It is defined by a spatial polygon"""
 
-    cadastral_community = models.ManyToManyField(
-        Place, blank=True, verbose_name="Cadastral Community",
-        help_text="The cadastral community where the site is located."
-    )
     cadastral_community = models.ManyToManyField(
         Place, blank=True, verbose_name="Cadastral Community",
         help_text="The cadastral community where the site is located."

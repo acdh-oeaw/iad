@@ -27,6 +27,20 @@
         <p>{% projects_metadata 'description' %}</p>
         <div>
             <h3>Data-Count</h3>
+            {% create_object_count app='archiv' as models %}
+            {% for x in models %}
+            <div class="col-lg-4 col-md-4 col-sm-6 grid-item type-one">
+                <div class="div-tile">
+                    {% if x.link %}
+                        <a href="{{ x.link }}"><h5>{{x.name}}</h5></a>
+                        {% else %}
+                        <h5>{{x.name}}</h5>
+                    {% endif %}
+                    <hr class="hrtile">
+                    <h5 class="count">{{x.count}}</h5>
+                </div>
+            </div>
+            {% endfor %}
             {% create_object_count app='entities' as models %}
             {% for x in models %}
             <div class="col-lg-4 col-md-4 col-sm-6 grid-item type-one">

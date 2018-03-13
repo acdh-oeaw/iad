@@ -7,8 +7,45 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-from .forms import PeriodForm, AltNameForm
-from .models import Period, AltName
+from .forms import PeriodForm, AltNameForm, ResearchEventForm
+from .models import Period, AltName, ResearchEvent
+
+
+class ResearchEventDetailView(DetailView):
+    model = ResearchEvent
+    template_name = 'archiv/researchevent_detail.html'
+
+
+class ResearchEventCreate(CreateView):
+
+    model = ResearchEvent
+    form_class = ResearchEventForm
+    template_name = 'archiv/researchevent_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResearchEventCreate, self).dispatch(*args, **kwargs)
+
+
+class ResearchEventUpdate(UpdateView):
+
+    model = ResearchEvent
+    form_class = ResearchEventForm
+    template_name = 'archiv/researchevent_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResearchEventUpdate, self).dispatch(*args, **kwargs)
+
+
+class ResearchEventDelete(DeleteView):
+    model = ResearchEvent
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_period')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResearchEventDelete, self).dispatch(*args, **kwargs)
 
 
 class AltNameDetailView(DetailView):
