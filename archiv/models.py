@@ -330,6 +330,34 @@ class ExtractionArea(BaseArchEnt):
         related_name="ea_grave_type"
     )
 
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_extractionareas')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:extractionarea_create')
+
+    def get_next(self):
+        next = Settlement.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Settlement.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:extractionarea_detail', kwargs={'pk': self.id}
+        )
+
+    def __str__(self):
+        return "{}".format(self.name)
+
 
 class Communication(BaseArchEnt):
     comm_type = models.ManyToManyField(

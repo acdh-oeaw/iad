@@ -17,4 +17,7 @@ urlpatterns = [
     url(r'sites/$', views.SiteListView.as_view(), name='browse_sites'),
     url(r'settlements/$', views.SettlementListView.as_view(), name='browse_settlements'),
     url(r'cemeteries/$', views.CemeteryListView.as_view(), name='browse_cemeteries'),
+    url(
+        r'extractionareas/$', views.ExtractionAreaListView.as_view(), name='browse_extractionareas'
+    ),
 ]

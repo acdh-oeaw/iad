@@ -11,6 +11,43 @@ from .forms import *
 from .models import *
 
 
+class ExtractionAreaDetailView(DetailView):
+    model = ExtractionArea
+    template_name = 'archiv/extractionarea_detail.html'
+
+
+class ExtractionAreaCreate(CreateView):
+
+    model = ExtractionArea
+    form_class = ExtractionAreaForm
+    template_name = 'archiv/extractionarea_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ExtractionAreaCreate, self).dispatch(*args, **kwargs)
+
+
+class ExtractionAreaUpdate(UpdateView):
+
+    model = ExtractionArea
+    form_class = ExtractionAreaForm
+    template_name = 'archiv/extractionarea_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ExtractionAreaUpdate, self).dispatch(*args, **kwargs)
+
+
+class ExtractionAreaDelete(DeleteView):
+    model = ExtractionArea
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_extractionareas')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ExtractionAreaDelete, self).dispatch(*args, **kwargs)
+
+
 class CemeteryDetailView(DetailView):
     model = Cemetery
     template_name = 'archiv/cemetery_detail.html'

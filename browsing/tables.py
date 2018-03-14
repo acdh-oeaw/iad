@@ -4,6 +4,22 @@ from entities.models import *
 from archiv.models import *
 
 
+class ExtractionAreaTable(tables.Table):
+    id = tables.LinkColumn(
+        'archiv:extractionarea_detail',
+        args=[A('pk')], verbose_name='ID'
+    )
+    name = tables.LinkColumn(
+        'archiv:extractionarea_detail',
+        args=[A('pk')], verbose_name='Name'
+    )
+
+    class Meta:
+        model = ExtractionArea
+        sequence = ('id', 'name',)
+        attrs = {"class": "table table-responsive table-hover"}
+
+
 class CemeteryTable(tables.Table):
     id = tables.LinkColumn(
         'archiv:cemetery_detail',
