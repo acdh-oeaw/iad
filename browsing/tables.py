@@ -4,6 +4,22 @@ from entities.models import *
 from archiv.models import *
 
 
+class FindTable(tables.Table):
+    id = tables.LinkColumn(
+        'archiv:find_detail',
+        args=[A('pk')], verbose_name='ID'
+    )
+    name = tables.LinkColumn(
+        'archiv:find_detail',
+        args=[A('pk')], verbose_name='Name'
+    )
+
+    class Meta:
+        model = Find
+        sequence = ('id', 'name',)
+        attrs = {"class": "table table-responsive table-hover"}
+
+
 class CommunicationTable(tables.Table):
     id = tables.LinkColumn(
         'archiv:communication_detail',

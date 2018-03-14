@@ -11,6 +11,43 @@ from .forms import *
 from .models import *
 
 
+class FindDetailView(DetailView):
+    model = Find
+    template_name = 'archiv/find_detail.html'
+
+
+class FindCreate(CreateView):
+
+    model = Find
+    form_class = FindForm
+    template_name = 'archiv/find_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(FindCreate, self).dispatch(*args, **kwargs)
+
+
+class FindUpdate(UpdateView):
+
+    model = Find
+    form_class = FindForm
+    template_name = 'archiv/find_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(FindUpdate, self).dispatch(*args, **kwargs)
+
+
+class FindDelete(DeleteView):
+    model = Find
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_finds')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(FindDelete, self).dispatch(*args, **kwargs)
+
+
 class CommunicationDetailView(DetailView):
     model = Communication
     template_name = 'archiv/communication_detail.html'

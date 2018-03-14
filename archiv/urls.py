@@ -4,6 +4,14 @@ from . import views
 app_name = 'archiv'
 
 urlpatterns = [
+    url(r'^find/detail/(?P<pk>[0-9]+)$', views.CommunicationDetailView.as_view(),
+        name='find_detail'),
+    url(r'^find/create/$', views.CommunicationCreate.as_view(),
+        name='find_create'),
+    url(r'^find/edit/(?P<pk>[0-9]+)$', views.CommunicationUpdate.as_view(),
+        name='find_edit'),
+    url(r'^find/delete/(?P<pk>[0-9]+)$', views.CommunicationDelete.as_view(),
+        name='find_delete'),
     url(r'^communication/detail/(?P<pk>[0-9]+)$', views.CommunicationDetailView.as_view(),
         name='communication_detail'),
     url(r'^communication/create/$', views.CommunicationCreate.as_view(),

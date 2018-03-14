@@ -399,3 +399,31 @@ class Find(BaseArchEnt):
         SkosConcept, blank=True, help_text="provide some helptext",
         related_name="find_grave_type"
     )
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_finds')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:find_create')
+
+    def get_next(self):
+        next = Find.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Find.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:find_detail', kwargs={'pk': self.id}
+        )
+
+    def __str__(self):
+        return "{}".format(self.name)
