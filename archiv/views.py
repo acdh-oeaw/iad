@@ -8,7 +8,44 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 from .forms import *
-from .models import Period, AltName, ResearchEvent, Site, Settlement
+from .models import *
+
+
+class CemeteryDetailView(DetailView):
+    model = Cemetery
+    template_name = 'archiv/cemetery_detail.html'
+
+
+class CemeteryCreate(CreateView):
+
+    model = Cemetery
+    form_class = CemeteryForm
+    template_name = 'archiv/cemetery_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CemeteryCreate, self).dispatch(*args, **kwargs)
+
+
+class CemeteryUpdate(UpdateView):
+
+    model = Cemetery
+    form_class = CemeteryForm
+    template_name = 'archiv/cemetery_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CemeteryUpdate, self).dispatch(*args, **kwargs)
+
+
+class CemeteryDelete(DeleteView):
+    model = Cemetery
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_cemeteries')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CemeteryDelete, self).dispatch(*args, **kwargs)
 
 
 class SettlementDetailView(DetailView):
@@ -46,6 +83,7 @@ class SettlementDelete(DeleteView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(SettlementDelete, self).dispatch(*args, **kwargs)
+
 
 class SiteDetailView(DetailView):
     model = Site

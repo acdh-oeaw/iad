@@ -3,7 +3,22 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
-from .models import Period, AltName, ResearchEvent, Site, Settlement
+from .models import *
+
+
+class CemeteryForm(forms.ModelForm):
+    class Meta:
+        model = Cemetery
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super(CemeteryForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = True
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-md-3'
+        self.helper.field_class = 'col-md-9'
+        self.helper.add_input(Submit('submit', 'save'),)
 
 
 class SettlementForm(forms.ModelForm):

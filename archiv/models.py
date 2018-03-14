@@ -295,8 +295,33 @@ class Cemetery(BaseArchEnt):
         related_name="cemetery_burial_type"
     )
 
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_cemeteries')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:cemetery_create')
+
+    def get_next(self):
+        next = Settlement.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Settlement.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:cemetery_detail', kwargs={'pk': self.id}
+        )
+
     def __str__(self):
-        return "Site: {}, Type: {}".format(self.site_id.name, self.__class__.__name__)
+        return "{}".format(self.name)
 
 
 class ExtractionArea(BaseArchEnt):
