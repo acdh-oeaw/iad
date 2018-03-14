@@ -1,6 +1,6 @@
 import django_filters
 from dal import autocomplete
-from archiv.models import Period, AltName, ResearchEvent, Site
+from archiv.models import Period, AltName, ResearchEvent, Site, Settlement
 from entities.models import Place, AlternativeName, Institution, Person
 
 
@@ -19,6 +19,18 @@ django_filters.filters.LOOKUP_TYPES = [
     ('icontains', 'Contains (case insensitive)'),
     ('not_contains', 'Does not contain'),
 ]
+
+
+class SettlementListFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Settlement._meta.get_field('name').help_text,
+        label=Settlement._meta.get_field('name').verbose_name
+        )
+
+    class Meta:
+        model = Settlement
+        exclude = ['polygon']
 
 
 class SiteListFilter(django_filters.FilterSet):

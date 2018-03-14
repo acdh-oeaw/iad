@@ -7,9 +7,45 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-from .forms import PeriodForm, AltNameForm, ResearchEventForm, SiteForm
-from .models import Period, AltName, ResearchEvent, Site
+from .forms import *
+from .models import Period, AltName, ResearchEvent, Site, Settlement
 
+
+class SettlementDetailView(DetailView):
+    model = Settlement
+    template_name = 'archiv/settlement_detail.html'
+
+
+class SettlementCreate(CreateView):
+
+    model = Settlement
+    form_class = SettlementForm
+    template_name = 'archiv/settlement_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SettlementCreate, self).dispatch(*args, **kwargs)
+
+
+class SettlementUpdate(UpdateView):
+
+    model = Settlement
+    form_class = SettlementForm
+    template_name = 'archiv/settlement_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SettlementUpdate, self).dispatch(*args, **kwargs)
+
+
+class SettlementDelete(DeleteView):
+    model = Settlement
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_settlements')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SettlementDelete, self).dispatch(*args, **kwargs)
 
 class SiteDetailView(DetailView):
     model = Site

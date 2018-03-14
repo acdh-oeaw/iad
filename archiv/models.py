@@ -224,17 +224,17 @@ class BaseArchEnt(IadBaseClass):
     end_date = models.IntegerField(blank=True, null=True)
     type_certainty = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        related_name="basearch_type_certainty",
+        related_name="%(app_label)s_%(class)s_type_related",
         on_delete='PROTECT'
     )
     dating_certainty = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        related_name="basearch_dating_certainty",
+        related_name="%(app_label)s_%(class)s_dating_related",
         on_delete='PROTECT'
     )
     location_certainty = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        related_name="basearch_location_certainty",
+        related_name="%(app_label)s_%(class)s_location_related",
         on_delete='PROTECT'
     )
     period = models.ManyToManyField(
@@ -242,8 +242,8 @@ class BaseArchEnt(IadBaseClass):
         help_text="Other periods that were recorded on the site."
     )
 
-    def __str__(self):
-        return "Site: {}".format(self.site_id.name)
+    class Meta:
+        abstract = True
 
 
 class Settlement(BaseArchEnt):
@@ -255,6 +255,34 @@ class Settlement(BaseArchEnt):
         SkosConcept, blank=True, help_text="Is the settlement fortified?",
         related_name="settlement_fortification"
     )
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_settlements')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:settlement_create')
+
+    def get_next(self):
+        next = Settlement.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Settlement.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:settlement_detail', kwargs={'pk': self.id}
+        )
+
+    def __str__(self):
+        return "{}".format(self.name)
 
 
 class Cemetery(BaseArchEnt):

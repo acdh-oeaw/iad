@@ -9,7 +9,7 @@ from django_tables2 import SingleTableView, RequestConfig
 from .filters import *
 from .forms import *
 from .tables import *
-from archiv.models import Period
+from archiv.models import *
 from entities.models import Place, Institution
 from entities.serializer_arche import *
 
@@ -50,6 +50,37 @@ class GenericListView(SingleTableView):
         except AttributeError:
             context['create_view_link'] = None
         return context
+
+
+class SettlementListView(GenericListView):
+    model = Settlement
+    table_class = SettlementTable
+    filter_class = SettlementListFilter
+    formhelper_class = SettlementFilterFormHelper
+    init_columns = ['name']
+
+    def get_all_cols(self):
+        all_cols = list(self.table_class.base_columns.keys())
+        return all_cols
+
+    def get_context_data(self, **kwargs):
+        context = super(SettlementListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
+        context['togglable_colums'] = togglable_colums
+        return context
+
+    def get_table(self, **kwargs):
+        table = super(GenericListView, self).get_table()
+        RequestConfig(self.request, paginate={
+            'page': 1, 'per_page': self.paginate_by
+        }).configure(table)
+        default_cols = self.init_columns
+        all_cols = self.get_all_cols()
+        selected_cols = self.request.GET.getlist("columns") + default_cols
+        exclude_vals = [x for x in all_cols if x not in selected_cols]
+        table.exclude = exclude_vals
+        return table
 
 
 class SiteListView(GenericListView):
