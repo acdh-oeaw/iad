@@ -20,4 +20,5 @@ urlpatterns = [
     url(
         r'extractionareas/$', views.ExtractionAreaListView.as_view(), name='browse_extractionareas'
     ),
+    url(r'communications/$', views.CommunicationListView.as_view(), name='browse_communications'),
 ]

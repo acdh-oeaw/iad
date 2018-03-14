@@ -21,6 +21,18 @@ django_filters.filters.LOOKUP_TYPES = [
 ]
 
 
+class CommunicationListFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Communication._meta.get_field('name').help_text,
+        label=Communication._meta.get_field('name').verbose_name
+        )
+
+    class Meta:
+        model = Communication
+        exclude = ['polygon']
+
+
 class ExtractionAreaListFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(
         lookup_expr='icontains',

@@ -4,6 +4,22 @@ from entities.models import *
 from archiv.models import *
 
 
+class CommunicationTable(tables.Table):
+    id = tables.LinkColumn(
+        'archiv:communication_detail',
+        args=[A('pk')], verbose_name='ID'
+    )
+    name = tables.LinkColumn(
+        'archiv:communication_detail',
+        args=[A('pk')], verbose_name='Name'
+    )
+
+    class Meta:
+        model = Communication
+        sequence = ('id', 'name',)
+        attrs = {"class": "table table-responsive table-hover"}
+
+
 class ExtractionAreaTable(tables.Table):
     id = tables.LinkColumn(
         'archiv:extractionarea_detail',

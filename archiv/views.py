@@ -11,6 +11,43 @@ from .forms import *
 from .models import *
 
 
+class CommunicationDetailView(DetailView):
+    model = Communication
+    template_name = 'archiv/communication_detail.html'
+
+
+class CommunicationCreate(CreateView):
+
+    model = Communication
+    form_class = CommunicationForm
+    template_name = 'archiv/communication_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CommunicationCreate, self).dispatch(*args, **kwargs)
+
+
+class CommunicationUpdate(UpdateView):
+
+    model = Communication
+    form_class = CommunicationForm
+    template_name = 'archiv/communication_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CommunicationUpdate, self).dispatch(*args, **kwargs)
+
+
+class CommunicationDelete(DeleteView):
+    model = Communication
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_communications')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CommunicationDelete, self).dispatch(*args, **kwargs)
+
+
 class ExtractionAreaDetailView(DetailView):
     model = ExtractionArea
     template_name = 'archiv/extractionarea_detail.html'

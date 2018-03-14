@@ -339,13 +339,13 @@ class ExtractionArea(BaseArchEnt):
         return reverse('archiv:extractionarea_create')
 
     def get_next(self):
-        next = Settlement.objects.filter(id__gt=self.id)
+        next = ExtractionArea.objects.filter(id__gt=self.id)
         if next:
             return next.first().id
         return False
 
     def get_prev(self):
-        prev = Settlement.objects.filter(id__lt=self.id).order_by('-id')
+        prev = ExtractionArea.objects.filter(id__lt=self.id).order_by('-id')
         if prev:
             return prev.first().id
         return False
@@ -364,6 +364,34 @@ class Communication(BaseArchEnt):
         SkosConcept, blank=True, help_text="provide some helptext",
         related_name="comm_grave_type"
     )
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_communications')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:communication_create')
+
+    def get_next(self):
+        next = Communication.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Communication.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:communication_detail', kwargs={'pk': self.id}
+        )
+
+    def __str__(self):
+        return "{}".format(self.name)
 
 
 class Find(BaseArchEnt):
