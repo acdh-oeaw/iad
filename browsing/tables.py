@@ -13,6 +13,7 @@ class FindTable(tables.Table):
         'archiv:find_detail',
         args=[A('pk')], verbose_name='Name'
     )
+    public = tables.Column()
 
     class Meta:
         model = Find
@@ -29,6 +30,7 @@ class CommunicationTable(tables.Table):
         'archiv:communication_detail',
         args=[A('pk')], verbose_name='Name'
     )
+    public = tables.Column()
 
     class Meta:
         model = Communication
@@ -45,10 +47,12 @@ class ExtractionAreaTable(tables.Table):
         'archiv:extractionarea_detail',
         args=[A('pk')], verbose_name='Name'
     )
+    site_id = tables.Column()
+    public = tables.Column()
 
     class Meta:
         model = ExtractionArea
-        sequence = ('id', 'name',)
+        sequence = ('id', 'name', 'site_id')
         attrs = {"class": "table table-responsive table-hover"}
 
 
@@ -61,10 +65,12 @@ class CemeteryTable(tables.Table):
         'archiv:cemetery_detail',
         args=[A('pk')], verbose_name='Name'
     )
+    site_id = tables.Column()
+    public = tables.Column()
 
     class Meta:
         model = Cemetery
-        sequence = ('id', 'name',)
+        sequence = ('id', 'name', 'site_id')
         attrs = {"class": "table table-responsive table-hover"}
 
 
@@ -77,10 +83,12 @@ class SettlementTable(tables.Table):
         'archiv:settlement_detail',
         args=[A('pk')], verbose_name='Name'
     )
+    site_id = tables.Column()
+    public = tables.Column()
 
     class Meta:
         model = Settlement
-        sequence = ('id', 'name',)
+        sequence = ('id', 'name', 'site_id')
         attrs = {"class": "table table-responsive table-hover"}
 
 
@@ -93,6 +101,7 @@ class SiteTable(tables.Table):
         'archiv:site_detail',
         args=[A('pk')], verbose_name='Name'
     )
+    public = tables.Column()
 
     class Meta:
         model = Site

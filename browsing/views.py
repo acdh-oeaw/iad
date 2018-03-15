@@ -150,7 +150,7 @@ class CemeteryListView(GenericListView):
     table_class = CemeteryTable
     filter_class = CemeteryListFilter
     formhelper_class = CemeteryFilterFormHelper
-    init_columns = ['name']
+    init_columns = ['name', 'site_id', 'public', 'comment']
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -181,7 +181,7 @@ class SettlementListView(GenericListView):
     table_class = SettlementTable
     filter_class = SettlementListFilter
     formhelper_class = SettlementFilterFormHelper
-    init_columns = ['name']
+    init_columns = ['name', 'site_id', 'public', 'comment']
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -212,7 +212,7 @@ class SiteListView(GenericListView):
     table_class = SiteTable
     filter_class = SiteListFilter
     formhelper_class = SiteFilterFormHelper
-    init_columns = ['name']
+    init_columns = ['name', 'public', 'comment']
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())

@@ -28,7 +28,7 @@ class SkosNamespace(models.Model):
 class SkosConceptScheme(models.Model):
     dc_title = models.CharField(max_length=300, blank=True)
     namespace = models.ForeignKey(
-        SkosNamespace, blank=True, null=True, on_delete=models.PROTECT
+        SkosNamespace, blank=True, null=True, on_delete=models.CASCADE
     )
     dct_creator = models.URLField(blank=True)
     legacy_id = models.CharField(max_length=200, blank=True)
@@ -76,7 +76,7 @@ class SkosConcept(models.Model):
     label = models.ManyToManyField(SkosLabel, blank=True)
     notation = models.CharField(max_length=300, blank=True)
     namespace = models.ForeignKey(
-        SkosNamespace, blank=True, null=True, on_delete=models.PROTECT
+        SkosNamespace, blank=True, null=True, on_delete=models.CASCADE
     )
     skos_broader = models.ManyToManyField(
         'SkosConcept', blank=True, related_name="narrower"

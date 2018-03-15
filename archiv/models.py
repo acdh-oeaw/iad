@@ -214,7 +214,7 @@ class Site(IadBaseClass):
         )
 
     def __str__(self):
-        return "{}".format(self.name)
+        return "{}".format(self.identifier)
 
 
 class BaseArchEnt(IadBaseClass):
@@ -223,24 +223,24 @@ class BaseArchEnt(IadBaseClass):
 
     site_id = models.ForeignKey(
         Site, help_text="The unique identifier of the site.",
-        blank=True, null=True, on_delete='PROTECT'
+        blank=True, null=True, on_delete=models.CASCADE
     )
     start_date = models.IntegerField(blank=True, null=True)
     end_date = models.IntegerField(blank=True, null=True)
     type_certainty = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         related_name="%(app_label)s_%(class)s_type_related",
-        on_delete='PROTECT'
+        on_delete=models.CASCADE
     )
     dating_certainty = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         related_name="%(app_label)s_%(class)s_dating_related",
-        on_delete='PROTECT'
+        on_delete=models.CASCADE
     )
     location_certainty = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         related_name="%(app_label)s_%(class)s_location_related",
-        on_delete='PROTECT'
+        on_delete=models.CASCADE
     )
     period = models.ManyToManyField(
         Period, blank=True, verbose_name="Other Present Periods",
@@ -432,3 +432,9 @@ class Find(BaseArchEnt):
 
     def __str__(self):
         return "{}".format(self.name)
+
+
+ENTITY_MAPPING = {
+    'settlement': Settlement,
+    'burial site': Cemetery
+}
