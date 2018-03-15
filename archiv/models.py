@@ -47,7 +47,12 @@ class AltName(IdProvider):
 
 
 class IadBaseClass(IdProvider):
+
     """A class for shared properties"""
+
+    identifier = models.CharField(
+        blank=True, null=True, max_length=250, verbose_name="Identifier"
+    )
     name = models.CharField(
         blank=True, null=True, max_length=250, verbose_name="The objects name"
     )

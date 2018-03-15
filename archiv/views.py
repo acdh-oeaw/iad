@@ -226,7 +226,7 @@ class SiteUpdate(UpdateView):
 class SiteDelete(DeleteView):
     model = Site
     template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_period')
+    success_url = reverse_lazy('browsing:browse_sites')
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -263,7 +263,7 @@ class ResearchEventUpdate(UpdateView):
 class ResearchEventDelete(DeleteView):
     model = ResearchEvent
     template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_period')
+    success_url = reverse_lazy('browsing:browse_researchevents')
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -300,7 +300,7 @@ class AltNameUpdate(UpdateView):
 class AltNameDelete(DeleteView):
     model = AltName
     template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_period')
+    success_url = reverse_lazy('browsing:browse_altnames')
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -337,7 +337,7 @@ class PeriodUpdate(UpdateView):
 class PeriodDelete(DeleteView):
     model = Period
     template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_period')
+    success_url = reverse_lazy('browsing:browse_periods')
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
