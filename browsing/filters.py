@@ -21,63 +21,15 @@ django_filters.filters.LOOKUP_TYPES = [
 ]
 
 
-class FindListFilter(django_filters.FilterSet):
+class ArchEntListFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(
         lookup_expr='icontains',
-        help_text=Find._meta.get_field('name').help_text,
-        label=Find._meta.get_field('name').verbose_name
+        help_text=ArchEnt._meta.get_field('name').help_text,
+        label=ArchEnt._meta.get_field('name').verbose_name
         )
 
     class Meta:
-        model = Find
-        exclude = ['polygon']
-
-
-class CommunicationListFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=Communication._meta.get_field('name').help_text,
-        label=Communication._meta.get_field('name').verbose_name
-        )
-
-    class Meta:
-        model = Communication
-        exclude = ['polygon']
-
-
-class ExtractionAreaListFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=ExtractionArea._meta.get_field('name').help_text,
-        label=ExtractionArea._meta.get_field('name').verbose_name
-        )
-
-    class Meta:
-        model = ExtractionArea
-        exclude = ['polygon']
-
-
-class CemeteryListFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=Cemetery._meta.get_field('name').help_text,
-        label=Cemetery._meta.get_field('name').verbose_name
-        )
-
-    class Meta:
-        model = Cemetery
-        exclude = ['polygon']
-
-
-class SettlementListFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=Settlement._meta.get_field('name').help_text,
-        label=Settlement._meta.get_field('name').verbose_name
-        )
-
-    class Meta:
-        model = Settlement
+        model = ArchEnt
         exclude = ['polygon']
 
 

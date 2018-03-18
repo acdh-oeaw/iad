@@ -15,11 +15,5 @@ urlpatterns = [
     url(r'periods/$', views.PeriodListView.as_view(), name='browse_periods'),
     url(r'researchevents/$', views.ResearchEventListView.as_view(), name='browse_researchevents'),
     url(r'sites/$', views.SiteListView.as_view(), name='browse_sites'),
-    url(r'settlements/$', views.SettlementListView.as_view(), name='browse_settlements'),
-    url(r'cemeteries/$', views.CemeteryListView.as_view(), name='browse_cemeteries'),
-    url(
-        r'extractionareas/$', views.ExtractionAreaListView.as_view(), name='browse_extractionareas'
-    ),
-    url(r'communications/$', views.CommunicationListView.as_view(), name='browse_communications'),
-    url(r'finds/$', views.FindListView.as_view(), name='browse_finds'),
+    url(r'archents/$', views.ArchEntListView.as_view(), name='browse_archents'),
 ]

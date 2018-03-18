@@ -4,90 +4,20 @@ from entities.models import *
 from archiv.models import *
 
 
-class FindTable(tables.Table):
+class ArchEntTable(tables.Table):
     id = tables.LinkColumn(
-        'archiv:find_detail',
+        'archiv:archent_detail',
         args=[A('pk')], verbose_name='ID'
     )
     name = tables.LinkColumn(
-        'archiv:find_detail',
-        args=[A('pk')], verbose_name='Name'
-    )
-    public = tables.Column()
-
-    class Meta:
-        model = Find
-        sequence = ('id', 'name',)
-        attrs = {"class": "table table-responsive table-hover"}
-
-
-class CommunicationTable(tables.Table):
-    id = tables.LinkColumn(
-        'archiv:communication_detail',
-        args=[A('pk')], verbose_name='ID'
-    )
-    name = tables.LinkColumn(
-        'archiv:communication_detail',
-        args=[A('pk')], verbose_name='Name'
-    )
-    public = tables.Column()
-
-    class Meta:
-        model = Communication
-        sequence = ('id', 'name',)
-        attrs = {"class": "table table-responsive table-hover"}
-
-
-class ExtractionAreaTable(tables.Table):
-    id = tables.LinkColumn(
-        'archiv:extractionarea_detail',
-        args=[A('pk')], verbose_name='ID'
-    )
-    name = tables.LinkColumn(
-        'archiv:extractionarea_detail',
+        'archiv:archent_detail',
         args=[A('pk')], verbose_name='Name'
     )
     site_id = tables.Column()
     public = tables.Column()
 
     class Meta:
-        model = ExtractionArea
-        sequence = ('id', 'name', 'site_id')
-        attrs = {"class": "table table-responsive table-hover"}
-
-
-class CemeteryTable(tables.Table):
-    id = tables.LinkColumn(
-        'archiv:cemetery_detail',
-        args=[A('pk')], verbose_name='ID'
-    )
-    name = tables.LinkColumn(
-        'archiv:cemetery_detail',
-        args=[A('pk')], verbose_name='Name'
-    )
-    site_id = tables.Column()
-    public = tables.Column()
-
-    class Meta:
-        model = Cemetery
-        sequence = ('id', 'name', 'site_id')
-        attrs = {"class": "table table-responsive table-hover"}
-
-
-class SettlementTable(tables.Table):
-    id = tables.LinkColumn(
-        'archiv:settlement_detail',
-        args=[A('pk')], verbose_name='ID'
-    )
-    name = tables.LinkColumn(
-        'archiv:settlement_detail',
-        args=[A('pk')], verbose_name='Name'
-    )
-    site_id = tables.Column()
-    public = tables.Column()
-
-    class Meta:
-        model = Settlement
+        model = ArchEnt
         sequence = ('id', 'name', 'site_id')
         attrs = {"class": "table table-responsive table-hover"}
 

@@ -52,104 +52,11 @@ class GenericListView(SingleTableView):
         return context
 
 
-class FindListView(GenericListView):
-    model = Find
-    table_class = FindTable
-    filter_class = FindListFilter
-    formhelper_class = FindFilterFormHelper
-    init_columns = ['name']
-
-    def get_all_cols(self):
-        all_cols = list(self.table_class.base_columns.keys())
-        return all_cols
-
-    def get_context_data(self, **kwargs):
-        context = super(FindListView, self).get_context_data()
-        context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
-        return context
-
-    def get_table(self, **kwargs):
-        table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
-        default_cols = self.init_columns
-        all_cols = self.get_all_cols()
-        selected_cols = self.request.GET.getlist("columns") + default_cols
-        exclude_vals = [x for x in all_cols if x not in selected_cols]
-        table.exclude = exclude_vals
-        return table
-
-
-class CommunicationListView(GenericListView):
-    model = Communication
-    table_class = CommunicationTable
-    filter_class = CommunicationListFilter
-    formhelper_class = CommunicationFilterFormHelper
-    init_columns = ['name']
-
-    def get_all_cols(self):
-        all_cols = list(self.table_class.base_columns.keys())
-        return all_cols
-
-    def get_context_data(self, **kwargs):
-        context = super(CommunicationListView, self).get_context_data()
-        context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
-        return context
-
-    def get_table(self, **kwargs):
-        table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
-        default_cols = self.init_columns
-        all_cols = self.get_all_cols()
-        selected_cols = self.request.GET.getlist("columns") + default_cols
-        exclude_vals = [x for x in all_cols if x not in selected_cols]
-        table.exclude = exclude_vals
-        return table
-
-
-class ExtractionAreaListView(GenericListView):
-    model = ExtractionArea
-    table_class = ExtractionAreaTable
-    filter_class = ExtractionAreaListFilter
-    formhelper_class = ExtractionAreaFilterFormHelper
-    init_columns = ['name']
-
-    def get_all_cols(self):
-        all_cols = list(self.table_class.base_columns.keys())
-        return all_cols
-
-    def get_context_data(self, **kwargs):
-        context = super(ExtractionAreaListView, self).get_context_data()
-        context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
-        return context
-
-    def get_table(self, **kwargs):
-        table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
-        default_cols = self.init_columns
-        all_cols = self.get_all_cols()
-        selected_cols = self.request.GET.getlist("columns") + default_cols
-        exclude_vals = [x for x in all_cols if x not in selected_cols]
-        table.exclude = exclude_vals
-        return table
-
-
-class CemeteryListView(GenericListView):
-    model = Cemetery
-    table_class = CemeteryTable
-    filter_class = CemeteryListFilter
-    formhelper_class = CemeteryFilterFormHelper
+class ArchEntListView(GenericListView):
+    model = ArchEnt
+    table_class = ArchEntTable
+    filter_class = ArchEntListFilter
+    formhelper_class = ArchEntFilterFormHelper
     init_columns = ['name', 'site_id', 'public', 'comment']
 
     def get_all_cols(self):
@@ -157,38 +64,7 @@ class CemeteryListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(CemeteryListView, self).get_context_data()
-        context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
-        return context
-
-    def get_table(self, **kwargs):
-        table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
-        default_cols = self.init_columns
-        all_cols = self.get_all_cols()
-        selected_cols = self.request.GET.getlist("columns") + default_cols
-        exclude_vals = [x for x in all_cols if x not in selected_cols]
-        table.exclude = exclude_vals
-        return table
-
-
-class SettlementListView(GenericListView):
-    model = Settlement
-    table_class = SettlementTable
-    filter_class = SettlementListFilter
-    formhelper_class = SettlementFilterFormHelper
-    init_columns = ['name', 'site_id', 'public', 'comment']
-
-    def get_all_cols(self):
-        all_cols = list(self.table_class.base_columns.keys())
-        return all_cols
-
-    def get_context_data(self, **kwargs):
-        context = super(SettlementListView, self).get_context_data()
+        context = super(ArchEntListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
         context['togglable_colums'] = togglable_colums
@@ -320,7 +196,9 @@ class PeriodListView(GenericListView):
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={'page': 1, 'per_page': self.paginate_by}).configure(table)
+        RequestConfig(
+            self.request, paginate={'page': 1, 'per_page': self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -349,7 +227,9 @@ class AlternativeNameListView(GenericListView):
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={'page': 1, 'per_page': self.paginate_by}).configure(table)
+        RequestConfig(
+            self.request, paginate={'page': 1, 'per_page': self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols

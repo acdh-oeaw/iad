@@ -217,7 +217,7 @@ class Site(IadBaseClass):
         return "{}".format(self.identifier)
 
 
-class BaseArchEnt(IadBaseClass):
+class ArchEnt(IadBaseClass):
     """An archaeological entity is defined by a specific human activity (entity type),
     period of this activity (dating) and spatial location (polygon inside of the site)."""
 
@@ -227,219 +227,37 @@ class BaseArchEnt(IadBaseClass):
     )
     ent_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        related_name="%(app_label)s_%(class)s_type_related",
+        related_name="archent_type_related",
+        on_delete=models.CASCADE
+    )
+    topography = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        related_name="archent_topography",
+        on_delete=models.CASCADE
+    )
+    burial_type = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        related_name="archent_burial_type",
         on_delete=models.CASCADE
     )
     start_date = models.IntegerField(blank=True, null=True)
     end_date = models.IntegerField(blank=True, null=True)
     type_certainty = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        related_name="%(app_label)s_%(class)s_type_cert_related",
+        related_name="archent_type_cert_related",
         on_delete=models.CASCADE
     )
     dating_certainty = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        related_name="%(app_label)s_%(class)s_dating_cert_related",
+        related_name="archent_dating_cert_related",
         on_delete=models.CASCADE
     )
     location_certainty = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        related_name="%(app_label)s_%(class)s_location_related",
+        related_name="archent_location_related",
         on_delete=models.CASCADE
     )
     period = models.ManyToManyField(
         Period, blank=True, verbose_name="Other Present Periods",
         help_text="Other periods that were recorded on the site."
     )
-
-    class Meta:
-        abstract = True
-
-
-class Settlement(BaseArchEnt):
-    topography = models.ManyToManyField(
-        SkosConcept, blank=True, help_text="Where is the settlement located",
-        related_name="settlement_topography"
-    )
-    fortification = models.ManyToManyField(
-        SkosConcept, blank=True, help_text="Is the settlement fortified?",
-        related_name="settlement_fortification"
-    )
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('browsing:browse_settlements')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:settlement_create')
-
-    def get_next(self):
-        next = Settlement.objects.filter(id__gt=self.id)
-        if next:
-            return next.first().id
-        return False
-
-    def get_prev(self):
-        prev = Settlement.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return prev.first().id
-        return False
-
-    def get_absolute_url(self):
-        return reverse(
-            'archiv:settlement_detail', kwargs={'pk': self.id}
-        )
-
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-class Cemetery(BaseArchEnt):
-    grave_type = models.ManyToManyField(
-        SkosConcept, blank=True, help_text="provide some helptext",
-        related_name="cemetery_grave_type"
-    )
-    burial_type = models.ManyToManyField(
-        SkosConcept, blank=True, help_text="provide some helptext",
-        related_name="cemetery_burial_type"
-    )
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('browsing:browse_cemeteries')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:cemetery_create')
-
-    def get_next(self):
-        next = Settlement.objects.filter(id__gt=self.id)
-        if next:
-            return next.first().id
-        return False
-
-    def get_prev(self):
-        prev = Settlement.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return prev.first().id
-        return False
-
-    def get_absolute_url(self):
-        return reverse(
-            'archiv:cemetery_detail', kwargs={'pk': self.id}
-        )
-
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-class ExtractionArea(BaseArchEnt):
-    ea_type = models.ManyToManyField(
-        SkosConcept, blank=True, help_text="provide some helptext",
-        related_name="ea_grave_type"
-    )
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('browsing:browse_extractionareas')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:extractionarea_create')
-
-    def get_next(self):
-        next = ExtractionArea.objects.filter(id__gt=self.id)
-        if next:
-            return next.first().id
-        return False
-
-    def get_prev(self):
-        prev = ExtractionArea.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return prev.first().id
-        return False
-
-    def get_absolute_url(self):
-        return reverse(
-            'archiv:extractionarea_detail', kwargs={'pk': self.id}
-        )
-
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-class Communication(BaseArchEnt):
-    comm_type = models.ManyToManyField(
-        SkosConcept, blank=True, help_text="provide some helptext",
-        related_name="comm_grave_type"
-    )
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('browsing:browse_communications')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:communication_create')
-
-    def get_next(self):
-        next = Communication.objects.filter(id__gt=self.id)
-        if next:
-            return next.first().id
-        return False
-
-    def get_prev(self):
-        prev = Communication.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return prev.first().id
-        return False
-
-    def get_absolute_url(self):
-        return reverse(
-            'archiv:communication_detail', kwargs={'pk': self.id}
-        )
-
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-class Find(BaseArchEnt):
-    find_type = models.ManyToManyField(
-        SkosConcept, blank=True, help_text="provide some helptext",
-        related_name="find_grave_type"
-    )
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('browsing:browse_finds')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:find_create')
-
-    def get_next(self):
-        next = Find.objects.filter(id__gt=self.id)
-        if next:
-            return next.first().id
-        return False
-
-    def get_prev(self):
-        prev = Find.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return prev.first().id
-        return False
-
-    def get_absolute_url(self):
-        return reverse(
-            'archiv:find_detail', kwargs={'pk': self.id}
-        )
-
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-ENTITY_MAPPING = {
-    'settlement': Settlement,
-    'burial site': Cemetery
-}
