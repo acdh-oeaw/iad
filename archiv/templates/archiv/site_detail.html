@@ -44,9 +44,19 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            {# <div class="col-md-6"> #}
+            <div class="col-md-6">
                 <legend>Lorem Ipsum</legend>
                 <table class="table table-bordered table-hover">
+                    {% if object.identifier %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "identifier" %}
+                            </th>
+                            <td>
+                                {{ object.identifier }}
+                            </td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <th>
                             {% get_verbose_name site "name" %}
@@ -123,9 +133,107 @@
                             </td>
                         </tr>
                     {% endif %}
-
+                    {% if object.cadastral_community.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "cadastral_community" %}
+                            </th>
+                            <td>
+                                {% for x in object.cadastral_community.all %}
+                                    <li>
+                                        {{ x }}
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.cadastral_number %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "cadastral_number" %}
+                            </th>
+                            <td>
+                                {{ object.cadastral_number }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.heritage_number %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "heritage_number" %}
+                            </th>
+                            <td>
+                                {{ object.heritage_number }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.plot_number %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "plot_number" %}
+                            </th>
+                            <td>
+                                {{ object.plot_number }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.period.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "period" %}
+                            </th>
+                            <td>
+                                {% for x in object.period.all %}
+                                    <li>
+                                        {{ x }}
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.information_source.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "information_source" %}
+                            </th>
+                            <td>
+                                {% for x in object.information_source.all %}
+                                    <li>
+                                        {{ x }}
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
                 </table>
-            {# </div> #}
+            </div>
+            <div class="col-md-6">
+                <legend>
+                    related objects
+                </legend>
+                    {% if object.has_archent.all %}
+                        <ul>
+                            {% for x in object.has_archent.all %}
+                                <li>
+                                    <a href="{{ x.get_absolute_url }}">{{ x }} ({{ x.ent_type }})</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <legend>
+                        related other periods
+                    </legend>
+                        {% if object.other_period.all %}
+                            <ul>
+                                {% for x in object.other_period.all %}
+                                    <li>
+                                        <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+            </div>
         </div>
     </div>
 </div>

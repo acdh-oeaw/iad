@@ -180,8 +180,12 @@ class Site(IadBaseClass):
         help_text="The plot number (applies to Slovenian sites)."
     )
     period = models.ManyToManyField(
-        Period, blank=True, verbose_name="Other Present Periods",
-        help_text="Other periods that were recorded on the site."
+        Period, blank=True, verbose_name="some verbose name???"
+    )
+    other_period = models.ManyToManyField(
+        SkosConcept, blank=True, verbose_name="Other Present Periods",
+        help_text="Other periods that were recorded on the site.",
+        related_name="has_other_period"
     )
     information_source = models.ManyToManyField(
         ResearchEvent, blank=True,
@@ -214,7 +218,10 @@ class Site(IadBaseClass):
         )
 
     def __str__(self):
-        return "{}".format(self.identifier)
+        if self.name:
+            return "{}".format(self.name)
+        else:
+            return "{}".format(self.identifier)
 
 
 class ArchEnt(IadBaseClass):
@@ -223,7 +230,8 @@ class ArchEnt(IadBaseClass):
 
     site_id = models.ForeignKey(
         Site, help_text="The unique identifier of the site.",
-        blank=True, null=True, on_delete=models.CASCADE
+        blank=True, null=True, on_delete=models.CASCADE,
+        related_name="has_archent"
     )
     ent_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
@@ -261,3 +269,34 @@ class ArchEnt(IadBaseClass):
         Period, blank=True, verbose_name="Other Present Periods",
         help_text="Other periods that were recorded on the site."
     )
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_archents')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:archent_create')
+
+    def get_next(self):
+        next = ArchEnt.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = ArchEnt.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:archent_detail', kwargs={'pk': self.id}
+        )
+
+    def __str__(self):
+        if self.name:
+            return "{}".format(self.name)
+        else:
+            return "{}".format(self.identifier)
