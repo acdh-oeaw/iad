@@ -225,16 +225,21 @@ class BaseArchEnt(IadBaseClass):
         Site, help_text="The unique identifier of the site.",
         blank=True, null=True, on_delete=models.CASCADE
     )
-    start_date = models.IntegerField(blank=True, null=True)
-    end_date = models.IntegerField(blank=True, null=True)
-    type_certainty = models.ForeignKey(
+    ent_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         related_name="%(app_label)s_%(class)s_type_related",
         on_delete=models.CASCADE
     )
+    start_date = models.IntegerField(blank=True, null=True)
+    end_date = models.IntegerField(blank=True, null=True)
+    type_certainty = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        related_name="%(app_label)s_%(class)s_type_cert_related",
+        on_delete=models.CASCADE
+    )
     dating_certainty = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        related_name="%(app_label)s_%(class)s_dating_related",
+        related_name="%(app_label)s_%(class)s_dating_cert_related",
         on_delete=models.CASCADE
     )
     location_certainty = models.ForeignKey(
