@@ -85,6 +85,20 @@
                             </td>
                         </tr>
                     {% endif %}
+                    {% if object.has_related_site.all %}
+                        <tr>
+                            <th>
+                                related site
+                            </th>
+                            <td>
+                                {% for x in object.has_related_site.all %}
+                                    <li>
+                                        <a href="{{ x.get_absolute_url }}"/>{{ x }}</a>
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
                     {% if object.responsible_institution.all %}
                         <tr>
                             <th>

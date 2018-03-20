@@ -256,7 +256,8 @@ class Site(IadBaseClass):
     )
     information_source = models.ManyToManyField(
         ResearchEvent, blank=True,
-        help_text="How was the site discovered? Choose the corresponding research event."
+        help_text="How was the site discovered? Choose the corresponding research event.",
+        related_name="has_related_site"
     )
 
     @classmethod
