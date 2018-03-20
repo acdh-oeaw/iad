@@ -212,10 +212,21 @@
                     related objects
                 </legend>
                     {% if object.has_archent.all %}
+                        <h3>Arch Ents</h3>
                         <ul>
                             {% for x in object.has_archent.all %}
                                 <li>
                                     <a href="{{ x.get_absolute_url }}">{{ x }} ({{ x.ent_type }})</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% if object.information_source.all %}
+                        <h3>Research Events</h3>
+                        <ul>
+                            {% for x in object.information_source.all %}
+                                <li>
+                                    <a href="{{ x.get_absolute_url }}">{{ x }}</a>
                                 </li>
                             {% endfor %}
                         </ul>

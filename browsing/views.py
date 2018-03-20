@@ -88,7 +88,7 @@ class SiteListView(GenericListView):
     table_class = SiteTable
     filter_class = SiteListFilter
     formhelper_class = SiteFilterFormHelper
-    init_columns = ['name', 'public', 'comment']
+    init_columns = ['name', 'identifier', 'public', 'comment']
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -119,7 +119,7 @@ class ResearchEventListView(GenericListView):
     table_class = ResearchEventTable
     filter_class = ResearchEventListFilter
     formhelper_class = ResearchEventFilterFormHelper
-    init_columns = ['name']
+    init_columns = ['name', 'start_date', 'end_date']
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())

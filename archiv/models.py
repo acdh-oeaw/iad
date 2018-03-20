@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.contrib.gis.db import models
 from idprovider.models import IdProvider
-from entities.models import Place
+from entities.models import Place, Person, Institution
 from vocabs.models import SkosConcept
 from bib.models import Book
 
@@ -155,11 +155,46 @@ class Period(IadBaseClass):
         return "{}".format(self.name)
 
 
+class ResearchQuestion(IdProvider):
+    question = models.TextField(blank=True, null=True, verbose_name="research question")
+
+
 class ResearchEvent(IadBaseClass):
     """Please Provide some Information about this Class"""
 
+    start_date = models.CharField(
+        blank=True, null=True,
+        max_length=250,
+        verbose_name="Start Date.",
+        help_text="Start Date"
+    )
+    end_date = models.CharField(
+        max_length=250,
+        blank=True, null=True,
+        verbose_name="End Date.",
+        help_text="End Date"
+    )
+    responsible_researcher = models.ManyToManyField(
+        Person, blank=True, verbose_name="Responsible Researcher",
+        related_name="has_research"
+    )
+    responsible_institution = models.ManyToManyField(
+        Institution, blank=True, verbose_name="Responsible Institution",
+        related_name="has_research"
+    )
+    research_type = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        verbose_name="Research Methods",
+        related_name="is_research_type_of",
+        on_delete=models.CASCADE
+    )
+    research_method = models.ManyToManyField(
+        SkosConcept, blank=True, verbose_name="Research Methods",
+        related_name="is_research_method_of"
+    )
+
     def __str__(self):
-        return self.name
+        return "{}".format(self.name)
 
     @classmethod
     def get_listview_url(self):

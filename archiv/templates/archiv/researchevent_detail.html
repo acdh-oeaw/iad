@@ -55,6 +55,64 @@
                             {{ object.name }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {% get_verbose_name researchevent "start_date" %}
+                        </th>
+                        <td>
+                            {{ object.start_date }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% get_verbose_name researchevent "end_date" %}
+                        </th>
+                        <td>
+                            {{ object.end_date }}
+                        </td>
+                    </tr>
+                    {% if object.responsible_researcher.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name researchevent "responsible_researcher" %}
+                            </th>
+                            <td>
+                                {% for x in object.responsible_researcher.all %}
+                                    <li>
+                                        {{ x }}
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.responsible_institution.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name researchevent "responsible_institution" %}
+                            </th>
+                            <td>
+                                {% for x in object.responsible_institution.all %}
+                                    <li>
+                                        {{ x }}
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.research_method.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name researchevent "research_method" %}
+                            </th>
+                            <td>
+                                {% for x in object.research_method.all %}
+                                    <li>
+                                        {{ x }}
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
                     {% if object.alt_name.all %}
                         <tr>
                             <th>
