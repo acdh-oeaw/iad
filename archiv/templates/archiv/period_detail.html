@@ -55,13 +55,73 @@
                             {{ object.name }}
                         </td>
                     </tr>
-                    {% if object.alt_name.all %}
+                    {% if object.start_date %}
                         <tr>
                             <th>
-                                {% get_verbose_name period "alt_name" %}
+                                {% get_verbose_name period "start_date" %}
                             </th>
                             <td>
-                                {% for x in object.alt_name.all %}
+                                {{ object.start_date }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.start_date_latest %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name period "start_date_latest" %}
+                            </th>
+                            <td>
+                                {{ object.start_date_latest }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.end_date %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name period "end_date" %}
+                            </th>
+                            <td>
+                                {{ object.end_date }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.end_date_latest %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name period "end_date_latest" %}
+                            </th>
+                            <td>
+                                {{ object.start_date_latest }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.bibl %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name period "bibl" %}
+                            </th>
+                            <td>
+                                {{ object.bibl }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.country %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name period "country" %}
+                            </th>
+                            <td>
+                                {{ object.country }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.region.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name period "region" %}
+                            </th>
+                            <td>
+                                {% for x in object.region.all %}
                                     <li>
                                         {{x }}
                                     </li>
@@ -120,26 +180,6 @@
                                         {{ x }}
                                     </li>
                                 {% endfor %}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if object.start_date %}
-                        <tr>
-                            <th>
-                                {% get_verbose_name period "start_date" %}
-                            </th>
-                            <td>
-                                {{ object.start_date }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if object.end_date %}
-                        <tr>
-                            <th>
-                                {% get_verbose_name period "end_date" %}
-                            </th>
-                            <td>
-                                {{ object.end_date }}
                             </td>
                         </tr>
                     {% endif %}

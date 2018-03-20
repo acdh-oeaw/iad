@@ -78,7 +78,9 @@ class PeriodTable(tables.Table):
         args=[A('pk')], verbose_name='Name'
     )
     start_date = tables.Column()
+    start_date_latest = tables.Column()
     end_date = tables.Column()
+    end_date_latest = tables.Column()
 
     class Meta:
         model = Period

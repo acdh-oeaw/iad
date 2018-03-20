@@ -87,11 +87,43 @@ class IadBaseClass(IdProvider):
 
 
 class Period(IadBaseClass):
-    start_date = models.IntegerField(blank=True, null=True)
-    end_date = models.IntegerField(blank=True, null=True)
+    start_date = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Earliest beginning of the period.",
+        help_text="Must be a number!"
+    )
+    start_date_latest = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Latest beginning of the period.",
+        help_text="Must be a number!"
+    )
+    end_date = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Earliest end of the period.",
+        help_text="Must be a number!"
+    )
+    end_date_latest = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Latest end of the period.",
+        help_text="Must be a number!"
+    )
     norm_id = models.CharField(
         blank=True, null=True, max_length=250,
         verbose_name="Link to some norm data record like period io"
+    )
+    region = models.ManyToManyField(
+        Place, blank=True, related_name="has_related_period_region",
+        verbose_name="Region in which this period is used in.",
+        help_text="Region in which this period is used in."
+    )
+    country = models.ForeignKey(
+        Place, blank=True, null=True, related_name="has_related_period_country",
+        verbose_name="Country in which this period is used in.",
+        help_text="Country in which this period is used in.",
+        on_delete=models.CASCADE
+    )
+    bibl = models.TextField(
+        blank=True, null=True, verbose_name="Bibliographic source for this period."
     )
 
     @classmethod

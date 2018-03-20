@@ -181,7 +181,10 @@ class PeriodListView(GenericListView):
     table_class = PeriodTable
     filter_class = PeriodListFilter
     formhelper_class = PeriodFilterFormHelper
-    init_columns = ['id', 'name', 'start_date', 'end_date']
+    init_columns = [
+        'id', 'name', 'start_date', 'start_date_latest',
+        'end_date', 'end_date_latest'
+    ]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
