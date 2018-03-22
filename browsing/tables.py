@@ -4,6 +4,22 @@ from entities.models import *
 from archiv.models import *
 
 
+class ResearchQuestionTable(tables.Table):
+    id = tables.LinkColumn(
+        'archiv:researchquestion_detail',
+        args=[A('pk')], verbose_name='ID'
+    )
+    qeustion = tables.LinkColumn(
+        'archiv:researchquestion_detail',
+        args=[A('pk')], verbose_name='Question'
+    )
+
+    class Meta:
+        model = ResearchQuestion
+        sequence = ('id', 'qeustion')
+        attrs = {"class": "table table-responsive table-hover"}
+
+
 class ArchEntTable(tables.Table):
     id = tables.LinkColumn(
         'archiv:archent_detail',

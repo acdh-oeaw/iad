@@ -11,7 +11,6 @@ from .forms import *
 from .models import *
 
 
-
 class ArchEntDetailView(DetailView):
     model = ArchEnt
     template_name = 'archiv/archent_detail.html'
@@ -195,3 +194,40 @@ class PeriodDelete(DeleteView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(PeriodDelete, self).dispatch(*args, **kwargs)
+
+
+class ResearchQuestionDetailView(DetailView):
+    model = ResearchQuestion
+    template_name = 'archiv/researchquestion_detail.html'
+
+
+class ResearchQuestionCreate(CreateView):
+
+    model = ResearchQuestion
+    form_class = ResearchQuestionForm
+    template_name = 'archiv/researchquestion_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResearchQuestionCreate, self).dispatch(*args, **kwargs)
+
+
+class ResearchQuestionUpdate(UpdateView):
+
+    model = ResearchQuestion
+    form_class = ResearchQuestionForm
+    template_name = 'archiv/researchquestion_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResearchQuestionUpdate, self).dispatch(*args, **kwargs)
+
+
+class ResearchQuestionDelete(DeleteView):
+    model = ResearchQuestion
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_researchquestions')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResearchQuestionDelete, self).dispatch(*args, **kwargs)

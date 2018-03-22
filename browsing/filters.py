@@ -21,6 +21,18 @@ django_filters.filters.LOOKUP_TYPES = [
 ]
 
 
+class ResearchQuestionListFilter(django_filters.FilterSet):
+    question = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ResearchQuestion._meta.get_field('question').help_text,
+        label=ResearchQuestion._meta.get_field('question').verbose_name
+        )
+
+    class Meta:
+        model = ResearchQuestion
+        fields = '__all__'
+
+
 class ArchEntListFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(
         lookup_expr='icontains',

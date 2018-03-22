@@ -15,6 +15,25 @@ class GenericFilterFormHelper(FormHelper):
         self.add_input(Submit('Filter', 'Search'))
 
 
+class ResearchQuestionFormHelper(FormHelper):
+    def __init__(self, *args, **kwargs):
+        super(ResearchQuestionFormHelper, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.form_class = 'genericFilterForm'
+        self.form_method = 'GET'
+        self.helper.form_tag = False
+        self.add_input(Submit('Filter', 'Search'))
+        self.layout = Layout(
+            Accordion(
+                AccordionGroup(
+                    'Basic search options',
+                    'question',
+                    css_id="basic_search_fields"
+                )
+                )
+            )
+
+
 class ArchEntFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
         super(ArchEntFilterFormHelper, self).__init__(*args, **kwargs)

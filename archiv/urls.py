@@ -44,4 +44,12 @@ urlpatterns = [
         name='researchevent_edit'),
     url(r'^researchevent/delete/(?P<pk>[0-9]+)$', views.ResearchEventDelete.as_view(),
         name='researchevent_delete'),
+    url(r'^researchquestion/detail/(?P<pk>[0-9]+)$', views.ResearchQuestionDetailView.as_view(),
+        name='researchquestion_detail'),
+    url(r'^researchquestion/create/$', views.ResearchQuestionCreate.as_view(),
+        name='researchquestion_create'),
+    url(r'^researchquestion/edit/(?P<pk>[0-9]+)$', views.ResearchQuestionUpdate.as_view(),
+        name='researchquestion_edit'),
+    url(r'^researchquestion/delete/(?P<pk>[0-9]+)$', views.ResearchQuestionDelete.as_view(),
+        name='researchquestion_delete'),
 ]
