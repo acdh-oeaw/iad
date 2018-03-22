@@ -1,7 +1,7 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% load webpage_extras %}
-{% block title %}Site{% endblock %}
+{% block title %}Research Question{% endblock %}
 {% block content %}
 
 <div class="container">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                        <small>Site:</small> {{ object }}
+                        <small>Research Question:</small> {{ object }}
                         {% if user.is_authenticated %}
                             <small>
                                 <a href="{% url 'archiv:researchquestion_edit' pk=object.id %}">

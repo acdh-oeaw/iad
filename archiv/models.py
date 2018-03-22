@@ -403,3 +403,37 @@ class ArchEnt(IadBaseClass):
             return "{}".format(self.name)
         else:
             return "{}".format(self.identifier)
+
+
+HERITAGE_STATUS_CHOICES = (
+    ('yes', 'yes'),
+    ('no', 'no'),
+    ('partially', 'partially'),
+)
+
+
+class MonumentProtection(IadBaseClass):
+    site_id = models.ForeignKey(
+        Site, help_text="The unique identifier of the site.",
+        verbose_name="Site",
+        blank=True, null=True, on_delete=models.CASCADE,
+        related_name="has_monument_protection"
+    )
+    current_land_use = models.ManyToManyField(
+        SkosConcept, blank=True,
+        verbose_name="current land use",
+        related_name="monument_protection_current_land_use",
+        help_text="provide some"
+    )
+    heritage_status = models.CharField(
+        blank=True, null=True, verbose_name="heritage status",
+        help_text="provide some",
+        max_length=250,
+        choices=HERITAGE_STATUS_CHOICES
+    )
+    threats = models.ManyToManyField(
+        SkosConcept, blank=True,
+        verbose_name="threats",
+        related_name="monument_protection_threats",
+        help_text="provide some"
+    )
