@@ -231,3 +231,40 @@ class ResearchQuestionDelete(DeleteView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(ResearchQuestionDelete, self).dispatch(*args, **kwargs)
+
+
+class MonumentProtectionDetailView(DetailView):
+    model = MonumentProtection
+    template_name = 'archiv/monumentprotection_detail.html'
+
+
+class MonumentProtectionCreate(CreateView):
+
+    model = MonumentProtection
+    form_class = MonumentProtectionForm
+    template_name = 'archiv/monumentprotection_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MonumentProtectionCreate, self).dispatch(*args, **kwargs)
+
+
+class MonumentProtectionUpdate(UpdateView):
+
+    model = MonumentProtection
+    form_class = MonumentProtectionForm
+    template_name = 'archiv/monumentprotection_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MonumentProtectionUpdate, self).dispatch(*args, **kwargs)
+
+
+class MonumentProtectionDelete(DeleteView):
+    model = MonumentProtection
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_monumentprotections')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MonumentProtectionDelete, self).dispatch(*args, **kwargs)

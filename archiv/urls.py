@@ -4,6 +4,14 @@ from . import views
 app_name = 'archiv'
 
 urlpatterns = [
+    url(r'^monumentprotection/detail/(?P<pk>[0-9]+)$', views.MonumentProtectionDetailView.as_view(),
+        name='monumentprotection_detail'),
+    url(r'^monumentprotection/create/$', views.MonumentProtectionCreate.as_view(),
+        name='monumentprotection_create'),
+    url(r'^monumentprotection/edit/(?P<pk>[0-9]+)$', views.MonumentProtectionUpdate.as_view(),
+        name='monumentprotection_edit'),
+    url(r'^monumentprotection/delete/(?P<pk>[0-9]+)$', views.MonumentProtectionDelete.as_view(),
+        name='monumentprotection_delete'),
     url(r'^archent/detail/(?P<pk>[0-9]+)$', views.ArchEntDetailView.as_view(),
         name='archent_detail'),
     url(r'^archent/create/$', views.ArchEntCreate.as_view(),
