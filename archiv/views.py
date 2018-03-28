@@ -11,6 +11,43 @@ from .forms import *
 from .models import *
 
 
+class TourismDetailView(DetailView):
+    model = Tourism
+    template_name = 'archiv/tourism_detail.html'
+
+
+class TourismCreate(CreateView):
+
+    model = Tourism
+    form_class = TourismForm
+    template_name = 'archiv/tourism_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TourismCreate, self).dispatch(*args, **kwargs)
+
+
+class TourismUpdate(UpdateView):
+
+    model = Tourism
+    form_class = TourismForm
+    template_name = 'archiv/tourism_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TourismUpdate, self).dispatch(*args, **kwargs)
+
+
+class TourismDelete(DeleteView):
+    model = Tourism
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_tourisms')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TourismDelete, self).dispatch(*args, **kwargs)
+
+
 class ArchEntDetailView(DetailView):
     model = ArchEnt
     template_name = 'archiv/archent_detail.html'
