@@ -437,3 +437,31 @@ class MonumentProtection(IadBaseClass):
         related_name="monument_protection_threats",
         help_text="provide some"
     )
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_monumentprotections')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:monumentprotection_create')
+
+    def get_next(self):
+        next = MonumentProtection.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = MonumentProtection.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:monumentprotection_detail', kwargs={'pk': self.id}
+        )
+
+    def __str__(self):
+        return "MonumentProtection {} for Site {}".format(self.id, self.site_id)

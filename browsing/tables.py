@@ -4,6 +4,18 @@ from entities.models import *
 from archiv.models import *
 
 
+class MonumentProtectionTable(tables.Table):
+    id = tables.LinkColumn(
+        'archiv:monumentprotection_detail',
+        args=[A('pk')], verbose_name='ID'
+    )
+
+    class Meta:
+        model = MonumentProtection
+        sequence = ('id', 'site_id')
+        attrs = {"class": "table table-responsive table-hover"}
+
+
 class ResearchQuestionTable(tables.Table):
     id = tables.LinkColumn(
         'archiv:researchquestion_detail',

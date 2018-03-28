@@ -191,20 +191,6 @@
                             </td>
                         </tr>
                     {% endif %}
-                    {% if object.information_source.all %}
-                        <tr>
-                            <th>
-                                {% get_verbose_name site "information_source" %}
-                            </th>
-                            <td>
-                                {% for x in object.information_source.all %}
-                                    <li>
-                                        {{ x }}
-                                    </li>
-                                {% endfor %}
-                            </td>
-                        </tr>
-                    {% endif %}
                 </table>
             </div>
             <div class="col-md-6">
@@ -222,7 +208,7 @@
                         </ul>
                     {% endif %}
                     {% if object.information_source.all %}
-                        <h3>Research Events</h3>
+                        <h3>Research Events / Information Source???</h3>
                         <ul>
                             {% for x in object.information_source.all %}
                                 <li>
@@ -231,10 +217,11 @@
                             {% endfor %}
                         </ul>
                     {% endif %}
-                    <legend>
-                        related other periods
-                    </legend>
-                        {% if object.other_period.all %}
+                    {% if object.other_period.all %}
+                        <legend>
+                            related other periods
+                        </legend>
+
                             <ul>
                                 {% for x in object.other_period.all %}
                                     <li>
@@ -243,6 +230,18 @@
                                 {% endfor %}
                             </ul>
                         {% endif %}
+                        {% if object.has_monument_protection.all %}
+                            <legend>
+                                related monument protection things
+                            </legend>
+                                <ul>
+                                    {% for x in object.has_monument_protection.all %}
+                                        <li>
+                                            <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
 
             </div>
         </div>

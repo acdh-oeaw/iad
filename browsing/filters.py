@@ -21,6 +21,23 @@ django_filters.filters.LOOKUP_TYPES = [
 ]
 
 
+class MonumentProtectionListFilter(django_filters.FilterSet):
+    current_land_use = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.all(),
+        help_text=MonumentProtection._meta.get_field('current_land_use').help_text,
+        label=MonumentProtection._meta.get_field('current_land_use').verbose_name
+        )
+    site_id = django_filters.ModelMultipleChoiceFilter(
+        queryset=Site.objects.all(),
+        help_text=MonumentProtection._meta.get_field('site_id').help_text,
+        label=MonumentProtection._meta.get_field('site_id').verbose_name
+        )
+
+    class Meta:
+        model = MonumentProtection
+        exclude = ['polygon']
+
+
 class ResearchQuestionListFilter(django_filters.FilterSet):
     question = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -94,15 +111,15 @@ class PeriodListFilter(django_filters.FilterSet):
 
 
 class PersonListFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=Person._meta.get_field('name').help_text,
-        label=Person._meta.get_field('name').verbose_name
+    current_land_use = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(),
+        help_text=MonumentProtection._meta.get_field('site_id').help_text,
+        label=MonumentProtection._meta.get_field('site_id').verbose_name
         )
     belongs_to_institution = django_filters.ModelMultipleChoiceFilter(
-        queryset=Institution.objects.all(),
-        help_text=Person._meta.get_field('belongs_to_institution').help_text,
-        label=Person._meta.get_field('belongs_to_institution').verbose_name
+        queryset=Site.objects.all(),
+        help_text=MonumentProtection._meta.get_field('site_id').help_text,
+        label=MonumentProtection._meta.get_field('site_id').verbose_name
         )
 
     class Meta:
