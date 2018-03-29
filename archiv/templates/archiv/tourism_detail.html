@@ -65,41 +65,53 @@
                             </td>
                         </tr>
                     {% endif %}
-                    {% if object.threats.all %}
+                    {% if object.accessibility %}
                         <tr>
                             <th>
-                                {% get_verbose_name tourism "threats" %}
+                                {% get_verbose_name tourism "accessibility" %}
                             </th>
                             <td>
-                                {% for x in object.threats.all %}
-                                    <li>
-                                        {{ x }}
-                                    </li>
-                                {% endfor %}
+                                {{ object.accessibility }}
                             </td>
                         </tr>
                     {% endif %}
-                    {% if object.current_land_use.all %}
+                    {% if object.visibility %}
                         <tr>
                             <th>
-                                {% get_verbose_name tourism "current_land_use" %}
+                                {% get_verbose_name tourism "visibility" %}
                             </th>
                             <td>
-                                {% for x in object.current_land_use.all %}
-                                    <li>
-                                        {{ x }}
-                                    </li>
-                                {% endfor %}
+                                {{ object.visibility }}
                             </td>
                         </tr>
                     {% endif %}
-                    {% if object.heritage_status %}
+                    {% if object.infrastructure %}
                         <tr>
                             <th>
-                                {% get_verbose_name tourism "heritage_status" %}
+                                {% get_verbose_name tourism "infrastructure" %}
                             </th>
                             <td>
-                                {{ object.heritage_status }}
+                                {{ object.infrastructure }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.long_term_management %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name tourism "long_term_management" %}
+                            </th>
+                            <td>
+                                {{ object.long_term_management }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.potential_surrounding %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name tourism "potential_surrounding" %}
+                            </th>
+                            <td>
+                                {{ object.potential_surrounding }}
                             </td>
                         </tr>
                     {% endif %}
