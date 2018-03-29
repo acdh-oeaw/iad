@@ -471,6 +471,31 @@ class Tourism(IadBaseClass):
         description of the site to be implemented into the app."
     )
 
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_tourisms')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:tourism_create')
+
+    def get_next(self):
+        next = Tourism.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Tourism.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:tourism_detail', kwargs={'pk': self.id}
+        )
+
     def __str__(self):
         return "Tourism {} for Site {}".format(self.id, self.site_id)
 
