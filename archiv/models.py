@@ -5,6 +5,19 @@ from entities.models import Place, Person, Institution
 from vocabs.models import SkosConcept
 from bib.models import Book
 
+HERITAGE_STATUS_CHOICES = (
+    ('yes', 'yes'),
+    ('no', 'no'),
+    ('partially', 'partially'),
+)
+
+
+VALUE_STATUS_CHOICES = (
+    ('1 - high', '1 - high'),
+    ('2 - middle', '2 - middle'),
+    ('3 - low', '3 - low'),
+)
+
 
 class AltName(IdProvider):
     label = models.CharField(
@@ -294,6 +307,50 @@ class Site(IadBaseClass):
         help_text="How was the site discovered? Choose the corresponding research event.",
         related_name="has_related_site"
     )
+    accessibility = models.CharField(
+        blank=True, null=True, verbose_name="accessibility",
+        help_text="provide some",
+        max_length=250,
+        choices=VALUE_STATUS_CHOICES
+    )
+    visibility = models.CharField(
+        blank=True, null=True, verbose_name="visibility",
+        help_text="provide some",
+        max_length=250,
+        choices=VALUE_STATUS_CHOICES
+    )
+    infrastructure = models.CharField(
+        blank=True, null=True, verbose_name="infrastructure",
+        help_text="provide some",
+        max_length=250,
+        choices=VALUE_STATUS_CHOICES
+    )
+    long_term_management = models.CharField(
+        blank=True, null=True, verbose_name="long_term_management",
+        help_text="provide some",
+        max_length=250,
+        choices=VALUE_STATUS_CHOICES
+    )
+    potential_surrounding = models.CharField(
+        blank=True, null=True, verbose_name="potential_surrounding",
+        help_text="provide some",
+        max_length=250,
+        choices=VALUE_STATUS_CHOICES
+    )
+    museum = models.ManyToManyField(
+        Institution, blank=True, verbose_name="Responsible Institution",
+        help_text="Where are the finds from the site stored?",
+        related_name="is_museum"
+    )
+    iad_app = models.BooleanField(
+        verbose_name="iad_app",
+        default=False, help_text="Should this site be used in the IAD-App?"
+    )
+    app_description = models.TextField(
+        blank=True, null=True, verbose_name="app_description",
+        help_text="If the site is going to be used in the IAD app, please provide the \
+        description of the site to be implemented into the app."
+    )
 
     @classmethod
     def get_listview_url(self):
@@ -403,101 +460,6 @@ class ArchEnt(IadBaseClass):
             return "{}".format(self.name)
         else:
             return "{}".format(self.identifier)
-
-
-HERITAGE_STATUS_CHOICES = (
-    ('yes', 'yes'),
-    ('no', 'no'),
-    ('partially', 'partially'),
-)
-
-
-VALUE_STATUS_CHOICES = (
-    ('1 - high', '1 - high'),
-    ('2 - middle', '2 - middle'),
-    ('3 - low', '3 - low'),
-)
-
-
-class Tourism(IadBaseClass):
-    site_id = models.ForeignKey(
-        Site, help_text="The unique identifier of the site.",
-        verbose_name="Site",
-        blank=True, null=True, on_delete=models.CASCADE,
-        related_name="has_tourism"
-    )
-    accessibility = models.CharField(
-        blank=True, null=True, verbose_name="accessibility",
-        help_text="provide some",
-        max_length=250,
-        choices=VALUE_STATUS_CHOICES
-    )
-    visibility = models.CharField(
-        blank=True, null=True, verbose_name="visibility",
-        help_text="provide some",
-        max_length=250,
-        choices=VALUE_STATUS_CHOICES
-    )
-    infrastructure = models.CharField(
-        blank=True, null=True, verbose_name="infrastructure",
-        help_text="provide some",
-        max_length=250,
-        choices=VALUE_STATUS_CHOICES
-    )
-    long_term_management = models.CharField(
-        blank=True, null=True, verbose_name="long_term_management",
-        help_text="provide some",
-        max_length=250,
-        choices=VALUE_STATUS_CHOICES
-    )
-    potential_surrounding = models.CharField(
-        blank=True, null=True, verbose_name="potential_surrounding",
-        help_text="provide some",
-        max_length=250,
-        choices=VALUE_STATUS_CHOICES
-    )
-    museum = models.ManyToManyField(
-        Institution, blank=True, verbose_name="Responsible Institution",
-        help_text="Where are the finds from the site stored?",
-        related_name="is_museum"
-    )
-    iad_app = models.BooleanField(
-        verbose_name="iad_app",
-        default=False, help_text="Should this site be used in the IAD-App?"
-    )
-    app_description = models.TextField(
-        blank=True, null=True, verbose_name="app_description",
-        help_text="If the site is going to be used in the IAD app, please provide the \
-        description of the site to be implemented into the app."
-    )
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('browsing:browse_tourisms')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:tourism_create')
-
-    def get_next(self):
-        next = Tourism.objects.filter(id__gt=self.id)
-        if next:
-            return next.first().id
-        return False
-
-    def get_prev(self):
-        prev = Tourism.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return prev.first().id
-        return False
-
-    def get_absolute_url(self):
-        return reverse(
-            'archiv:tourism_detail', kwargs={'pk': self.id}
-        )
-
-    def __str__(self):
-        return "Tourism {} for Site {}".format(self.id, self.site_id)
 
 
 class MonumentProtection(IadBaseClass):

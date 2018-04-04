@@ -21,18 +21,6 @@ django_filters.filters.LOOKUP_TYPES = [
 ]
 
 
-class TourismListFilter(django_filters.FilterSet):
-    site_id = django_filters.ModelMultipleChoiceFilter(
-        queryset=Site.objects.all(),
-        help_text=Tourism._meta.get_field('site_id').help_text,
-        label=Tourism._meta.get_field('site_id').verbose_name
-        )
-
-    class Meta:
-        model = Tourism
-        exclude = ['polygon']
-
-
 class MonumentProtectionListFilter(django_filters.FilterSet):
     current_land_use = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.all(),
