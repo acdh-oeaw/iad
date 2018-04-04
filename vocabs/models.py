@@ -78,6 +78,12 @@ class SkosConcept(models.Model):
     namespace = models.ForeignKey(
         SkosNamespace, blank=True, null=True, on_delete=models.CASCADE
     )
+    broader_concept = models.ForeignKey(
+        'SkosConcept', help_text="Broader Term.",
+        verbose_name="Broader Term",
+        blank=True, null=True, on_delete=models.CASCADE,
+        related_name="narrower_concepts"
+    )
     skos_broader = models.ManyToManyField(
         'SkosConcept', blank=True, related_name="narrower"
     )
