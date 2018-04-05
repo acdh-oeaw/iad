@@ -1,6 +1,6 @@
 import django_filters
 from dal import autocomplete
-from .models import SkosConcept, SkosConceptScheme
+from .models import SkosConcept, SkosConceptScheme, get_all_children
 
 
 django_filters.filters.LOOKUP_TYPES = [
@@ -18,6 +18,24 @@ django_filters.filters.LOOKUP_TYPES = [
     ('icontains', 'Contains (case insensitive)'),
     ('not_contains', 'Does not contain'),
 ]
+
+
+def generous_concept_filter(queryset, name, value):
+    if value:
+        lookup = '__'.join([name, 'in'])
+        print("name: {}".format(name))
+        print("value: {}".format(value))
+        # current_concept = SkosConcept.objects.filter(id__in=value)
+        # narrower_concepts = SkosConcept.objects.filter(
+        #     broader_concept__in=current_concept
+        # )
+        # all = current_concept | narrower_concepts
+        starter = value[0]
+        all = get_all_children(starter, include_self=True)
+        print("all :{}".format(all))
+        qs = queryset.filter(**{lookup: all})
+        return qs
+    return queryset
 
 
 class SkosConceptFilter(django_filters.FilterSet):

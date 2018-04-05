@@ -3,6 +3,8 @@ from dal import autocomplete
 from django.urls import reverse
 from archiv.models import *
 from entities.models import Place, AlternativeName, Institution, Person
+from vocabs.models import SkosConcept, SkosConceptScheme
+from vocabs.filters import generous_concept_filter
 
 
 django_filters.filters.LOOKUP_TYPES = [
@@ -80,7 +82,21 @@ class SiteListFilter(django_filters.FilterSet):
         ),
         queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="archenttype"),
         help_text="Site contains specific archaeological entity?",
-        label="Archaeological Entity"
+        label="Greedy Archaeological Entity"
+        )
+    example = django_filters.ModelMultipleChoiceFilter(
+        name="has_archent__ent_type",
+        method=generous_concept_filter,
+        widget=autocomplete.Select2Multiple(
+            url="/vocabs-ac/specific-concept-ac/archenttype",
+            attrs={
+                'data-placeholder': 'Autocomplete ...',
+                'data-minimum-input-length': 3,
+                },
+        ),
+        queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="archenttype"),
+        help_text="Site contains specific archaeological entity?",
+        label="Generous Archaeological Entity"
         )
 
     class Meta:

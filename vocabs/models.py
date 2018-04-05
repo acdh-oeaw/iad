@@ -162,3 +162,15 @@ class SkosConcept(models.Model):
 
     def get_absolute_url(self):
         return reverse('vocabs:skosconcept_detail', kwargs={'pk': self.id})
+
+
+def get_all_children(self, include_self=True):
+    # many thanks to https://stackoverflow.com/questions/4725343/django-self-recursive-foreignkey-filter-query-for-all-childs
+    r = []
+    if include_self:
+        r.append(self)
+    for c in SkosConcept.objects.filter(broader_concept=self):
+        _r = get_all_children(c, include_self=True)
+        if 0 < len(_r):
+            r.extend(_r)
+    return r

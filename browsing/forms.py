@@ -97,6 +97,7 @@ class SiteFilterFormHelper(FormHelper):
                     'Advanced search',
                     'public',
                     'has_archent__ent_type',
+                    'example',
                     css_id="more"
                     ),
                 )
