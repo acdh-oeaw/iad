@@ -3,6 +3,21 @@ from .models import SkosLabel, SkosConcept, SkosConceptScheme
 from django.db.models import Q
 
 
+class SpecificConcepts(autocomplete.Select2QuerySetView):
+
+    def get_queryset(self):
+        scheme = self.kwargs['scheme']
+        selected_scheme = SkosConceptScheme.objects.filter(dc_title__icontains=scheme)
+        qs = SkosConcept.objects.filter(scheme__in=selected_scheme)
+
+        if self.q:
+            direct_match = qs.filter(pref_label__icontains=self.q)
+            plus_narrower = direct_match | qs.filter(broader_concept__in=direct_match)
+            return plus_narrower
+
+        return []
+
+
 class SKOSConstraintACNoHierarchy(autocomplete.Select2QuerySetView):
 
     def get_queryset(self):
@@ -38,7 +53,7 @@ class SKOSConstraintAC(autocomplete.Select2QuerySetView):
 
         if self.q:
             direct_match = qs.filter(pref_label__icontains=self.q)
-            plus_narrower = qs.filter(broader_concept__in=direct_match) | direct_match
+            plus_narrower = direct_match | qs.filter(broader_concept__in=direct_match)
             return plus_narrower
         else:
             return qs

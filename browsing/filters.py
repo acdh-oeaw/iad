@@ -1,5 +1,6 @@
 import django_filters
 from dal import autocomplete
+from django.urls import reverse
 from archiv.models import *
 from entities.models import Place, AlternativeName, Institution, Person
 
@@ -63,10 +64,23 @@ class ArchEntListFilter(django_filters.FilterSet):
 
 
 class SiteListFilter(django_filters.FilterSet):
+    # url = reverse('vocabs-ac:specific-concept-ac', kwargs={'schema': 'archenttype'})
     name = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Site._meta.get_field('name').help_text,
         label=Site._meta.get_field('name').verbose_name
+        )
+    has_archent__ent_type = django_filters.ModelMultipleChoiceFilter(
+        widget=autocomplete.Select2Multiple(
+            url="/vocabs-ac/specific-concept-ac/archenttype",
+            attrs={
+                'data-placeholder': 'Autocomplete ...',
+                'data-minimum-input-length': 3,
+                },
+        ),
+        queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="archenttype"),
+        help_text="Site contains specific archaeological entity?",
+        label="Archaeological Entity"
         )
 
     class Meta:

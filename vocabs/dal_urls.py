@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.urls import path
 from . import views
 from . import dal_views
 from .models import SkosLabel, SkosConcept, SkosConceptScheme
@@ -36,5 +37,10 @@ urlpatterns = [
         r'^skos-constraint-no-hierarchy-ac/$', dal_views.SKOSConstraintACNoHierarchy.as_view(
             model=SkosConcept),
         name='skos-constraint-no-hierarchy-ac',
+    ),
+    path(
+        r'specific-concept-ac/<str:scheme>', dal_views.SpecificConcepts.as_view(
+            model=SkosConcept),
+        name='specific-concept-ac',
     )
 ]

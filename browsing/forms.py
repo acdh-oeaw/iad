@@ -96,6 +96,7 @@ class SiteFilterFormHelper(FormHelper):
                 AccordionGroup(
                     'Advanced search',
                     'public',
+                    'has_archent__ent_type',
                     css_id="more"
                     ),
                 )
