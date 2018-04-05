@@ -37,11 +37,11 @@ class SKOSConstraintAC(autocomplete.Select2QuerySetView):
             qs = SkosConcept.objects.all()
 
         if self.q:
-            qs = qs.filter(
-                Q(pref_label__icontains=self.q) | Q(skos_broader__pref_label__icontains=self.q)
-            )
-
-        return qs
+            direct_match = qs.filter(pref_label__icontains=self.q)
+            plus_narrower = qs.filter(broader_concept__in=direct_match) | direct_match
+            return plus_narrower
+        else:
+            return qs
 
 
 class SkosLabelAC(autocomplete.Select2QuerySetView):
@@ -50,7 +50,6 @@ class SkosLabelAC(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(label__icontains=self.q)
-
         return qs
 
 
@@ -59,9 +58,11 @@ class SkosConceptAC(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = SkosConcept.objects.all()
         if self.q:
-            qs = qs.filter(pref_label__icontains=self.q)
-
-        return qs
+            direct_match = qs.filter(pref_label__icontains=self.q)
+            plus_narrower = qs.filter(broader_concept__in=direct_match) | direct_match
+            return plus_narrower
+        else:
+            return qs
 
 
 class SkosConceptPrefLabalAC(autocomplete.Select2ListView):

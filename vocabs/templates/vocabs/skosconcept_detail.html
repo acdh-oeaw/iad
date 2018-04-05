@@ -5,7 +5,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h1 style="text-align: center;">
-                <small>{{ object }}</small><br />
+                <small>{{ object.label }}</small><br />
                 <small>a skos:Concept</small>
                 {% if user.is_authenticated %}
                     <a href="{% url 'vocabs:skosconcept_update' pk=object.id %}">

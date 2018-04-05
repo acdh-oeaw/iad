@@ -108,7 +108,8 @@ class SkosConcept(models.Model):
         verbose_name='Name reverse',
         help_text='Inverse relation like: \
         "is sub-class of" vs. "is super-class of".',
-        blank=True)
+        blank=True
+    )
 
     def get_broader(self):
         broader = self.skos_broader.all()
@@ -146,16 +147,18 @@ class SkosConcept(models.Model):
             pass
         super(SkosConcept, self).save(*args, **kwargs)
 
+    @cached_property
+    def label(self):
+        # 'borrowed from https://github.com/sennierer'
+        d = self
+        res = self.pref_label
+        while d.broader_concept:
+            res = d.broader_concept.pref_label + ' >> ' + res
+            d = d.broader_concept
+        return res
+
     def __str__(self):
-        parents = self.skos_broader.all()
-        if parents:
-            parent = "|".join([x.__str__() for x in parents])
-        else:
-            parent = None
-        if parent:
-            return "{} >> {}".format(parent, self.pref_label)
-        else:
-            return self.pref_label
+        return self.label
 
     def get_absolute_url(self):
         return reverse('vocabs:skosconcept_detail', kwargs={'pk': self.id})
