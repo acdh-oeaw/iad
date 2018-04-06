@@ -6,9 +6,22 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.functional import cached_property
 
-DEFAULT_PEFIX = os.path.basename(settings.BASE_DIR)
 
-DEFAULT_NAMESPACE = "http://www.vocabs/{}/".format(DEFAULT_PEFIX)
+try:
+    DEFAULT_NAMESPACE = settings.VOCABS_SETTINGS['default_nsgg']
+except KeyError:
+    DEFAULT_NAMESPACE = "http://www.vocabs/provide-some-namespace/"
+
+try:
+    DEFAULT_PREFIX = settings.VOCABS_SETTINGS['default_prefix']
+except KeyError:
+    DEFAULT_PREFIX = "provideSome"
+
+try:
+    DEFAULT_LANG = settings.VOCABS_SETTINGS['default_lang']
+except KeyError:
+    DEFAULT_LANG = "eng"
+
 
 LABEL_TYPES = (
     ('prefLabel', 'prefLabel'),
@@ -19,7 +32,7 @@ LABEL_TYPES = (
 
 class SkosNamespace(models.Model):
     namespace = models.URLField(blank=True, default=DEFAULT_NAMESPACE)
-    prefix = models.CharField(max_length=50, blank=True, default=DEFAULT_PEFIX)
+    prefix = models.CharField(max_length=50, blank=True, default=DEFAULT_PREFIX)
 
     def __str__(self):
         return "{}".format(self.prefix)
@@ -36,7 +49,7 @@ class SkosConceptScheme(models.Model):
     def save(self, *args, **kwargs):
         if self.namespace is None:
             temp_namespace, _ = SkosNamespace.objects.get_or_create(
-                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PEFIX)
+                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PREFIX)
             temp_namespace.save()
             self.namespace = temp_namespace
         else:
@@ -69,10 +82,10 @@ class SkosLabel(models.Model):
 
 class SkosConcept(models.Model):
     pref_label = models.CharField(max_length=300, blank=True)
-    pref_label_lang = models.CharField(max_length=3, blank=True, default="eng")
+    pref_label_lang = models.CharField(max_length=3, blank=True, default=DEFAULT_LANG)
     scheme = models.ManyToManyField(SkosConceptScheme, blank=True)
     definition = models.TextField(blank=True)
-    definition_lang = models.CharField(max_length=3, blank=True, default="eng")
+    definition_lang = models.CharField(max_length=3, blank=True, default=DEFAULT_LANG)
     label = models.ManyToManyField(SkosLabel, blank=True)
     notation = models.CharField(max_length=300, blank=True)
     namespace = models.ForeignKey(
@@ -140,7 +153,7 @@ class SkosConcept(models.Model):
 
         if self.namespace is None:
             temp_namespace, _ = SkosNamespace.objects.get_or_create(
-                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PEFIX)
+                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PREFIX)
             temp_namespace.save()
             self.namespace = temp_namespace
         else:
