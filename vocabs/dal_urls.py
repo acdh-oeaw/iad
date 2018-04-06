@@ -19,7 +19,7 @@ urlpatterns = [
         name='skosconceptscheme-autocomplete',
     ),
     url(
-        r'^skosconcept-autocomplete/$', dal_views.SkosConceptAC.as_view(
+        r'^skosconcept-autocomplete/$', dal_views.SpecificConcepts.as_view(
             model=SkosConcept,
             create_field='pref_label',),
         name='skosconcept-autocomplete',

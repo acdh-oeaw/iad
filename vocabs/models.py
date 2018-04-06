@@ -157,15 +157,35 @@ class SkosConcept(models.Model):
             d = d.broader_concept
         return res
 
-    def __str__(self):
-        return self.label
+    @classmethod
+    def get_listview_url(self):
+        return reverse('vocabs:browse_vocabs')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('vocabs:skosconcept_create')
 
     def get_absolute_url(self):
         return reverse('vocabs:skosconcept_detail', kwargs={'pk': self.id})
 
+    def get_next(self):
+        next = SkosConcept.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = SkosConcept.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def __str__(self):
+        return self.pref_label
+
 
 def get_all_children(self, include_self=True):
-    # many thanks to https://stackoverflow.com/questions/4725343/django-self-recursive-foreignkey-filter-query-for-all-childs
+    # many thanks to https://stackoverflow.com/questions/4725343
     r = []
     if include_self:
         r.append(self)

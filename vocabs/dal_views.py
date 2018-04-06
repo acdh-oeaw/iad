@@ -5,10 +5,19 @@ from django.db.models import Q
 
 class SpecificConcepts(autocomplete.Select2QuerySetView):
 
+    def get_result_label(self, item):
+        return "{}".format(item.label)
+
     def get_queryset(self):
-        scheme = self.kwargs['scheme']
-        selected_scheme = SkosConceptScheme.objects.filter(dc_title__icontains=scheme)
-        qs = SkosConcept.objects.filter(scheme__in=selected_scheme)
+        try:
+            scheme = self.kwargs['scheme']
+            selected_scheme = SkosConceptScheme.objects.filter(dc_title__icontains=scheme)
+        except KeyError:
+            selected_scheme = None
+        if selected_scheme:
+            qs = SkosConcept.objects.filter(scheme__in=selected_scheme)
+        else:
+            qs = SkosConcept.objects.all()
 
         if self.q:
             direct_match = qs.filter(pref_label__icontains=self.q)
@@ -69,6 +78,9 @@ class SkosLabelAC(autocomplete.Select2QuerySetView):
 
 
 class SkosConceptAC(autocomplete.Select2QuerySetView):
+
+    def get_result_label(self, item):
+        return "{}".format(item.label)
 
     def get_queryset(self):
         qs = SkosConcept.objects.all()
