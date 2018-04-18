@@ -141,7 +141,7 @@
                             <td>
                                 {% for x in object.cadastral_community.all %}
                                     <li>
-                                        {{ x }}
+                                        <a href="{{ x.get_absolute_url }}">{{ x }}</a>
                                     </li>
                                 {% endfor %}
                             </td>
@@ -185,7 +185,7 @@
                             <td>
                                 {% for x in object.period.all %}
                                     <li>
-                                        {{ x }}
+                                        <a href="{{ x.get_absolute_url }}">{{ x }}</a>
                                     </li>
                                 {% endfor %}
                             </td>

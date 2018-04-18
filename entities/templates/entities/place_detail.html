@@ -99,25 +99,40 @@ include 'autocomplete_light/static.html
                     <td>
                         {% if object.part_of %}
 
-                        <a href="{% url 'entities:place_detail' pk=object.part_of.id %}">{{ object.part_of }}</a>
+                            <a href="{% url 'entities:place_detail' pk=object.part_of.id %}">{{ object.part_of }}</a>
                         {% else %}
-                        No entry
+                            No entry
                         {% endif %}
                     </td>
-
                 </tr>
-                <tr>
-                    <th>has child</th>
-                    <td>
-                        <ul>
-                            {% for x in object.has_child.all %}
-                            {% if x.id %}
-                            <li><a href="{% url 'entities:place_detail' pk=x.id %}">{{ x }}</a></li>
-                            {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </td>
-                </tr>
+                {% if object.has_sites.all %}
+                    <tr>
+                        <th>related sites</th>
+                        <td>
+                            <ul>
+                                {% for x in object.has_sites.all %}
+                                    {% if x.id %}
+                                        <li><a href="{{ x.get_absolute_url }}">{{ x }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if object.has_child.all %}
+                    <tr>
+                        <th>has children</th>
+                        <td>
+                            <ul>
+                                {% for x in object.has_child.all %}
+                                    {% if x.id %}
+                                        <li><a href="{% url 'entities:place_detail' pk=x.id %}">{{ x }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
         {% if user.is_authenticated %}

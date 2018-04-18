@@ -277,7 +277,8 @@ class Site(IadBaseClass):
 
     cadastral_community = models.ManyToManyField(
         Place, blank=True, verbose_name="Cadastral Community",
-        help_text="The cadastral community where the site is located."
+        help_text="The cadastral community where the site is located.",
+        related_name="has_sites"
     )
     cadastral_number = models.CharField(
         blank=True, null=True, max_length=250,
@@ -295,7 +296,8 @@ class Site(IadBaseClass):
         help_text="The plot number (applies to Slovenian sites)."
     )
     period = models.ManyToManyField(
-        Period, blank=True, verbose_name="some verbose name???"
+        Period, blank=True, verbose_name="Period (to be deprecated)",
+        help_text="Dating of all ARCHAEOLOGICAL ENTITIES of this particular site"
     )
     other_period = models.ManyToManyField(
         SkosConcept, blank=True, verbose_name="Other Present Periods",

@@ -90,6 +90,10 @@ class SiteForm(forms.ModelForm):
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
                 url='bib-ac:book-autocomplete'),
+            'cadastral_community': autocomplete.ModelSelect2Multiple(
+                url='entities-ac:place-autocomplete'),
+            'period': autocomplete.ModelSelect2Multiple(
+                url='archiv-ac:period-autocomplete'),
         }
 
     def __init__(self, *args, **kwargs):
