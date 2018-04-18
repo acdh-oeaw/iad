@@ -24,9 +24,11 @@ urlpatterns = [
     url(r'^sparql/', include('sparql.urls', namespace='sparql')),
     url(r'^vocabs/', include('vocabs.urls', namespace='vocabs')),
     url(r'^vocabs-ac/', include('vocabs.dal_urls', namespace='vocabs-ac')),
+    url(r'^archiv-ac/', include('archiv.dal_urls', namespace='archiv-ac')),
     url(r'^entities-ac/', include('entities.dal_urls', namespace='entities-ac')),
     url(r'^entities/', include('entities.urls', namespace='entities')),
     url(r'^bib/', include('bib.urls', namespace='bib')),
+    url(r'^bib-ac/', include('bib.dal_urls', namespace='bib-ac')),
     url(r'^archiv/', include('archiv.urls', namespace='archiv')),
     url(r'^', include('webpage.urls', namespace='webpage')),
 ]

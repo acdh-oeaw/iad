@@ -85,6 +85,12 @@ class SiteForm(forms.ModelForm):
     class Meta:
         model = Site
         fields = "__all__"
+        widgets = {
+            'alt_name': autocomplete.ModelSelect2Multiple(
+                url='archiv-ac:altname-autocomplete'),
+            'literature': autocomplete.ModelSelect2Multiple(
+                url='bib-ac:book-autocomplete'),
+        }
 
     def __init__(self, *args, **kwargs):
         super(SiteForm, self).__init__(*args, **kwargs)

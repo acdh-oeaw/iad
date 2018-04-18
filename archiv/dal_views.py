@@ -1,0 +1,12 @@
+from dal import autocomplete
+from .models import *
+
+
+class AltNameAC(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = AltName.objects.all()
+
+        if self.q:
+            qs = qs.filter(label__icontains=self.q)
+
+        return qs
