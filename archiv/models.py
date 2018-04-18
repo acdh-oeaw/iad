@@ -1,5 +1,6 @@
 from django.urls import reverse
 from django.contrib.gis.db import models
+from django.core.serializers import serialize
 from idprovider.models import IdProvider
 from entities.models import Place, Person, Institution
 from vocabs.models import SkosConcept
@@ -16,6 +17,52 @@ VALUE_STATUS_CHOICES = (
     ('1 - high', '1 - high'),
     ('2 - middle', '2 - middle'),
     ('3 - low', '3 - low'),
+)
+
+SITE_ACCESSIBILITY = (
+    ('1 – accessible by public transport', '1 – accessible by public transport'),
+    (
+        '2 – accessible for individual tourist groups',
+        '2 – accessible for individual tourist groups'
+    ),
+    ('3 – inaccessible', '3 – inaccessible '),
+)
+
+SITE_VISIBILITY = (
+    (
+        '1 – reconstructed and interpreted onsite',
+        '1 – reconstructed and interpreted onsite'
+    ),
+    ('2 – visible, but not interpreted', '2 – visible, but not interpreted'),
+    ('3 - invisible archaeological heritage', '3 - invisible archaeological heritage'),
+)
+
+
+SITE_INFRASTRUCTURE = (
+    ('1 – complete infrastructure', '1 – complete infrastructure'),
+    ('2 – basic infrastructure', '2 – basic infrastructure'),
+    ('3 – no infrastructure', '3 – no infrastructure'),
+)
+
+SITE_LONGTERMMANGEMENT = (
+    ('1 – long-term care ensured', '1 – long-term care ensured'),
+    ('2 – short-term care ensured', '2 – short-term care ensured'),
+    ('3 – no care foreseen or possible', '3 – no care foreseen or possible'),
+)
+
+SITE_POTENTIALSURROUNDINGS = (
+    (
+        '1 – touristic region with excellent infrastructure',
+        '1 – touristic region with excellent infrastructure'
+    ),
+    (
+        '2 – touristic offer in development',
+        '2 – touristic offer in development'
+    ),
+    (
+        '3 – no or little attempts for tourism',
+        '3 – no or little attempts for tourism'
+    ),
 )
 
 
@@ -93,7 +140,7 @@ class IadBaseClass(IdProvider):
     literature = models.ManyToManyField(
         Book, blank=True, help_text="provide some"
     )
-    polygon = models.MultiPolygonField(blank=True, null=True, srid=4326)
+    polygon = models.MultiPolygonField(blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -282,7 +329,7 @@ class Site(IadBaseClass):
     )
     cadastral_number = models.CharField(
         blank=True, null=True, max_length=250,
-        verbose_name="Cadastral Number",
+        verbose_name="Cadastral Number (will be moved to Place-Class)",
         help_text="The cadastral number."
     )
     heritage_number = models.CharField(
@@ -313,31 +360,31 @@ class Site(IadBaseClass):
         blank=True, null=True, verbose_name="accessibility",
         help_text="provide some",
         max_length=250,
-        choices=VALUE_STATUS_CHOICES
+        choices=SITE_ACCESSIBILITY
     )
     visibility = models.CharField(
         blank=True, null=True, verbose_name="visibility",
         help_text="provide some",
         max_length=250,
-        choices=VALUE_STATUS_CHOICES
+        choices=SITE_VISIBILITY
     )
     infrastructure = models.CharField(
         blank=True, null=True, verbose_name="infrastructure",
         help_text="provide some",
         max_length=250,
-        choices=VALUE_STATUS_CHOICES
+        choices=SITE_INFRASTRUCTURE
     )
     long_term_management = models.CharField(
         blank=True, null=True, verbose_name="long_term_management",
         help_text="provide some",
         max_length=250,
-        choices=VALUE_STATUS_CHOICES
+        choices=SITE_LONGTERMMANGEMENT
     )
     potential_surrounding = models.CharField(
         blank=True, null=True, verbose_name="potential_surrounding",
         help_text="provide some",
         max_length=250,
-        choices=VALUE_STATUS_CHOICES
+        choices=SITE_POTENTIALSURROUNDINGS
     )
     museum = models.ManyToManyField(
         Institution, blank=True, verbose_name="Responsible Institution",
@@ -353,6 +400,14 @@ class Site(IadBaseClass):
         help_text="If the site is going to be used in the IAD app, please provide the \
         description of the site to be implemented into the app."
     )
+
+    def get_geojson(self):
+        geojson = serialize(
+            'geojson', Site.objects.filter(id=self.id),
+            geometry_field='polygon',
+            fields=('name', 'identifier',)
+        )
+        return geojson
 
     @classmethod
     def get_listview_url(self):

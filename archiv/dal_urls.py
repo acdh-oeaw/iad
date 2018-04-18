@@ -14,4 +14,8 @@ urlpatterns = [
         r'^period-autocomplete/$', dal_views.PeriodAC.as_view(model=Period),
         name='period-autocomplete',
     ),
+    url(
+        r'^researchevent-autocomplete/$', dal_views.ResearchEventAC.as_view(model=Period),
+        name='researchevent-autocomplete',
+    ),
 ]

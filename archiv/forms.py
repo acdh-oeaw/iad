@@ -94,6 +94,12 @@ class SiteForm(forms.ModelForm):
                 url='entities-ac:place-autocomplete'),
             'period': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:period-autocomplete'),
+            'other_period': autocomplete.ModelSelect2Multiple(
+                url='/vocabs-ac/specific-concept-ac/otherperiods'),
+            'information_source': autocomplete.ModelSelect2Multiple(
+                url='archiv-ac:researchevent-autocomplete'),
+            'museum': autocomplete.ModelSelect2Multiple(
+                url='entities-ac:institution-autocomplete'),
         }
 
     def __init__(self, *args, **kwargs):

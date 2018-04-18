@@ -2,6 +2,13 @@
 {% load staticfiles %}
 {% load webpage_extras %}
 {% block title %}Site{% endblock %}
+{% block scriptHeader %}
+    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}" />
+    <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
+    <style>
+        #map { height: 500px; }
+    </style>
+{% endblock %}
 {% block content %}
 
 <div class="container">
@@ -45,7 +52,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
-                <legend>Lorem Ipsum</legend>
+                <legend>Basic Information</legend>
                 <table class="table table-bordered table-hover">
                     {% if object.identifier %}
                         <tr>
@@ -192,13 +199,54 @@
                         </tr>
                     {% endif %}
                 </table>
+                <legend>Tourism</legend>
+                <table class="table table-bordered table-hover">
+                    {% if object.accessibility %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "accessibility" %}
+                            </th>
+                            <td>
+                                {{ object.accessibility }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.visibility %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "visibility" %}
+                            </th>
+                            <td>
+                                {{ object.visibility }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.infrastructure %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "infrastructure" %}
+                            </th>
+                            <td>
+                                {{ object.infrastructure }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.long_term_management %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "long_term_management" %}
+                            </th>
+                            <td>
+                                {{ object.long_term_management }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                </table>
+
             </div>
             <div class="col-md-6">
-                <legend>
-                    related objects
-                </legend>
                     {% if object.has_archent.all %}
-                        <h3>Arch Ents</h3>
+                        <legend>related Arch Ents</legend>
                         <ul>
                             {% for x in object.has_archent.all %}
                                 <li>
@@ -208,7 +256,7 @@
                         </ul>
                     {% endif %}
                     {% if object.information_source.all %}
-                        <h3>Research Events / Information Source???</h3>
+                        <h3>Information Source</h3>
                         <ul>
                             {% for x in object.information_source.all %}
                                 <li>
@@ -255,7 +303,28 @@
 
             </div>
         </div>
+        {{ object.get_geojson|safe }}
+        <div id="map"/>
     </div>
 </div>
 </div>
+<script type="text/javascript">
+$( document ).ready(function() {
+    var placeName = "{{ object.cadastral_community.name }}"
+    var lat = 46
+    var lng = 15
+    var map = L.map('map').setView([lat, lng], 6);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.light',
+        accessToken: 'pk.eyJ1Ijoic2VubmllcmVyIiwiYSI6ImNpbHk1YWV0bDAwZnB2dW01d2l1Y3phdmkifQ.OljQLEhqeAygai2y6VoSwQ'
+    }).addTo(map);
+    var geojsonFeature = {{ object.get_geojson|safe }}
+
+    L.geoJson(geojsonFeature).addTo(map);
+
+});
+</script>
 {% endblock %}
