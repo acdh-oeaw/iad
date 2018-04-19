@@ -12,6 +12,20 @@ class MonumentProtectionForm(forms.ModelForm):
         model = MonumentProtection
         fields = "__all__"
 
+        widgets = {
+            'alt_name': autocomplete.ModelSelect2Multiple(
+                url='archiv-ac:altname-autocomplete'),
+            'literature': autocomplete.ModelSelect2Multiple(
+                url='bib-ac:book-autocomplete'),
+            'polygon': LeafletWidget(),
+            'site_id': autocomplete.ModelSelect2(
+                url='archiv-ac:site-autocomplete'),
+            'current_land_use': autocomplete.ModelSelect2Multiple(
+                url='/vocabs-ac/specific-concept-ac/current_land_use'),
+            'threats': autocomplete.ModelSelect2Multiple(
+                url='/vocabs-ac/specific-concept-ac/threats'),
+        }
+
     def __init__(self, *args, **kwargs):
         super(MonumentProtectionForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()

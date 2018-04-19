@@ -6,18 +6,13 @@ from entities.models import Place, Person, Institution
 from vocabs.models import SkosConcept
 from bib.models import Book
 
-HERITAGE_STATUS_CHOICES = (
-    ('yes', 'yes'),
-    ('no', 'no'),
-    ('partially', 'partially'),
-)
-
 
 VALUE_STATUS_CHOICES = (
     ('1 - high', '1 - high'),
     ('2 - middle', '2 - middle'),
     ('3 - low', '3 - low'),
 )
+
 
 class AltName(IdProvider):
     label = models.CharField(
@@ -546,6 +541,14 @@ class ArchEnt(IadBaseClass):
             return "{}".format(self.identifier)
 
 
+HERITAGE_STATUS_CHOICES = (
+    ('yes', 'yes'),
+    ('no', 'no'),
+    ('partially', 'partially'),
+    ('in process', 'in process'),
+)
+
+
 class MonumentProtection(IadBaseClass):
     site_id = models.ForeignKey(
         Site, help_text="The unique identifier of the site.",
@@ -571,6 +574,14 @@ class MonumentProtection(IadBaseClass):
         related_name="monument_protection_threats",
         help_text="provide some"
     )
+
+    def get_geojson(self):
+        geojson = serialize(
+            'geojson', MonumentProtection.objects.filter(id=self.id),
+            geometry_field='polygon',
+            fields=('name', 'identifier',)
+        )
+        return geojson
 
     @classmethod
     def get_listview_url(self):
