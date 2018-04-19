@@ -11,7 +11,6 @@ class MonumentProtectionForm(forms.ModelForm):
     class Meta:
         model = MonumentProtection
         fields = "__all__"
-
         widgets = {
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
@@ -102,6 +101,13 @@ class PeriodForm(forms.ModelForm):
     class Meta:
         model = Period
         fields = "__all__"
+        widgets = {
+            'alt_name': autocomplete.ModelSelect2Multiple(
+                url='archiv-ac:altname-autocomplete'),
+            'literature': autocomplete.ModelSelect2Multiple(
+                url='bib-ac:book-autocomplete'),
+            'polygon': LeafletWidget(),
+        }
 
     def __init__(self, *args, **kwargs):
         super(PeriodForm, self).__init__(*args, **kwargs)

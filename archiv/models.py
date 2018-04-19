@@ -134,6 +134,14 @@ class Period(IadBaseClass):
         blank=True, null=True, verbose_name="Bibliographic source for this period."
     )
 
+    def get_geojson(self):
+        geojson = serialize(
+            'geojson', Period.objects.filter(id=self.id),
+            geometry_field='polygon',
+            fields=('name', 'identifier',)
+        )
+        return geojson
+
     @classmethod
     def get_listview_url(self):
         return reverse('browsing:browse_periods')
@@ -235,6 +243,14 @@ class ResearchEvent(IadBaseClass):
         related_name="is_research_question_of",
         on_delete=models.CASCADE
     )
+
+    def get_geojson(self):
+        geojson = serialize(
+            'geojson', ResearchEvent.objects.filter(id=self.id),
+            geometry_field='polygon',
+            fields=('name', 'identifier',)
+        )
+        return geojson
 
     def __str__(self):
         return "{}".format(self.name)
