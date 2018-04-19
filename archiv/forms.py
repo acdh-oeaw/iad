@@ -63,11 +63,11 @@ class ArchEntForm(forms.ModelForm):
             'site_id': autocomplete.ModelSelect2(
                 url='archiv-ac:site-autocomplete'),
             'ent_type': autocomplete.ModelSelect2(
-                url='/vocabs-ac/specific-concept-ac/archenttype'),
+                url='/vocabs-ac/specific-concept-ac/archaeological-entity-type'),
             'topography': autocomplete.ModelSelect2(
                 url='/vocabs-ac/specific-concept-ac/topography'),
             'burial_type': autocomplete.ModelSelect2(
-                url='/vocabs-ac/specific-concept-ac/burial_type'),
+                url='/vocabs-ac/specific-concept-ac/burial-type'),
             'period': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:period-autocomplete'),
             }
@@ -97,9 +97,9 @@ class ResearchEventForm(forms.ModelForm):
             'responsible_institution': autocomplete.ModelSelect2Multiple(
                 url='entities-ac:institution-autocomplete'),
             'research_type': autocomplete.ModelSelect2(
-                url='/vocabs-ac/specific-concept-ac/research_type'),
+                url='/vocabs-ac/specific-concept-ac/research-type'),
             'research_method': autocomplete.ModelSelect2Multiple(
-                url='/vocabs-ac/specific-concept-ac/research_method'),
+                url='/vocabs-ac/specific-concept-ac/research-method'),
             'research_question': autocomplete.ModelSelect2(
                 url='archiv-ac:researchquestion-autocomplete'),
         }
@@ -151,7 +151,7 @@ class SiteForm(forms.ModelForm):
             'period': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:period-autocomplete'),
             'other_period': autocomplete.ModelSelect2Multiple(
-                url='/vocabs-ac/specific-concept-ac/otherperiods'),
+                url='/vocabs-ac/specific-concept-ac/other-present-archaeological-period'),
             'information_source': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:researchevent-autocomplete'),
             'museum': autocomplete.ModelSelect2Multiple(
