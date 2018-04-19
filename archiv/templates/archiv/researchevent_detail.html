@@ -1,7 +1,12 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% load webpage_extras %}
-{% block title %}Research Event{% endblock %}
+{% load leaflet_tags %}
+{% block title %}Research Event {{ object.id }}{% endblock %}
+{% block scriptHeader %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+{% endblock %}
 {% block content %}
 
 <div class="container">
@@ -44,7 +49,7 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            {# <div class="col-md-6"> #}
+            <div class="col-md-6">
                 <legend>Lorem Ipsum</legend>
                 <table class="table table-bordered table-hover">
                     <tr>
@@ -71,6 +76,14 @@
                             {{ object.end_date }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {% get_verbose_name researchevent "research_question" %}
+                        </th>
+                        <td>
+                            <a href="{{ object.research_question.get_absolute_url }}">{{ object.research_question }}</a>
+                        </td>
+                    </tr>
                     {% if object.responsible_researcher.all %}
                         <tr>
                             <th>
@@ -79,7 +92,7 @@
                             <td>
                                 {% for x in object.responsible_researcher.all %}
                                     <li>
-                                        {{ x }}
+                                        <a href="{{ x.get_absolute_url }}">{{ x }}</a>
                                     </li>
                                 {% endfor %}
                             </td>
@@ -107,7 +120,7 @@
                             <td>
                                 {% for x in object.responsible_institution.all %}
                                     <li>
-                                        {{ x }}
+                                        <a href="{{ x.get_absolute_url }}"/>{{ x }}</a>
                                     </li>
                                 {% endfor %}
                             </td>
@@ -195,11 +208,22 @@
                             </td>
                         </tr>
                     {% endif %}
-
                 </table>
-            {# </div> #}
+            </div>
+            <div class="col-md-6">
+                <legend>Map</legend>
+                {% leaflet_map "yourmap" callback="window.map_init_basic" %}
+                <legend>GeoJSON</legend>
+                {{ object.get_geojson }}
+            </div>
         </div>
     </div>
 </div>
 </div>
+<script type="text/javascript">
+    function map_init_basic (map, options) {
+        var geojsonFeature = {{ object.get_geojson|safe }};
+        L.geoJson(geojsonFeature).addTo(map);
+    }
+</script>
 {% endblock %}

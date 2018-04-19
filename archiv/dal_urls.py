@@ -6,11 +6,11 @@ app_name = 'archiv'
 
 urlpatterns = [
     url(
-        r'^site-autocomplete/$', dal_views.SiteAC.as_view(model=Period),
+        r'^site-autocomplete/$', dal_views.SiteAC.as_view(model=Site),
         name='site-autocomplete',
     ),
     url(
-        r'^peraltnameiod-autocomplete/$', dal_views.AltNameAC.as_view(
+        r'^altname-autocomplete/$', dal_views.AltNameAC.as_view(
             model=AltName, create_field='label',),
         name='altname-autocomplete',
     ),
@@ -19,7 +19,13 @@ urlpatterns = [
         name='period-autocomplete',
     ),
     url(
-        r'^researchevent-autocomplete/$', dal_views.ResearchEventAC.as_view(model=Period),
+        r'^researchevent-autocomplete/$', dal_views.ResearchEventAC.as_view(model=ResearchEvent),
         name='researchevent-autocomplete',
+    ),
+    url(
+        r'^researchquestion-autocomplete/$',
+        dal_views.ResearchQuestionAC.as_view(
+            model=ResearchQuestion, create_field='question'),
+        name='researchquestion-autocomplete',
     ),
 ]

@@ -86,6 +86,23 @@ class ResearchEventForm(forms.ModelForm):
     class Meta:
         model = ResearchEvent
         fields = "__all__"
+        widgets = {
+            'alt_name': autocomplete.ModelSelect2Multiple(
+                url='archiv-ac:altname-autocomplete'),
+            'literature': autocomplete.ModelSelect2Multiple(
+                url='bib-ac:book-autocomplete'),
+            'polygon': LeafletWidget(),
+            'responsible_researcher': autocomplete.ModelSelect2Multiple(
+                url='entities-ac:person-autocomplete'),
+            'responsible_institution': autocomplete.ModelSelect2Multiple(
+                url='entities-ac:institution-autocomplete'),
+            'research_type': autocomplete.ModelSelect2(
+                url='/vocabs-ac/specific-concept-ac/research_type'),
+            'research_method': autocomplete.ModelSelect2Multiple(
+                url='/vocabs-ac/specific-concept-ac/research_method'),
+            'research_question': autocomplete.ModelSelect2(
+                url='archiv-ac:researchquestion-autocomplete'),
+        }
 
     def __init__(self, *args, **kwargs):
         super(ResearchEventForm, self).__init__(*args, **kwargs)

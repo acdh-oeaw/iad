@@ -230,7 +230,7 @@ class ResearchEvent(IadBaseClass):
     )
     research_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        verbose_name="Research Methods",
+        verbose_name="Research Type",
         related_name="is_research_type_of",
         on_delete=models.CASCADE
     )

@@ -3,6 +3,16 @@ from dal import autocomplete
 from .models import *
 
 
+class ResearchQuestionAC(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = ResearchQuestion.objects.all()
+
+        if self.q:
+            qs = qs.filter(question__icontains=self.q)
+
+        return qs
+
+
 class ResearchEventAC(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = ResearchEvent.objects.all()
