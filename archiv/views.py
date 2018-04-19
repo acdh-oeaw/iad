@@ -11,27 +11,55 @@ from .forms import *
 from .models import *
 
 
+class BaseCreateView(CreateView):
+    model = None
+    form_class = None
+    template_name = 'archiv/generic_create.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BaseCreateView, self).get_context_data()
+        context['docstring'] = "{}".format(self.model.__doc__)
+        if self.model.__name__.endswith('s'):
+            context['class_name'] = "{}".format(self.model.__name__)
+        else:
+            context['class_name'] = "{}s".format(self.model.__name__)
+        return context
+
+
+class BaseUpdateView(UpdateView):
+    model = None
+    form_class = None
+    template_name = 'archiv/generic_create.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BaseUpdateView, self).get_context_data()
+        context['docstring'] = "{}".format(self.model.__doc__)
+        if self.model.__name__.endswith('s'):
+            context['class_name'] = "{}".format(self.model.__name__)
+        else:
+            context['class_name'] = "{}s".format(self.model.__name__)
+        return context
+
+
 class ArchEntDetailView(DetailView):
     model = ArchEnt
     template_name = 'archiv/archent_detail.html'
 
 
-class ArchEntCreate(CreateView):
+class ArchEntCreate(BaseCreateView):
 
     model = ArchEnt
     form_class = ArchEntForm
-    template_name = 'archiv/archent_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(ArchEntCreate, self).dispatch(*args, **kwargs)
 
 
-class ArchEntUpdate(UpdateView):
+class ArchEntUpdate(BaseUpdateView):
 
     model = ArchEnt
     form_class = ArchEntForm
-    template_name = 'archiv/archent_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -53,22 +81,20 @@ class SiteDetailView(DetailView):
     template_name = 'archiv/site_detail.html'
 
 
-class SiteCreate(CreateView):
+class SiteCreate(BaseCreateView):
 
     model = Site
     form_class = SiteForm
-    template_name = 'archiv/site_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(SiteCreate, self).dispatch(*args, **kwargs)
 
 
-class SiteUpdate(UpdateView):
+class SiteUpdate(BaseUpdateView):
 
     model = Site
     form_class = SiteForm
-    template_name = 'archiv/site_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -90,22 +116,20 @@ class ResearchEventDetailView(DetailView):
     template_name = 'archiv/researchevent_detail.html'
 
 
-class ResearchEventCreate(CreateView):
+class ResearchEventCreate(BaseCreateView):
 
     model = ResearchEvent
     form_class = ResearchEventForm
-    template_name = 'archiv/researchevent_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(ResearchEventCreate, self).dispatch(*args, **kwargs)
 
 
-class ResearchEventUpdate(UpdateView):
+class ResearchEventUpdate(BaseUpdateView):
 
     model = ResearchEvent
     form_class = ResearchEventForm
-    template_name = 'archiv/researchevent_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -127,22 +151,20 @@ class AltNameDetailView(DetailView):
     template_name = 'archiv/altname_detail.html'
 
 
-class AltNameCreate(CreateView):
+class AltNameCreate(BaseCreateView):
 
     model = AltName
     form_class = AltNameForm
-    template_name = 'archiv/altname_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(AltNameCreate, self).dispatch(*args, **kwargs)
 
 
-class AltNameUpdate(UpdateView):
+class AltNameUpdate(BaseUpdateView):
 
     model = AltName
     form_class = AltNameForm
-    template_name = 'archiv/altname_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -164,22 +186,20 @@ class PeriodDetailView(DetailView):
     template_name = 'archiv/period_detail.html'
 
 
-class PeriodCreate(CreateView):
+class PeriodCreate(BaseCreateView):
 
     model = Period
     form_class = PeriodForm
-    template_name = 'archiv/period_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(PeriodCreate, self).dispatch(*args, **kwargs)
 
 
-class PeriodUpdate(UpdateView):
+class PeriodUpdate(BaseUpdateView):
 
     model = Period
     form_class = PeriodForm
-    template_name = 'archiv/period_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -201,22 +221,20 @@ class ResearchQuestionDetailView(DetailView):
     template_name = 'archiv/researchquestion_detail.html'
 
 
-class ResearchQuestionCreate(CreateView):
+class ResearchQuestionCreate(BaseCreateView):
 
     model = ResearchQuestion
     form_class = ResearchQuestionForm
-    template_name = 'archiv/researchquestion_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(ResearchQuestionCreate, self).dispatch(*args, **kwargs)
 
 
-class ResearchQuestionUpdate(UpdateView):
+class ResearchQuestionUpdate(BaseUpdateView):
 
     model = ResearchQuestion
     form_class = ResearchQuestionForm
-    template_name = 'archiv/researchquestion_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -238,22 +256,20 @@ class MonumentProtectionDetailView(DetailView):
     template_name = 'archiv/monumentprotection_detail.html'
 
 
-class MonumentProtectionCreate(CreateView):
+class MonumentProtectionCreate(BaseCreateView):
 
     model = MonumentProtection
     form_class = MonumentProtectionForm
-    template_name = 'archiv/monumentprotection_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(MonumentProtectionCreate, self).dispatch(*args, **kwargs)
 
 
-class MonumentProtectionUpdate(UpdateView):
+class MonumentProtectionUpdate(BaseUpdateView):
 
     model = MonumentProtection
     form_class = MonumentProtectionForm
-    template_name = 'archiv/monumentprotection_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
