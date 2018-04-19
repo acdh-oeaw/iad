@@ -19,53 +19,6 @@ VALUE_STATUS_CHOICES = (
     ('3 - low', '3 - low'),
 )
 
-SITE_ACCESSIBILITY = (
-    ('1 – accessible by public transport', '1 – accessible by public transport'),
-    (
-        '2 – accessible for individual tourist groups',
-        '2 – accessible for individual tourist groups'
-    ),
-    ('3 – inaccessible', '3 – inaccessible '),
-)
-
-SITE_VISIBILITY = (
-    (
-        '1 – reconstructed and interpreted onsite',
-        '1 – reconstructed and interpreted onsite'
-    ),
-    ('2 – visible, but not interpreted', '2 – visible, but not interpreted'),
-    ('3 - invisible archaeological heritage', '3 - invisible archaeological heritage'),
-)
-
-
-SITE_INFRASTRUCTURE = (
-    ('1 – complete infrastructure', '1 – complete infrastructure'),
-    ('2 – basic infrastructure', '2 – basic infrastructure'),
-    ('3 – no infrastructure', '3 – no infrastructure'),
-)
-
-SITE_LONGTERMMANGEMENT = (
-    ('1 – long-term care ensured', '1 – long-term care ensured'),
-    ('2 – short-term care ensured', '2 – short-term care ensured'),
-    ('3 – no care foreseen or possible', '3 – no care foreseen or possible'),
-)
-
-SITE_POTENTIALSURROUNDINGS = (
-    (
-        '1 – touristic region with excellent infrastructure',
-        '1 – touristic region with excellent infrastructure'
-    ),
-    (
-        '2 – touristic offer in development',
-        '2 – touristic offer in development'
-    ),
-    (
-        '3 – no or little attempts for tourism',
-        '3 – no or little attempts for tourism'
-    ),
-)
-
-
 class AltName(IdProvider):
     label = models.CharField(
         blank=True, null=True, max_length=250,
@@ -317,6 +270,53 @@ class ResearchEvent(IadBaseClass):
         )
 
 
+SITE_ACCESSIBILITY = (
+    ('1 – accessible by public transport', '1 – accessible by public transport'),
+    (
+        '2 – accessible for individual tourist groups',
+        '2 – accessible for individual tourist groups'
+    ),
+    ('3 – inaccessible', '3 – inaccessible '),
+)
+
+SITE_VISIBILITY = (
+    (
+        '1 – reconstructed and interpreted onsite',
+        '1 – reconstructed and interpreted onsite'
+    ),
+    ('2 – visible, but not interpreted', '2 – visible, but not interpreted'),
+    ('3 - invisible archaeological heritage', '3 - invisible archaeological heritage'),
+)
+
+
+SITE_INFRASTRUCTURE = (
+    ('1 – complete infrastructure', '1 – complete infrastructure'),
+    ('2 – basic infrastructure', '2 – basic infrastructure'),
+    ('3 – no infrastructure', '3 – no infrastructure'),
+)
+
+SITE_LONGTERMMANGEMENT = (
+    ('1 – long-term care ensured', '1 – long-term care ensured'),
+    ('2 – short-term care ensured', '2 – short-term care ensured'),
+    ('3 – no care foreseen or possible', '3 – no care foreseen or possible'),
+)
+
+SITE_POTENTIALSURROUNDINGS = (
+    (
+        '1 – touristic region with excellent infrastructure',
+        '1 – touristic region with excellent infrastructure'
+    ),
+    (
+        '2 – touristic offer in development',
+        '2 – touristic offer in development'
+    ),
+    (
+        '3 – no or little attempts for tourism',
+        '3 – no or little attempts for tourism'
+    ),
+)
+
+
 class Site(IadBaseClass):
     """SITE is the highest class in the database and includes mostly geographical and
     administrative information about the area where past human activity has been recognized.
@@ -441,6 +441,22 @@ class Site(IadBaseClass):
             return "{}".format(self.identifier)
 
 
+ARCHENT_CERTAINTY = (
+    (
+        '1 - high: data from more complementary methods and/or with relevant comparisons',
+        '1 - high: data from more complementary methods and/or with relevant comparisons'
+    ),
+    (
+        '2 - basic: data from only one method and without relevant comparisons',
+        '2 - basic: data from only one method and without relevant comparisons'
+    ),
+    (
+        '3 - low: not certain data from old finds or old not-verifiable sources',
+        '3 - low: not certain data from old finds or old not-verifiable sources'
+    )
+)
+
+
 class ArchEnt(IadBaseClass):
     """An archaeological entity is defined by a specific human activity (entity type),
     period of this activity (dating) and spatial location (polygon inside of the site)."""
@@ -467,25 +483,36 @@ class ArchEnt(IadBaseClass):
     )
     start_date = models.IntegerField(blank=True, null=True)
     end_date = models.IntegerField(blank=True, null=True)
-    type_certainty = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
-        related_name="archent_type_cert_related",
-        on_delete=models.CASCADE
+    type_certainty = models.CharField(
+        blank=True, null=True, verbose_name="Type Certainty",
+        help_text="provide some",
+        max_length=250,
+        choices=ARCHENT_CERTAINTY
     )
-    dating_certainty = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
-        related_name="archent_dating_cert_related",
-        on_delete=models.CASCADE
+    dating_certainty = models.CharField(
+        blank=True, null=True, verbose_name="Dating Certainty",
+        help_text="provide some",
+        max_length=250,
+        choices=ARCHENT_CERTAINTY
     )
-    location_certainty = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
-        related_name="archent_location_related",
-        on_delete=models.CASCADE
+    location_certainty = models.CharField(
+        blank=True, null=True, verbose_name="Location Certainty",
+        help_text="provide some",
+        max_length=250,
+        choices=ARCHENT_CERTAINTY
     )
     period = models.ManyToManyField(
         Period, blank=True, verbose_name="Other Present Periods",
         help_text="Other periods that were recorded on the site."
     )
+
+    def get_geojson(self):
+        geojson = serialize(
+            'geojson', ArchEnt.objects.filter(id=self.id),
+            geometry_field='polygon',
+            fields=('name', 'identifier',)
+        )
+        return geojson
 
     @classmethod
     def get_listview_url(self):

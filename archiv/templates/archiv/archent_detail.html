@@ -1,7 +1,12 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
+{% load leaflet_tags %}
 {% load webpage_extras %}
 {% block title %}Archaelogical Entity {{ object.id }}{% endblock %}
+{% block scriptHeader %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+{% endblock %}
 {% block content %}
 
 <div class="container">
@@ -44,7 +49,7 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            {# <div class="col-md-6"> #}
+            <div class="col-md-6">
                 <legend>Basic Information</legend>
                 <table class="table table-bordered table-hover">
                     <tr>
@@ -148,9 +153,48 @@
                         </tr>
                     {% endif %}
                 </table>
-            {# </div> #}
+                <legend>Certainty</legend>
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>
+                            {% get_verbose_name archent "type_certainty" %}
+                        </th>
+                        <td>
+                            {{ object.type_certainty }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% get_verbose_name archent "dating_certainty" %}
+                        </th>
+                        <td>
+                            {{ object.dating_certainty }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% get_verbose_name archent "location_certainty" %}
+                        </th>
+                        <td>
+                            {{ object.location_certainty }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <legend>Map</legend>
+                {% leaflet_map "yourmap" callback="window.map_init_basic" %}
+                <legend>GeoJSON</legend>
+                {{ object.get_geojson }}
+            </div>
         </div>
     </div>
 </div>
 </div>
+<script type="text/javascript">
+    function map_init_basic (map, options) {
+        var geojsonFeature = {{ object.get_geojson|safe }};
+        L.geoJson(geojsonFeature).addTo(map);
+    }
+</script>
 {% endblock %}

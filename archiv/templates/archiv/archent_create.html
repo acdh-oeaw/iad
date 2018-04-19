@@ -1,15 +1,20 @@
 {% extends "webpage/base.html" %}
 {% block title %} Create/Modify Arch Ent{% endblock %}
-{% block content %}
+{% load leaflet_tags %}
 {% load crispy_forms_tags %}
-<div class="container">
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h1>Create/Edit Arch Ent</h1>
+{% block scriptHeader %}
+    {% leaflet_js plugins="forms" %}
+    {% leaflet_css plugins="forms" %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>Create/Edit Arch Ent</h1>
+            </div>
+            <div class="panel-body">
+                 {% crispy form %}
+            </div>
+        </div>
     </div>
-    <div class="panel-body">
-         {% crispy form %}
-    </div>
-</div>
-</div>
 {% endblock content %}

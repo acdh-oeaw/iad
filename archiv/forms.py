@@ -1,5 +1,6 @@
 from dal import autocomplete
 from django import forms
+from leaflet.forms.widgets import LeafletWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -45,10 +46,15 @@ class ArchEntForm(forms.ModelForm):
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
                 url='bib-ac:book-autocomplete'),
+            'polygon': LeafletWidget(),
             'site_id': autocomplete.ModelSelect2(
                 url='archiv-ac:site-autocomplete'),
             'ent_type': autocomplete.ModelSelect2(
                 url='/vocabs-ac/specific-concept-ac/archenttype'),
+            'topography': autocomplete.ModelSelect2(
+                url='/vocabs-ac/specific-concept-ac/topography'),
+            'burial_type': autocomplete.ModelSelect2(
+                url='/vocabs-ac/specific-concept-ac/burial_type'),
             'period': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:period-autocomplete'),
             }
@@ -102,6 +108,7 @@ class SiteForm(forms.ModelForm):
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
                 url='bib-ac:book-autocomplete'),
+            'polygon': LeafletWidget(),
             'cadastral_community': autocomplete.ModelSelect2Multiple(
                 url='entities-ac:place-autocomplete'),
             'period': autocomplete.ModelSelect2Multiple(
