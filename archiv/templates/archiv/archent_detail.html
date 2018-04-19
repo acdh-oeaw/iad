@@ -1,7 +1,7 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% load webpage_extras %}
-{% block title %}Archaelogical Entity{% endblock %}
+{% block title %}Archaelogical Entity {{ object.id }}{% endblock %}
 {% block content %}
 
 <div class="container">
@@ -45,11 +45,21 @@
     <div class="panel-body">
         <div class="row">
             {# <div class="col-md-6"> #}
-                <legend>Lorem Ipsum</legend>
+                <legend>Basic Information</legend>
                 <table class="table table-bordered table-hover">
                     <tr>
                         <th>
-                            {% get_verbose_name settlement "name" %}
+                            {% get_verbose_name archent "site_id" %}
+                        </th>
+                        <td>
+                            <a href="{{ object.site_id.get_absolute_url }}">
+                                {{ object.site_id }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% get_verbose_name archent "name" %}
                         </th>
                         <td>
                             {{ object.name }}
@@ -58,7 +68,7 @@
                     {% if object.alt_name.all %}
                         <tr>
                             <th>
-                                {% get_verbose_name settlement "alt_name" %}
+                                {% get_verbose_name iadbaseclass "alt_name" %}
                             </th>
                             <td>
                                 {% for x in object.alt_name.all %}
@@ -72,7 +82,7 @@
                     {% if object.alt_id %}
                         <tr>
                             <th>
-                                {% get_verbose_name settlement "alt_id" %}
+                                {% get_verbose_name archent "alt_id" %}
                             </th>
                             <td>
                                 {{ object.alt_id }}
@@ -82,7 +92,7 @@
                     {% if object.description %}
                         <tr>
                             <th>
-                                {% get_verbose_name settlement "description" %}
+                                {% get_verbose_name archent "description" %}
                             </th>
                             <td>
                                 {{ object.description }}
@@ -92,7 +102,7 @@
                     {% if object.comment %}
                         <tr>
                             <th>
-                                {% get_verbose_name settlement "comment" %}
+                                {% get_verbose_name archent "comment" %}
                             </th>
                             <td>
                                 {{ object.comment }}
@@ -102,7 +112,7 @@
                     {% if object.public %}
                         <tr>
                             <th>
-                                {% get_verbose_name settlement "public" %}
+                                {% get_verbose_name archent "public" %}
                             </th>
                             <td>
                                 {{ object.public }}
@@ -112,12 +122,26 @@
                     {% if object.literature.all %}
                         <tr>
                             <th>
-                                {% get_verbose_name settlement "literature" %}
+                                {% get_verbose_name archent "literature" %}
                             </th>
                             <td>
                                 {% for x in object.literature.all %}
                                     <li>
                                         {{ x }}
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.period.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name archent "period" %}
+                            </th>
+                            <td>
+                                {% for x in object.period.all %}
+                                    <li>
+                                        <a href="{{ x.get_absolute_url }}">{{ x }}</a>
                                     </li>
                                 {% endfor %}
                             </td>

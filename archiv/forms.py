@@ -40,6 +40,18 @@ class ArchEntForm(forms.ModelForm):
     class Meta:
         model = ArchEnt
         fields = "__all__"
+        widgets = {
+            'alt_name': autocomplete.ModelSelect2Multiple(
+                url='archiv-ac:altname-autocomplete'),
+            'literature': autocomplete.ModelSelect2Multiple(
+                url='bib-ac:book-autocomplete'),
+            'site_id': autocomplete.ModelSelect2(
+                url='archiv-ac:site-autocomplete'),
+            'ent_type': autocomplete.ModelSelect2(
+                url='/vocabs-ac/specific-concept-ac/archenttype'),
+            'period': autocomplete.ModelSelect2Multiple(
+                url='archiv-ac:period-autocomplete'),
+            }
 
     def __init__(self, *args, **kwargs):
         super(ArchEntForm, self).__init__(*args, **kwargs)

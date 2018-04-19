@@ -6,6 +6,10 @@ app_name = 'archiv'
 
 urlpatterns = [
     url(
+        r'^site-autocomplete/$', dal_views.SiteAC.as_view(model=Period),
+        name='site-autocomplete',
+    ),
+    url(
         r'^peraltnameiod-autocomplete/$', dal_views.AltNameAC.as_view(
             model=AltName, create_field='label',),
         name='altname-autocomplete',

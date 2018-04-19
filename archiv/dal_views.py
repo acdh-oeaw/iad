@@ -18,6 +18,16 @@ class ResearchEventAC(autocomplete.Select2QuerySetView):
         return qs
 
 
+class SiteAC(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Site.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+
+        return qs
+
+
 class PeriodAC(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = Period.objects.all()
