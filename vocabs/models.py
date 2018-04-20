@@ -136,6 +136,11 @@ class SkosConcept(models.Model):
         all_narrower = set(list(narrower)+list(narrower_reverse))
         return all_narrower
 
+    def get_absolute_url(self):
+        return reverse(
+            'vocabs:skosconcept_detail', kwargs={'pk': self.id}
+        )
+
     @property
     def all_schemes(self):
         return ', '.join([x.dc_title for x in self.scheme.all()])

@@ -20,7 +20,7 @@ class MonumentProtectionForm(forms.ModelForm):
             'site_id': autocomplete.ModelSelect2(
                 url='archiv-ac:site-autocomplete'),
             'current_land_use': autocomplete.ModelSelect2Multiple(
-                url='/vocabs-ac/specific-concept-ac/current_land_use'),
+                url='/vocabs-ac/specific-concept-ac/current-land-use'),
             'threats': autocomplete.ModelSelect2Multiple(
                 url='/vocabs-ac/specific-concept-ac/threats'),
         }
@@ -99,7 +99,7 @@ class ResearchEventForm(forms.ModelForm):
             'research_type': autocomplete.ModelSelect2(
                 url='/vocabs-ac/specific-concept-ac/research-type'),
             'research_method': autocomplete.ModelSelect2Multiple(
-                url='/vocabs-ac/specific-concept-ac/research-method'),
+                url='/vocabs-ac/specific-concept-ac/research-methods'),
             'research_question': autocomplete.ModelSelect2(
                 url='archiv-ac:researchquestion-autocomplete'),
         }

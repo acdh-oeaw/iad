@@ -239,6 +239,48 @@
                             </td>
                         </tr>
                     {% endif %}
+                    {% if object.potential_surrounding %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "potential_surrounding" %}
+                            </th>
+                            <td>
+                                {{ object.potential_surrounding }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.museum.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "museum" %}
+                            </th>
+                            <td>
+                                {% for x in object.museum.all %}
+                                    <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.iad_app %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "iad_app" %}
+                            </th>
+                            <td>
+                                {{ object.iad_app }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.app_description %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "app_description" %}
+                            </th>
+                            <td>
+                                {{ object.app_description }}
+                            </td>
+                        </tr>
+                    {% endif %}
                 </table>
 
             </div>

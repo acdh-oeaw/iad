@@ -45,7 +45,9 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">skos:broader</div>
                         <div class="panel-body">
-                            <h3>{{ object.broader_concept }}</h3>
+                            {% if object.broader_concept %}
+                                <a href="{{ object.broader_concept.get_absolute_url }}">{{ object.broader_concept }}</a>
+                            {% endif %}
                             {% for x in object.get_broader %}
                                 <a href="{% url 'vocabs:skosconcept_detail' pk=x.id %}">{{ x }}</a>
                             {% endfor %}
