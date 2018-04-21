@@ -261,6 +261,10 @@ class ResearchEvent(IadBaseClass):
         with the conducted research methods? Only for scientific research.",
         on_delete=models.CASCADE
     )
+    generation_data_set = models.DateField(
+        blank=True, null=True,
+        verbose_name="When was the data-set generated?", help_text="provide some"
+    )
 
     def get_geojson(self):
         geojson = serialize(

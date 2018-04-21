@@ -85,7 +85,10 @@ class ArchEntForm(forms.ModelForm):
 class ResearchEventForm(forms.ModelForm):
     class Meta:
         model = ResearchEvent
-        fields = "__all__"
+        fields = [
+            'public', 'polygon', 'research_type', 'research_method', 'start_date', 'end_date',
+            'identifier', 'research_question', 'comment'
+        ]
         widgets = {
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
