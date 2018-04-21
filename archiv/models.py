@@ -212,35 +212,41 @@ class ResearchEvent(IadBaseClass):
         blank=True, null=True,
         max_length=250,
         verbose_name="Start Date.",
-        help_text="Start Date"
+        help_text="When did the research event start?"
     )
     end_date = models.CharField(
         max_length=250,
         blank=True, null=True,
         verbose_name="End Date.",
-        help_text="End Date"
+        help_text="When did the research event end?"
     )
     responsible_researcher = models.ManyToManyField(
         Person, blank=True, verbose_name="Responsible Researcher",
-        related_name="has_research"
+        related_name="has_research",
+        help_text="Who is the responsible researcher/project leader of the conducted research?"
     )
     responsible_institution = models.ManyToManyField(
         Institution, blank=True, verbose_name="Responsible Institution",
-        related_name="has_research"
+        related_name="has_research",
+        help_text="Which institution conducted the research?"
     )
     research_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         verbose_name="Research Type",
+        help_text="Was it a development led research or scientific research?",
         related_name="is_research_type_of",
         on_delete=models.CASCADE
     )
     research_method = models.ManyToManyField(
         SkosConcept, blank=True, verbose_name="Research Methods",
+        help_text="Which method has been applied?",
         related_name="is_research_method_of"
     )
     research_question = models.ForeignKey(
         ResearchQuestion, blank=True, null=True, verbose_name="Research Question",
         related_name="is_research_question_of",
+        help_text="What was the initial research question to be answered\
+        with the conducted research methods? Only for scientific research.",
         on_delete=models.CASCADE
     )
 
