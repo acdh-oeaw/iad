@@ -497,6 +497,18 @@ ARCHENT_CERTAINTY = (
 )
 
 
+@modify_fields(
+    name={
+            'verbose_name': 'Entity Name',
+            'help_text': 'The name of the entity in the language\
+            of the country where the entity is located.'
+        },
+    alt_name={
+        'verbose_name': 'Entity alternative name',
+        'help_text': 'Another name / Other names of the entity\
+        (another spelling, language, alias name etc.)'
+        }
+    )
 class ArchEnt(IadBaseClass):
     """An archaeological entity is defined by a specific human activity (entity type),
     period of this activity (dating) and spatial location (polygon inside of the site)."""
@@ -508,11 +520,13 @@ class ArchEnt(IadBaseClass):
     )
     ent_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
+        verbose_name="Entity Type", help_text="What type of area is it?",
         related_name="archent_type_related",
         on_delete=models.CASCADE
     )
     topography = models.ForeignKey(
         SkosConcept, blank=True, null=True,
+        help_text="Where is the entity located",
         related_name="archent_topography",
         on_delete=models.CASCADE
     )
@@ -542,8 +556,8 @@ class ArchEnt(IadBaseClass):
         choices=ARCHENT_CERTAINTY
     )
     period = models.ManyToManyField(
-        Period, blank=True, verbose_name="Other Present Periods",
-        help_text="Other periods that were recorded on the site."
+        Period, blank=True, verbose_name="Dating",
+        help_text="Dating of the archaeological entity."
     )
 
     def get_geojson(self):
