@@ -5,6 +5,15 @@
 {% block scriptHeader %}
     {% leaflet_js plugins="forms" %}
     {% leaflet_css plugins="forms" %}
+    <style>
+
+        .leaflet-container {  /* all maps */
+            width:  800px;
+            height: 800px;
+        }
+        }
+
+</style>
 {% endblock %}
 {% block content %}
 <div class="container">
