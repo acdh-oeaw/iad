@@ -7,6 +7,15 @@ from vocabs.models import SkosConcept
 from bib.models import Book
 
 
+def modify_fields(**kwargs):
+    def wrap(cls):
+        for field, prop_dict in kwargs.items():
+            for prop, val in prop_dict.items():
+                setattr(cls._meta.get_field(field), prop, val)
+        return cls
+    return wrap
+
+
 VALUE_STATUS_CHOICES = (
     ('1 - high', '1 - high'),
     ('2 - middle', '2 - middle'),
@@ -205,6 +214,9 @@ class ResearchQuestion(IdProvider):
         return self.question
 
 
+@modify_fields(identifier={
+    'verbose_name': 'Activity ID',
+    'help_text': 'Applies to Austrian sites.'})
 class ResearchEvent(IadBaseClass):
     """Please Provide some Information about this Class"""
 
