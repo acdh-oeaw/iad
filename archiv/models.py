@@ -354,7 +354,7 @@ class Site(IadBaseClass):
         help_text="The plot number (applies to Slovenian sites)."
     )
     period = models.ManyToManyField(
-        Period, blank=True, verbose_name="Period (to be deprecated)",
+        Period, blank=True, verbose_name="Dating",
         help_text="Dating of all ARCHAEOLOGICAL ENTITIES of this particular site"
     )
     other_period = models.ManyToManyField(

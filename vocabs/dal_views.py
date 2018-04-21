@@ -23,6 +23,8 @@ class SpecificConcepts(autocomplete.Select2QuerySetView):
             direct_match = qs.filter(pref_label__icontains=self.q)
             plus_narrower = direct_match | qs.filter(broader_concept__in=direct_match)
             return plus_narrower
+        else:
+            return qs
 
         return []
 
