@@ -10,7 +10,10 @@ from .models import *
 class MonumentProtectionForm(forms.ModelForm):
     class Meta:
         model = MonumentProtection
-        fields = "__all__"
+        fields = [
+            'public', 'polygon', 'current_land_use',
+            'heritage_status', 'threats', 'comment'
+            ]
         widgets = {
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),

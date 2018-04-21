@@ -90,9 +90,10 @@ class IadBaseClass(IdProvider):
         that cannot be expressed in other fields."""
     )
     public = models.BooleanField(
-        default=False, help_text="""Should this entry (and all related entries) be public
-        or only visible to the account holders?
-        Can be made public only after data-check was completed."""
+        default=False, verbose_name="Public",
+        help_text="Should this entry (and all related entries) be public\
+        or only visible to the account holders? Can be made public\
+        only after data-check was completed."
     )
     literature = models.ManyToManyField(
         Book, blank=True, help_text="provide some"
@@ -218,7 +219,9 @@ class ResearchQuestion(IdProvider):
     'verbose_name': 'Activity ID',
     'help_text': 'Applies to Austrian sites.'})
 class ResearchEvent(IadBaseClass):
-    """Please Provide some Information about this Class"""
+    """An archaeological entity is defined by a specific human activity (entity type),
+    period of this activity (dating) and spatial location (polygon inside of the site).
+    """
 
     start_date = models.CharField(
         blank=True, null=True,
@@ -265,6 +268,10 @@ class ResearchEvent(IadBaseClass):
         blank=True, null=True,
         verbose_name="When was the data-set generated?", help_text="provide some"
     )
+
+    class Meta:
+        verbose_name = "Research Activity"
+        verbose_name_plural = "Research Activities"
 
     def get_geojson(self):
         geojson = serialize(
@@ -587,6 +594,9 @@ HERITAGE_STATUS_CHOICES = (
 )
 
 
+@modify_fields(comment={
+    'help_text': 'Any noteworthy information about the protection\
+    of the site that has not been expressed in other fields. (other types ).'})
 class MonumentProtection(IadBaseClass):
     site_id = models.ForeignKey(
         Site, help_text="The unique identifier of the site.",
@@ -596,22 +606,25 @@ class MonumentProtection(IadBaseClass):
     )
     current_land_use = models.ManyToManyField(
         SkosConcept, blank=True,
-        verbose_name="current land use",
+        verbose_name="Current Land Use",
         related_name="monument_protection_current_land_use",
         help_text="provide some"
     )
     heritage_status = models.CharField(
-        blank=True, null=True, verbose_name="heritage status",
-        help_text="provide some",
+        blank=True, null=True, verbose_name="Heritage Status",
+        help_text="Has the site status of heritage?",
         max_length=250,
         choices=HERITAGE_STATUS_CHOICES
     )
     threats = models.ManyToManyField(
         SkosConcept, blank=True,
-        verbose_name="threats",
+        verbose_name="Threats",
         related_name="monument_protection_threats",
-        help_text="provide some"
+        help_text="Which activity is threatening the site?"
     )
+
+    class Meta:
+        verbose_name = 'Monument Protection'
 
     def get_geojson(self):
         geojson = serialize(
