@@ -103,28 +103,37 @@
                             </a>
                         {% endif %}
                         <ul class="dropdown-menu">
-                            {% nav_menu app='archiv' as links %}
-                            {% for x in links %}
-                                <li>
-                                    <a href="{{ x.link}}">{{ x.name }}</a>
-                                </li>
-                            {% endfor %}
+                            <li>
+                                <a href="{% url 'browsing:browse_researchevents' %}">Research Activity</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'browsing:browse_sites' %}">Site</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'browsing:browse_archents' %}">Arch. Entity</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'browsing:browse_monumentprotections' %}">Monument Protection</a>
+                            </li>
                             <li role="separator" class="divider"></li>
-                            {% nav_menu app='entities' as links %}
-                            {% for x in links %}
-                                <li>
-                                    <a href="{{ x.link}}">{{ x.name }}</a>
-                                </li>
-                            {% endfor %}
-
+                            <li>
+                                <a href="{% url 'browsing:browse_periods' %}">Chronology</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'browsing:browse_institutions' %}">Institution</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'browsing:browse_persons' %}">Researcher</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="{% url 'browsing:browse_researchquestions' %}">Research Question</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'browsing:browse_archivaltnames' %}">Alternative Names</a>
+                            </li>
                             {% if user.is_authenticated %}
-                            <li role="separator" class="divider"></li>
-                            {% nav_menu app='arche' as links %}
-                            {% for x in links %}
-                                <li>
-                                    <a href="{{ x.link}}">{{ x.name }}</a>
-                                </li>
-                            {% endfor %}
+                                <li role="separator" class="divider"></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a></li>
                             {% endif %}
