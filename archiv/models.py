@@ -357,6 +357,16 @@ SITE_POTENTIALSURROUNDINGS = (
 )
 
 
+@modify_fields(
+    name={
+        'verbose_name': 'Site Name',
+        'help_text': 'The name of the site in the language of\
+        the country where the site is located.'
+        },
+    description={
+        'verbose_name': 'Description',
+        'help_text': 'Description of the whole site.'
+    })
 class Site(IadBaseClass):
     """SITE is the highest class in the database and includes mostly geographical and
     administrative information about the area where past human activity has been recognized.
