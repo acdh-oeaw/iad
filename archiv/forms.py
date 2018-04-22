@@ -150,7 +150,7 @@ class SiteForm(forms.ModelForm):
     class Meta:
         model = Site
         fields = [
-            'public', 'polygon', 'alt_id', 'name', 'alt_name',
+            'public', 'name', 'polygon', 'alt_id', 'alt_name',
             'cadastral_community', 'heritage_number', 'plot_number',
             'period', 'other_period', 'information_source',
             'description', 'comment', 'literature'
