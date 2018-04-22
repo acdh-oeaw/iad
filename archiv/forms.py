@@ -149,7 +149,12 @@ class PeriodForm(forms.ModelForm):
 class SiteForm(forms.ModelForm):
     class Meta:
         model = Site
-        fields = "__all__"
+        fields = [
+            'public', 'polygon', 'alt_id', 'name', 'alt_name',
+            'cadastral_community', 'heritage_number', 'plot_number',
+            'period', 'other_period', 'information_source',
+            'description', 'comment', 'literature'
+        ]
         widgets = {
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
