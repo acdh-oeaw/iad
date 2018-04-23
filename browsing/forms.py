@@ -15,6 +15,26 @@ class GenericFilterFormHelper(FormHelper):
         self.add_input(Submit('Filter', 'Search'))
 
 
+class ReferenceFormHelper(FormHelper):
+    def __init__(self, *args, **kwargs):
+        super(ReferenceFormHelper, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.form_class = 'genericFilterForm'
+        self.form_method = 'GET'
+        self.helper.form_tag = False
+        self.add_input(Submit('Filter', 'Search'))
+        self.layout = Layout(
+            Accordion(
+                AccordionGroup(
+                    'Basic search options',
+                    'zotero_item',
+                    'page',
+                    css_id="basic_search_fields"
+                )
+                )
+            )
+
+
 class MonumentProtectionFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
         super(MonumentProtectionFormHelper, self).__init__(*args, **kwargs)

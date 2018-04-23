@@ -4,7 +4,7 @@ from django.core.serializers import serialize
 from idprovider.models import IdProvider
 from entities.models import Place, Person, Institution
 from vocabs.models import SkosConcept
-from bib.models import Book
+from bib.models import Reference
 
 
 def modify_fields(**kwargs):
@@ -96,7 +96,7 @@ class IadBaseClass(IdProvider):
         only after data-check was completed."
     )
     literature = models.ManyToManyField(
-        Book, blank=True, verbose_name="Literature",
+        Reference, blank=True, verbose_name="Literature",
         help_text="Add publication references"
     )
     polygon = models.MultiPolygonField(blank=True, null=True)

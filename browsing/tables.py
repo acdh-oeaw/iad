@@ -2,6 +2,19 @@ import django_tables2 as tables
 from django_tables2.utils import A
 from entities.models import *
 from archiv.models import *
+from bib.models import *
+
+
+class ReferenceTable(tables.Table):
+    id = tables.LinkColumn(
+        'bib:reference_detail',
+        args=[A('pk')], verbose_name='ID'
+    )
+
+    class Meta:
+        model = Reference
+        sequence = ('id', 'zotero_item', 'page')
+        attrs = {"class": "table table-responsive table-hover"}
 
 
 class MonumentProtectionTable(tables.Table):

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.urls import reverse
 from django.db import models
 from django.conf import settings
 
@@ -46,6 +47,34 @@ class Reference(models.Model):
         verbose_name="Page Number",
         help_text="Page Number"
     )
+
+    class Meta:
+        ordering = ['-id']
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('bib:browse_references')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('bib:reference_create')
+
+    def get_next(self):
+        next = Reference.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Reference.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'bib:reference_detail', kwargs={'pk': self.id}
+        )
 
     def __str__(self):
         try:

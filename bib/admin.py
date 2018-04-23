@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book
+from .models import Book, Reference
 
 
 class BookAdmin(admin.ModelAdmin):
@@ -14,10 +14,11 @@ class BookAdmin(admin.ModelAdmin):
 
 
 class ReferenceAdmin(admin.ModelAdmin):
-    search_fields = ['id', 'zotero_item', 'page_number']
-    list_display = ['id', 'zotero_item', 'page_number']
+    search_fields = ['id', 'zotero_item', 'page']
+    list_display = ['id', 'zotero_item', 'page']
 
 
 admin.site.register(Book, BookAdmin)
+admin.site.register(Reference, ReferenceAdmin)
 
 # Register your models here.

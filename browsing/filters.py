@@ -2,6 +2,7 @@ import django_filters
 from dal import autocomplete
 from django.urls import reverse
 from archiv.models import *
+from bib.models import *
 from entities.models import Place, AlternativeName, Institution, Person
 from vocabs.models import SkosConcept, SkosConceptScheme
 from vocabs.filters import generous_concept_filter
@@ -22,6 +23,18 @@ django_filters.filters.LOOKUP_TYPES = [
     ('icontains', 'Contains (case insensitive)'),
     ('not_contains', 'Does not contain'),
 ]
+
+
+class ReferenceListFilter(django_filters.FilterSet):
+    zotero_item = django_filters.ModelMultipleChoiceFilter(
+        queryset=Reference.objects.all(),
+        help_text=Reference._meta.get_field('zotero_item').help_text,
+        label=Reference._meta.get_field('zotero_item').verbose_name
+        )
+
+    class Meta:
+        model = Reference
+        fields = '__all__'
 
 
 class MonumentProtectionListFilter(django_filters.FilterSet):

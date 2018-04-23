@@ -18,7 +18,7 @@ class MonumentProtectionForm(forms.ModelForm):
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
-                url='bib-ac:book-autocomplete'),
+                url='bib-ac:reference-autocomplete'),
             'polygon': LeafletWidget(),
             'site_id': autocomplete.ModelSelect2(
                 url='archiv-ac:site-autocomplete'),
@@ -65,7 +65,7 @@ class ArchEntForm(forms.ModelForm):
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
-                url='bib-ac:book-autocomplete'),
+                url='bib-ac:reference-autocomplete'),
             'polygon': LeafletWidget(),
             'site_id': autocomplete.ModelSelect2(
                 url='archiv-ac:site-autocomplete'),
@@ -100,7 +100,7 @@ class ResearchEventForm(forms.ModelForm):
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
-                url='bib-ac:book-autocomplete'),
+                url='bib-ac:reference-autocomplete'),
             'polygon': LeafletWidget(),
             'responsible_researcher': autocomplete.ModelSelect2Multiple(
                 url='entities-ac:person-autocomplete'),
@@ -132,7 +132,7 @@ class PeriodForm(forms.ModelForm):
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
-                url='bib-ac:book-autocomplete'),
+                url='bib-ac:reference-autocomplete'),
             'polygon': LeafletWidget(),
         }
 
@@ -159,7 +159,7 @@ class SiteForm(forms.ModelForm):
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
-                url='bib-ac:book-autocomplete'),
+                url='bib-ac:reference-autocomplete'),
             'polygon': LeafletWidget(),
             'cadastral_community': autocomplete.ModelSelect2Multiple(
                 url='entities-ac:place-autocomplete'),

@@ -24,4 +24,8 @@ urlpatterns = [
         r'monumentprotections/$', views.MonumentProtectionListView.as_view(),
         name='browse_monumentprotections'
     ),
+    url(
+        r'references/$', views.ReferenceListView.as_view(),
+        name='browse_references'
+    ),
 ]
