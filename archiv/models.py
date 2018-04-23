@@ -311,6 +311,13 @@ class ResearchEvent(IadBaseClass):
         )
 
 
+SITE_OWNERSHIP = (
+    ('1 – private', '1 – private'),
+    ('2 – public', '2 – public'),
+    ('3 – private/public', '3 – private/public'),
+    ('4 – information not available', '4 – information not available'),
+)
+
 SITE_ACCESSIBILITY = (
     ('1 – accessible by public transport', '1 – accessible by public transport'),
     (
@@ -318,6 +325,7 @@ SITE_ACCESSIBILITY = (
         '2 – accessible for individual tourist groups'
     ),
     ('3 – inaccessible', '3 – inaccessible '),
+    ('4 – information not available', '4 – information not available'),
 )
 
 SITE_VISIBILITY = (
@@ -327,6 +335,7 @@ SITE_VISIBILITY = (
     ),
     ('2 – visible, but not interpreted', '2 – visible, but not interpreted'),
     ('3 - invisible archaeological heritage', '3 - invisible archaeological heritage'),
+    ('4 – information not available', '4 – information not available'),
 )
 
 
@@ -334,12 +343,14 @@ SITE_INFRASTRUCTURE = (
     ('1 – complete infrastructure', '1 – complete infrastructure'),
     ('2 – basic infrastructure', '2 – basic infrastructure'),
     ('3 – no infrastructure', '3 – no infrastructure'),
+    ('4 – information not available', '4 – information not available'),
 )
 
 SITE_LONGTERMMANGEMENT = (
     ('1 – long-term care ensured', '1 – long-term care ensured'),
     ('2 – short-term care ensured', '2 – short-term care ensured'),
     ('3 – no care foreseen or possible', '3 – no care foreseen or possible'),
+    ('4 – information not available', '4 – information not available'),
 )
 
 SITE_POTENTIALSURROUNDINGS = (
@@ -355,6 +366,7 @@ SITE_POTENTIALSURROUNDINGS = (
         '3 – no or little attempts for tourism',
         '3 – no or little attempts for tourism'
     ),
+    ('4 – information not available', '4 – information not available'),
 )
 
 
@@ -392,6 +404,12 @@ class Site(IadBaseClass):
         blank=True, null=True, max_length=250,
         verbose_name="Plot Number",
         help_text="The plot number (applies to Slovenian sites)."
+    )
+    ownership = models.CharField(
+        blank=True, null=True, verbose_name="ownership",
+        help_text="Ownership of the land, where the site is located.",
+        max_length=250,
+        choices=SITE_VISIBILITY
     )
     period = models.ManyToManyField(
         Period, blank=True, verbose_name="Dating",
