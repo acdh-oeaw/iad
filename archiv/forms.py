@@ -152,7 +152,7 @@ class SiteForm(forms.ModelForm):
         fields = [
             'public', 'name', 'polygon', 'alt_id', 'alt_name',
             'cadastral_community', 'heritage_number', 'plot_number',
-            'period', 'other_period', 'information_source',
+            'ownership', 'period', 'other_period', 'information_source',
             'description', 'comment', 'literature'
         ]
         widgets = {

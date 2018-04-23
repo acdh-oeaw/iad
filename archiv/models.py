@@ -409,7 +409,7 @@ class Site(IadBaseClass):
         blank=True, null=True, verbose_name="ownership",
         help_text="Ownership of the land, where the site is located.",
         max_length=250,
-        choices=SITE_VISIBILITY
+        choices=SITE_OWNERSHIP
     )
     period = models.ManyToManyField(
         Period, blank=True, verbose_name="Dating",
