@@ -139,7 +139,7 @@ class Period(IadBaseClass):
         Place, blank=True, null=True, related_name="has_related_period_country",
         verbose_name="Country in which this period is used in.",
         help_text="Country in which this period is used in.",
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL
     )
     bibl = models.TextField(
         blank=True, null=True, verbose_name="Bibliographic source for this period."
@@ -251,7 +251,7 @@ class ResearchEvent(IadBaseClass):
         verbose_name="Research Type",
         help_text="Was it a development led research or scientific research?",
         related_name="is_research_type_of",
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL
     )
     research_method = models.ManyToManyField(
         SkosConcept, blank=True, verbose_name="Research Methods",
@@ -263,7 +263,7 @@ class ResearchEvent(IadBaseClass):
         related_name="is_research_question_of",
         help_text="What was the initial research question to be answered\
         with the conducted research methods? Only for scientific research.",
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL
     )
     generation_data_set = models.DateField(
         blank=True, null=True,
@@ -544,25 +544,25 @@ class ArchEnt(IadBaseClass):
 
     site_id = models.ForeignKey(
         Site, help_text="The unique identifier of the site.",
-        blank=True, null=True, on_delete=models.CASCADE,
+        blank=True, null=True, on_delete=models.SET_NULL,
         related_name="has_archent"
     )
     ent_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         verbose_name="Entity Type", help_text="What type of area is it?",
         related_name="archent_type_related",
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL
     )
     topography = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="Where is the entity located",
         related_name="archent_topography",
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL
     )
     burial_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         related_name="archent_burial_type",
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL
     )
     type_certainty = models.CharField(
         blank=True, null=True, verbose_name="Arch. entity type certainty",
@@ -642,7 +642,7 @@ class MonumentProtection(IadBaseClass):
     site_id = models.ForeignKey(
         Site, help_text="The unique identifier of the site.",
         verbose_name="Site",
-        blank=True, null=True, on_delete=models.CASCADE,
+        blank=True, null=True, on_delete=models.SET_NULL,
         related_name="has_monument_protection"
     )
     current_land_use = models.ManyToManyField(

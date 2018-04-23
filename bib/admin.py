@@ -13,6 +13,11 @@ class BookAdmin(admin.ModelAdmin):
     ]
 
 
+class ReferenceAdmin(admin.ModelAdmin):
+    search_fields = ['id', 'zotero_item', 'page_number']
+    list_display = ['id', 'zotero_item', 'page_number']
+
+
 admin.site.register(Book, BookAdmin)
 
 # Register your models here.

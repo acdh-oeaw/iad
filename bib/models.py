@@ -30,3 +30,25 @@ class Book(models.Model):
 
     def __str__(self):
         return "{}, {}".format(self.author, self.title)
+
+
+class Reference(models.Model):
+    """Contains a precise bibliographic reference"""
+    zotero_item = models.ForeignKey(
+        Book, blank=True, null=True,
+        verbose_name="Zotero Item",
+        help_text="Select the zotero item you would like to quote",
+        related_name="has_references",
+        on_delete=models.SET_NULL
+    )
+    page = models.CharField(
+        max_length=250, blank=True, null=True,
+        verbose_name="Page Number",
+        help_text="Page Number"
+    )
+
+    def __str__(self):
+        try:
+            return "{}, {}".format(self.zotero_item, self.page)
+        except:
+            return self.id

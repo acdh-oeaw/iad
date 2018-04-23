@@ -9,4 +9,8 @@ urlpatterns = [
         r'^book-autocomplete/$', dal_views.BookAC.as_view(model=Book),
         name='book-autocomplete',
     ),
+    url(
+        r'^reference-autocomplete/$', dal_views.BookAC.as_view(model=Reference),
+        name='reference-autocomplete',
+    ),
 ]
