@@ -96,7 +96,8 @@ class IadBaseClass(IdProvider):
         only after data-check was completed."
     )
     literature = models.ManyToManyField(
-        Book, blank=True, help_text="provide some"
+        Book, blank=True, verbose_name="Literature",
+        help_text="Add publication references"
     )
     polygon = models.MultiPolygonField(blank=True, null=True)
 
@@ -548,20 +549,20 @@ class ArchEnt(IadBaseClass):
     start_date = models.IntegerField(blank=True, null=True)
     end_date = models.IntegerField(blank=True, null=True)
     type_certainty = models.CharField(
-        blank=True, null=True, verbose_name="Type Certainty",
-        help_text="provide some",
+        blank=True, null=True, verbose_name="Arch. entity type certainty",
+        help_text="How certain is the interpretation of the arch. entity type",
         max_length=250,
         choices=ARCHENT_CERTAINTY
     )
     dating_certainty = models.CharField(
-        blank=True, null=True, verbose_name="Dating Certainty",
-        help_text="provide some",
+        blank=True, null=True, verbose_name="Dating certainty",
+        help_text="How reliable is the dating of the archaeological entity?",
         max_length=250,
         choices=ARCHENT_CERTAINTY
     )
     location_certainty = models.CharField(
-        blank=True, null=True, verbose_name="Location Certainty",
-        help_text="provide some",
+        blank=True, null=True, verbose_name="Location certainty",
+        help_text="How accurate is the information on the location of the arch. entity",
         max_length=250,
         choices=ARCHENT_CERTAINTY
     )
@@ -632,7 +633,7 @@ class MonumentProtection(IadBaseClass):
         SkosConcept, blank=True,
         verbose_name="Current Land Use",
         related_name="monument_protection_current_land_use",
-        help_text="provide some"
+        help_text="What activities are currently present at the site location?"
     )
     heritage_status = models.CharField(
         blank=True, null=True, verbose_name="Heritage Status",

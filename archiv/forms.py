@@ -58,7 +58,7 @@ class ArchEntForm(forms.ModelForm):
         model = ArchEnt
         fields = [
             'public', 'polygon', 'site_id', 'name', 'alt_name',
-            'ent_type', 'topography', 'burial_type', 'period',
+            'ent_type', 'topography', 'burial_type', 'period', 'type_certainty',
             'dating_certainty', 'location_certainty', 'comment'
         ]
         widgets = {
