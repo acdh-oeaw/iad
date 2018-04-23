@@ -564,8 +564,6 @@ class ArchEnt(IadBaseClass):
         related_name="archent_burial_type",
         on_delete=models.CASCADE
     )
-    start_date = models.IntegerField(blank=True, null=True)
-    end_date = models.IntegerField(blank=True, null=True)
     type_certainty = models.CharField(
         blank=True, null=True, verbose_name="Arch. entity type certainty",
         help_text="How certain is the interpretation of the arch. entity type",
