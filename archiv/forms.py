@@ -153,7 +153,10 @@ class SiteForm(forms.ModelForm):
             'public', 'name', 'polygon', 'alt_id', 'alt_name',
             'cadastral_community', 'heritage_number', 'plot_number',
             'ownership', 'period', 'other_period', 'information_source',
-            'description', 'comment', 'literature'
+            'description', 'comment', 'literature',
+            # tourism
+            'accessibility', 'visibility', 'infrastructure', 'long_term_management',
+            'potential_surrounding', 'museum', 'iad_app', 'app_description'
         ]
         widgets = {
             'alt_name': autocomplete.ModelSelect2Multiple(

@@ -426,46 +426,47 @@ class Site(IadBaseClass):
         related_name="has_related_site"
     )
     accessibility = models.CharField(
-        blank=True, null=True, verbose_name="accessibility",
-        help_text="provide some",
+        blank=True, null=True, verbose_name="Accessibility",
+        help_text="Transportation types available on the site.",
         max_length=250,
         choices=SITE_ACCESSIBILITY
     )
     visibility = models.CharField(
-        blank=True, null=True, verbose_name="visibility",
-        help_text="provide some",
+        blank=True, null=True, verbose_name="Visibility",
+        help_text="How visible are the remains on site.",
         max_length=250,
         choices=SITE_VISIBILITY
     )
     infrastructure = models.CharField(
-        blank=True, null=True, verbose_name="infrastructure",
-        help_text="provide some",
+        blank=True, null=True, verbose_name="Infrastructure",
+        help_text="What kind of infrastructure is available in the vicinity of the site (restaurants, parking, etc.)",
         max_length=250,
         choices=SITE_INFRASTRUCTURE
     )
     long_term_management = models.CharField(
-        blank=True, null=True, verbose_name="long_term_management",
-        help_text="provide some",
+        blank=True, null=True, verbose_name="Long-Term Management",
+        help_text="What kind of management of the site is foreseen?",
         max_length=250,
         choices=SITE_LONGTERMMANGEMENT
     )
     potential_surrounding = models.CharField(
-        blank=True, null=True, verbose_name="potential_surrounding",
-        help_text="provide some",
+        blank=True, null=True, verbose_name="Potential of the Surroundings",
+        help_text="How well is the region where the site is located visited by tourists?\
+        What is the potential of other touristic attractions in the vicinity?",
         max_length=250,
         choices=SITE_POTENTIALSURROUNDINGS
     )
     museum = models.ManyToManyField(
-        Institution, blank=True, verbose_name="Responsible Institution",
+        Institution, blank=True, verbose_name="Museum",
         help_text="Where are the finds from the site stored?",
         related_name="is_museum"
     )
     iad_app = models.BooleanField(
-        verbose_name="iad_app",
+        verbose_name="App",
         default=False, help_text="Should this site be used in the IAD-App?"
     )
     app_description = models.TextField(
-        blank=True, null=True, verbose_name="app_description",
+        blank=True, null=True, verbose_name="App Description",
         help_text="If the site is going to be used in the IAD app, please provide the \
         description of the site to be implemented into the app."
     )
