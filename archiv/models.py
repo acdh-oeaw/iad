@@ -411,10 +411,6 @@ class Site(IadBaseClass):
         max_length=250,
         choices=SITE_OWNERSHIP
     )
-    period = models.ManyToManyField(
-        Period, blank=True, verbose_name="Dating",
-        help_text="Dating of all ARCHAEOLOGICAL ENTITIES of this particular site"
-    )
     other_period = models.ManyToManyField(
         SkosConcept, blank=True, verbose_name="Other Present Periods",
         help_text="Other periods that were recorded on the site.",

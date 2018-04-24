@@ -152,9 +152,9 @@ class SiteForm(forms.ModelForm):
         fields = [
             'public', 'name', 'polygon', 'alt_id', 'alt_name',
             'cadastral_community', 'heritage_number', 'plot_number',
-            'ownership', 'period', 'other_period', 'information_source',
+            'ownership', 'other_period', 'information_source',
             'description', 'comment', 'literature',
-            # tourism
+            # tourism field
             'accessibility', 'visibility', 'infrastructure', 'long_term_management',
             'potential_surrounding', 'museum', 'iad_app', 'app_description'
         ]
@@ -166,8 +166,6 @@ class SiteForm(forms.ModelForm):
             'polygon': LeafletWidget(),
             'cadastral_community': autocomplete.ModelSelect2Multiple(
                 url='entities-ac:place-autocomplete'),
-            'period': autocomplete.ModelSelect2Multiple(
-                url='archiv-ac:period-autocomplete'),
             'other_period': autocomplete.ModelSelect2Multiple(
                 url='/vocabs-ac/specific-concept-ac/other-present-archaeological-period'),
             'information_source': autocomplete.ModelSelect2Multiple(
