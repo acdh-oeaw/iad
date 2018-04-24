@@ -94,7 +94,8 @@ class ResearchEventForm(forms.ModelForm):
         model = ResearchEvent
         fields = [
             'public', 'polygon', 'research_type', 'research_method', 'start_date', 'end_date',
-            'identifier', 'research_question', 'comment'
+            'identifier', 'responsible_researcher', 'responsible_institution',
+            'research_question', 'comment', 'generation_data_set'
         ]
         widgets = {
             'alt_name': autocomplete.ModelSelect2Multiple(

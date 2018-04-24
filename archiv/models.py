@@ -267,7 +267,7 @@ class ResearchEvent(IadBaseClass):
     )
     generation_data_set = models.DateField(
         blank=True, null=True,
-        verbose_name="When was the data-set generated?", help_text="provide some"
+        verbose_name="When was the data-set generated?", help_text="provide some (YYYY-MM-DD)"
     )
 
     class Meta:
