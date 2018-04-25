@@ -224,17 +224,15 @@ class ResearchEvent(IadBaseClass):
     period of this activity (dating) and spatial location (polygon inside of the site).
     """
 
-    start_date = models.CharField(
+    start_date = models.DateField(
         blank=True, null=True,
-        max_length=250,
         verbose_name="Start Date.",
-        help_text="When did the research event start?"
+        help_text="When did the research event start? (YYYY-MM-DD)"
     )
-    end_date = models.CharField(
-        max_length=250,
+    end_date = models.DateField(
         blank=True, null=True,
         verbose_name="End Date.",
-        help_text="When did the research event end?"
+        help_text="When did the research event end? (YYYY-MM-DD)"
     )
     responsible_researcher = models.ManyToManyField(
         Person, blank=True, verbose_name="Responsible Researcher",
