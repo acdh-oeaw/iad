@@ -145,6 +145,9 @@ class Period(IadBaseClass):
         blank=True, null=True, verbose_name="Bibliographic source for this period."
     )
 
+    class Meta:
+        ordering = ['id']
+
     def get_geojson(self):
         geojson = serialize(
             'geojson', Period.objects.filter(id=self.id),
