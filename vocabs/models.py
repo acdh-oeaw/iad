@@ -124,6 +124,9 @@ class SkosConcept(models.Model):
         blank=True
     )
 
+    class Meta:
+        ordering = ['id']
+
     def get_broader(self):
         broader = self.skos_broader.all()
         broader_reverse = SkosConcept.objects.filter(skos_narrower=self)
