@@ -24,14 +24,21 @@ class ReferenceFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
-            Accordion(
-                AccordionGroup(
-                    'Basic search options',
-                    'zotero_item',
-                    'page',
-                    css_id="basic_search_fields"
-                )
-                )
+            Fieldset(
+               'Basic search options',
+                'zotero_item',
+                'page',
+                css_id="basic_search_fields"
+                ),
+####### Uncomment if there are advanced options ####################            
+            # Accordion(
+            #     AccordionGroup(
+            #         'Advanced search options',
+            #         'zotero_item',
+            #         'page',
+            #         css_id="more"
+            #     )
+            #     )
             )
 
 
@@ -44,14 +51,21 @@ class MonumentProtectionFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
-            Accordion(
-                AccordionGroup(
-                    'Basic search options',
-                    'current_land_use',
-                    'site_id',
-                    css_id="basic_search_fields"
-                )
-                )
+            Fieldset(
+                'Basic search options',
+                'current_land_use',
+                'site_id',
+                css_id="basic_search_fields"
+                ),
+####### Uncomment if there are advanced options ####################            
+            # Accordion(
+            #     AccordionGroup(
+            #         'Advanced search options',
+            #         'zotero_item',
+            #         'page',
+            #         css_id="more"
+            #     )
+            #     )
             )
 
 
@@ -64,13 +78,20 @@ class ResearchQuestionFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
-            Accordion(
-                AccordionGroup(
-                    'Basic search options',
-                    'question',
-                    css_id="basic_search_fields"
-                )
-                )
+            Fieldset(
+                'Basic search options',
+                'question',
+                css_id="basic_search_fields"
+                ),
+####### Uncomment if there are advanced options ####################            
+            # Accordion(
+            #     AccordionGroup(
+            #         'Advanced search options',
+            #         'zotero_item',
+            #         'page',
+            #         css_id="more"
+            #     )
+            #     )
             )
 
 
@@ -83,14 +104,14 @@ class ArchEntFilterFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
+            Fieldset(
+                'Basic search options',
+                'name',
+                css_id="basic_search_fields"
+                ),
             Accordion(
                 AccordionGroup(
-                    'Basic search options',
-                    'name',
-                    css_id="basic_search_fields"
-                ),
-                AccordionGroup(
-                    'Advanced search',
+                    'Advanced search options',
                     'public',
                     css_id="more"
                     ),
@@ -107,14 +128,14 @@ class SiteFilterFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
+            Fieldset(
+                'Basic search options',
+                'name',
+                css_id="basic_search_fields"
+                ),
             Accordion(
                 AccordionGroup(
-                    'Basic search options',
-                    'name',
-                    css_id="basic_search_fields"
-                ),
-                AccordionGroup(
-                    'Advanced search',
+                    'Advanced search options',
                     'public',
                     'has_archent__ent_type',
                     'example',
@@ -133,13 +154,20 @@ class ResearchEventFilterFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
-            Accordion(
-                AccordionGroup(
-                    'Basic search options',
-                    'name',
-                    css_id="basic_search_fields"
+            Fieldset(
+                'Basic search options',
+                'name',
+                css_id="basic_search_fields"
                 ),
-                )
+####### Uncomment and add more fields if there are advanced options ####################            
+            # Accordion(
+            #     AccordionGroup(
+            #         'Advanced search options',
+            #         'zotero_item',
+            #         'page',
+            #         css_id="more"
+            #     )
+            #     )
             )
 
 
@@ -152,14 +180,14 @@ class AltNameFilterFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
+            Fieldset(
+                'Basic search options',
+                'label',
+                css_id="basic_search_fields"
+                ),
             Accordion(
                 AccordionGroup(
-                    'Basic search options',
-                    'label',
-                    css_id="basic_search_fields"
-                ),
-                AccordionGroup(
-                    'Advanced search',
+                    'Advanced search options',
                     'language',
                     css_id="more"
                     ),
@@ -176,14 +204,14 @@ class PeriodFilterFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
+            Fieldset(
+                'Basic search options',
+                'name',
+                css_id="basic_search_fields"
+                ),
             Accordion(
                 AccordionGroup(
-                    'Basic search options',
-                    'name',
-                    css_id="basic_search_fields"
-                ),
-                AccordionGroup(
-                    'Advanced search',
+                    'Advanced search options',
                     'public',
                     'start_date',
                     'end_date',
@@ -202,15 +230,15 @@ class PersonFilterFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
+            Fieldset(
+                'Basic search options',
+                'name',
+                'written_name',
+                css_id="basic_search_fields"
+                ),
             Accordion(
                 AccordionGroup(
-                    'Basic search options',
-                    'name',
-                    'written_name',
-                    css_id="basic_search_fields"
-                ),
-                AccordionGroup(
-                    'Advanced search',
+                    'Advanced search options',
                     'acad_title',
                     'alt_names',
                     'authority_url',
@@ -230,13 +258,20 @@ class AlternativeNameFilterFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
-            Accordion(
-                AccordionGroup(
-                    'Basic search options',
-                    'name',
-                    css_id="basic_search_fields"
-                    ),
-                )
+            Fieldset(
+                'Basic search options',
+                'name',
+                css_id="basic_search_fields"
+                ),
+####### Uncomment and add your fields if there are advanced options ####################            
+            # Accordion(
+            #     AccordionGroup(
+            #         'Advanced search options',
+            #         'zotero_item',
+            #         'page',
+            #         css_id="more"
+            #     )
+            #     )
             )
 
 
@@ -249,15 +284,15 @@ class InstitutionFilterFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
+            Fieldset(
+                'Basic search options',
+                'written_name',
+                'alt_names',
+                css_id="basic_search_fields"
+                ),
             Accordion(
                 AccordionGroup(
-                    'Basic search options',
-                    'written_name',
-                    'alt_names',
-                    css_id="basic_search_fields"
-                ),
-                AccordionGroup(
-                    'Advanced search'
+                    'Advanced search options'
                     'authority_url',
                     'location',
                     css_id="more"
@@ -275,15 +310,15 @@ class PlaceFilterFormHelper(FormHelper):
         self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
+            Fieldset(
+                'Basic search options',
+                'name',
+                'alternative_name',
+                css_id="basic_search_fields"
+                ),
             Accordion(
                 AccordionGroup(
-                    'Basic search options',
-                    'name',
-                    'alternative_name',
-                    css_id="basic_search_fields"
-                ),
-                AccordionGroup(
-                    'Advanced search'
+                    'Advanced search options'
                     'geonames_id',
                     'part_of',
                     css_id="more"
