@@ -25,22 +25,27 @@ $("#goto option").each(function() {
 </style>
 <div class="container-fluid">
 
-        <h1 style="margin-bottom:15px; margin-top:15px;"><i class="fas fa-search" style="padding-left:10px; padding-right: 10px;"></i>Browse {% class_definition %} {% block list_title %}{% endblock %}</h1>
-        {% if get_arche_dump %}
-            <a class ="btn btn-outline-secondary"  href="{{ get_arche_dump}}{% querystring %}">Dump as RDF</a>
-        {% endif %}
-        {% if user.is_authenticated %}
-            {% if create_view_link  %}
-                <a class ="btn btn-outline-secondary"  href="{{ create_view_link }}">Create new {{class_name}}</a>
-            {% endif %}
-        {% endif %}
-    {% block customView %}{% endblock %}
-    {% block create_button %}{% endblock %}
 
         <div class="row">
             <div class="col-md-4">
             <div class="card">
             <div class="card-body">
+              <!--Title of serach and buttons-->
+             <h3 style="margin-bottom:15px;">
+             <!-- <i class="fas fa-search" style="padding-left:10px; padding-right: 10px;"></i> -->
+             Browse {% class_definition %} {% block list_title %}{% endblock %}
+             </h3>
+              {% if get_arche_dump %}
+                <a class ="btn btn-outline-secondary"  href="{{ get_arche_dump}}{% querystring %}">Dump as RDF</a>
+              {% endif %}
+              {% if user.is_authenticated %}
+              {% if create_view_link  %}
+                <a class ="btn btn-outline-secondary"  href="{{ create_view_link }}">Create new {{class_name}}</a>
+              {% endif %}
+              {% endif %}
+              {% block customView %}{% endblock %}
+              {% block create_button %}{% endblock %}
+              <!--Search mask-->
                 {% load django_tables2 crispy_forms_tags %}
             <form action="." class="uniForm" method="get">
                 {% if togglable_colums %}
