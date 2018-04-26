@@ -71,7 +71,7 @@
 <body role="document">
 <header>
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <div class="container">
+        <!-- <div class="container"> -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -163,11 +163,11 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        <!-- </div> -->
     </nav>
 </header>
 <section class="main-content">
-    <div id="content" class="container">{% block content %}{% endblock %}</div>
+    <div id="content">{% block content %}{% endblock %}</div>
 </section>
 <div style="text-align:center">
     <span class="socialShare"><!-- The share buttons will be inserted here --></span>
