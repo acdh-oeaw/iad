@@ -1,7 +1,7 @@
 {% if columns %}
     <select class="custom-select" size="3" name="columns" id="column_selector" multiple>
     {% for x in columns %}
-        <option value="{{ x }}">{{ x }}</option>
+        <option value="{{ x }}">{{ x|title }}</option>
     {% endfor %}
     </select>
 {% else %}
