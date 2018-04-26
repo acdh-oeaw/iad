@@ -70,5 +70,9 @@ footer {
     white-space: normal;
     margin-bottom: 10px;
 }
+.separate-panel legend {
+    /*change color of border when the pallete is chosen*/
+    border: 2px solid gray;
+    padding: 5px;
 }
 

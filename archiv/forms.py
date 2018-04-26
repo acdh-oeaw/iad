@@ -2,7 +2,7 @@ from dal import autocomplete
 from django import forms
 from leaflet.forms.widgets import LeafletWidget
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout, Fieldset
 
 from .models import *
 
@@ -183,6 +183,38 @@ class SiteForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-9'
         self.helper.add_input(Submit('submit', 'save'),)
+        self.helper.layout = Layout(
+            Fieldset(
+                'Site description',
+                'public',
+                'name',
+                'polygon',
+                'alt_id',
+                'alt_name',
+                'cadastral_community',
+                'heritage_number',
+                'plot_number',
+                'ownership',
+                'other_period',
+                'information_source',
+                'description',
+                'comment',
+                'literature',
+                css_class="separate-panel",
+            ),
+            Fieldset(
+                'Tourism',
+                'accessibility',
+                'visibility',
+                'infrastructure',
+                'long_term_management',
+                'potential_surrounding',
+                'museum',
+                'iad_app',
+                'app_description',
+                css_class="separate-panel",
+            )
+            )
 
 
 class AltNameForm(forms.ModelForm):
