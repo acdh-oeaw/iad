@@ -20,19 +20,22 @@
         <meta name="theme-color" content="#ffffff"/>
     <!--favicons end -->
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap400/css/bootstrap.min.css' %}" />
+    <!-- <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap400/css/bootstrap.min.css' %}" /> -->
     <!-- custom css -->
     <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}" />
     <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,500" rel="stylesheet">
     <!-- custom less -->
     <link rel="stylesheet/less" type="text/css" href="{% static 'webpage/css/style.less' %}" />
+    <!--Fundament CSS-->
+    <link href="https://fundament.acdh.oeaw.ac.at/dist/fundament/css/fundament.min.css" rel="stylesheet">
     <!--scroll to top CSS -->
     <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}" />
     <!-- LESS -->
     <script type="text/javascript" src="{% static 'webpage/libraries/less/less.min.js' %}"></script>
     <!-- jQuery -->
     <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
-    <script type="text/javascript" src="{% static 'webpage/libraries/popper/popper.min.js' %}"></script>
+    <!--Popper-->
+    <!-- <script type="text/javascript" src="{% static 'webpage/libraries/popper/popper.min.js' %}"></script> -->
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script> -->
     <!--scroll to top -->
     <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
@@ -70,10 +73,13 @@
     {% block scriptHeader %}
     {% endblock %}
 </head>
-<body role="document">
+<body role="document" class="contained fixed-nav">
 <header>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white box-shadow">
         <!-- <div class="container"> -->
+        <a class="navbar-brand" href="/">
+          IAD
+        </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -145,25 +151,28 @@
                         </div>
                     </li>
                     {% endif %}
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="dropdown">
-                        {% if user.is_authenticated %}
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                {{ user.get_username }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="nav-link" href="{% url 'webpage:user_logout' %}">Log-Out</a>
-                            </div>
-                        {% else %}
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="nav-link" href="{% url 'webpage:user_login' %}">Log-In</a>
-                            </div>
-                        {% endif %}
+     {% if user.is_authenticated %}
+                    <li class="nav-item dropdown ml-auto">
+                        <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            {{ user.get_username }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="nav-link" href="{% url 'webpage:user_logout' %}">Log-Out</a>
+                        </div>
                     </li>
-                </ul>
+                    {% else %}
+                    <li class="nav-item dropdown ml-auto">
+                        <a class="nav-link" href="{% url 'webpage:user_login' %}">
+                        <i class="fas fa-sign-in-alt"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul> 
+                <div class="navbar-icons">
+                <a href="https://github.com/acdh-oeaw/iad" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+                </div>  
             </div>
         <!-- </div> -->
     </nav>
@@ -194,24 +203,26 @@
     </div>
 </footer>
 {% block scripts %}
-<script type="text/javascript" src="{% static 'webpage/libraries/bootstrap400/js/bootstrap.min.js' %}"></script>
+<script defer src="https://fundament.acdh.oeaw.ac.at/dist/fundament/vendor/js/fontawesome-all.min.js"></script>
+<script src="https://fundament.acdh.oeaw.ac.at/dist/fundament/js/fundament.min.js"></script>
+<!-- <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap400/js/bootstrap.min.js' %}"></script> -->
 <!--bootstrap-select must be after bootstrap js-->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css" />
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="{% static 'webpage/libraries/bootstrap400/js/bootstrap-tab.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap400/js/bootstrap-tab.js' %}"></script> -->
 <!-- cool share -->
 <script type="text/javascript">
-    $(function (){
-        var options = {
-            twitter: {
-            text: '',
-            via: ''
-        },
-        facebook : true,
-        googlePlus : true
-        };
-        $('.socialShare').shareButtons(options);
-    });
+    // $(function (){
+    //     var options = {
+    //         twitter: {
+    //         text: '',
+    //         via: ''
+    //     },
+    //     facebook : true,
+    //     googlePlus : true
+    //     };
+    //     $('.socialShare').shareButtons(options);
+    // });
 </script>
 <!-- scroll-up-bottom -->
 <script type="text/javascript">
