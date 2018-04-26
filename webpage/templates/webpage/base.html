@@ -32,7 +32,8 @@
     <script type="text/javascript" src="{% static 'webpage/libraries/less/less.min.js' %}"></script>
     <!-- jQuery -->
     <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script type="text/javascript" src="{% static 'webpage/libraries/popper/popper.min.js' %}"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script> -->
     <!--scroll to top -->
     <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
     <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
@@ -194,8 +195,10 @@
 </footer>
 {% block scripts %}
 <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap400/js/bootstrap.min.js' %}"></script>
+<!--bootstrap-select must be after bootstrap js-->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css" />
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap400/js/bootstrap-tab.js' %}"></script>
-
 <!-- cool share -->
 <script type="text/javascript">
     $(function (){
