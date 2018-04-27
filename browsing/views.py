@@ -213,7 +213,7 @@ class ResearchEventListView(GenericListView):
     table_class = ResearchEventTable
     filter_class = ResearchEventListFilter
     formhelper_class = ResearchEventFilterFormHelper
-    init_columns = ['name', 'start_date', 'end_date']
+    init_columns = ['id', 'start_date', 'end_date']
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())

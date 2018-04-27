@@ -243,5 +243,7 @@ class Person(IdProvider):
             return "{}".format(self.written_name)
         elif self.name and self.forename:
             return "{}, {}".format(self.name, self.forename)
+        elif self.name:
+            return "{}".format(self.name)
         else:
             return "No name provided"

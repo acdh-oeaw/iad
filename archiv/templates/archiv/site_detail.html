@@ -288,6 +288,16 @@
 
             </div>
             <div class="col-md-6">
+                {% if object.has_research_activity.all %}
+                    <legend>related Arch Ents</legend>
+                    <ul>
+                        {% for x in object.has_research_activity.all %}
+                            <li>
+                                <a href="{{ x.get_absolute_url }}">{{ x }} </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                     {% if object.has_archent.all %}
                         <legend>related Arch Ents</legend>
                         <ul>

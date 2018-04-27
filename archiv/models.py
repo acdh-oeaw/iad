@@ -185,133 +185,6 @@ class Period(IadBaseClass):
         return "{}".format(self.name)
 
 
-class ResearchQuestion(IdProvider):
-    question = models.TextField(
-        blank=True, null=True, verbose_name="research question"
-    )
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('browsing:browse_researchquestions')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:researchquestion_create')
-
-    def get_next(self):
-        next = ResearchQuestion.objects.filter(id__gt=self.id)
-        if next:
-            return next.first().id
-        return False
-
-    def get_prev(self):
-        prev = ResearchQuestion.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return prev.first().id
-        return False
-
-    def get_absolute_url(self):
-        return reverse(
-            'archiv:researchquestion_detail', kwargs={'pk': self.id}
-        )
-
-    def __str__(self):
-        return self.question
-
-
-@modify_fields(identifier={
-    'verbose_name': 'Activity ID',
-    'help_text': 'Applies to Austrian sites.'})
-class ResearchEvent(IadBaseClass):
-    """An archaeological entity is defined by a specific human activity (entity type),
-    period of this activity (dating) and spatial location (polygon inside of the site).
-    """
-
-    start_date = models.DateField(
-        blank=True, null=True,
-        verbose_name="Start Date.",
-        help_text="When did the research event start? (YYYY-MM-DD)"
-    )
-    end_date = models.DateField(
-        blank=True, null=True,
-        verbose_name="End Date.",
-        help_text="When did the research event end? (YYYY-MM-DD)"
-    )
-    responsible_researcher = models.ManyToManyField(
-        Person, blank=True, verbose_name="Responsible Researcher",
-        related_name="has_research",
-        help_text="Who is the responsible researcher/project leader of the conducted research?"
-    )
-    responsible_institution = models.ManyToManyField(
-        Institution, blank=True, verbose_name="Responsible Institution",
-        related_name="has_research",
-        help_text="Which institution conducted the research?"
-    )
-    research_type = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
-        verbose_name="Research Type",
-        help_text="Was it a development led research or scientific research?",
-        related_name="is_research_type_of",
-        on_delete=models.SET_NULL
-    )
-    research_method = models.ManyToManyField(
-        SkosConcept, blank=True, verbose_name="Research Methods",
-        help_text="Which method has been applied?",
-        related_name="is_research_method_of"
-    )
-    research_question = models.ForeignKey(
-        ResearchQuestion, blank=True, null=True, verbose_name="Research Question",
-        related_name="is_research_question_of",
-        help_text="What was the initial research question to be answered\
-        with the conducted research methods? Only for scientific research.",
-        on_delete=models.SET_NULL
-    )
-    generation_data_set = models.DateField(
-        blank=True, null=True,
-        verbose_name="When was the data-set generated?", help_text="provide some (YYYY-MM-DD)"
-    )
-
-    class Meta:
-        verbose_name = "Research Activity"
-        verbose_name_plural = "Research Activities"
-
-    def get_geojson(self):
-        geojson = serialize(
-            'geojson', ResearchEvent.objects.filter(id=self.id),
-            geometry_field='polygon',
-            fields=('name', 'identifier',)
-        )
-        return geojson
-
-    def __str__(self):
-        return "{}".format(self.name)
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('browsing:browse_researchevents')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:researchevent_create')
-
-    def get_next(self):
-        next = ResearchEvent.objects.filter(id__gt=self.id)
-        if next:
-            return next.first().id
-        return False
-
-    def get_prev(self):
-        prev = ResearchEvent.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return prev.first().id
-        return False
-
-    def get_absolute_url(self):
-        return reverse(
-            'archiv:researchevent_detail', kwargs={'pk': self.id}
-        )
-
-
 SITE_OWNERSHIP = (
     ('1 – private', '1 – private'),
     ('2 – public', '2 – public'),
@@ -417,11 +290,6 @@ class Site(IadBaseClass):
         help_text="Other periods that were recorded on the site.",
         related_name="has_other_period"
     )
-    information_source = models.ManyToManyField(
-        ResearchEvent, blank=True,
-        help_text="How was the site discovered? Choose the corresponding research event.",
-        related_name="has_related_site"
-    )
     accessibility = models.CharField(
         blank=True, null=True, verbose_name="Accessibility",
         help_text="Transportation types available on the site.",
@@ -436,7 +304,8 @@ class Site(IadBaseClass):
     )
     infrastructure = models.CharField(
         blank=True, null=True, verbose_name="Infrastructure",
-        help_text="What kind of infrastructure is available in the vicinity of the site (restaurants, parking, etc.)",
+        help_text="What kind of infrastructure is available in the vicinity of the site\
+        (restaurants, parking, etc.)",
         max_length=250,
         choices=SITE_INFRASTRUCTURE
     )
@@ -508,6 +377,150 @@ class Site(IadBaseClass):
             return "{}".format(self.identifier)
 
 
+class ResearchQuestion(IdProvider):
+    question = models.TextField(
+        blank=True, null=True, verbose_name="research question"
+    )
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_researchquestions')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:researchquestion_create')
+
+    def get_next(self):
+        next = ResearchQuestion.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = ResearchQuestion.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:researchquestion_detail', kwargs={'pk': self.id}
+        )
+
+    def __str__(self):
+        return self.question
+
+
+@modify_fields(identifier={
+    'verbose_name': 'Activity ID',
+    'help_text': 'Applies to Austrian sites.'})
+class ResearchEvent(IadBaseClass):
+    """An archaeological entity is defined by a specific human activity (entity type),
+    period of this activity (dating) and spatial location (polygon inside of the site).
+    """
+
+    site_id = models.ManyToManyField(
+        Site, help_text="The unique identifier of related sites.",
+        verbose_name="Related Sites", blank=True, related_name="has_research_activity"
+    )
+
+    start_date = models.DateField(
+        blank=True, null=True,
+        verbose_name="Start Date.",
+        help_text="When did the research event start? (YYYY-MM-DD)"
+    )
+    end_date = models.DateField(
+        blank=True, null=True,
+        verbose_name="End Date.",
+        help_text="When did the research event end? (YYYY-MM-DD)"
+    )
+    responsible_researcher = models.ManyToManyField(
+        Person, blank=True, verbose_name="Responsible Researcher",
+        related_name="has_research",
+        help_text="Who is the responsible researcher/project leader of the conducted research?"
+    )
+    responsible_institution = models.ManyToManyField(
+        Institution, blank=True, verbose_name="Responsible Institution",
+        related_name="has_research",
+        help_text="Which institution conducted the research?"
+    )
+    research_type = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        verbose_name="Research Type",
+        help_text="Was it a development led research or scientific research?",
+        related_name="is_research_type_of",
+        on_delete=models.SET_NULL
+    )
+    research_method = models.ManyToManyField(
+        SkosConcept, blank=True, verbose_name="Research Methods",
+        help_text="Which method has been applied?",
+        related_name="is_research_method_of"
+    )
+    research_question = models.ForeignKey(
+        ResearchQuestion, blank=True, null=True, verbose_name="Research Question",
+        related_name="is_research_question_of",
+        help_text="What was the initial research question to be answered\
+        with the conducted research methods? Only for scientific research.",
+        on_delete=models.SET_NULL
+    )
+    generation_data_set = models.DateField(
+        blank=True, null=True,
+        verbose_name="When was the data-set generated?", help_text="provide some (YYYY-MM-DD)"
+    )
+
+    class Meta:
+        verbose_name = "Research Activity"
+        verbose_name_plural = "Research Activities"
+
+    def get_geojson(self):
+        geojson = serialize(
+            'geojson', ResearchEvent.objects.filter(id=self.id),
+            geometry_field='polygon',
+            fields=('name', 'identifier',)
+        )
+        return geojson
+
+    def __str__(self):
+        if self.start_date and self.responsible_researcher and self.research_method:
+            methods = " | ".join([x.pref_label for x in self.research_method.all()])
+            return "{}; {}; {} (id:{})".format(
+                self.start_date, self.responsible_researcher.all()[0],
+                methods, self.id
+            )
+        elif self.start_date and self.research_method:
+            methods = " | ".join([x.pref_label for x in self.research_method.all()])
+            return "{}; {} (id:{})".format(
+                self.start_date, methods, self.id
+            )
+        return "{}".format(self.id)
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('browsing:browse_researchevents')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:researchevent_create')
+
+    def get_next(self):
+        next = ResearchEvent.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = ResearchEvent.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_absolute_url(self):
+        return reverse(
+            'archiv:researchevent_detail', kwargs={'pk': self.id}
+        )
+
+
+
 ARCHENT_CERTAINTY = (
     (
         '1 - high: data from more complementary methods and/or with relevant comparisons',
@@ -555,11 +568,6 @@ class ArchEnt(IadBaseClass):
         SkosConcept, blank=True, null=True,
         help_text="Where is the entity located",
         related_name="archent_topography",
-        on_delete=models.SET_NULL
-    )
-    burial_type = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
-        related_name="archent_burial_type",
         on_delete=models.SET_NULL
     )
     type_certainty = models.CharField(

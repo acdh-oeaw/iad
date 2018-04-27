@@ -56,6 +56,20 @@
             <div class="col-md-6">
                 <legend>Lorem Ipsum</legend>
                 <table class="table table-bordered table-hover">
+                    {% if object.site_id.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name researchevent "site_id" %}
+                            </th>
+                            <td>
+                                {% for x in object.site_id.all %}
+                                    <li>
+                                        <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <th>
                             {% get_verbose_name researchevent "name" %}

@@ -58,7 +58,7 @@ class ArchEntForm(forms.ModelForm):
         model = ArchEnt
         fields = [
             'public', 'polygon', 'site_id', 'name', 'alt_name',
-            'ent_type', 'topography', 'burial_type', 'period', 'type_certainty',
+            'ent_type', 'topography', 'period', 'type_certainty',
             'dating_certainty', 'location_certainty', 'comment'
         ]
         widgets = {
@@ -73,8 +73,6 @@ class ArchEntForm(forms.ModelForm):
                 url='/vocabs-ac/specific-concept-ac/archaeological-entity-type'),
             'topography': autocomplete.ModelSelect2(
                 url='/vocabs-ac/specific-concept-ac/topography'),
-            'burial_type': autocomplete.ModelSelect2(
-                url='/vocabs-ac/specific-concept-ac/burial-type'),
             'period': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:period-autocomplete'),
             }
@@ -93,11 +91,14 @@ class ResearchEventForm(forms.ModelForm):
     class Meta:
         model = ResearchEvent
         fields = [
-            'public', 'polygon', 'research_type', 'research_method', 'start_date', 'end_date',
+            'public', 'polygon', 'site_id', 'research_type',
+            'research_method', 'start_date', 'end_date',
             'identifier', 'responsible_researcher', 'responsible_institution',
             'research_question', 'comment', 'generation_data_set'
         ]
         widgets = {
+            'site_id': autocomplete.ModelSelect2Multiple(
+                url='archiv-ac:site-autocomplete'),
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
@@ -153,8 +154,7 @@ class SiteForm(forms.ModelForm):
         fields = [
             'public', 'name', 'polygon', 'alt_id', 'alt_name',
             'cadastral_community', 'heritage_number', 'plot_number',
-            'ownership', 'other_period', 'information_source',
-            'description', 'comment', 'literature',
+            'ownership', 'other_period', 'description', 'comment', 'literature',
             # tourism field
             'accessibility', 'visibility', 'infrastructure', 'long_term_management',
             'potential_surrounding', 'museum', 'iad_app', 'app_description'
@@ -169,8 +169,6 @@ class SiteForm(forms.ModelForm):
                 url='entities-ac:place-autocomplete'),
             'other_period': autocomplete.ModelSelect2Multiple(
                 url='/vocabs-ac/specific-concept-ac/other-present-archaeological-period'),
-            'information_source': autocomplete.ModelSelect2Multiple(
-                url='archiv-ac:researchevent-autocomplete'),
             'museum': autocomplete.ModelSelect2Multiple(
                 url='entities-ac:institution-autocomplete'),
         }
