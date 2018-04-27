@@ -5,11 +5,34 @@
 {% block title %}Site{% endblock %}
 {% block scriptHeader %}
     {% leaflet_js %}
-    {% leaflet_css %}
+    {% leaflet_css %} 
 {% endblock %}
 {% block content %}
+<style>
+    .leaflet-container {  /* all maps */
+        width:  100%;
+        height: 800px;
 
-<div class="container">
+        }
+    #yourmap {  
+        }
+        
+</style>
+<script type="text/javascript">
+$("#sidebar").stick_in_parent();
+</script>
+
+<script type="text/javascript">
+    function map_init_basic (map, options) {
+        var geojsonFeature = {{ object.get_geojson|safe }};
+        L.geoJson(geojsonFeature).addTo(map);
+    }
+</script>
+
+<div class="row">
+
+<div class="col-md-6"><!--left side-->
+
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -18,6 +41,7 @@
                         <h2>
                             <a href="{% url 'archiv:site_detail' pk=object.get_prev %}">
                             <i class="fas fa-chevron-left" title="previous"></i>
+                            </a>
                         </h2>
                     {% endif %}
                 </div>
@@ -344,18 +368,39 @@
                                 </ul>
                             {% endif %}
 
+
+
             </div>
+            
         </div>
-        {% leaflet_map "yourmap" callback="window.map_init_basic" %}
-        <legend>GeoJSON</legend>
-        {{ object.get_geojson }}
+       
     </div>
 </div>
+
+
+
+</div><!--left side ended-->
+<div class="col-md-6" id="sidebar"><!--right side for map-->
+ {% leaflet_map "yourmap" callback="window.map_init_basic" %}
+ <br>
+ 
+        
 </div>
-<script type="text/javascript">
-    function map_init_basic (map, options) {
-        var geojsonFeature = {{ object.get_geojson|safe }};
-        L.geoJson(geojsonFeature).addTo(map);
-    }
-</script>
+
+
+
+</div><!--main row-->
+<br>
+<div class="row">
+<div class="col-md-6 offset-md-6">
+<button  type="button" class="btn btn btn-dark" data-toggle="collapse" data-target="#geojson-data">GeoJSON</button>
+<div class="collapse" id="geojson-data">
+<div class="card">
+<div class="card-body">
+<p>{{ object.get_geojson }}</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 {% endblock %}

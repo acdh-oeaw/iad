@@ -136,7 +136,7 @@ VOCABS_SETTINGS = {
 
 LEAFLET_CONFIG = {
     'DEFAULT_CENTER': (47, 16),
-    'DEFAULT_ZOOM': 6,
+    'DEFAULT_ZOOM': 8,
     'MIN_ZOOM': 3,
     'OVERLAYS': [
         ('MAPBOX', 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {

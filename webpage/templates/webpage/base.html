@@ -27,13 +27,14 @@
     <!-- custom less -->
     <link rel="stylesheet/less" type="text/css" href="{% static 'webpage/css/style.less' %}" />
     <!--Fundament CSS-->
-    <link href="https://fundament.acdh.oeaw.ac.at/dist/fundament/css/fundament.min.css" rel="stylesheet">
+    <link href="{% static 'webpage/libraries/fundament/css/fundament.css'%}" rel="stylesheet">
     <!--scroll to top CSS -->
-    <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}"/>
     <!-- LESS -->
     <script type="text/javascript" src="{% static 'webpage/libraries/less/less.min.js' %}"></script>
     <!-- jQuery -->
     <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webpage/libraries/sticky-kit/jquery.sticky-kit.min.js' %}"></script>
     <!--Popper-->
     <!-- <script type="text/javascript" src="{% static 'webpage/libraries/popper/popper.min.js' %}"></script> -->
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script> -->
@@ -206,7 +207,11 @@
 </footer>
 {% block scripts %}
 <script defer src="https://fundament.acdh.oeaw.ac.at/dist/fundament/vendor/js/fontawesome-all.min.js"></script>
-<script src="https://fundament.acdh.oeaw.ac.at/dist/fundament/js/fundament.min.js"></script>
+<script src="{% static 'webpage/libraries/fundament/js/fundament.js' %}"></script>
+<!--parallax-->
+<!-- <script src="{% static 'webpage/libraries/parallax/parallax.js' %}"></script> -->
+
+
 <!-- <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap400/js/bootstrap.min.js' %}"></script> -->
 <!--bootstrap-select must be after bootstrap js-->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css" />
