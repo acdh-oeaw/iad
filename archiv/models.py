@@ -482,10 +482,12 @@ class ResearchEvent(IadBaseClass):
 
     def __str__(self):
         if self.start_date and self.responsible_researcher and self.research_method:
+            researchers = " | ".join(
+                [x.name for x in self.responsible_researcher.all()]
+            )
             methods = " | ".join([x.pref_label for x in self.research_method.all()])
             return "{}; {}; {} (id:{})".format(
-                self.start_date, self.responsible_researcher.all()[0],
-                methods, self.id
+                self.start_date, researchers, methods, self.id
             )
         elif self.start_date and self.research_method:
             methods = " | ".join([x.pref_label for x in self.research_method.all()])
