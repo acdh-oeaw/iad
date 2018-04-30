@@ -30,7 +30,7 @@
                     {% csrf_token %}
                     {% crispy form %}
                     {% if object %}
-                    <a class="btn btn-default btn-block" target="_blank">Check<span id="currentID"></span></a>
+                    <a class="btn btn-default btn-block" target="_blank" rel="noopener">Check<span id="currentID"></span></a>
                     {% endif %}
                     <input class="btn btn-primary btn-block" type="submit" value="Save" />
                     {% if object %}
