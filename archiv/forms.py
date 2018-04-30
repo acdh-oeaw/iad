@@ -236,13 +236,14 @@ class SiteForm(forms.ModelForm):
     OPTIONS = [(x.id, x) for x in ResearchEvent.objects.all()]
 
     research_activities = forms.MultipleChoiceField(
-        choices=OPTIONS, required=False
+        choices=OPTIONS, required=False, widget=autocomplete.Select2Multiple(
+            url='archiv-ac:researchevent-autocomplete')
     )
 
     class Meta:
         model = Site
         fields = [
-            'research_activities', 'public', 'name', 'polygon', 'alt_id', 'alt_name',
+            'public', 'name', 'polygon', 'alt_id', 'alt_name',
             'cadastral_community', 'heritage_number', 'plot_number',
             'ownership', 'other_period', 'description', 'comment', 'literature',
             # tourism field
