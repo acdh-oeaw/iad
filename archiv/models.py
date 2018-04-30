@@ -105,6 +105,12 @@ class IadBaseClass(IdProvider):
         abstract = True
 
 
+@modify_fields(
+    name={
+        'verbose_name': 'Period name',
+        'help_text': 'The name of the period (e.g. Iron Age, Early Iron Age, Hallstatt A…).'
+        }
+        )
 class Period(IadBaseClass):
     start_date = models.IntegerField(
         blank=True, null=True,
