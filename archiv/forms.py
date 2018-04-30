@@ -272,7 +272,7 @@ class SiteForm(forms.ModelForm):
             init_data = [x.id for x in ResearchEvent.objects.filter(site_id=instance.id)]
             self.fields['research_activities'].initial = init_data
         except AttributeError:
-            pass 
+            pass
         self.helper.form_tag = True
         self.helper.form_class = 'form-group'
         self.helper.add_input(Submit('submit', 'save'),)
@@ -330,7 +330,9 @@ class SiteForm(forms.ModelForm):
             res_acts = None
         if res_acts:
             res_obj = [x for x in ResearchEvent.objects.filter(pk__in=res_acts)]
-            instance.has_research_activity.set(res_obj)
+            try:
+                instance.has_research_activity.set(res_obj)
+            except:
         return super(SiteForm, self).save(commit=commit)
 
 
