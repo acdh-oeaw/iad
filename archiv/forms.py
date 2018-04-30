@@ -333,6 +333,7 @@ class SiteForm(forms.ModelForm):
             try:
                 instance.has_research_activity.set(res_obj)
             except:
+                pass
         return super(SiteForm, self).save(commit=commit)
 
 
