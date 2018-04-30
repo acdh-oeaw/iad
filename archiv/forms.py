@@ -266,11 +266,13 @@ class SiteForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(SiteForm, self).__init__(*args, **kwargs)
-        instance = kwargs['instance']
-        init_data = [x.id for x in ResearchEvent.objects.filter(site_id=instance.id)]
-        print(init_data)
         self.helper = FormHelper()
-        self.fields['research_activities'].initial = init_data
+        try:
+            instance = kwargs['instance']
+            init_data = [x.id for x in ResearchEvent.objects.filter(site_id=instance.id)]
+            self.fields['research_activities'].initial = init_data
+        except AttributeError:
+            pass 
         self.helper.form_tag = True
         self.helper.form_class = 'form-group'
         self.helper.add_input(Submit('submit', 'save'),)
