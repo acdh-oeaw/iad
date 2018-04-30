@@ -114,7 +114,7 @@ class SiteListFilter(django_filters.FilterSet):
     has_research_activity = django_filters.ModelMultipleChoiceFilter(
         queryset=ResearchEvent.objects.all(),
         name='has_research_activity',
-        label="Research event(s)"
+        label="Research activity"
         )
     cadastral_community = django_filters.ModelMultipleChoiceFilter(
         queryset=Place.objects.all(),

@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% load webpage_extras %}
 {% load leaflet_tags %}
-{% block title %}Research Event {{ object.id }}{% endblock %}
+{% block title %}Research Activity {{ object.id }}{% endblock %}
 {% block scriptHeader %}
     {% leaflet_js %}
     {% leaflet_css %}
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                        <small>Research Event:</small> {{ object }}
+                        <small>Research Activity:</small> {{ object }}
                         {% if user.is_authenticated %}
                             <small>
                                 <a href="{% url 'archiv:researchevent_edit' pk=object.id %}">

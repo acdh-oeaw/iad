@@ -433,12 +433,12 @@ class ResearchEvent(IadBaseClass):
     start_date = models.DateField(
         blank=True, null=True,
         verbose_name="Start Date.",
-        help_text="When did the research event start? (YYYY-MM-DD)"
+        help_text="When did the research activity start? (YYYY-MM-DD)"
     )
     end_date = models.DateField(
         blank=True, null=True,
         verbose_name="End Date.",
-        help_text="When did the research event end? (YYYY-MM-DD)"
+        help_text="When did the research activity end? (YYYY-MM-DD)"
     )
     responsible_researcher = models.ManyToManyField(
         Person, blank=True, verbose_name="Responsible Researcher",
