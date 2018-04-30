@@ -17,6 +17,11 @@ urlpatterns = [
         name='place-autocomplete',
     ),
     url(
+        r'^place-autocomplete-search/$', dal_views.PlaceAC.as_view(
+            model=Place),
+        name='place-autocomplete-search',
+    ),
+    url(
         r'^city-autocomplete/$', dal_views.CityAC.as_view(
             model=Place, create_field='name',),
         name='city-autocomplete',

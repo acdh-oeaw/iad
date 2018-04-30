@@ -131,6 +131,7 @@ class SiteFilterFormHelper(FormHelper):
             Fieldset(
                 'Basic search options',
                 'name',
+                'has_research_activity',
                 css_id="basic_search_fields"
                 ),
             Accordion(
@@ -139,6 +140,18 @@ class SiteFilterFormHelper(FormHelper):
                     'public',
                     'has_archent__ent_type',
                     'example',
+                    'cadastral_community',
+                    # 'cadastral_number',
+                    'heritage_number',
+                    'plot_number',
+                    'ownership',
+                    'other_period',
+                    'accessibility',
+                    'visibility',
+                    'infrastructure',
+                    'long_term_management',
+                    'potential_surrounding',
+                    # 'museum',
                     css_id="more"
                     ),
                 )

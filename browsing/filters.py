@@ -111,6 +111,87 @@ class SiteListFilter(django_filters.FilterSet):
         help_text="Site contains specific archaeological entity?",
         label="Generous Archaeological Entity"
         )
+    has_research_activity = django_filters.ModelMultipleChoiceFilter(
+        queryset=ResearchEvent.objects.all(),
+        name='has_research_activity',
+        label="Research event(s)"
+        )
+    cadastral_community = django_filters.ModelMultipleChoiceFilter(
+        queryset=Place.objects.all(),
+        help_text=Site._meta.get_field('cadastral_community').help_text,
+        label=Site._meta.get_field('cadastral_community').verbose_name,
+        widget=autocomplete.Select2Multiple(
+            url='entities-ac:place-autocomplete-search',
+            attrs={
+                'data-placeholder': 'Autocomplete ...',
+                'data-minimum-input-length': 3,
+                },
+        )
+        )
+    cadastral_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Site._meta.get_field('cadastral_number').help_text,
+        label=Site._meta.get_field('cadastral_number').verbose_name
+        )
+    heritage_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Site._meta.get_field('heritage_number').help_text,
+        label=Site._meta.get_field('heritage_number').verbose_name
+        )
+    plot_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Site._meta.get_field('plot_number').help_text,
+        label=Site._meta.get_field('plot_number').verbose_name
+        )
+    ownership = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Site._meta.get_field('ownership').help_text,
+        label=Site._meta.get_field('ownership').verbose_name
+        )
+    other_period = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="other-present-archaeological-period"),
+        help_text=Site._meta.get_field('other_period').help_text,
+        label=Site._meta.get_field('other_period').verbose_name,
+        method=generous_concept_filter,
+        widget=autocomplete.Select2Multiple(
+            url="/vocabs-ac/specific-concept-ac/other-present-archaeological-period",
+            attrs={
+                'data-placeholder': 'Autocomplete ...',
+                'data-minimum-input-length': 3,
+                },
+        )
+        )
+    accessibility = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Site._meta.get_field('accessibility').help_text,
+        label=Site._meta.get_field('accessibility').verbose_name
+        )
+    visibility = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Site._meta.get_field('visibility').help_text,
+        label=Site._meta.get_field('visibility').verbose_name
+        )
+    infrastructure = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Site._meta.get_field('infrastructure').help_text,
+        label=Site._meta.get_field('infrastructure').verbose_name
+        )
+    long_term_management = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Site._meta.get_field('long_term_management').help_text,
+        label=Site._meta.get_field('long_term_management').verbose_name
+        )
+    potential_surrounding = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Site._meta.get_field('potential_surrounding').help_text,
+        label=Site._meta.get_field('potential_surrounding').verbose_name
+        )
+    # museum = django_filters.ModelMultipleChoiceFilter(
+    #     queryset=Institution.objects.all(),
+    #     help_text=Site._meta.get_field('museum').help_text,
+    #     label=Site._meta.get_field('museum').verbose_name,
+    #     )
+
 
     class Meta:
         model = Site
