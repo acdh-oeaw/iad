@@ -1,5 +1,6 @@
 from dal import autocomplete
 from django import forms
+from .models import ResearchEvent
 from leaflet.forms.widgets import LeafletWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML
@@ -232,10 +233,16 @@ class PeriodForm(forms.ModelForm):
 
 
 class SiteForm(forms.ModelForm):
+    OPTIONS = [(x.id, x) for x in ResearchEvent.objects.all()]
+
+    research_activities = forms.MultipleChoiceField(
+        choices=OPTIONS, required=False
+    )
+
     class Meta:
         model = Site
         fields = [
-            'public', 'name', 'polygon', 'alt_id', 'alt_name',
+            'research_activities', 'public', 'name', 'polygon', 'alt_id', 'alt_name',
             'cadastral_community', 'heritage_number', 'plot_number',
             'ownership', 'other_period', 'description', 'comment', 'literature',
             # tourism field
@@ -258,7 +265,11 @@ class SiteForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(SiteForm, self).__init__(*args, **kwargs)
+        instance = kwargs['instance']
+        init_data = [x.id for x in ResearchEvent.objects.filter(site_id=instance.id)]
+        print(init_data)
         self.helper = FormHelper()
+        self.fields['research_activities'].initial = init_data
         self.helper.form_tag = True
         self.helper.form_class = 'form-group'
         self.helper.add_input(Submit('submit', 'save'),)
@@ -268,6 +279,7 @@ class SiteForm(forms.ModelForm):
                 Div(
                     'public',
                     'name',
+                    'research_activities',
                     css_class="col-md-9"
                 ),
                 Div(
@@ -282,7 +294,7 @@ class SiteForm(forms.ModelForm):
                     'plot_number',
                     'ownership',
                     'other_period',
-                    'information_source',
+                    # 'information_source',
                     'description',
                     'comment',
                     'literature',
@@ -293,19 +305,30 @@ class SiteForm(forms.ModelForm):
             Fieldset(
                 'Tourism',
                 Div(
-                'accessibility',
-                'visibility',
-                'infrastructure',
-                'long_term_management',
-                'potential_surrounding',
-                'museum',
-                'iad_app',
-                'app_description',
-                css_class="col-md-9"
+                    'accessibility',
+                    'visibility',
+                    'infrastructure',
+                    'long_term_management',
+                    'potential_surrounding',
+                    'museum',
+                    'iad_app',
+                    'app_description',
+                    css_class="col-md-9"
                 ),
                 css_class="separate-panel",
             )
-            )
+        )
+
+    def save(self, commit=True):
+        instance = forms.ModelForm.save(self, False)
+        try:
+            res_acts = [int(x) for x in self.cleaned_data['research_activities']]
+        except:
+            res_acts = None
+        if res_acts:
+            res_obj = [x for x in ResearchEvent.objects.filter(pk__in=res_acts)]
+            instance.has_research_activity.set(res_obj)
+        return super(SiteForm, self).save(commit=commit)
 
 
 class AltNameForm(forms.ModelForm):

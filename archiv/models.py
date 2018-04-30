@@ -380,7 +380,7 @@ class Site(IadBaseClass):
         if self.name:
             return "{}".format(self.name)
         else:
-            return "{}".format(self.identifier)
+            return "{}".format(self.id)
 
 
 class ResearchQuestion(IdProvider):
