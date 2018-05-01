@@ -323,17 +323,14 @@ class SiteForm(forms.ModelForm):
         )
 
     def save(self, commit=True):
-        instance = forms.ModelForm.save(self, False)
+        instance = forms.ModelForm.save(self, True)
         try:
             res_acts = [int(x) for x in self.cleaned_data['research_activities']]
         except:
             res_acts = None
         if res_acts:
             res_obj = [x for x in ResearchEvent.objects.filter(pk__in=res_acts)]
-            try:
-                instance.has_research_activity.set(res_obj)
-            except:
-                pass
+            instance.has_research_activity.set(res_obj)
         return super(SiteForm, self).save(commit=commit)
 
 
