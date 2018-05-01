@@ -12,7 +12,7 @@ class MonumentProtectionForm(forms.ModelForm):
     class Meta:
         model = MonumentProtection
         fields = [
-            'public', 'polygon', 'current_land_use',
+            'site_id', 'public', 'polygon', 'current_land_use',
             'heritage_status', 'threats', 'comment'
             ]
         widgets = {
@@ -31,6 +31,7 @@ class MonumentProtectionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(MonumentProtectionForm, self).__init__(*args, **kwargs)
+        self.fields['site_id'].required = True
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'
@@ -45,6 +46,7 @@ class MonumentProtectionForm(forms.ModelForm):
                 css_class="col-md-12"
                 ),
             Div(
+                'site_id',
                 'current_land_use',
                 'heritage_status',
                 'threats',
