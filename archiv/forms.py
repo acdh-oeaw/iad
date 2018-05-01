@@ -300,7 +300,7 @@ class SiteForm(forms.ModelForm):
                     'plot_number',
                     'ownership',
                     'other_period',
-                    'information_source',
+                    'research_activities',
                     'description',
                     'comment',
                     'literature',
