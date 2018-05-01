@@ -95,6 +95,7 @@ class ArchEntForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ArchEntForm, self).__init__(*args, **kwargs)
+        self.fields['ent_type'].required = True
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'
@@ -237,7 +238,9 @@ class SiteForm(forms.ModelForm):
 
     research_activities = forms.MultipleChoiceField(
         choices=OPTIONS, required=False, widget=autocomplete.Select2Multiple(
-            url='archiv-ac:researchevent-autocomplete')
+            url='archiv-ac:researchevent-autocomplete'),
+        label="Information Source",
+        help_text="How was the site discovered? Choose the corresponding research event."
     )
 
     class Meta:
@@ -273,6 +276,7 @@ class SiteForm(forms.ModelForm):
             self.fields['research_activities'].initial = init_data
         except AttributeError:
             pass
+        self.fields['name'].required = True
         self.helper.form_tag = True
         self.helper.form_class = 'form-group'
         self.helper.add_input(Submit('submit', 'save'),)
@@ -282,7 +286,6 @@ class SiteForm(forms.ModelForm):
                 Div(
                     'public',
                     'name',
-                    'research_activities',
                     css_class="col-md-9"
                 ),
                 Div(
@@ -297,7 +300,7 @@ class SiteForm(forms.ModelForm):
                     'plot_number',
                     'ownership',
                     'other_period',
-                    # 'information_source',
+                    'information_source',
                     'description',
                     'comment',
                     'literature',

@@ -112,6 +112,9 @@ class IadBaseClass(IdProvider):
         }
         )
 class Period(IadBaseClass):
+
+    """ Please provide a definition of this class """
+
     start_date = models.IntegerField(
         blank=True, null=True,
         verbose_name="Earliest beginning of the period.",
@@ -153,6 +156,7 @@ class Period(IadBaseClass):
 
     class Meta:
         ordering = ['id']
+        verbose_name = "Chronology"
 
     def get_geojson(self):
         geojson = serialize(
@@ -343,6 +347,10 @@ class Site(IadBaseClass):
         description of the site to be implemented into the app."
     )
 
+    class Meta:
+        ordering = ['id']
+        verbose_name = "Site"
+
     def get_geojson(self):
         geojson = serialize(
             'geojson', Site.objects.filter(id=self.id),
@@ -416,13 +424,22 @@ class ResearchQuestion(IdProvider):
     def __str__(self):
         return self.question
 
+    class Meta:
+        ordering = ['id']
+        verbose_name = "Research Question"
+
 
 @modify_fields(identifier={
     'verbose_name': 'Activity ID',
     'help_text': 'Applies to Austrian sites.'})
 class ResearchEvent(IadBaseClass):
-    """An archaeological entity is defined by a specific human activity (entity type),
-    period of this activity (dating) and spatial location (polygon inside of the site).
+    """The data set RESEARCH ACTIVITY comprises data on archaeological research conducted on\
+    a specific site. At the same time a single research activity may result in discovery or\
+    analysis of more than one site. Its extent is defined through a spatial polygon and type\
+    of research, institution and duration. Research activity is any archaeological work that\
+    contributed to new knowledge about the past. Data acquisition (ALS) conducted by\
+    “non-archaeological” project will not be entered as a separate research activity.
+
     """
 
     site_id = models.ManyToManyField(
@@ -475,6 +492,7 @@ class ResearchEvent(IadBaseClass):
     )
 
     class Meta:
+        ordering = ['id']
         verbose_name = "Research Activity"
         verbose_name_plural = "Research Activities"
 
@@ -526,7 +544,6 @@ class ResearchEvent(IadBaseClass):
         return reverse(
             'archiv:researchevent_detail', kwargs={'pk': self.id}
         )
-
 
 
 ARCHENT_CERTAINTY = (
@@ -601,6 +618,10 @@ class ArchEnt(IadBaseClass):
         help_text="Dating of the archaeological entity."
     )
 
+    class Meta:
+        ordering = ['id']
+        verbose_name = "Archaeological Entity"
+
     def get_geojson(self):
         geojson = serialize(
             'geojson', ArchEnt.objects.filter(id=self.id),
@@ -653,6 +674,10 @@ HERITAGE_STATUS_CHOICES = (
     'help_text': 'Any noteworthy information about the protection\
     of the site that has not been expressed in other fields. (other types ).'})
 class MonumentProtection(IadBaseClass):
+
+    """A table gathering information on the protection status of the site.\
+    It is defined by a polygon."""
+
     site_id = models.ForeignKey(
         Site, help_text="The unique identifier of the site.",
         verbose_name="Site",
@@ -679,6 +704,7 @@ class MonumentProtection(IadBaseClass):
     )
 
     class Meta:
+        ordering = ['id']
         verbose_name = 'Monument Protection'
 
     def get_geojson(self):

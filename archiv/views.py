@@ -19,10 +19,13 @@ class BaseCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(BaseCreateView, self).get_context_data()
         context['docstring'] = "{}".format(self.model.__doc__)
-        if self.model.__name__.endswith('s'):
-            context['class_name'] = "{}".format(self.model.__name__)
+        if self.model._meta.verbose_name_plural:
+            context['class_name'] = "{}".format(self.model._meta.verbose_name.title())
         else:
-            context['class_name'] = "{}s".format(self.model.__name__)
+            if self.model.__name__.endswith('s'):
+                context['class_name'] = "{}".format(self.model.__name__)
+            else:
+                context['class_name'] = "{}s".format(self.model.__name__)
         return context
 
 
