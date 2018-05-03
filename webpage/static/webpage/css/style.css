@@ -72,7 +72,9 @@ footer {
 }
 .separate-panel legend {
     /*change color of border when the pallete is chosen*/
-    border: 2px solid gray;
+    border: 2px solid #caebf2;
+    background-color: #caebf2;
+    /*color: #ffffff;*/
     padding: 5px;
 }
 
