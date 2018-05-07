@@ -604,7 +604,7 @@ class ArchEnt(IadBaseClass):
 
     site_id = models.ForeignKey(
         Site, help_text="The unique identifier of the site.",
-        verbose_name="Site",
+        verbose_name="Site Name",
         blank=True, null=True, on_delete=models.SET_NULL,
         related_name="has_archent"
     )
@@ -716,7 +716,7 @@ class MonumentProtection(IadBaseClass):
 
     site_id = models.ForeignKey(
         Site, help_text="The unique identifier of the site.",
-        verbose_name="Site",
+        verbose_name="Site Name",
         blank=True, null=True, on_delete=models.SET_NULL,
         related_name="has_monument_protection"
     )
