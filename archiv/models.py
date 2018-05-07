@@ -517,6 +517,19 @@ class ResearchEvent(IadBaseClass):
         )
         return geojson
 
+    def get_site_geojson(self):
+        if self.site_id:
+            geojson = serialize(
+                'geojson', Site.objects.filter(has_research_activity__in=[self.id]),
+                geometry_field='polygon',
+                fields=('name', 'identifier',)
+            )
+            print('HANSI')
+            # print(Site.objects.filter(has_research_activity__in=[self.id]))
+        else:
+            geojson = None
+        return geojson
+
     def __str__(self):
         if self.start_date and self.responsible_researcher and self.research_method:
             researchers = " | ".join(
