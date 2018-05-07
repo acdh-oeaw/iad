@@ -236,7 +236,10 @@ class PeriodForm(forms.ModelForm):
 
 
 class SiteForm(forms.ModelForm):
-    OPTIONS = [(x.id, x) for x in ResearchEvent.objects.all()]
+    try:
+        OPTIONS = [(x.id, x) for x in ResearchEvent.objects.all()]
+    except:
+        OPTIONS = [('Populate database first'), ('populate database first')]
 
     research_activities = forms.MultipleChoiceField(
         choices=OPTIONS, required=False, widget=autocomplete.Select2Multiple(

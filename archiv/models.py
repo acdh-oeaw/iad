@@ -101,6 +101,19 @@ class IadBaseClass(IdProvider):
     )
     polygon = models.MultiPolygonField(blank=True, null=True)
 
+    def copy_instance(self):
+        """Saves a copy of the current object and returns it"""
+        obj = self
+        obj.id = None
+        obj.pk = None
+        old_name = "{}".format(self.name)
+        if old_name:
+            obj.name = "COPY OF {}".format(old_name)
+        else:
+            obj.name = "COPY of some other Object"
+        obj.save()
+        return obj
+
     class Meta:
         abstract = True
 
