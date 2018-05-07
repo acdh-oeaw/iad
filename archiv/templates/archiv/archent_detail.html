@@ -205,6 +205,11 @@
     function map_init_basic (map, options) {
         var geojsonFeature = {{ object.get_geojson|safe }};
         L.geoJson(geojsonFeature).addTo(map);
+        {% if object.get_site_geojson %}
+            var siteGeojsonFeature = {{ object.get_site_geojson|safe }};
+
+            L.geoJson(siteGeojsonFeature).setStyle({fillColor: 'green'}).addTo(map);
+        {% endif %}
     }
 </script>
 {% endblock %}

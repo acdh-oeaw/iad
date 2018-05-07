@@ -524,8 +524,6 @@ class ResearchEvent(IadBaseClass):
                 geometry_field='polygon',
                 fields=('name', 'identifier',)
             )
-            print('HANSI')
-            # print(Site.objects.filter(has_research_activity__in=[self.id]))
         else:
             geojson = None
         return geojson
@@ -643,6 +641,17 @@ class ArchEnt(IadBaseClass):
         Period, blank=True, verbose_name="Dating",
         help_text="Dating of the archaeological entity."
     )
+
+    def get_site_geojson(self):
+        if self.site_id:
+            geojson = serialize(
+                'geojson', Site.objects.filter(has_archent__in=[self.id]),
+                geometry_field='polygon',
+                fields=('name', 'identifier',)
+            )
+        else:
+            geojson = None
+        return geojson
 
     class Meta:
         ordering = ['id']

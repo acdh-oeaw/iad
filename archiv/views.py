@@ -64,6 +64,11 @@ class ArchEntUpdate(BaseUpdateView):
     model = ArchEnt
     form_class = ArchEntForm
 
+    def get_context_data(self, **kwargs):
+        context = super(ArchEntUpdate, self).get_context_data()
+        context['site_poly'] = "HANSI"
+        return context
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(ArchEntUpdate, self).dispatch(*args, **kwargs)
