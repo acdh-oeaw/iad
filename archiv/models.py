@@ -588,12 +588,12 @@ ARCHENT_CERTAINTY = (
 
 @modify_fields(
     name={
-            'verbose_name': 'Entity Name',
-            'help_text': 'The name of the entity in the language\
-            of the country where the entity is located.'
-        },
+        'verbose_name': 'Entity Name',
+        'help_text': 'The name of the entity in the language\
+        of the country where the entity is located.'
+    },
     alt_name={
-        'verbose_name': 'Entity alternative name',
+        'verbose_name': 'Entity Alternative Name',
         'help_text': 'Another name / Other names of the entity\
         (another spelling, language, alias name etc.)'
         }
@@ -604,6 +604,7 @@ class ArchEnt(IadBaseClass):
 
     site_id = models.ForeignKey(
         Site, help_text="The unique identifier of the site.",
+        verbose_name="Site",
         blank=True, null=True, on_delete=models.SET_NULL,
         related_name="has_archent"
     )
@@ -620,7 +621,7 @@ class ArchEnt(IadBaseClass):
         on_delete=models.SET_NULL
     )
     type_certainty = models.CharField(
-        blank=True, null=True, verbose_name="Arch. entity type certainty",
+        blank=True, null=True, verbose_name="Entity Type Certainty",
         help_text="How certain is the interpretation of the arch. entity type",
         max_length=250,
         choices=ARCHENT_CERTAINTY

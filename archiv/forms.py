@@ -97,6 +97,7 @@ class ArchEntForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ArchEntForm, self).__init__(*args, **kwargs)
+        self.fields['site_id'].required = True
         self.fields['ent_type'].required = True
         self.helper = FormHelper()
         self.helper.form_tag = True
