@@ -37,6 +37,12 @@
                                     <i class="far fa-trash-alt" title="delete"></i>
                                 </a>
                             </small>
+                            |
+                            <small>
+                                <a href="{% url 'arche:resource_copy' %}?app-name=archiv&id={{ object.id }}&class-name=researchevent">
+                                    <i class="far fa-copy" aria-hidden="true" title="copy object"></i>
+                                </a>
+                            </small>
                         {% endif %}
                     </h1>
                 </div>
