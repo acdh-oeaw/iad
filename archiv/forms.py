@@ -245,7 +245,7 @@ class SiteForm(forms.ModelForm):
     research_activities = forms.MultipleChoiceField(
         choices=OPTIONS, required=False, widget=autocomplete.Select2Multiple(
             url='archiv-ac:researchevent-autocomplete'),
-        label="Information Source",
+        label="Research Activity",
         help_text="How was the site discovered? Choose the corresponding research event."
     )
 

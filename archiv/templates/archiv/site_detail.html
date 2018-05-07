@@ -307,6 +307,13 @@
             <div class="col-md-6">
                 {% if object.has_research_activity.all %}
                     <legend>Information Source</legend>
+                        <li>
+                            To Be Done: list the earliest realted Research Activity
+                        </li>
+                    <legend>Research Activity</legend>
+                    <li>
+                        To Be Done: list all related Research Activities except the earliest
+                    </li>
                     <ul>
                         {% for x in object.has_research_activity.all %}
                             <li>
