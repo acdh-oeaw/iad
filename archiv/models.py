@@ -627,13 +627,13 @@ class ArchEnt(IadBaseClass):
         choices=ARCHENT_CERTAINTY
     )
     dating_certainty = models.CharField(
-        blank=True, null=True, verbose_name="Dating certainty",
+        blank=True, null=True, verbose_name="Dating Certainty",
         help_text="How reliable is the dating of the archaeological entity?",
         max_length=250,
         choices=ARCHENT_CERTAINTY
     )
     location_certainty = models.CharField(
-        blank=True, null=True, verbose_name="Location certainty",
+        blank=True, null=True, verbose_name="Location Certainty",
         help_text="How accurate is the information on the location of the arch. entity",
         max_length=250,
         choices=ARCHENT_CERTAINTY
