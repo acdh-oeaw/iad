@@ -614,6 +614,22 @@ class ArchEnt(IadBaseClass):
         related_name="archent_type_related",
         on_delete=models.SET_NULL
     )
+    burial_type = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        verbose_name="Burial Type", help_text="Provide some helptext",
+        related_name="burial_type_related",
+        on_delete=models.SET_NULL
+    )
+    settlement_fortification = models.ManyToManyField(
+        SkosConcept, blank=True, verbose_name="Settlement Fortification",
+        help_text="Provide some helptext.", related_name="settlement_fortification_related"
+    )
+    settlement_occupation = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        verbose_name="Settlement Occupation", help_text="Provide some helptext",
+        related_name="settlement_occupation_related",
+        on_delete=models.SET_NULL
+    )
     topography = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="Where is the entity located",
