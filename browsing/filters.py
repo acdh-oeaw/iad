@@ -199,7 +199,7 @@ class SiteListFilter(django_filters.FilterSet):
         label=ResearchEvent._meta.get_field('start_date').verbose_name
         )
     has_research_activity__end_date = django_filters.DateFilter(
-        lookup_expr='gte',
+        lookup_expr='lte',
         help_text=ResearchEvent._meta.get_field('end_date').help_text,
         label=ResearchEvent._meta.get_field('end_date').verbose_name
         )
@@ -238,7 +238,7 @@ class SiteListFilter(django_filters.FilterSet):
         label=ResearchEvent._meta.get_field('research_question').verbose_name
         )
     has_research_activity__generation_data_set = django_filters.DateFilter(
-        lookup_expr='gte',
+        lookup_expr='exact',
         help_text=ResearchEvent._meta.get_field('generation_data_set').help_text,
         label=ResearchEvent._meta.get_field('generation_data_set').verbose_name
         )
