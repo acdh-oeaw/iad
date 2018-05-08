@@ -32,7 +32,7 @@
             } else if (selected_option.includes('funerary')) {
                 $( ".hidden_burial" ).css("display", 'inline');
             } else {
-                
+
             }
 
         });
@@ -40,6 +40,9 @@
             var selectedText = $("#id_ent_type option:selected").text();
             var burials = $( ".hidden_burial" );
             var settlements =  $( ".hidden_settlement" )
+            burials.css("display", "none");
+            settlements.css("display", "none");
+            console.log(selectedText)
             if (selectedText.includes('funerary site')) {
                 burials.toggle();
                 settlements.css("display", "none")
