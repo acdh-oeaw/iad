@@ -151,10 +151,6 @@ class SiteFilterFormHelper(FormHelper):
                     'infrastructure',
                     'long_term_management',
                     'potential_surrounding',
-                    'has_research_activity__start_date',
-                    'has_research_activity__end_date',
-                    'has_research_activity__responsible_researcher',
-                    'has_research_activity__responsible_institution',
                     # 'museum',
                     css_id="more"
                     ),
