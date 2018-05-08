@@ -91,6 +91,16 @@ class SkosConcept(models.Model):
     namespace = models.ForeignKey(
         SkosNamespace, blank=True, null=True, on_delete=models.CASCADE
     )
+    same_as_external = models.URLField(
+        max_length=250,
+        blank=True, null=True, verbose_name="URL of external Concept with same meaning",
+        help_text="URL of external Concept with same meaning",
+    )
+    source_description = models.TextField(
+        blank=True, null=True,
+        verbose_name="Source",
+        help_text="A verbose description of the concept's source"
+    )
     broader_concept = models.ForeignKey(
         'SkosConcept', help_text="Broader Term.",
         verbose_name="Broader Term",
