@@ -11,6 +11,7 @@
             {{ class_name }}
         {% endif %}
     </h1>
+    {% block aditionaljs %}
     {% if site_poly %}
         <script type="text/javascript">
             window.addEventListener("map:init", function (e) {
@@ -25,5 +26,30 @@
                 L.geoJson(siteGeojsonFeature, {style: SiteStyle}).addTo(detail.map);
             }, false);
         </script>
+        {% else %}
+        <script>
+            window.addEventListener("map:init", function (e) {
+                var SiteStyle = {
+                    "color": "#ff7800",
+                    "weight": 2,
+                    "opacity": 1,
+                    "fillOpacity": 0,
+                };
+                var detail = e.detail;
+                var map = detail.map;
+                var layerGroup = L.layerGroup().addTo(map);
+                $("#id_site_id").change(function() {
+                    var url = "/api/sites/" + this.value + "/?format=json";
+                    $.getJSON(url, function(data) {
+                        layerGroup.clearLayers();
+                        var newLayer = L.geoJson(data)
+                        newLayer.addTo(layerGroup);
+                    });
+                });
+            }, false);
+
+        </script>
     {% endif %}
+    {% endblock %}
+
 {% endblock %}

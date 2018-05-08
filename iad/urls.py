@@ -5,6 +5,7 @@ from entities.apis_views import PlaceViewSet, GeoJsonViewSet
 from bib.api_views import BookViewSet
 
 from vocabs import api_views
+from archiv import api_views as archiv_api_views
 
 router = routers.DefaultRouter()
 router.register(r'geojson', GeoJsonViewSet, base_name='places')
@@ -14,6 +15,7 @@ router.register(r'skosconceptschemes', api_views.SkosConceptSchemeViewSet)
 router.register(r'skosconcepts', api_views.SkosConceptViewSet)
 router.register(r'places', PlaceViewSet)
 router.register(r'Book', BookViewSet)
+router.register(r'sites', archiv_api_views.PlaceViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
