@@ -93,6 +93,15 @@ class SiteDetailView(DetailView):
     model = Site
     template_name = 'archiv/site_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(SiteDetailView, self).get_context_data()
+        try:
+            information_source = self.object.has_research_activity.order_by('start_date')[0]
+        except IndexError:
+            information_source = None
+        context['information_source'] = information_source
+        return context
+
 
 class SiteCreate(BaseCreateView):
 

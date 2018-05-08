@@ -23,7 +23,6 @@
         {% if site_poly %}
                 <script type="text/javascript">
                     window.addEventListener("map:init", function (e) {
-
                         var detail = e.detail;
                         var siteGeojsonFeature = {{ site_poly|safe }};
                         L.geoJson(siteGeojsonFeature, {style: SiteStyle}).addTo(detail.map);
