@@ -3,7 +3,7 @@ from django import forms
 from .models import ResearchEvent
 from leaflet.forms.widgets import LeafletWidget
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML
+from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML, Field
 
 from .models import *
 
@@ -135,9 +135,18 @@ class ArchEntForm(forms.ModelForm):
                 'name',
                 'alt_name',
                 'ent_type',
-                'burial_type',
-                'settlement_fortification',
-                'settlement_occupation',
+                Div(
+                    'burial_type',
+                    css_class="hidden_burial",
+                ),
+                Div(
+                    'settlement_fortification',
+                    css_class="hidden_settlement",
+                ),
+                Div(
+                    'settlement_occupation',
+                    css_class="hidden_settlement",
+                ),
                 'topography',
                 'period',
                 'type_certainty',
