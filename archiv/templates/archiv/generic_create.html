@@ -11,11 +11,19 @@
             {{ class_name }}
         {% endif %}
     </h1>
-    <script type="text/javascript">
-        window.addEventListener("map:init", function (e) {
-            var detail = e.detail;
-            L.marker([48.5, 17.5]).addTo(detail.map);
-            console.log("{{ site_poly }}")
-        }, false);
-    </script>
+    {% if site_poly %}
+        <script type="text/javascript">
+            window.addEventListener("map:init", function (e) {
+                var SiteStyle = {
+                    "color": "#ff7800",
+                    "weight": 2,
+                    "opacity": 1,
+                    "fillOpacity": 0,
+                };
+                var detail = e.detail;
+                var siteGeojsonFeature = {{ site_poly|safe }};
+                L.geoJson(siteGeojsonFeature, {style: SiteStyle}).addTo(detail.map);
+            }, false);
+        </script>
+    {% endif %}
 {% endblock %}

@@ -66,7 +66,12 @@ class ArchEntUpdate(BaseUpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(ArchEntUpdate, self).get_context_data()
-        context['site_poly'] = "HANSI"
+        try:
+            instance = self.object
+            site_poly = instance.site_id.get_geojson()
+            context['site_poly'] = "{}".format(site_poly)
+        except:
+            context['site_poly'] = None
         return context
 
     @method_decorator(login_required)
@@ -278,6 +283,16 @@ class MonumentProtectionUpdate(BaseUpdateView):
 
     model = MonumentProtection
     form_class = MonumentProtectionForm
+
+    def get_context_data(self, **kwargs):
+        context = super(MonumentProtectionUpdate, self).get_context_data()
+        try:
+            instance = self.object
+            site_poly = instance.site_id.get_geojson()
+            context['site_poly'] = "{}".format(site_poly)
+        except:
+            context['site_poly'] = None
+        return context
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
