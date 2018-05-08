@@ -151,8 +151,26 @@ class SiteFilterFormHelper(FormHelper):
                     'infrastructure',
                     'long_term_management',
                     'potential_surrounding',
+                    'has_research_activity__start_date',
+                    'has_research_activity__end_date',
+                    'has_research_activity__responsible_researcher',
+                    'has_research_activity__responsible_institution',
                     # 'museum',
                     css_id="more"
+                    ),
+                ),
+            Accordion(
+                AccordionGroup(
+                    'Research Activity search options',
+                    'has_research_activity__start_date',
+                    'has_research_activity__end_date',
+                    'has_research_activity__responsible_researcher',
+                    'has_research_activity__responsible_institution',
+                    'has_research_activity__research_type',
+                    'has_research_activity__research_method',
+                    'has_research_activity__research_question',
+                    'has_research_activity__generation_data_set',
+                    css_id="research_activity_options"
                     ),
                 )
             )

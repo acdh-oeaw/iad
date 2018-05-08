@@ -191,6 +191,57 @@ class SiteListFilter(django_filters.FilterSet):
     #     help_text=Site._meta.get_field('museum').help_text,
     #     label=Site._meta.get_field('museum').verbose_name,
     #     )
+######## Research Activity Fields ######################################
+#2001-01-01
+    has_research_activity__start_date = django_filters.DateFilter(
+        lookup_expr='gte',
+        help_text=ResearchEvent._meta.get_field('start_date').help_text,
+        label=ResearchEvent._meta.get_field('start_date').verbose_name
+        )
+    has_research_activity__end_date = django_filters.DateFilter(
+        lookup_expr='gte',
+        help_text=ResearchEvent._meta.get_field('end_date').help_text,
+        label=ResearchEvent._meta.get_field('end_date').verbose_name
+        )
+    has_research_activity__responsible_researcher = django_filters.ModelMultipleChoiceFilter(
+        queryset=Person.objects.all(),
+        help_text=ResearchEvent._meta.get_field('responsible_researcher').help_text,
+        label=ResearchEvent._meta.get_field('responsible_researcher').verbose_name
+        )
+    has_research_activity__responsible_institution = django_filters.ModelMultipleChoiceFilter(
+        queryset=Institution.objects.all(),
+        help_text=ResearchEvent._meta.get_field('responsible_institution').help_text,
+        label=ResearchEvent._meta.get_field('responsible_institution').verbose_name
+        )
+    has_research_activity__research_type = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="research-type"),
+        help_text=ResearchEvent._meta.get_field('research_type').help_text,
+        label=ResearchEvent._meta.get_field('research_type').verbose_name,
+        method=generous_concept_filter
+        )
+    has_research_activity__research_method = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="research-methods"),
+        help_text=ResearchEvent._meta.get_field('research_method').help_text,
+        label=ResearchEvent._meta.get_field('research_method').verbose_name,
+        method=generous_concept_filter,
+        widget=autocomplete.Select2Multiple(
+            url="/vocabs-ac/specific-concept-ac/research-methods",
+            attrs={
+                'data-placeholder': 'Autocomplete ...',
+                'data-minimum-input-length': 3,
+                },
+        )
+        )
+    has_research_activity__research_question = django_filters.ModelMultipleChoiceFilter(
+        queryset=ResearchQuestion.objects.all(),
+        help_text=ResearchEvent._meta.get_field('research_question').help_text,
+        label=ResearchEvent._meta.get_field('research_question').verbose_name
+        )
+    has_research_activity__generation_data_set = django_filters.DateFilter(
+        lookup_expr='gte',
+        help_text=ResearchEvent._meta.get_field('generation_data_set').help_text,
+        label=ResearchEvent._meta.get_field('generation_data_set').verbose_name
+        )
 
 
     class Meta:
