@@ -24,7 +24,18 @@
    </style>
 
     <script type="text/javascript">
+        $('#id_finds_type').ready(function(){
+            var selected_option =  $("#id_ent_type option:selected").text()
+            console.log(selected_option);
+            if (selected_option.includes('settlement')){
+                $( ".hidden_settlement" ).css("display", 'inline');
+            } else if (selected_option.includes('funerary')) {
+                $( ".hidden_burial" ).css("display", 'inline');
+            } else {
+                
+            }
 
+        });
         $("#id_ent_type").change(function() {
             var selectedText = $("#id_ent_type option:selected").text();
             var burials = $( ".hidden_burial" );

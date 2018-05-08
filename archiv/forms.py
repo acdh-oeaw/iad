@@ -103,7 +103,7 @@ class ArchEntForm(forms.ModelForm):
                 url='/vocabs-ac/specific-concept-ac/archaeological-entity-type'),
             'burial_type': autocomplete.ModelSelect2(
                 url='/vocabs-ac/specific-concept-ac/burial-type'),
-            'settlement_fortification': autocomplete.ModelSelect2(
+            'settlement_fortification': autocomplete.ModelSelect2Multiple(
                 url='/vocabs-ac/specific-concept-ac/settlement-fortification'),
             'settlement_occupation': autocomplete.ModelSelect2(
                 url='/vocabs-ac/specific-concept-ac/settlement-occupation'),
