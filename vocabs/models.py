@@ -86,7 +86,7 @@ class SkosConcept(models.Model):
     scheme = models.ManyToManyField(SkosConceptScheme, blank=True)
     definition = models.TextField(blank=True)
     definition_lang = models.CharField(max_length=3, blank=True, default=DEFAULT_LANG)
-    label = models.ManyToManyField(SkosLabel, blank=True)
+    other_label = models.ManyToManyField(SkosLabel, blank=True)
     notation = models.CharField(max_length=300, blank=True)
     namespace = models.ForeignKey(
         SkosNamespace, blank=True, null=True, on_delete=models.CASCADE

@@ -103,6 +103,18 @@
                                     <td>skos:prefLabel| @{{ object.pref_label_lang }}</td>
                                     <td>{{ object.pref_label }} </td>
                                 </tr>
+                                <tr>
+                                    <td>Labels</td>
+                                    <td>
+                                        {% for x in object.other_label.all %} {{ x }}
+                                            {% if user.is_authenticated %}
+                                                <a href="{% url 'vocabs:skoslabel_update' pk=x.id %}">
+                                                    <i class="far fa-edit" title="edit"></i>
+                                                </a>
+                                            {% endif %}<br />
+                                        {% endfor %}
+                                    </td>
+                                </tr>
                                 {% if object.definition %}
                                     <tr>
                                         <td>skos:definition | @{{ object.definition_lang }}</td>
@@ -131,17 +143,7 @@
                                                 {{ object.name_reverse }}
                                             </td>
                                         </tr>
-                                        <td>Labels</td>
-                                        <td>
-                                            {% for x in object.label.all %} {{ x }}
-                                                {% if user.is_authenticated %}
-                                                    <a href="{% url 'vocabs:skoslabel_update' pk=x.id %}">
-                                                        <i class="far fa-edit" title="edit"></i>
-                                                    </a>
-                                                {% endif %}<br />
-                                            {% endfor %}
-                                        </td>
-                                    </tr>
+
                                 {% endif %}
                                 {% if object.legacy_id %}
                                     <tr>

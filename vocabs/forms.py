@@ -57,7 +57,9 @@ class SkosConceptForm(forms.ModelForm):
         model = SkosConcept
         fields = "__all__"
         widgets = {
-            'label': autocomplete.ModelSelect2Multiple(url='vocabs-ac:skoslabel-autocomplete'),
+            'other_label': autocomplete.ModelSelect2Multiple(
+                url='vocabs-ac:skoslabel-autocomplete'
+            ),
             'skos_broader': autocomplete.ModelSelect2Multiple(
                 url='vocabs-ac:skosconcept-autocomplete'),
             'skos_narrower': autocomplete.ModelSelect2Multiple(
