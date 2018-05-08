@@ -160,6 +160,7 @@ class ResearchEventForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ResearchEventForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.fields['start_date'].required = True
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('submit', 'save'),)
