@@ -75,9 +75,21 @@ class ArchEntForm(forms.ModelForm):
     class Meta:
         model = ArchEnt
         fields = [
-            'public', 'polygon', 'site_id', 'name', 'alt_name',
-            'ent_type', 'topography', 'period', 'type_certainty',
-            'dating_certainty', 'location_certainty', 'comment'
+            'public',
+            'polygon',
+            'site_id',
+            'name',
+            'alt_name',
+            'ent_type',
+            'burial_type',
+            'settlement_fortification',
+            'settlement_occupation',
+            'topography',
+            'period',
+            'type_certainty',
+            'dating_certainty',
+            'location_certainty',
+            'comment'
         ]
         widgets = {
             'alt_name': autocomplete.ModelSelect2Multiple(
@@ -89,6 +101,12 @@ class ArchEntForm(forms.ModelForm):
                 url='archiv-ac:site-autocomplete'),
             'ent_type': autocomplete.ModelSelect2(
                 url='/vocabs-ac/specific-concept-ac/archaeological-entity-type'),
+            'burial_type': autocomplete.ModelSelect2(
+                url='/vocabs-ac/specific-concept-ac/burial-type'),
+            'settlement_fortification': autocomplete.ModelSelect2(
+                url='/vocabs-ac/specific-concept-ac/settlementfortification'),
+            'settlement_occupation': autocomplete.ModelSelect2(
+                url='/vocabs-ac/specific-concept-ac/settlement-occupation'),
             'topography': autocomplete.ModelSelect2(
                 url='/vocabs-ac/specific-concept-ac/topography'),
             'period': autocomplete.ModelSelect2Multiple(
@@ -117,6 +135,9 @@ class ArchEntForm(forms.ModelForm):
                 'name',
                 'alt_name',
                 'ent_type',
+                'burial_type',
+                'settlement_fortification',
+                'settlement_occupation',
                 'topography',
                 'period',
                 'type_certainty',
