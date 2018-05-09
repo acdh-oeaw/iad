@@ -48,6 +48,35 @@ class MonumentProtectionListFilter(django_filters.FilterSet):
         help_text=MonumentProtection._meta.get_field('site_id').help_text,
         label=MonumentProtection._meta.get_field('site_id').verbose_name
         )
+    current_land_use = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(
+            scheme__dc_title__icontains="current-land-use"
+            ),
+        help_text=MonumentProtection._meta.get_field('current_land_use').help_text,
+        label=MonumentProtection._meta.get_field('current_land_use').verbose_name,
+        method=generous_concept_filter,
+        widget=autocomplete.Select2Multiple(
+            url="/vocabs-ac/specific-concept-ac/current-land-use",
+            attrs={
+                'data-placeholder': 'Autocomplete ...',
+                'data-minimum-input-length': 3,
+                },
+        )
+        )
+    heritage_status = django_filters.ChoiceFilter(
+        help_text=MonumentProtection._meta.get_field('heritage_status').help_text,
+        label=MonumentProtection._meta.get_field('heritage_status').verbose_name,
+        choices=HERITAGE_STATUS_CHOICES
+        )
+    threats = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(
+            scheme__dc_title__icontains="threats"
+            ),
+        help_text=MonumentProtection._meta.get_field('threats').help_text,
+        label=MonumentProtection._meta.get_field('threats').verbose_name,
+        method=generous_concept_filter
+        )
+
 
     class Meta:
         model = MonumentProtection

@@ -57,15 +57,15 @@ class MonumentProtectionFormHelper(FormHelper):
                 'site_id',
                 css_id="basic_search_fields"
                 ),
-####### Uncomment if there are advanced options ####################            
-            # Accordion(
-            #     AccordionGroup(
-            #         'Advanced search options',
-            #         'zotero_item',
-            #         'page',
-            #         css_id="more"
-            #     )
-            #     )
+            Accordion(
+                AccordionGroup(
+                    'Advanced search options',
+                    'current_land_use',
+                    'heritage_status',
+                    'threats',
+                    css_id="more"
+                )
+                )
             )
 
 
@@ -269,7 +269,10 @@ class PeriodFilterFormHelper(FormHelper):
                     'Advanced search options',
                     'public',
                     'start_date',
+                    'start_date_latest',
                     'end_date',
+                    'end_date_latest',
+                    'country',
                     css_id="more"
                     ),
                 )
