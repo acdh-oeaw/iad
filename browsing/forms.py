@@ -168,6 +168,21 @@ class SiteFilterFormHelper(FormHelper):
                     'has_research_activity__generation_data_set',
                     css_id="research_activity_options"
                     ),
+                ),
+            Accordion(
+                AccordionGroup(
+                    'Arch. Entity search options',
+                    'has_archent__ent_type',
+                    'has_archent__burial_type',
+                    'has_archent__settlement_fortification',
+                    'has_archent__settlement_occupation',
+                    'has_archent__topography',
+                    'has_archent__type_certainty',
+                    'has_archent__dating_certainty',
+                    'has_archent__location_certainty',
+                    'has_archent__period',
+                    css_id="arch_entity_options"
+                    ),
                 )
             )
 
