@@ -23,7 +23,9 @@ include 'autocomplete_light/static.html
                 <div class="col-md-2">
                     {% if object.get_prev %}
                     <h2>
-                        <a href="{% url 'entities:place_detail' pk=object.get_prev %}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true" title="previous"></span></a>
+                        <a href="{% url 'entities:place_detail' pk=object.get_prev %}">
+                            <i class="fas fa-chevron-left" title="previous"></i>
+                        </a>
                     </h2>
                     {% endif %}
                 </div>
@@ -31,8 +33,8 @@ include 'autocomplete_light/static.html
                     <h1 style="text-align: center;">
                         <small>place:</small> {{ object.name }}
                         {% if user.is_authenticated %}
-                        <small><a href="{% url 'entities:place_edit' pk=object.id %}">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true" title="edit"></span>
+                        <a href="{% url 'entities:place_edit' pk=object.id %}">
+                            <i class="far fa-edit" title="edit"></i>
                         </a>
                     </small>
                     {% endif %}
@@ -41,7 +43,9 @@ include 'autocomplete_light/static.html
             <div class="col-md-2">
                 <h2>
                     {% if object.get_next %}
-                    <a href="{% url 'entities:place_detail' pk=object.get_next %}" style="float:right"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" title="next"></span></a>
+                    <a href="{% url 'entities:place_detail' pk=object.get_next %}" style="float:right">
+                        <i class="fas fa-chevron-right" title="next"></i>
+                    </a>
                 </h2>
                 {% endif %}
             </div>
