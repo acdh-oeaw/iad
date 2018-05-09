@@ -8,7 +8,11 @@ register = template.Library()
 def create_object_count(app=None):
 
     """fetches all models of the passed in app and returns a
-    dict containg the name of each class and the number of instances"""
+    dict containg the name of each class and the number of instances
+    Be aware that ContentType fetches the models name from the database. This might cause
+    problems if you are using verbose names on the classes which differ from the actual class name.
+
+    """
 
     if app:
         models = ContentType.objects.filter(app_label=app)
