@@ -36,38 +36,5 @@
         <h1 style="text-align:center">{% projects_metadata 'title' %}</h1>
         <h3>{% projects_metadata 'subtitle' %}</h3>
         <p>{% projects_metadata 'description' %}</p>
-        <div>
-            <h3>Data-Count</h3>
-            {% create_object_count app='archiv' as models %}
-            <div class="row">
-            {% for x in models %}
-             <div class="col-md-4  text-center">
-          <div class="card flex-md-row mb-4 box-shadow">
-            <div class="card-body">
-                    {% if x.link %}
-                    <h4 class="mb-0"><a class="text-dark" href="{{ x.link }}">{{x.name}}</a></h4>
-                    {% endif %}
-                    <h4 class="count">{{x.count}}</h4>
-                    <a class="btn btn-main btn-outline-primary btn-sm" href="{{ x.link }}" role="button">View Details</a>
-                </div>
-            </div>
-            </div>
-            {% endfor %}
-            {% create_object_count app='entities' as models %}
-            {% for x in models %}
-             <div class="col-md-4  text-center">
-          <div class="card flex-md-row mb-4 box-shadow">
-            <div class="card-body">
-                    {% if x.link %}
-                    <h4 class="mb-0"><a class="text-dark" href="{{ x.link }}">{{x.name}}</a></h4>
-                    {% endif %}
-                    <h4 class="count">{{x.count}}</h4>
-                    <a class="btn btn-main btn-outline-primary btn-sm" href="{{ x.link }}" role="button">View Details</a>
-                </div>
-            </div>
-            </div>
-            {% endfor %}
-            </div>
-        </div>
     </div>
 {% endblock %}
