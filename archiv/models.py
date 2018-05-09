@@ -1,6 +1,9 @@
 from django.urls import reverse
 from django.contrib.gis.db import models
 from django.core.serializers import serialize
+
+import reversion
+
 from idprovider.models import IdProvider
 from entities.models import Place, Person, Institution
 from vocabs.models import SkosConcept
@@ -23,6 +26,7 @@ VALUE_STATUS_CHOICES = (
 )
 
 
+@reversion.register()
 class AltName(IdProvider):
     label = models.CharField(
         blank=True, null=True, max_length=250,
@@ -124,6 +128,7 @@ class IadBaseClass(IdProvider):
         'help_text': 'The name of the period (e.g. Iron Age, Early Iron Age, Hallstatt A…).'
         }
         )
+@reversion.register()
 class Period(IadBaseClass):
 
     """ Please provide a definition of this class """
@@ -277,6 +282,7 @@ SITE_POTENTIALSURROUNDINGS = (
         'verbose_name': 'Description',
         'help_text': 'Description of the whole site.'
     })
+@reversion.register()
 class Site(IadBaseClass):
     """SITE is the highest class in the database and includes mostly geographical and
     administrative information about the area where past human activity has been recognized.
@@ -404,6 +410,7 @@ class Site(IadBaseClass):
             return "{}".format(self.id)
 
 
+@reversion.register()
 class ResearchQuestion(IdProvider):
     question = models.TextField(
         blank=True, null=True, verbose_name="research question"
@@ -445,6 +452,7 @@ class ResearchQuestion(IdProvider):
 @modify_fields(identifier={
     'verbose_name': 'Activity ID',
     'help_text': 'Applies to Austrian sites.'})
+@reversion.register()
 class ResearchEvent(IadBaseClass):
     """The data set RESEARCH ACTIVITY comprises data on archaeological research conducted on\
     a specific site. At the same time a single research activity may result in discovery or\
@@ -598,6 +606,7 @@ ARCHENT_CERTAINTY = (
         (another spelling, language, alias name etc.)'
         }
     )
+@reversion.register()
 class ArchEnt(IadBaseClass):
     """An archaeological entity is defined by a specific human activity (entity type),
     period of this activity (dating) and spatial location (polygon inside of the site)."""
@@ -725,6 +734,7 @@ HERITAGE_STATUS_CHOICES = (
 @modify_fields(comment={
     'help_text': 'Any noteworthy information about the protection\
     of the site that has not been expressed in other fields. (other types ).'})
+@reversion.register()
 class MonumentProtection(IadBaseClass):
 
     """A table gathering information on the protection status of the site.\

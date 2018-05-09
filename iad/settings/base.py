@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django_tables2',
     'rest_framework',
     'rest_framework_gis',
+    'reversion',
     'leaflet',
     'idprovider',
     'webpage',
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'reversion.middleware.RevisionMiddleware',
 ]
 
 ROOT_URLCONF = 'iad.urls'
