@@ -85,32 +85,6 @@ class SiteListFilter(django_filters.FilterSet):
         help_text=Site._meta.get_field('name').help_text,
         label=Site._meta.get_field('name').verbose_name
         )
-    has_archent__ent_type = django_filters.ModelMultipleChoiceFilter(
-        widget=autocomplete.Select2Multiple(
-            url="/vocabs-ac/specific-concept-ac/archenttype",
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        ),
-        queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="archenttype"),
-        help_text="Site contains specific archaeological entity?",
-        label="Greedy Archaeological Entity"
-        )
-    example = django_filters.ModelMultipleChoiceFilter(
-        name="has_archent__ent_type",
-        method=generous_concept_filter,
-        widget=autocomplete.Select2Multiple(
-            url="/vocabs-ac/specific-concept-ac/archenttype",
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        ),
-        queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="archenttype"),
-        help_text="Site contains specific archaeological entity?",
-        label="Generous Archaeological Entity"
-        )
     has_research_activity = django_filters.ModelMultipleChoiceFilter(
         queryset=ResearchEvent.objects.all(),
         name='has_research_activity',
@@ -212,11 +186,10 @@ class SiteListFilter(django_filters.FilterSet):
         help_text=ResearchEvent._meta.get_field('responsible_institution').help_text,
         label=ResearchEvent._meta.get_field('responsible_institution').verbose_name
         )
-    has_research_activity__research_type = django_filters.ModelMultipleChoiceFilter(
+    has_research_activity__research_type = django_filters.ModelChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="research-type"),
         help_text=ResearchEvent._meta.get_field('research_type').help_text,
         label=ResearchEvent._meta.get_field('research_type').verbose_name,
-        method=generous_concept_filter
         )
     has_research_activity__research_method = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="research-methods"),
@@ -316,6 +289,36 @@ class SiteListFilter(django_filters.FilterSet):
                 },
         )
         )
+##################### Monument Protection Fields ####################
+    has_monument_protection__current_land_use = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(
+            scheme__dc_title__icontains="current-land-use"
+            ),
+        help_text=MonumentProtection._meta.get_field('current_land_use').help_text,
+        label=MonumentProtection._meta.get_field('current_land_use').verbose_name,
+        method=generous_concept_filter,
+        widget=autocomplete.Select2Multiple(
+            url="/vocabs-ac/specific-concept-ac/current-land-use",
+            attrs={
+                'data-placeholder': 'Autocomplete ...',
+                'data-minimum-input-length': 3,
+                },
+        )
+        )
+    has_monument_protection__heritage_status = django_filters.ChoiceFilter(
+        help_text=MonumentProtection._meta.get_field('heritage_status').help_text,
+        label=MonumentProtection._meta.get_field('heritage_status').verbose_name,
+        choices=HERITAGE_STATUS_CHOICES
+        )
+    has_monument_protection__threats = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(
+            scheme__dc_title__icontains="threats"
+            ),
+        help_text=MonumentProtection._meta.get_field('threats').help_text,
+        label=MonumentProtection._meta.get_field('threats').verbose_name,
+        method=generous_concept_filter
+        )
+
 
 
     class Meta:
@@ -340,6 +343,54 @@ class ResearchEventListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=ResearchEvent._meta.get_field('name').help_text,
         label=ResearchEvent._meta.get_field('name').verbose_name
+        )
+    start_date = django_filters.DateFilter(
+        lookup_expr='gte',
+        help_text=ResearchEvent._meta.get_field('start_date').help_text,
+        label=ResearchEvent._meta.get_field('start_date').verbose_name
+        )
+    end_date = django_filters.DateFilter(
+        lookup_expr='lte',
+        help_text=ResearchEvent._meta.get_field('end_date').help_text,
+        label=ResearchEvent._meta.get_field('end_date').verbose_name
+        )
+    responsible_researcher = django_filters.ModelMultipleChoiceFilter(
+        queryset=Person.objects.all(),
+        help_text=ResearchEvent._meta.get_field('responsible_researcher').help_text,
+        label=ResearchEvent._meta.get_field('responsible_researcher').verbose_name
+        )
+    responsible_institution = django_filters.ModelMultipleChoiceFilter(
+        queryset=Institution.objects.all(),
+        help_text=ResearchEvent._meta.get_field('responsible_institution').help_text,
+        label=ResearchEvent._meta.get_field('responsible_institution').verbose_name
+        )
+    research_type = django_filters.ModelChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="research-type"),
+        help_text=ResearchEvent._meta.get_field('research_type').help_text,
+        label=ResearchEvent._meta.get_field('research_type').verbose_name
+        )
+    research_method = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="research-methods"),
+        help_text=ResearchEvent._meta.get_field('research_method').help_text,
+        label=ResearchEvent._meta.get_field('research_method').verbose_name,
+        method=generous_concept_filter,
+        widget=autocomplete.Select2Multiple(
+            url="/vocabs-ac/specific-concept-ac/research-methods",
+            attrs={
+                'data-placeholder': 'Autocomplete ...',
+                'data-minimum-input-length': 3,
+                },
+        )
+        )
+    research_question = django_filters.ModelMultipleChoiceFilter(
+        queryset=ResearchQuestion.objects.all(),
+        help_text=ResearchEvent._meta.get_field('research_question').help_text,
+        label=ResearchEvent._meta.get_field('research_question').verbose_name
+        )
+    generation_data_set = django_filters.DateFilter(
+        lookup_expr='exact',
+        help_text=ResearchEvent._meta.get_field('generation_data_set').help_text,
+        label=ResearchEvent._meta.get_field('generation_data_set').verbose_name
         )
 
     class Meta:

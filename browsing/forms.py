@@ -138,8 +138,6 @@ class SiteFilterFormHelper(FormHelper):
                 AccordionGroup(
                     'Advanced search options',
                     'public',
-                    'has_archent__ent_type',
-                    'example',
                     'cadastral_community',
                     # 'cadastral_number',
                     'heritage_number',
@@ -152,7 +150,8 @@ class SiteFilterFormHelper(FormHelper):
                     'long_term_management',
                     'potential_surrounding',
                     # 'museum',
-                    css_id="more"
+                    css_id="more",
+                    css_class="test"
                     ),
                 ),
             Accordion(
@@ -183,6 +182,15 @@ class SiteFilterFormHelper(FormHelper):
                     'has_archent__period',
                     css_id="arch_entity_options"
                     ),
+                ),
+            Accordion(
+                AccordionGroup(
+                    'Monument protection search options',
+                    'has_monument_protection__current_land_use',
+                    'has_monument_protection__heritage_status',
+                    'has_monument_protection__threats',
+                    css_id="monument_protection_options"
+                    ),
                 )
             )
 
@@ -201,15 +209,20 @@ class ResearchEventFilterFormHelper(FormHelper):
                 'name',
                 css_id="basic_search_fields"
                 ),
-####### Uncomment and add more fields if there are advanced options ####################            
-            # Accordion(
-            #     AccordionGroup(
-            #         'Advanced search options',
-            #         'zotero_item',
-            #         'page',
-            #         css_id="more"
-            #     )
-            #     )
+            Accordion(
+                AccordionGroup(
+                    'Advanced search options',
+                    'start_date',
+                    'end_date',
+                    'responsible_researcher',
+                    'responsible_institution',
+                    'research_type',
+                    'research_method',
+                    'research_question',
+                    'generation_data_set',
+                    css_id="more"
+                )
+                )
             )
 
 
