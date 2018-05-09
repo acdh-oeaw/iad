@@ -8,8 +8,15 @@
     {% leaflet_css %}
 {% endblock %}
 {% block content %}
-
-<div class="container">
+<style>
+    .leaflet-container {  /* all maps */
+        width:  100%;
+        height: 800px;
+    }
+</style>
+<!-- <div class="container"> -->
+<div class="row">
+<div class="col-md-6">
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -58,18 +65,8 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <legend>Lorem Ipsum</legend>
+                <legend><!--add soemthing here--></legend>
                 <table class="table table-bordered table-hover">
-                    <tr>
-                        <th>
-                            {% get_verbose_name monumentprotection "name" %}
-                        </th>
-                        <td>
-                            {{ object.name }}
-                        </td>
-                    </tr>
                     {% if object.site_id %}
                         <tr>
                             <th>
@@ -197,17 +194,16 @@
                         </tr>
                     {% endif %}
                 </table>
-            </div>
-            <div class="col-md-6">
-                <legend>Map</legend>
-                {% leaflet_map "yourmap" callback="window.map_init_basic" %}
-                <legend>GeoJSON</legend>
-                {{ object.get_geojson }}
-            </div>
-        </div>
     </div>
 </div>
+</div><!--col-6-->
+<div class="col-md-6">
+{% leaflet_map "yourmap" callback="window.map_init_basic" %}
+                <legend>GeoJSON</legend>
+                {{ object.get_geojson }}
 </div>
+</div><!--main row-->
+<!-- </div> -->
 <script type="text/javascript">
     function map_init_basic (map, options) {
         var geojsonFeature = {{ object.get_geojson|safe }};

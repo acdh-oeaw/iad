@@ -8,8 +8,15 @@
     {% leaflet_css %}
 {% endblock %}
 {% block content %}
-
-<div class="container">
+<style>
+    .leaflet-container {  /* all maps */
+        width:  100%;
+        height: 800px;
+    }
+</style>
+<!-- <div class="container"> -->
+<div class="row">
+<div class="col-md-6">
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -57,9 +64,7 @@
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
+    <div class="card-body">      
                 <legend>Basic Information</legend>
                 <table class="table table-bordered table-hover">
                     <tr>
@@ -163,8 +168,10 @@
                         </tr>
                     {% endif %}
                 </table>
+                {% if object.type_certainty or  object.dating_certainty or object.location_certainty %}
                 <legend>Certainty</legend>
                 <table class="table table-bordered table-hover">
+                {% if object.type_certainty %}
                     <tr>
                         <th>
                             {% get_verbose_name archent "type_certainty" %}
@@ -173,6 +180,8 @@
                             {{ object.type_certainty }}
                         </td>
                     </tr>
+                {% endif %}
+                {% if object.dating_certainty %}
                     <tr>
                         <th>
                             {% get_verbose_name archent "dating_certainty" %}
@@ -181,6 +190,8 @@
                             {{ object.dating_certainty }}
                         </td>
                     </tr>
+                {% endif %}
+                {% if object.location_certainty %}
                     <tr>
                         <th>
                             {% get_verbose_name archent "location_certainty" %}
@@ -189,18 +200,19 @@
                             {{ object.location_certainty }}
                         </td>
                     </tr>
+                {% endif %}
                 </table>
-            </div>
-            <div class="col-md-6">
-                <legend>Map</legend>
-                {% leaflet_map "yourmap" callback="window.map_init_basic" %}
-                <legend>GeoJSON</legend>
-                {{ object.get_geojson }}
-            </div>
-        </div>
+                {% endif %}
     </div>
 </div>
 </div>
+<div class="col-md-6">
+    {% leaflet_map "yourmap" callback="window.map_init_basic" %}
+    <legend>GeoJSON</legend>
+    {{ object.get_geojson }}
+</div>
+</div><!--main row-->
+<!-- </div> -->
 <script type="text/javascript">
     function map_init_basic (map, options) {
         var geojsonFeature = {{ object.get_geojson|safe }};
