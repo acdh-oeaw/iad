@@ -47,7 +47,7 @@
                             </small>
                             |
                             <small>
-                                <a href="{% url 'arche:resource_copy' %}?app-name=archiv&id={{ object.id }}&class-name=monumentprotection">
+                                <a href="{% url 'arche:resource_copy' %}?app-name=archiv&id={{ object.id }}&class-name=monumentprotection" class="confirmation">
                                     <i class="far fa-copy" aria-hidden="true" title="copy object"></i>
                                 </a>
                             </small>
@@ -226,5 +226,10 @@
         var geojsonFeature = {{ object.get_geojson|safe }};
         L.geoJson(geojsonFeature).addTo(map);
     }
+</script>
+<script type="text/javascript">
+    $('.confirmation').on('click', function () {
+        return confirm('Are you sure?');
+    });
 </script>
 {% endblock %}

@@ -47,7 +47,7 @@
                             </small>
                             |
                             <small>
-                                <a href="{% url 'arche:resource_copy' %}?app-name=archiv&id={{ object.id }}&class-name=archent">
+                                <a href="{% url 'arche:resource_copy' %}?app-name=archiv&id={{ object.id }}&class-name=archent" class="confirmation">
                                     <i class="far fa-copy" aria-hidden="true" title="copy object"></i>
                                 </a>
                             </small>
@@ -66,7 +66,7 @@
                                 <input id="current-id" name="current-id" type="hidden" value="{{ object.id }}">
                                 <input id="current-class" name="current-class" type="hidden" value="ArchEnt">
                             </div>
-                            <button type="submit" class="btn btn-primary">Copy</button>
+                            <button type="submit" class="btn btn-primary confirmation">Copy</button>
                         </form>
                     {% endif %}
                 </div>
@@ -81,7 +81,7 @@
             </div>
         </div>
     </div>
-    <div class="card-body">      
+    <div class="card-body">
                 <legend>Basic Information</legend>
                 <table class="table table-bordered table-hover">
                     <tr>
@@ -240,5 +240,10 @@
             L.geoJson(siteGeojsonFeature).setStyle({fillColor: 'green'}).addTo(map);
         {% endif %}
     }
+</script>
+<script type="text/javascript">
+    $('.confirmation').on('click', function () {
+        return confirm('Are you sure?');
+    });
 </script>
 {% endblock %}
