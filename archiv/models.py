@@ -90,8 +90,10 @@ class IadBaseClass(IdProvider):
         blank=True, null=True, verbose_name="Description of the object."
     )
     comment = models.TextField(
-        blank=True, null=True, help_text="""Any noteworthy general information about the object
-        that cannot be expressed in other fields."""
+        blank=True, null=True,
+        help_text="""Any noteworthy general information about the object
+        that cannot be expressed in other fields.""",
+        verbose_name="Comment"
     )
     public = models.BooleanField(
         default=False, verbose_name="Public",

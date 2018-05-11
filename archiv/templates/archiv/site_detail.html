@@ -339,7 +339,7 @@
                     </ul>
                 {% endif %}
                     {% if object.has_archent.all %}
-                        <legend>related Arch Ents</legend>
+                        <legend>related Arch Entities</legend>
                         <ul>
                             {% for x in object.has_archent.all %}
                                 <li>
@@ -370,7 +370,7 @@
                     {% endif %}
                     {% if object.other_period.all %}
                         <legend>
-                            related other periods
+                            related other Periods
                         </legend>
 
                             <ul>
@@ -383,7 +383,7 @@
                         {% endif %}
                         {% if object.has_monument_protection.all %}
                             <legend>
-                                related monument protection things
+                                related Monument Protection
                             </legend>
                                 <ul>
                                     {% for x in object.has_monument_protection.all %}

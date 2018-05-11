@@ -10,7 +10,15 @@
 {% endblock %}
 {% block content %}
 
-<div class="container">
+<style>
+    .leaflet-container {  /* all maps */
+        width:  100%;
+        height: 800px;
+    }
+</style>
+<div class="row">
+<!-- <div class="container"> -->
+<div class="col-md-6">
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -75,9 +83,7 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <legend>Lorem Ipsum</legend>
+                <legend><!--add soemthing here--></legend>
                 <table class="table table-bordered table-hover">
                     {% if object.site_id.all %}
                         <tr>
@@ -95,20 +101,13 @@
                     {% endif %}
                     <tr>
                         <th>
-                            {% get_verbose_name researchevent "name" %}
-                        </th>
-                        <td>
-                            {{ object.name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {% get_verbose_name researchevent "start_date" %}
                         </th>
                         <td>
                             {{ object.start_date }}
                         </td>
                     </tr>
+                    {% if object.end_date %}
                     <tr>
                         <th>
                             {% get_verbose_name researchevent "end_date" %}
@@ -117,6 +116,8 @@
                             {{ object.end_date }}
                         </td>
                     </tr>
+                    {% endif %}
+                    {% if object.research_question %}
                     <tr>
                         <th>
                             {% get_verbose_name researchevent "research_question" %}
@@ -125,6 +126,7 @@
                             <a href="{{ object.research_question.get_absolute_url }}">{{ object.research_question }}</a>
                         </td>
                     </tr>
+                    {% endif %}
                     {% if object.responsible_researcher.all %}
                         <tr>
                             <th>
@@ -250,19 +252,18 @@
                         </tr>
                     {% endif %}
                 </table>
-            </div>
-            <div class="col-md-6">
-                <legend>Map</legend>
-                {% leaflet_map "yourmap" callback="window.map_init_basic" %}
-                <legend>GeoJSON</legend>
-                {{ object.get_geojson }}
-                <legend>SiteGeoJSON</legend>
-                {{ object.get_site_geojson }}
-            </div>
-        </div>
-    </div>
+    </div><!--card body-->
+</div><!--card-->
 </div>
+<div class="col-md-6">
+    {% leaflet_map "yourmap" callback="window.map_init_basic" %}
+    <legend>GeoJSON</legend>
+    {{ object.get_geojson }}
+    <legend>SiteGeoJSON</legend>
+    {{ object.get_site_geojson }}
 </div>
+<!-- </div> --><!--container-->
+</div><!--main row-->
 <script type="text/javascript">
     function map_init_basic (map, options) {
         var geojsonFeature = {{ object.get_geojson|safe }};
