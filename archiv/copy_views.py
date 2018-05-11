@@ -1,9 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 from .models import Site, ArchEnt, ResearchEvent, MonumentProtection
 
 
+@login_required
 def copy_site_poly_view(request):
 
     """copies the current's object polygon to a new target_class"""

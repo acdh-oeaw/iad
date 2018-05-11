@@ -19,6 +19,7 @@ from browsing.views import GenericListView
 from browsing.forms import GenericFilterFormHelper
 
 
+@login_required
 def copy_view(request):
     """View looks for get-params with: name of application, of model and id\
     of instance of model which should be copied"""
