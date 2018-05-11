@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% load leaflet_tags %}
 {% load webpage_extras %}
+{% load archiv_extras %}
 {% block title %}Archaelogical Entity {{ object.id }}{% endblock %}
 {% block scriptHeader %}
     {% leaflet_js %}
@@ -45,6 +46,22 @@
                             </small>
                         {% endif %}
                     </h1>
+                    {% if user.is_authenticated %}
+                        {% class_dict as classes %}
+                        <form action="{% url 'archiv:copy_poly' %}">
+                            <div class="form-group">
+                                <strong>Copy polygon to:</strong>
+                                <select class="custom-select" name="target-class" id="target-class">
+                                    {% for key, value in classes.items %}
+                                        <option value="{{ key }}">{{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                                <input id="current-id" name="current-id" type="hidden" value="{{ object.id }}">
+                                <input id="current-class" name="current-class" type="hidden" value="ArchEnt">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Copy</button>
+                        </form>
+                    {% endif %}
                 </div>
             <div class="col-md-2">
                 <h2>

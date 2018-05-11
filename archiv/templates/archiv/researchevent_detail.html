@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% load webpage_extras %}
 {% load leaflet_tags %}
+{% load archiv_extras %}
 {% block title %}Research Activity {{ object.id }}{% endblock %}
 {% block scriptHeader %}
     {% leaflet_js %}
@@ -39,12 +40,28 @@
                             </small>
                             |
                             <small>
-                                <a href="{% url 'arche:resource_copy' %}?app-name=archiv&id={{ object.id }}&class-name=researchevent">
+                                <a href="{% url 'arche:resource_copy' %}?app-name=archiv&id={{ object.id }}&class-name=researchevent" class="confirmation">
                                     <i class="far fa-copy" aria-hidden="true" title="copy object"></i>
                                 </a>
                             </small>
                         {% endif %}
                     </h1>
+                    {% if user.is_authenticated %}
+                        {% class_dict as classes %}
+                        <form action="{% url 'archiv:copy_poly' %}">
+                            <div class="form-group">
+                                <strong>Copy polygon to:</strong>
+                                <select class="custom-select" name="target-class" id="target-class">
+                                    {% for key, value in classes.items %}
+                                        <option value="{{ key }}">{{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                                <input id="current-id" name="current-id" type="hidden" value="{{ object.id }}">
+                                <input id="current-class" name="current-class" type="hidden" value="ResearchEvent">
+                            </div>
+                            <button type="submit" class="btn btn-primary confirmation">Copy</button>
+                        </form>
+                    {% endif %}
                 </div>
             <div class="col-md-2">
                 <h2>
@@ -256,5 +273,10 @@
             L.geoJson(siteGeojsonFeature).setStyle({fillColor: 'green'}).addTo(map);
         {% endif %}
     }
+</script>
+<script type="text/javascript">
+    $('.confirmation').on('click', function () {
+        return confirm('Are you sure?');
+    });
 </script>
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+from . import copy_views
 
 app_name = 'archiv'
 
@@ -60,4 +61,5 @@ urlpatterns = [
         name='researchquestion_edit'),
     url(r'^researchquestion/delete/(?P<pk>[0-9]+)$', views.ResearchQuestionDelete.as_view(),
         name='researchquestion_delete'),
+    url(r'^copy-poly/$', copy_views.copy_site_poly_view, name='copy_poly'),
 ]
