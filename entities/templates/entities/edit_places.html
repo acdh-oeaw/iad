@@ -1,5 +1,7 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
+{% load webpage_extras %}
+{% load leaflet_tags %}
 {% block Title %}Edit Places{% endblock %}
 
 {% block scriptHeader %}
@@ -7,10 +9,10 @@
     include 'autocomplete_light/static.html
 -->
 <!--leafletjs -->
-    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}" />
-    <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
+    {% leaflet_js %}
+    {% leaflet_css %}
         <style>
-            #map { height: 500px; }
+            #map { height: 800px; }
         </style>
 {% endblock %}
 
@@ -23,14 +25,14 @@
 {% endif %}
         <div class="card">
             <div class="card-header">
-                  <h3>{%if object %} Edit {% else %} Create {% endif %}</h3>
+                  <h1>{%if object %} Edit {{ object.name }} {% else %} Create {% endif %}</h1>
             </div>
             <div class="card-body">
                 <form action="" method="post">
                     {% csrf_token %}
                     {% crispy form %}
                     {% if object %}
-                    <a class="btn btn-default btn-block" target="_blank" rel="noopener">Check<span id="currentID"></span></a>
+                    <a class="btn btn-outline-secondary btn-block" target="_blank" rel="noopener">Check<span id="currentID"></span></a>
                     {% endif %}
                     <input class="btn btn-primary btn-block" type="submit" value="Save" />
                     {% if object %}

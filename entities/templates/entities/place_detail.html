@@ -1,22 +1,24 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
-{% block Title %}Edit Places{% endblock %}
-
+{% load webpage_extras %}
+{% load leaflet_tags %}
+{% block Title %}Place{% endblock %}
 {% block scriptHeader %}
 <!-- In case you are using any autocomplete-functions, don´t forget to
 include 'autocomplete_light/static.html
 -->
-<!--leafletjs -->
-<link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}" />
-<script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
-<style>
-#map { height: 500px; }
-</style>
+    {% leaflet_js %}
+    {% leaflet_css %}
 {% endblock %}
 
 {% block content %}
+<style>
+    #map { height: 800px; }
+</style>
 
-<div class="container">
+<div class="row">
+<!-- <div class="container"> -->
+<div class="col-md-6">
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -31,10 +33,17 @@ include 'autocomplete_light/static.html
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                        <small>place:</small> {{ object.name }}
+                    <small>Place:</small> {{ object.name }}
                         {% if user.is_authenticated %}
+                    <small>
                         <a href="{% url 'entities:place_edit' pk=object.id %}">
                             <i class="far fa-edit" title="edit"></i>
+                        </a>
+                    </small>
+                    |
+                    <small>
+                        <a href="{% url 'entities:place_delete' pk=object.id %}">
+                        <i class="far fa-trash-alt" title="delete"></i>
                         </a>
                     </small>
                     {% endif %}
@@ -52,12 +61,9 @@ include 'autocomplete_light/static.html
         </div>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <legend>About</legend>
                 <table class="table table-bordered table-hover">
                     <tr>
-                        <th>
+                        <th class="w-25">
                             Name
                         </th>
                         <td>
@@ -137,19 +143,19 @@ include 'autocomplete_light/static.html
                         </td>
                     </tr>
                 {% endif %}
-            </tbody>
         </table>
-        {% if user.is_authenticated %}
-            <a class="btn btn-danger" href="{% url 'entities:place_delete' pk=object.id %}">delete</a>
-        {% endif %}
-    </div>
-    <div class="col-md-6">
-        <div id="map"/>
-    </div>
 </div>
 </div>
+</div><!--col-6-md-div-->
+<div class="col-md-6">
+{% if object.lat and object.lng %}
+<div id="map"></div>
+{% else %}
+<p>No coordinates provided</p>
+{% endif %}
 </div>
-</div>
+<!-- </div> -->
+</div><!--main row -->
 
 <script type="text/javascript">
 $( document ).ready(function() {

@@ -1,22 +1,24 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
-{% block Title %}Edit Places{% endblock %}
+{% load webpage_extras %}
+{% load leaflet_tags %}
+{% block Title %}Institution{% endblock %}
 
 {% block scriptHeader %}
 <!-- In case you are using any autocomplete-functions, don´t forget to
 include 'autocomplete_light/static.html
 -->
 <!--leafletjs -->
-<link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}" />
-<script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
-<style>
-#map { height: 500px; }
-</style>
+    {% leaflet_js %}
+    {% leaflet_css %}
 {% endblock %}
-
 {% block content %}
-
-<div class="container">
+<style>
+#map { height: 800px; }
+</style>
+<!-- <div class="container"> -->
+<div class="row">
+<div class="col-md-6">
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -31,12 +33,19 @@ include 'autocomplete_light/static.html
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                        <small>institution:</small> {{ object }}
+                        <small>Institution:</small> {{ object }}
                         {% if user.is_authenticated %}
-                        <small><a href="{% url 'entities:institution_edit' pk=object.id %}">
+                        <small>
+                        <a href="{% url 'entities:institution_edit' pk=object.id %}">
                             <i class="far fa-edit" title="edit"></i>
                         </a>
-                    </small>
+                        </small>
+                        |
+                        <small>
+                            <a href="{% url 'entities:institution_delete' pk=object.id %}">
+                            <i class="far fa-trash-alt" title="delete"></i>
+                            </a>
+                        </small>
                     {% endif %}
                 </h1>
             </div>
@@ -52,13 +61,11 @@ include 'autocomplete_light/static.html
         </div>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <legend>About</legend>
+
                 <table class="table table-bordered table-hover">
                     <tr>
-                        <th>
-                            Name
+                        <th class="w-25">
+                            {% get_verbose_name institution "written_name" %}
                         </th>
                         <td>
                             {{ object.written_name }}
@@ -66,7 +73,7 @@ include 'autocomplete_light/static.html
                     </tr>
                     <tr>
                         <th>
-                            authority_url
+                            {% get_verbose_name institution "authority_url" %}
                         </th>
                         <td>
                             <a href="{{ object.authority_url }}">{{ object.authority_url }}</a>
@@ -74,16 +81,18 @@ include 'autocomplete_light/static.html
                     </tr>
                     <tr>
                         <th>
-                            alt_names
+                            {% get_verbose_name institution "alt_names" %}
                         </th>
                         <td>
-                            {{ object.alt_names }}
+                        {% for x in object.alt_names.all %}
+                            <li>{{ x }}</li>
+                        {% endfor %}
                         </td>
                     </tr>
                     {% if object.parent_institution %}
                         <tr>
                             <th>
-                                parent_institution
+                                {% get_verbose_name institution "parent_institution" %}
                             </th>
                             <td>
                                 <a href="{{ object.parent_institution.get_absolute_url }}">{{ object.parent_institution }}</a>
@@ -93,7 +102,7 @@ include 'autocomplete_light/static.html
                     {% if object.children_institutions.all %}
                         <tr>
                             <th>
-                                children_institutions
+                                Children institutions
                             </th>
                             <td>
                                 <ul>
@@ -110,14 +119,25 @@ include 'autocomplete_light/static.html
                     {% if object.location %}
                         <tr>
                             <th>
-                                location
+                                {% get_verbose_name institution "location" %}
                             </th>
                             <td>
                                 <a href="{{ object.location.get_absolute_url }}">{{ object.location }}</a>
                             </td>
                         </tr>
                     {% endif %}
+                    {% if object.comment %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name institution "comment" %}
+                            </th>
+                            <td>
+                                {{ object.comment }}
+                            </td>
+                        </tr>
+                    {% endif %}
                 </table>
+                {% if object.has_member.all %}
                 <legend>Related Persons</legend>
                 <ul>
                     {% for x in object.has_member.all %}
@@ -126,18 +146,15 @@ include 'autocomplete_light/static.html
                     </li>
                     {% endfor %}
                 </ul>
-
-                {% if user.is_authenticated %}
-                    <a class="btn btn-danger" href="{% url 'entities:institution_delete' pk=object.id %}">delete</a>
                 {% endif %}
-            </div>
-            <div class="col-md-6">
-                <div id="map"/>
-            </div>
         </div>
     </div>
 </div>
-</div>
+            <div class="col-md-6">
+                <div id="map"></div>
+            </div>
+</div><!--main row-->
+<!-- </div> -->
 
 <script type="text/javascript">
 $( document ).ready(function() {

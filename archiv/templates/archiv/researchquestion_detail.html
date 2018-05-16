@@ -49,17 +49,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
-                <legend>Lorem Ipsum</legend>
-                <table class="table table-bordered table-hover">
-                    <tr>
-                        <td>
-                            {% get_verbose_name researchquestion "question" %}
-                        </td>
-                        <td>
-                            {{ object.question }}
-                        </td>
-                    </tr>
-                </table>
+                <p>{{ object.question }}</p>
             </div>
             <div class="col-md-6">
                 <legend>

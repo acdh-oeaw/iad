@@ -133,24 +133,44 @@ class Place(IdProvider):
 
 
 class Institution(IdProvider):
-    legacy_id = models.CharField(max_length=300, blank=True)
-    written_name = models.CharField(max_length=300, blank=True)
-    authority_url = models.CharField(max_length=300, blank=True)
+    legacy_id = models.CharField(
+        max_length=300, blank=True,
+        verbose_name="Legacy ID"
+        )
+    written_name = models.CharField(
+        max_length=300, blank=True,
+        verbose_name="Written name"
+        )
+    authority_url = models.CharField(
+        max_length=300, blank=True,
+        verbose_name="Authority url"
+        )
     alt_names = models.ManyToManyField(
         AlternativeName,
         max_length=250, blank=True,
         help_text="Alternative names",
-        related_name="altname_of_inst"
+        related_name="altname_of_inst",
+        verbose_name="Alternative names"
     )
-    abbreviation = models.CharField(max_length=300, blank=True)
+    abbreviation = models.CharField(
+        max_length=300, blank=True,
+        verbose_name="Abbreviation"
+        )
     location = models.ForeignKey(
-        Place, blank=True, null=True, on_delete=models.CASCADE
-    )
+        Place, blank=True, null=True,
+        on_delete=models.CASCADE,
+        verbose_name="Location"
+        )
     parent_institution = models.ForeignKey(
-        'Institution', blank=True, null=True, related_name='children_institutions',
-        on_delete=models.CASCADE
-    )
-    comment = models.TextField(blank=True)
+        'Institution', blank=True,
+        null=True, related_name='children_institutions',
+        on_delete=models.CASCADE,
+        verbose_name="Parent institution"
+        )
+    comment = models.TextField(
+        blank=True,
+        verbose_name="Comment"
+        )
 
     @classmethod
     def get_arche_dump(self):
@@ -184,32 +204,58 @@ class Institution(IdProvider):
 
 
 class Person(IdProvider):
-    legacy_id = models.CharField(max_length=300, blank=True)
-    written_name = models.CharField(max_length=300, blank=True)
-    forename = models.CharField(max_length=300, blank=True)
-    name = models.CharField(max_length=300, blank=True)
-    acad_title = models.CharField(max_length=300, blank=True)
+    legacy_id = models.CharField(
+        max_length=300, blank=True,
+        verbose_name="Legacy ID"
+        )
+    written_name = models.CharField(
+        max_length=300, blank=True,
+        verbose_name="Written name"
+        )
+    forename = models.CharField(
+        max_length=300, blank=True,
+        verbose_name="Forename"
+        )
+    name = models.CharField(
+        max_length=300, blank=True,
+        verbose_name="Name"
+        )
+    acad_title = models.CharField(
+        max_length=300, blank=True,
+        verbose_name="Academic title"
+        )
     alt_names = models.ManyToManyField(
         AlternativeName,
         max_length=250, blank=True,
-        help_text="Alternative names",
-        related_name="altname_of_persons"
+        related_name="altname_of_persons",
+        verbose_name="Alternative names"
     )
     belongs_to_institution = models.ForeignKey(
-        Institution, blank=True, null=True, related_name="has_member",
-        on_delete=models.CASCADE
+        Institution, blank=True, null=True,
+        related_name="has_member",
+        on_delete=models.CASCADE,
+        verbose_name="Belongs to institution"
     )
     place_of_birth = models.ForeignKey(
-        Place, blank=True, null=True, related_name="is_birthplace",
-        on_delete=models.CASCADE
+        Place, blank=True, null=True,
+        related_name="is_birthplace",
+        on_delete=models.CASCADE,
+        verbose_name="Place of Birth"
     )
     date_of_birth = models.DateField(
-        auto_now=False, auto_now_add=False, blank=True, null=True,
+        auto_now=False, auto_now_add=False,
+        blank=True, null=True,
         verbose_name="Date of Birth",
         help_text="YYYY-MM-DD"
     )
-    authority_url = models.CharField(max_length=300, blank=True)
-    comment = models.TextField(blank=True)
+    authority_url = models.CharField(
+        max_length=300, blank=True,
+        verbose_name="Authority url"
+        )
+    comment = models.TextField(
+        blank=True,
+        verbose_name="Comment"
+        )
 
     @classmethod
     def get_createview_url(self):
