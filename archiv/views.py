@@ -1,11 +1,12 @@
 from django.shortcuts import render
-
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
+from reversion.models import Version
 
 from .forms import *
 from .models import *
@@ -100,6 +101,7 @@ class SiteDetailView(DetailView):
         except IndexError:
             information_source = None
         context['information_source'] = information_source
+        context['history'] = Version.objects.get_for_object(self.object)
         return context
 
 
