@@ -1,4 +1,5 @@
 from django.urls import reverse
+from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.core.serializers import serialize
 
@@ -367,6 +368,18 @@ class Site(IadBaseClass):
         help_text="If the site is going to be used in the IAD app, please provide the \
         description of the site to be implemented into the app."
     )
+    tourism_comment = models.TextField(
+        blank=True, null=True,
+        help_text="Any noteworthy information about the touristic potential of the site that \
+        has not been expressed in other fields.",
+        verbose_name="Comment"
+    )
+    site_checked_by = models.ForeignKey(
+        User, blank=True, null=True, related_name="site_checked_by_user",
+        verbose_name="Checked by",
+        help_text="Who and when checked the entered data (The 'when' is stored automatically).",
+        on_delete=models.SET_NULL
+    )
 
     class Meta:
         ordering = ['id']
@@ -632,20 +645,22 @@ class ArchEnt(IadBaseClass):
         on_delete=models.SET_NULL
     )
     settlement_fortification = models.ManyToManyField(
-        SkosConcept, blank=True, verbose_name="Settlement Fortification",
-        help_text="Provide some helptext.", related_name="settlement_fortification_related"
+        SkosConcept, blank=True,
+        verbose_name="Settlement Fortification",
+        help_text="If 'settlement' is the entity type, specify the type of fortification.",
+        related_name="settlement_fortification_related"
     )
     settlement_occupation = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        verbose_name="Settlement Occupation", help_text="Provide some helptext",
+        verbose_name="Settlement Occupation",
+        help_text="If 'settlement' is the entity type, specify the type of occupation.",
         related_name="settlement_occupation_related",
         on_delete=models.SET_NULL
     )
-    topography = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
+    topography = models.ManyToManyField(
+        SkosConcept, blank=True,
         help_text="Where is the entity located",
-        related_name="archent_topography",
-        on_delete=models.SET_NULL
+        related_name="archent_topography"
     )
     type_certainty = models.CharField(
         blank=True, null=True, verbose_name="Entity Type Certainty",
