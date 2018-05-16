@@ -34,7 +34,7 @@
                     {% if object %}
                     <a class="btn btn-outline-secondary btn-block" target="_blank" rel="noopener">Check<span id="currentID"></span></a>
                     {% endif %}
-                    <input class="btn btn-primary btn-block" type="submit" value="Save" />
+                    <input class="btn btn-primary" type="submit" value="Save" />
                     {% if object %}
                     <a class ="btn btn-danger btn-sm" href="{% url 'entities:place_delete' pk=object.id %}">delete</a>
                     {% endif %}
