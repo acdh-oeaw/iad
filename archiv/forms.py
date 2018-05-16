@@ -107,7 +107,7 @@ class ArchEntForm(forms.ModelForm):
                 url='/vocabs-ac/specific-concept-ac/settlement-fortification'),
             'settlement_occupation': autocomplete.ModelSelect2(
                 url='/vocabs-ac/specific-concept-ac/settlement-occupation'),
-            'topography': autocomplete.ModelSelect2(
+            'topography': autocomplete.ModelSelect2Multiple(
                 url='/vocabs-ac/specific-concept-ac/topography'),
             'period': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:period-autocomplete'),
@@ -288,7 +288,8 @@ class SiteForm(forms.ModelForm):
             'ownership', 'other_period', 'description', 'comment', 'literature',
             # tourism field
             'accessibility', 'visibility', 'infrastructure', 'long_term_management',
-            'potential_surrounding', 'museum', 'iad_app', 'app_description'
+            'potential_surrounding', 'museum', 'iad_app', 'app_description',
+            'tourism_comment', 'site_checked_by',
         ]
         widgets = {
             'alt_name': autocomplete.ModelSelect2Multiple(
@@ -356,10 +357,19 @@ class SiteForm(forms.ModelForm):
                     'museum',
                     'iad_app',
                     'app_description',
+                    'tourism_comment',
                     css_class="col-md-9"
                 ),
                 css_class="separate-panel",
-            )
+            ),
+            Fieldset(
+                'Quality Control',
+                Div(
+                    'site_checked_by',
+                    css_class="col-md-9"
+                ),
+                css_class="separate-panel",
+            ),
         )
 
     def save(self, commit=True):

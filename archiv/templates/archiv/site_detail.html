@@ -318,8 +318,34 @@
                             </td>
                         </tr>
                     {% endif %}
+                    {% if object.tourism_comment %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "tourism_comment" %}
+                            </th>
+                            <td>
+                                {{ object.tourism_comment }}
+                            </td>
+                        </tr>
+                    {% endif %}
                 </table>
-
+                {% if user.is_authenticated %}
+                    <legend>Quality Control</legend>
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "site_checked_by" %}
+                            </th>
+                            <td>
+                                {% if object.site_checked_by %}
+                                    {{ object.site_checked_by }}
+                                {% else %}
+                                    not checked yet
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                {% endif %}
             </div>
             <div class="col-md-6">
                 {% if object.has_research_activity.all %}
@@ -352,16 +378,6 @@
                         <h3>Information Source</h3>
                         <ul>
                             {% for x in object.information_source.all %}
-                                <li>
-                                    <a href="{{ x.get_absolute_url }}">{{ x }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                    {% if object.has_tourism.all %}
-                        <h3>Tourism</h3>
-                        <ul>
-                            {% for x in object.has_tourism.all %}
                                 <li>
                                     <a href="{{ x.get_absolute_url }}">{{ x }}</a>
                                 </li>
