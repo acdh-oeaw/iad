@@ -28,4 +28,5 @@ urlpatterns = [
         r'references/$', views.ReferenceListView.as_view(),
         name='browse_references'
     ),
+    url(r'map/$', views.MapView.as_view(), name='map'),
 ]

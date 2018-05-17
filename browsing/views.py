@@ -13,6 +13,8 @@ from archiv.models import *
 from bib.models import *
 from entities.models import Place, Institution
 from entities.serializer_arche import *
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class GenericListView(SingleTableView):
@@ -209,6 +211,23 @@ class SiteListView(GenericListView):
         exclude_vals = [x for x in all_cols if x not in selected_cols]
         table.exclude = exclude_vals
         return table
+
+
+class MapView(SiteListView):
+    model = Site
+    template_name = 'browsing/map.html'
+    filter_class = SiteListFilter
+    formhelper_class = SiteFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(SiteListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+        context['sites'] = Site.objects.all()
+        return context
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MapView, self).dispatch(*args, **kwargs)
 
 
 class ResearchEventListView(GenericListView):

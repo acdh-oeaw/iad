@@ -70,7 +70,7 @@ footer {
     white-space: normal;
     margin-bottom: 10px;
 }
-.separate-panel legend {
+.separate-panel legend, .legend-blue {
     /*change color of border when the pallete is chosen*/
     border: 2px solid #caebf2;
     background-color: #caebf2;
