@@ -220,9 +220,9 @@ class MapView(SiteListView):
     formhelper_class = SiteFilterFormHelper
 
     def get_context_data(self, **kwargs):
-        context = super(SiteListView, self).get_context_data()
+        context = super(MapView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        context['sites'] = Site.objects.all()
+        context['sites'] = self.get_queryset()
         return context
 
     @method_decorator(login_required)

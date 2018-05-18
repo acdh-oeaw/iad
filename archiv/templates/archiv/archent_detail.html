@@ -102,6 +102,64 @@
                             {{ object.name }}
                         </td>
                     </tr>
+                    {% if object.ent_type %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name archent "ent_type" %}
+                            </th>
+                            <td>
+                                {{ object.ent_type }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.burial_type %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name archent "burial_type" %}
+                            </th>
+                            <td>
+                                {{ object.burial_type }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.settlement_fortification.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name archent "settlement_fortification" %}
+                            </th>
+                            <td>
+                                {% for x in object.settlement_fortification.all %}
+                                    <li>
+                                        {{x }}
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.settlement_occupation %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name archent "settlement_occupation" %}
+                            </th>
+                            <td>
+                                {{ object.settlement_occupation }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if object.topography.all %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name archent "topography" %}
+                            </th>
+                            <td>
+                                {% for x in object.topography.all %}
+                                    <li>
+                                        {{x }}
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
                     {% if object.alt_name.all %}
                         <tr>
                             <th>
