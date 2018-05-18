@@ -18,7 +18,8 @@
     }
     .info {
     background-color: #ffffff;
-    padding: 20px;
+    padding: 10px;
+    width: 110px;
 }
 	.h-hr {
     height: 4px;
@@ -27,7 +28,7 @@
 }
 @media (max-width: 768px) {
     .info {
-        width: 100%;
+        /*width: 100%;*/
         padding: 10px;
     }
     .info > h3 {
@@ -38,8 +39,13 @@
         margin-bottom: 10px;
         margin-top: 10px;
     }
+}
 
-
+.legend-map i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
 }
 </style>
 <div>
@@ -47,28 +53,54 @@
 </div>
 
 <script type="text/javascript">
+var SiteStyle = {
+            "color": "#ff7800",
+            "weight": 2,
+            "opacity": 1,
+            "fillOpacity": 0,
+        };
+var ArchEntStyle = {
+            "color": "#3589ff",
+            "weight": 2,
+            "opacity": 1,
+            "fillOpacity": 0,
+        };
 // var map = L.map("yourmap", {
 // 	// основные настройки
 
 //     zoomControl: false,
 	
 // });
+function onEachFeature(feature, layer) {
+    if (feature.properties && feature.properties.name) {
+      layer.bindPopup(feature.properties.name);
+    }
+  }
 
     function map_init_basic (map, options) {
 //for x
 {% for object in sites %}
+        var sitePopup = '<p><a href="{%url 'archiv:site_detail' pk=object.id %}">{{ object.name }}</a></p>'
         var geojsonFeature = {{ object.get_geojson|safe }};
-        L.geoJson(geojsonFeature).addTo(map);
+        L.geoJson(geojsonFeature, {style: SiteStyle})
+        .bindPopup(sitePopup)
+        .addTo(map);
         {% if object.has_archent.all %}
         {% for x in object.has_archent.all %}
+        var archentPopup = '<p><a href="{%url 'archiv:archent_detail' pk=x.id %}">{{ x.name }}</a></p>'
         var geojsonFeatureArchEnt = {{ x.get_geojson|safe }};
-        L.geoJson(geojsonFeatureArchEnt).addTo(map);
+        L.geoJson(geojsonFeatureArchEnt, {style: ArchEntStyle})
+        .bindPopup(archentPopup)
+        // .bindPopup(function (layer) {
+        // return layer.feature.properties.name;
+        // })
+        .addTo(map);
       	{% endfor %}
       	{% endif %}
 // end for
 {% endfor %}
 //add info panel on the map
-        var info = L.control({position: 'bottomleft'});
+        var info = L.control({position: 'topleft'});
         info.onAdd = function (map) {
             this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
             this.update();
@@ -76,13 +108,16 @@
         };
         // method that we will use to update the control based on feature properties passed
         info.update = function (props) {
-            this._div.innerHTML = '<h3>Search I-A-D Map</h3><hr class="h-hr">';
+            this._div.innerHTML = '<div class="legend-map"><i style="background: #ff7800;"></i><p>Site</p><i style="background: #3589ff;"></i><p>Arch.Entity</p></div>';
         };
         info.addTo(map);
         // change position of zoom controls
   //       L.control.zoom({
   //    	position:'topright'
 		// }).addTo(map);
+
+
+
 
 
     }
