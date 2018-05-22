@@ -82,6 +82,7 @@ class ArchEntForm(forms.ModelForm):
             'alt_name',
             'ent_type',
             'burial_type',
+            'burial_construction',
             'settlement_fortification',
             'settlement_occupation',
             'topography',
@@ -103,6 +104,8 @@ class ArchEntForm(forms.ModelForm):
                 url='/vocabs-ac/specific-concept-ac/archaeological-entity-type'),
             'burial_type': autocomplete.ModelSelect2(
                 url='/vocabs-ac/specific-concept-ac/burial-type'),
+            'burial_construction': autocomplete.ModelSelect2Multiple(
+                url='/vocabs-ac/specific-concept-ac/burial-construction'),
             'settlement_fortification': autocomplete.ModelSelect2Multiple(
                 url='/vocabs-ac/specific-concept-ac/settlement-fortification'),
             'settlement_occupation': autocomplete.ModelSelect2(
@@ -137,6 +140,7 @@ class ArchEntForm(forms.ModelForm):
                 'ent_type',
                 Div(
                     'burial_type',
+                    'burial_construction',
                     css_class="hidden_burial",
                 ),
                 Div(

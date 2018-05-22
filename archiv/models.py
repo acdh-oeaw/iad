@@ -644,6 +644,11 @@ class ArchEnt(IadBaseClass):
         related_name="burial_type_related",
         on_delete=models.SET_NULL
     )
+    burial_construction = models.ManyToManyField(
+        SkosConcept, blank=True,
+        verbose_name="Burial Construction", help_text="Provide some helptext",
+        related_name="burial_construction_related",
+    )
     settlement_fortification = models.ManyToManyField(
         SkosConcept, blank=True,
         verbose_name="Settlement Fortification",
