@@ -122,14 +122,13 @@
                             </td>
                         </tr>
                     {% endif %}
-                    {% endif %}
                     {% if object.burial_construction.all %}
                         <tr>
                             <th>
                                 {% get_verbose_name archent "burial_construction" %}
                             </th>
                             <td>
-                                {% for x in burial_construction.all %}
+                                {% for x in object.burial_construction.all %}
                                     <li>
                                         {{ x }}
                                     </li>
