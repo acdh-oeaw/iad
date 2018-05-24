@@ -146,8 +146,8 @@ class SiteListFilter(django_filters.FilterSet):
         help_text=Site._meta.get_field('plot_number').help_text,
         label=Site._meta.get_field('plot_number').verbose_name
         )
-    ownership = django_filters.CharFilter(
-        lookup_expr='icontains',
+    ownership = django_filters.ChoiceFilter(
+        choices=SITE_OWNERSHIP,
         help_text=Site._meta.get_field('ownership').help_text,
         label=Site._meta.get_field('ownership').verbose_name
         )
@@ -164,28 +164,28 @@ class SiteListFilter(django_filters.FilterSet):
                 },
         )
         )
-    accessibility = django_filters.CharFilter(
-        lookup_expr='icontains',
+    accessibility = django_filters.ChoiceFilter(
+        choices=SITE_ACCESSIBILITY,
         help_text=Site._meta.get_field('accessibility').help_text,
         label=Site._meta.get_field('accessibility').verbose_name
         )
-    visibility = django_filters.CharFilter(
-        lookup_expr='icontains',
+    visibility = django_filters.ChoiceFilter(
+        choices=SITE_VISIBILITY,
         help_text=Site._meta.get_field('visibility').help_text,
         label=Site._meta.get_field('visibility').verbose_name
         )
-    infrastructure = django_filters.CharFilter(
-        lookup_expr='icontains',
+    infrastructure = django_filters.ChoiceFilter(
+        choices=SITE_INFRASTRUCTURE,
         help_text=Site._meta.get_field('infrastructure').help_text,
         label=Site._meta.get_field('infrastructure').verbose_name
         )
-    long_term_management = django_filters.CharFilter(
-        lookup_expr='icontains',
+    long_term_management = django_filters.ChoiceFilter(
+        choices=SITE_LONGTERMMANGEMENT,
         help_text=Site._meta.get_field('long_term_management').help_text,
         label=Site._meta.get_field('long_term_management').verbose_name
         )
-    potential_surrounding = django_filters.CharFilter(
-        lookup_expr='icontains',
+    potential_surrounding = django_filters.ChoiceFilter(
+        choices=SITE_POTENTIALSURROUNDINGS,
         help_text=Site._meta.get_field('potential_surrounding').help_text,
         label=Site._meta.get_field('potential_surrounding').verbose_name
         )
