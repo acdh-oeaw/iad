@@ -312,7 +312,7 @@ class Site(IadBaseClass):
         help_text="The plot number (applies to Slovenian sites)."
     )
     ownership = models.CharField(
-        blank=True, null=True, verbose_name="ownership",
+        blank=True, null=True, verbose_name="Ownership",
         help_text="Ownership of the land, where the site is located.",
         max_length=250,
         choices=SITE_OWNERSHIP
