@@ -124,6 +124,14 @@ class ArchEntListFilter(django_filters.FilterSet):
         label=ArchEnt._meta.get_field('burial_type').verbose_name,
         method=generous_concept_filter
         )
+    burial_construction = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(
+            scheme__dc_title__icontains="burial-construction"
+            ),
+        help_text=ArchEnt._meta.get_field('burial_construction').help_text,
+        label=ArchEnt._meta.get_field('burial_construction').verbose_name,
+        method=generous_concept_filter
+        )
     site_id = django_filters.ModelMultipleChoiceFilter(
         queryset=Site.objects.all(),
         help_text=ArchEnt._meta.get_field('site_id').help_text,
