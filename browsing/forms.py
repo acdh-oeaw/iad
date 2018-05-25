@@ -107,11 +107,21 @@ class ArchEntFilterFormHelper(FormHelper):
             Fieldset(
                 'Basic search options',
                 'name',
+                'ent_type',
+                'burial_type',
                 css_id="basic_search_fields"
                 ),
             Accordion(
                 AccordionGroup(
                     'Advanced search options',
+                    'site_id',
+                    'settlement_fortification',
+                    'settlement_occupation',
+                    'topography',
+                    'type_certainty',
+                    'dating_certainty',
+                    'location_certainty',
+                    'period',
                     'public',
                     css_id="more"
                     ),

@@ -101,6 +101,85 @@ class ArchEntListFilter(django_filters.FilterSet):
         help_text=ArchEnt._meta.get_field('name').help_text,
         label=ArchEnt._meta.get_field('name').verbose_name
         )
+    ent_type = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(
+            scheme__dc_title__icontains="archaeological-entity-type"
+            ),
+        help_text=ArchEnt._meta.get_field('ent_type').help_text,
+        label=ArchEnt._meta.get_field('ent_type').verbose_name,
+        method=generous_concept_filter,
+        widget=autocomplete.Select2Multiple(
+            url="/vocabs-ac/specific-concept-ac/archaeological-entity-type",
+            attrs={
+                'data-placeholder': 'Autocomplete ...',
+                'data-minimum-input-length': 3,
+                },
+        )
+        )
+    burial_type = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(
+            scheme__dc_title__icontains="burial-type"
+            ),
+        help_text=ArchEnt._meta.get_field('burial_type').help_text,
+        label=ArchEnt._meta.get_field('burial_type').verbose_name,
+        method=generous_concept_filter
+        )
+    site_id = django_filters.ModelMultipleChoiceFilter(
+        queryset=Site.objects.all(),
+        help_text=ArchEnt._meta.get_field('site_id').help_text,
+        label=ArchEnt._meta.get_field('site_id').verbose_name
+        )
+    settlement_fortification = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(
+            scheme__dc_title__icontains="settlement-fortification"
+            ),
+        help_text=ArchEnt._meta.get_field('settlement_fortification').help_text,
+        label=ArchEnt._meta.get_field('settlement_fortification').verbose_name,
+        method=generous_concept_filter
+        )
+    settlement_occupation = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(
+            scheme__dc_title__icontains="settlement-occupation"
+            ),
+        help_text=ArchEnt._meta.get_field('settlement_occupation').help_text,
+        label=ArchEnt._meta.get_field('settlement_occupation').verbose_name,
+        method=generous_concept_filter
+        )
+    topography = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(
+            scheme__dc_title__icontains="topography"
+            ),
+        help_text=ArchEnt._meta.get_field('topography').help_text,
+        label=ArchEnt._meta.get_field('topography').verbose_name,
+        method=generous_concept_filter
+        )
+    type_certainty = django_filters.ChoiceFilter(
+        help_text=ArchEnt._meta.get_field('type_certainty').help_text,
+        label=ArchEnt._meta.get_field('type_certainty').verbose_name,
+        choices=ARCHENT_CERTAINTY
+        )
+    dating_certainty = django_filters.ChoiceFilter(
+        help_text=ArchEnt._meta.get_field('dating_certainty').help_text,
+        label=ArchEnt._meta.get_field('dating_certainty').verbose_name,
+        choices=ARCHENT_CERTAINTY
+        )
+    location_certainty = django_filters.ChoiceFilter(
+        help_text=ArchEnt._meta.get_field('location_certainty').help_text,
+        label=ArchEnt._meta.get_field('location_certainty').verbose_name,
+        choices=ARCHENT_CERTAINTY
+        )
+    period = django_filters.ModelMultipleChoiceFilter(
+        queryset=Period.objects.all(),
+        help_text=ArchEnt._meta.get_field('period').help_text,
+        label=ArchEnt._meta.get_field('period').verbose_name,
+        widget=autocomplete.Select2Multiple(
+            url="/archiv-ac/period-autocomplete",
+            attrs={
+                'data-placeholder': 'Autocomplete ...',
+                'data-minimum-input-length': 3,
+                },
+        )
+        )
 
     class Meta:
         model = ArchEnt
