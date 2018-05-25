@@ -664,6 +664,7 @@ class ArchEnt(IadBaseClass):
     )
     topography = models.ManyToManyField(
         SkosConcept, blank=True,
+        verbose_name="Topography",
         help_text="Where is the entity located",
         related_name="archent_topography"
     )
