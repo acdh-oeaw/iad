@@ -16,6 +16,7 @@ class PersonForm(forms.ModelForm):
             'place_of_birth': autocomplete.ModelSelect2(url='entities-ac:place-autocomplete'),
             'alt_names': autocomplete.ModelSelect2Multiple(
                 url='entities-ac:altname-autocomplete'),
+            'date_of_birth': forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD'}, format=('%Y-%m-%d')),
         }
 
     def __init__(self, *args, **kwargs):

@@ -163,6 +163,8 @@ class ArchEntForm(forms.ModelForm):
 
 
 class ResearchEventForm(forms.ModelForm):
+    #start_date = forms.DateField(input_formats=['%Y-%m-%d'])
+
     class Meta:
         model = ResearchEvent
         fields = [
@@ -187,8 +189,11 @@ class ResearchEventForm(forms.ModelForm):
                 url='/vocabs-ac/specific-concept-ac/research-type'),
             'research_method': autocomplete.ModelSelect2Multiple(
                 url='/vocabs-ac/specific-concept-ac/research-methods'),
+            'start_date': forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD'}, format=('%Y-%m-%d')),
+            'end_date': forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD'}, format=('%Y-%m-%d')),
             'research_question': autocomplete.ModelSelect2(
                 url='archiv-ac:researchquestion-autocomplete'),
+            'generation_data_set': forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD'}, format=('%Y-%m-%d'))
         }
 
     def __init__(self, *args, **kwargs):
