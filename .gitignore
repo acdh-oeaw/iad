@@ -42,3 +42,5 @@ dev_secret.py
 /play.ipynb
 /users.json
 /db.json
+/auth.json
+/shapes.json

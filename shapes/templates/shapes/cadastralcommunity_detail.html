@@ -1,0 +1,201 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% load leaflet_tags %}
+{% block title %}Site{% endblock %}
+{% block scriptHeader %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+{% endblock %}
+{% block content %}
+
+ <style>
+
+    .leaflet-container {  /* all maps */
+        width:  100%;
+        height: 800px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-2">
+                        {% if object.get_prev %}
+                            <h2>
+                                <a href="{% url 'shapes:cadastralcommunity_detail' pk=object.get_prev %}">
+                                <i class="fas fa-chevron-left" title="previous"></i>
+                                </a>
+                            </h2>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <h1 style="text-align: center;">
+                            {{ object }}
+                        </h1>
+                    </div>
+                <div class="col-md-2">
+                    <h2>
+                        {% if object.get_next %}
+                        <a href="{% url 'shapes:cadastralcommunity_detail' pk=object.get_next %}" style="float:right">
+                            <i class="fas fa-chevron-right" title="next"></i>
+                        </a>
+                    </h2>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-10">
+                    <legend>Basic Information</legend>
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>
+                                cadcom_num
+                            </th>
+                            <td>
+                                {{ object.cadcom_num}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                cadcom_nam
+                            </th>
+                            <td>
+                                {{ object.cadcom_nam}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                cadcom_alt
+                            </th>
+                            <td>
+                                {{ object.cadcom_alt}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                lau2_muni_field
+                            </th>
+                            <td>
+                                {{ object.lau2_muni_field}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                lau2_mun_1
+                            </th>
+                            <td>
+                                {{ object.lau2_mun_1}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                polbez_num
+                            </th>
+                            <td>
+                                {{ object.polbez_num}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                polbez_nam
+                            </th>
+                            <td>
+                                {{ object.polbez_nam}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                nuts3_code
+                            </th>
+                            <td>
+                                {{ object.nuts3_code}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                nuts3_name
+                            </th>
+                            <td>
+                                {{ object.nuts3_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                bundesland
+                            </th>
+                            <td>
+                                {{ object.bundesland}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                nuts2_name
+                            </th>
+                            <td>
+                                {{ object.nuts2_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                nuts2_code
+                            </th>
+                            <td>
+                                {{ object.nuts2_code}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                state_code
+                            </th>
+                            <td>
+                                {{ object.state_code}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                state_name
+                            </th>
+                            <td>
+                                {{ object.state_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                state_altn
+                            </th>
+                            <td>
+                                {{ object.state_altn}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <div class="col-md-6">
+    {% leaflet_map "yourmap" callback="window.map_init_basic" %}
+            <legend>GeoJSON</legend>
+            {{ object.get_geojson }}
+    </div>
+    </div>
+    <!-- </div> -->
+    <script type="text/javascript">
+        function map_init_basic (map, options) {
+            var geojsonFeature = {{ object.get_geojson|safe }};
+            L.geoJson(geojsonFeature).addTo(map);
+        }
+    </script>
+    <script type="text/javascript">
+        $('.confirmation').on('click', function () {
+            return confirm('Are you sure?');
+        });
+    </script>
+
+</div>
+{% endblock %}

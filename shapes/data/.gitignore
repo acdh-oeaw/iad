@@ -1,0 +1,12 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!__init__.py
+
+
+# ...even if they are in subdirectories
+!*/
+
+# python manage.py ogrinspect shapes\data\shp_EPSG4326\tangible_things.shp TangibleObject --srid=4326 --mapping --multi --settings=sh4d.settings.pg_local

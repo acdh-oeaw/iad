@@ -9,6 +9,7 @@ from idprovider.models import IdProvider
 from entities.models import Place, Person, Institution
 from vocabs.models import SkosConcept
 from bib.models import Reference
+from shapes.models import CadastralCommunity
 
 
 def modify_fields(**kwargs):
@@ -298,7 +299,7 @@ class Site(IadBaseClass):
     It is defined by a spatial polygon"""
 
     cadastral_community = models.ManyToManyField(
-        Place, blank=True, verbose_name="Cadastral Community",
+        CadastralCommunity, blank=True, verbose_name="Cadastral Community",
         help_text="The cadastral community where the site is located.",
         related_name="has_sites"
     )
