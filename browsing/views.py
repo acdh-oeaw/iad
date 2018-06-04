@@ -57,6 +57,10 @@ class GenericListView(SingleTableView):
             context['create_view_link'] = None
         return context
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(GenericListView, self).dispatch(*args, **kwargs)
+
 
 class ReferenceListView(GenericListView):
     model = Reference

@@ -16,6 +16,10 @@ class PersonDetailView(DetailView):
     model = Person
     template_name = 'entities/person_detail.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(PersonDetailView, self).dispatch(*args, **kwargs)
+
 
 class PersonCreate(CreateView):
 
@@ -75,6 +79,10 @@ class InstitutionDetailView(DetailView):
     model = Institution
     template_name = 'entities/institution_detail.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(InstitutionDetailView, self).dispatch(*args, **kwargs)
+
 
 class InstitutionDelete(DeleteView):
     model = Institution
@@ -91,6 +99,10 @@ class AlternativeNameListView(generic.ListView):
 
     def get_queryset(self):
         return AlternativeName.objects.all()
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AlternativeNameListView, self).dispatch(*args, **kwargs)
 
 
 class AlternativeNameCreate(CreateView):
@@ -119,6 +131,10 @@ class AlternativeNameDetailView(DetailView):
     model = AlternativeName
     template_name = 'entities/alternativenames_detail.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AlternativeNameDetailView, self).dispatch(*args, **kwargs)
+
 
 class AlternativeNameDelete(DeleteView):
     model = AlternativeName
@@ -134,6 +150,10 @@ class PlaceDetailView(DetailView):
     model = Place
     template_name = 'entities/place_detail.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(PlaceDetailView, self).dispatch(*args, **kwargs)
+
 
 class PlaceListView(generic.ListView):
     template_name = "entities/list_places.html"
@@ -141,6 +161,10 @@ class PlaceListView(generic.ListView):
 
     def get_queryset(self):
         return Place.objects.all()
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(PlaceListView, self).dispatch(*args, **kwargs)
 
 
 @login_required

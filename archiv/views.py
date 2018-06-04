@@ -101,6 +101,10 @@ class SiteDetailView(DetailView):
         context['history'] = Version.objects.get_for_object(self.object)
         return context
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SiteDetailView, self).dispatch(*args, **kwargs)
+
 
 class SiteCreate(BaseCreateView):
 
@@ -135,6 +139,10 @@ class SiteDelete(DeleteView):
 class ResearchEventDetailView(DetailView):
     model = ResearchEvent
     template_name = 'archiv/researchevent_detail.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResearchEventDetailView, self).dispatch(*args, **kwargs)
 
 
 class ResearchEventCreate(BaseCreateView):
@@ -171,6 +179,10 @@ class AltNameDetailView(DetailView):
     model = AltName
     template_name = 'archiv/altname_detail.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AltNameDetailView, self).dispatch(*args, **kwargs)
+
 
 class AltNameCreate(BaseCreateView):
 
@@ -205,6 +217,10 @@ class AltNameDelete(DeleteView):
 class PeriodDetailView(DetailView):
     model = Period
     template_name = 'archiv/period_detail.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(PeriodDetailView, self).dispatch(*args, **kwargs)
 
 
 class PeriodCreate(BaseCreateView):
@@ -241,6 +257,10 @@ class ResearchQuestionDetailView(DetailView):
     model = ResearchQuestion
     template_name = 'archiv/researchquestion_detail.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResearchQuestionDetailView, self).dispatch(*args, **kwargs)
+
 
 class ResearchQuestionCreate(BaseCreateView):
 
@@ -275,6 +295,10 @@ class ResearchQuestionDelete(DeleteView):
 class MonumentProtectionDetailView(DetailView):
     model = MonumentProtection
     template_name = 'archiv/monumentprotection_detail.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MonumentProtectionDetailView, self).dispatch(*args, **kwargs)
 
 
 class MonumentProtectionCreate(BaseCreateView):
