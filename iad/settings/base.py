@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'arche',
     'archiv',
     'shapes',
+    'charts',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
