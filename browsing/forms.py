@@ -123,7 +123,7 @@ class ArchEntFilterFormHelper(FormHelper):
                     'dating_certainty',
                     'location_certainty',
                     'period',
-                    'public',
+                    # 'public',
                     css_id="more"
                     ),
                 )
@@ -148,7 +148,7 @@ class SiteFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search options',
-                    'public',
+                    # 'public',
                     'cadastral_community',
                     # 'cadastral_number',
                     'heritage_number',
@@ -282,7 +282,7 @@ class PeriodFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search options',
-                    'public',
+                    # 'public',
                     'start_date',
                     'start_date_latest',
                     'end_date',

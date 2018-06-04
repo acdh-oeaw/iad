@@ -157,7 +157,7 @@
                                 {% get_verbose_name site "public" %}
                             </th>
                             <td>
-                                {{ object.public }}
+                                {{ object.get_public_display }}
                             </td>
                         </tr>
                     {% endif %}
@@ -304,7 +304,7 @@
                                 {% get_verbose_name site "iad_app" %}
                             </th>
                             <td>
-                                {{ object.iad_app }}
+                                {{ object.get_iad_app_display }}
                             </td>
                         </tr>
                     {% endif %}

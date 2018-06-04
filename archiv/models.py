@@ -26,6 +26,11 @@ VALUE_STATUS_CHOICES = (
     ('3 - low', '3 - low'),
 )
 
+BOOLEAN_CHOICES = (
+    (True, "Yes"),
+    (False, "No")
+)
+
 
 @reversion.register()
 class AltName(IdProvider):
@@ -98,6 +103,7 @@ class IadBaseClass(IdProvider):
     )
     public = models.BooleanField(
         default=False, verbose_name="Public",
+        choices=BOOLEAN_CHOICES,
         help_text="Should this entry (and all related entries) be public\
         or only visible to the account holders? Can be made public\
         only after data-check was completed."
@@ -361,7 +367,8 @@ class Site(IadBaseClass):
     )
     iad_app = models.BooleanField(
         verbose_name="App",
-        default=False, help_text="Should this site be used in the IAD-App?"
+        default=False, choices=BOOLEAN_CHOICES,
+        help_text="Should this site be used in the IAD-App?"
     )
     app_description = models.TextField(
         blank=True, null=True, verbose_name="App Description",

@@ -233,7 +233,7 @@
                                 {% get_verbose_name researchevent "public" %}
                             </th>
                             <td>
-                                {{ object.public }}
+                                {{ object.get_public_display }}
                             </td>
                         </tr>
                     {% endif %}

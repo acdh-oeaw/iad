@@ -16,6 +16,7 @@ class MonumentProtectionForm(forms.ModelForm):
             'heritage_status', 'threats', 'comment'
             ]
         widgets = {
+            'public': forms.CheckboxInput(),
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
@@ -93,6 +94,7 @@ class ArchEntForm(forms.ModelForm):
             'comment'
         ]
         widgets = {
+            'public': forms.CheckboxInput(),
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
@@ -174,6 +176,7 @@ class ResearchEventForm(forms.ModelForm):
             'research_question', 'comment', 'generation_data_set'
         ]
         widgets = {
+            'public': forms.CheckboxInput(),
             'site_id': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:site-autocomplete'),
             'alt_name': autocomplete.ModelSelect2Multiple(
@@ -301,6 +304,7 @@ class SiteForm(forms.ModelForm):
             'tourism_comment', 'site_checked_by',
         ]
         widgets = {
+            'public': forms.CheckboxInput(),
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(

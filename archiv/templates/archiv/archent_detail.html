@@ -94,6 +94,16 @@
                             </a>
                         </td>
                     </tr>
+                    {% if object.public %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name archent "public" %}
+                            </th>
+                            <td>
+                                {{ object.get_public_display }}
+                            </td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <th>
                             {% get_verbose_name archent "name" %}
@@ -215,16 +225,6 @@
                             </th>
                             <td>
                                 {{ object.comment }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if object.public %}
-                        <tr>
-                            <th>
-                                {% get_verbose_name archent "public" %}
-                            </th>
-                            <td>
-                                {{ object.public }}
                             </td>
                         </tr>
                     {% endif %}

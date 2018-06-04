@@ -41,7 +41,7 @@ class ResearchQuestionTable(tables.Table):
 
     class Meta:
         model = ResearchQuestion
-        sequence = ('id', 'qeustion')
+        sequence = ('id', 'question')
         attrs = {"class": "table table-responsive table-hover"}
 
 

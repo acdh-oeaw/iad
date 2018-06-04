@@ -156,7 +156,7 @@ class ArchEntListView(GenericListView):
     table_class = ArchEntTable
     filter_class = ArchEntListFilter
     formhelper_class = ArchEntFilterFormHelper
-    init_columns = ['name', 'site_id', 'public', 'comment']
+    init_columns = ['name', 'site_id', 'comment']
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -187,7 +187,7 @@ class SiteListView(GenericListView):
     table_class = SiteTable
     filter_class = SiteListFilter
     formhelper_class = SiteFilterFormHelper
-    init_columns = ['name', 'identifier', 'public', 'comment']
+    init_columns = ['id', 'name', 'comment']
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
