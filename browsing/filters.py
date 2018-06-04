@@ -6,6 +6,7 @@ from bib.models import *
 from entities.models import Place, AlternativeName, Institution, Person
 from vocabs.models import SkosConcept, SkosConceptScheme
 from vocabs.filters import generous_concept_filter
+from shapes.models import CadastralCommunity
 
 
 django_filters.filters.LOOKUP_TYPES = [
@@ -76,7 +77,6 @@ class MonumentProtectionListFilter(django_filters.FilterSet):
         label=MonumentProtection._meta.get_field('threats').verbose_name,
         method=generous_concept_filter
         )
-
 
     class Meta:
         model = MonumentProtection
@@ -207,11 +207,11 @@ class SiteListFilter(django_filters.FilterSet):
         label="Research activity"
         )
     cadastral_community = django_filters.ModelMultipleChoiceFilter(
-        queryset=Place.objects.all(),
+        queryset=CadastralCommunity.objects.all(),
         help_text=Site._meta.get_field('cadastral_community').help_text,
         label=Site._meta.get_field('cadastral_community').verbose_name,
         widget=autocomplete.Select2Multiple(
-            url='entities-ac:place-autocomplete-search',
+            url='shapes-ac:cadastralcommunity-autocomplete',
             attrs={
                 'data-placeholder': 'Autocomplete ...',
                 'data-minimum-input-length': 3,
