@@ -85,14 +85,12 @@ class ResearchEventTable(tables.Table):
         'archiv:researchevent_detail',
         args=[A('pk')], verbose_name='ID'
     )
-    name = tables.LinkColumn(
-        'archiv:researchevent_detail',
-        args=[A('pk')], verbose_name='Name'
-    )
+    start_date = tables.DateColumn(format='Y-m-d')
+    end_date = tables.DateColumn(format='Y-m-d')
 
     class Meta:
         model = ResearchEvent
-        sequence = ('id', 'name',)
+        sequence = ('id', 'start_date', 'end_date')
         attrs = {"class": "table table-responsive table-hover"}
 
 
