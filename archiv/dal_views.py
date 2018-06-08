@@ -19,6 +19,7 @@ class ResearchEventAC(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(
+                Q(id__icontains=self.q) |
                 Q(name__icontains=self.q) |
                 Q(research_type__pref_label__icontains=self.q) |
                 Q(research_method__pref_label__icontains=self.q) |
