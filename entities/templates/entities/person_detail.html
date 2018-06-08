@@ -115,6 +115,16 @@ include 'autocomplete_light/static.html
                         </td>
                     </tr>
                     {% endif %}
+                    {% if object.public %}
+                    <tr>
+                        <th>
+                            {% get_verbose_name person "public" %}
+                        </th>
+                        <td>
+                            {{ object.public }}
+                        </td>
+                    </tr>
+                    {% endif %}
                     {% if object.authority_url %}
                         <tr>
                             <th>

@@ -57,7 +57,6 @@ class CadastralCommunity(models.Model):
                 self.cadcom_nam, self.nuts3_name, self.state_name
             )
 
-
     def get_absolute_url(self):
         return reverse(
             'shapes:cadastralcommunity_detail', kwargs={'pk': self.id}

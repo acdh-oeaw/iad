@@ -3,6 +3,11 @@ from django.db import models
 from django.urls import reverse
 from idprovider.models import IdProvider
 
+BOOLEAN_CHOICES = (
+    (True, "Yes"),
+    (False, "No")
+)
+
 
 class AlternativeName(IdProvider):
     name = models.CharField(
@@ -256,6 +261,13 @@ class Person(IdProvider):
         blank=True,
         verbose_name="Comment"
         )
+    public = models.BooleanField(
+        default=False, verbose_name="Public",
+        choices=BOOLEAN_CHOICES,
+        help_text="Should this entry (and all related entries) be public\
+        or only visible to the account holders? Can be made public\
+        only after data-check was completed."
+    )
 
     @classmethod
     def get_createview_url(self):
