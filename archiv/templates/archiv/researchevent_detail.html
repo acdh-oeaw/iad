@@ -127,6 +127,16 @@
                         </td>
                     </tr>
                     {% endif %}
+                    {% if object.research_type %}
+                    <tr>
+                        <th>
+                            {% get_verbose_name researchevent "research_type" %}
+                        </th>
+                        <td>
+                            {{ object.research_type }}
+                        </td>
+                    </tr>
+                    {% endif %}
                     {% if object.responsible_researcher.all %}
                         <tr>
                             <th>
