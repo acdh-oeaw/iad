@@ -145,6 +145,20 @@ include 'autocomplete_light/static.html
                             </td>
                         </tr>
                     {% endif %}
+                    {% if object.has_research.all %}
+                        <tr>
+                            <th>
+                                related research activities
+                            </th>
+                            <td>
+                                {% for x in object.has_research.all %}
+                                    <li>
+                                        <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                                    </li>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
                 </table>
             </div>
     </div>

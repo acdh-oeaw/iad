@@ -490,6 +490,10 @@ class ResearchEvent(IadBaseClass):
         Site, help_text="The unique identifier of related sites.",
         verbose_name="Related Sites", blank=True, related_name="has_research_activity"
     )
+    legacy_research_id = models.CharField(
+        blank=True, null=True,
+        max_length=250,
+    )
 
     start_date = models.DateField(
         blank=True, null=True,
