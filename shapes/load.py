@@ -4,7 +4,7 @@ from . models import CadastralCommunity, cadastralcommunity_mapping
 
 cc_shps = os.path.abspath(
     os.path.join(
-        os.path.dirname(__file__), 'data', 'SI', 'SI.shp')
+        os.path.dirname(__file__), 'data', 'AT', 'AT.shp')
 )
 
 

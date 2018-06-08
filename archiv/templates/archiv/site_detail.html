@@ -219,6 +219,16 @@
                             </td>
                         </tr>
                     {% endif %}
+                    {% if object.ownership %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "ownership" %}
+                            </th>
+                            <td>
+                                {{ object.ownership }}
+                            </td>
+                        </tr>
+                    {% endif %}
                     {% if object.period.all %}
                         <tr>
                             <th>
@@ -352,7 +362,7 @@
                                 {% if history %}
                                     {% for x in history %}
                                         <li>
-                                            {{ x.revision.date_created }} changed by {{ x.revision.user }} 
+                                            {{ x.revision.date_created }} changed by {{ x.revision.user }}
                                         </li>
                                     {% endfor %}
                                 {% endif %}
