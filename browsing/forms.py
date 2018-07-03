@@ -60,7 +60,6 @@ class MonumentProtectionFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search options',
-                    'current_land_use',
                     'heritage_status',
                     'natural_heritage_status',
                     'threats',
