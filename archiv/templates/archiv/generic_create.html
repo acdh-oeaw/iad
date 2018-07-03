@@ -74,6 +74,12 @@
                         var detail = e.detail;
                         var siteGeojsonFeature = {{ site_poly|safe }};
                         L.geoJson(siteGeojsonFeature, {style: SiteStyle}).addTo(detail.map);
+                        var extra_layer = {
+                            wms_Slovenia: L.tileLayer.wms('https://prostor4.gov.si/ows2-m-pub/wms?', {
+                                layers: 'SI.GURS.ZPDZ:DOF050'
+                            }),
+                        };
+                        L.control.layers(extra_layer).addTo(detail.map);
                     }, false);
                 </script>
             {% else %}
@@ -81,7 +87,14 @@
                     window.addEventListener("map:init", function (e) {
                         var detail = e.detail;
                         var map = detail.map;
+                        var extra_layer = {
+                            wms_Slovenia: L.tileLayer.wms('https://prostor4.gov.si/ows2-m-pub/wms?', {
+                                layers: 'SI.GURS.ZPDZ:DOF050'
+                            }),
+                        };
+                        L.control.layers(extra_layer).addTo(detail.map);
                         var layerGroup = L.layerGroup().addTo(map);
+
                         $("#id_site_id").change(function() {
                             var url = "/api/sites/" + this.value + "/?format=json";
                             $.getJSON(url, function(data) {

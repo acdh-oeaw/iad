@@ -143,4 +143,21 @@ LEAFLET_CONFIG = {
     'DEFAULT_CENTER': (47, 16),
     'DEFAULT_ZOOM': 6,
     'MIN_ZOOM': 3,
+    'OVERLAYS': [
+        (
+            'World', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                'maxZoom': 25,
+                'attribution':
+                '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }
+        ),
+        (
+            'Ortho_World', 'https://api.mapbox.com/styles/v1/csae8092/cjj5eznid0gpu2sqau1eqiqr3/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY3NhZTgwOTIiLCJhIjoiY2lnM2FoZWpjMDJqZnY1a2gxdWl6a29kaiJ9.FQXlsKIu60WhiXLrfI59VA',
+            {
+                'maxZoom': 25,
+                'attribution': 'MapBox'
+            }
+        )
+    ]
 }
