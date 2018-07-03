@@ -28,12 +28,21 @@
    </style>
 
     <script type="text/javascript">
+    function includes(container, value) {
+        // https://www.sharmaprakash.com.np/javascript/ie-alternative-to-inludes/
+    	var returnValue = false;
+    	var pos = container.indexOf(value);
+    	if (pos >= 0) {
+    		returnValue = true;
+    	}
+    	return returnValue;
+    }
         $('#id_finds_type').ready(function(){
             var selected_option =  $("#id_ent_type option:selected").text()
             console.log(selected_option);
-            if (selected_option.includes('settlement')){
+            if (includes(selected_option, 'settlement')){
                 $( ".hidden_settlement" ).css("display", 'inline');
-            } else if (selected_option.includes('funerary')) {
+            } else if (includes(selected_option, 'funerary')) {
                 $( ".hidden_burial" ).css("display", 'inline');
             } else {
 
@@ -47,10 +56,10 @@
             burials.css("display", "none");
             settlements.css("display", "none");
             console.log(selectedText)
-            if (selectedText.includes('funerary site')) {
+            if (includes(selectedText, 'funerary site')) {
                 burials.toggle();
                 settlements.css("display", "none")
-            } else if (selectedText.includes('settlement')) {
+            } else if (includes(selectedText, 'settlement')) {
                 settlements.toggle();
                 burials.css("display", "none");
             } else {
