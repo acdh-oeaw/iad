@@ -450,6 +450,47 @@
 <script type="text/javascript">
     function map_init_basic (map, options) {
         var geojsonFeature = {{ object.get_geojson|safe }};
+        var basemaps = {
+
+            Ortho_World: L.tileLayer('https://api.mapbox.com/styles/v1/csae8092/cjj5eznid0gpu2sqau1eqiqr3/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY3NhZTgwOTIiLCJhIjoiY2lnM2FoZWpjMDJqZnY1a2gxdWl6a29kaiJ9.FQXlsKIu60WhiXLrfI59VA', {
+                maxZoom: 25,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }),
+
+            wms_Slovenia: L.tileLayer.wms('https://prostor4.gov.si/ows2-m-pub/wms?', {
+                layers: 'SI.GURS.ZPDZ:DOF050'
+            }),
+
+            geoportal_topo_tk_TK100: L.tileLayer.wms('https://geoportal.dgu.hr/services/tk/wms?', {
+                layers: 'tk:TK100'
+            }),
+            geoportal_topo_tk_TK200: L.tileLayer.wms('https://geoportal.dgu.hr/services/tk/wms?', {
+                layers: 'tk:TK200'
+            }),
+            geoportal_topo_tk_TK25_NOVI: L.tileLayer.wms('https://geoportal.dgu.hr/services/tk/wms?', {
+                layers: 'tk:TK25_NOVI'
+            }),
+
+            geoportal_base_HOK5: L.tileLayer.wms('https://geoportal.dgu.hr/services/hok/wms?', {
+                layers: 'HOK5'
+            }),
+
+
+            geoportal_oph_DOF5_NOVI: L.tileLayer.wms('https://geoportal.dgu.hr/services/dof/wms?', {
+                layers: 'DOF5_NOVI'
+            }),
+            geoportal_oph_DOF5_2011: L.tileLayer.wms('https://geoportal.dgu.hr/services/dof/wms?', {
+                layers: 'DOF5_2011'
+            }),
+
+            geoportal_oph2_OI_OrthoImagery: L.tileLayer.wms('https://geoportal.dgu.hr/services/inspire/orthophoto_2014-2016/wms?', {
+                layers: 'OI.OrthoImagery'
+            }),
+        };
+
+        L.control.layers(basemaps).addTo(map);
+
+        // basemaps.Countries.addTo(map);
         L.geoJson(geojsonFeature).addTo(map);
     }
 </script>
