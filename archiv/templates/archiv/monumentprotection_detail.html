@@ -132,6 +132,16 @@
                             </td>
                         </tr>
                     {% endif %}
+                    {% if object.natural.heritage_status %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name monumentprotection "natural.heritage_status" %}
+                            </th>
+                            <td>
+                                {{ object.natural.heritage_status }}
+                            </td>
+                        </tr>
+                    {% endif %}
                     {% if object.identifier %}
                         <tr>
                             <th>

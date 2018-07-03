@@ -788,8 +788,14 @@ class MonumentProtection(IadBaseClass):
         help_text="What activities are currently present at the site location?"
     )
     heritage_status = models.CharField(
-        blank=True, null=True, verbose_name="Heritage Status",
-        help_text="Has the site status of heritage?",
+        blank=True, null=True, verbose_name="Cultural Heritage Status",
+        help_text="Has the site status of cultural heritage?",
+        max_length=250,
+        choices=HERITAGE_STATUS_CHOICES
+    )
+    natural_heritage_status = models.CharField(
+        blank=True, null=True, verbose_name="Natural Heritage Status",
+        help_text="Has the site status of natural heritage?",
         max_length=250,
         choices=HERITAGE_STATUS_CHOICES
     )

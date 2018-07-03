@@ -13,7 +13,7 @@ class MonumentProtectionForm(forms.ModelForm):
         model = MonumentProtection
         fields = [
             'site_id', 'public', 'polygon', 'current_land_use',
-            'heritage_status', 'threats', 'comment'
+            'heritage_status', 'natural_heritage_status', 'threats', 'comment'
             ]
         widgets = {
             'public': forms.CheckboxInput(),
@@ -50,6 +50,7 @@ class MonumentProtectionForm(forms.ModelForm):
                 'site_id',
                 'current_land_use',
                 'heritage_status',
+                'natural_heritage_status',
                 'threats',
                 'comment',
                 css_class="col-md-9"

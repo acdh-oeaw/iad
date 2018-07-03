@@ -30,7 +30,7 @@ class ReferenceFormHelper(FormHelper):
                 'page',
                 css_id="basic_search_fields"
                 ),
-####### Uncomment if there are advanced options ####################            
+####### Uncomment if there are advanced options ####################
             # Accordion(
             #     AccordionGroup(
             #         'Advanced search options',
@@ -62,6 +62,7 @@ class MonumentProtectionFormHelper(FormHelper):
                     'Advanced search options',
                     'current_land_use',
                     'heritage_status',
+                    'natural_heritage_status',
                     'threats',
                     css_id="more"
                 )
@@ -83,7 +84,7 @@ class ResearchQuestionFormHelper(FormHelper):
                 'question',
                 css_id="basic_search_fields"
                 ),
-####### Uncomment if there are advanced options ####################            
+####### Uncomment if there are advanced options ####################
             # Accordion(
             #     AccordionGroup(
             #         'Advanced search options',
@@ -203,6 +204,7 @@ class SiteFilterFormHelper(FormHelper):
                     'Monument protection search options',
                     'has_monument_protection__current_land_use',
                     'has_monument_protection__heritage_status',
+                    'has_monument_protection__natural_heritage_status',
                     'has_monument_protection__threats',
                     css_id="monument_protection_options"
                     ),
@@ -336,7 +338,7 @@ class AlternativeNameFilterFormHelper(FormHelper):
                 'name',
                 css_id="basic_search_fields"
                 ),
-####### Uncomment and add your fields if there are advanced options ####################            
+####### Uncomment and add your fields if there are advanced options ####################
             # Accordion(
             #     AccordionGroup(
             #         'Advanced search options',
