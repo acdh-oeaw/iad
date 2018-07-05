@@ -86,10 +86,9 @@
                         var slov_layer =  L.tileLayer.wms('https://prostor4.gov.si/ows2-m-pub/wms?', {
                                 layers: 'SI.GURS.ZPDZ:DOF050'
                             })
+                        map.layerscontrol.addOverlay(slov_layer, 'Ortho_Sl');
+                        console.log(map.layerscontrol._layers);
 
-                        map.layerscontrol._layers.pop()
-
-                        // L.control.layers(extra_layer).addTo(detail.map);
                     }, false);
                 </script>
             {% else %}
