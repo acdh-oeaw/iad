@@ -8,6 +8,7 @@
 
     <script>
     $('#column_selector').on('loaded.bs.select', function (e) {
+        var url = new URL(window.location.href);
         var columns = url.searchParams.getAll("columns");
         $('#column_selector').selectpicker('val', columns);
     });
