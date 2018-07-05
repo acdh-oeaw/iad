@@ -33,7 +33,7 @@
     }
     .info > h3 {
        font-size: 1rem;
-       margin-bottom: 0px; 
+       margin-bottom: 0px;
     }
     .h-hr {
         margin-bottom: 10px;
@@ -84,7 +84,7 @@ var ArchEntStyle = {
 // 	// основные настройки
 
 //     zoomControl: false,
-	
+
 // });
 function onEachFeature(feature, layer) {
     if (feature.properties && feature.properties.name) {
@@ -101,16 +101,10 @@ function onEachFeature(feature, layer) {
         .bindPopup(sitePopup)
         .addTo(map);
         {% if object.has_archent.all %}
-        {% for x in object.has_archent.all %}
-        var archentPopup = '<p><a href="{%url 'archiv:archent_detail' pk=x.id %}">{{ x.name }}</a></p>'
-        var geojsonFeatureArchEnt = {{ x.get_geojson|safe }};
-        L.geoJson(geojsonFeatureArchEnt, {style: ArchEntStyle})
-        .bindPopup(archentPopup)
-        // .bindPopup(function (layer) {
-        // return layer.feature.properties.name;
-        // })
-        .addTo(map);
-      	{% endfor %}
+            {% for x in object.has_archent.all %}
+                var geojsonFeatureArchEnt = {{ x.get_geojson|safe }};
+                L.geoJson(geojsonFeatureArchEnt, {style: ArchEntStyle}).addTo(map);
+          	{% endfor %}
       	{% endif %}
 // end for
 {% endfor %}
