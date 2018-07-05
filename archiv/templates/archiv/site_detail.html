@@ -169,7 +169,7 @@
                             <td>
                                 {% for x in object.literature.all %}
                                     <li>
-                                        {{ x }}
+                                        {{ x }} <a href="{{ x.zotero_item.get_zotero_url }}"<i class="fas fa-book"></i></a>
                                     </li>
                                 {% endfor %}
                             </td>
