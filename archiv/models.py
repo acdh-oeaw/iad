@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.gis.db import models
+from django.contrib.gis import geos
 from django.core.serializers import serialize
 
 import reversion

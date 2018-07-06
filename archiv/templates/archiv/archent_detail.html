@@ -303,13 +303,27 @@
 </div><!--main row-->
 <!-- </div> -->
 <script type="text/javascript">
+    var SiteStyle = {
+            "color": "#ff7800",
+            "weight": 2,
+            "opacity": 1,
+            "fillOpacity": 0,
+        };
+    var ArchEntStyle = {
+            "color": "#3589ff",
+            "weight": 2,
+            "opacity": 1,
+            "fillOpacity": 0,
+        };
     function map_init_basic (map, options) {
         var geojsonFeature = {{ object.get_geojson|safe }};
-        L.geoJson(geojsonFeature).addTo(map);
+        var ArchEntGeoJsonLayer = L.geoJson(geojsonFeature).setStyle(ArchEntStyle);
+        ArchEntGeoJsonLayer.addTo(map);
+        map.fitBounds(ArchEntGeoJsonLayer.getBounds());
         {% if object.get_site_geojson %}
             var siteGeojsonFeature = {{ object.get_site_geojson|safe }};
 
-            L.geoJson(siteGeojsonFeature).setStyle({fillColor: 'green'}).addTo(map);
+            L.geoJson(siteGeojsonFeature).setStyle(SiteStyle).addTo(map);
         {% endif %}
     }
 </script>
