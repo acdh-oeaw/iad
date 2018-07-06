@@ -398,7 +398,7 @@ class Site(IadBaseClass):
         geojson = serialize(
             'geojson', Site.objects.filter(id=self.id),
             geometry_field='polygon',
-            fields=('name', 'identifier',)
+            fields=('name', 'identifier', 'pk')
         )
         return geojson
 
@@ -723,7 +723,7 @@ class ArchEnt(IadBaseClass):
         geojson = serialize(
             'geojson', ArchEnt.objects.filter(id=self.id),
             geometry_field='polygon',
-            fields=('name', 'identifier',)
+            fields=('name', 'identifier', 'pk')
         )
         return geojson
 

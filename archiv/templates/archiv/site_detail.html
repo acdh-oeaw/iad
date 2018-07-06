@@ -448,6 +448,17 @@
 </div>
 <!-- </div> -->
 <script type="text/javascript">
+    function createLink(propertyObject, objectType){
+        var url = "/archiv/"+objectType+"/detail/"+propertyObject.pk;
+        var link = '<a href="'+url+'">'+propertyObject.name+'</a>';
+        return link
+    }
+    function onEachFeature(feature, layer, objectType) {
+        if (feature.properties && feature.properties.name) {
+            var popupContent = createLink(feature.properties, 'archent');
+            layer.bindPopup(popupContent);
+        }
+      }
 
     var SiteStyle = {
         "color": "#ff7800",
@@ -456,11 +467,27 @@
         "fillOpacity": 0,
     };
 
+    var ArchEntStyle = {
+            "color": "#3589ff",
+            "weight": 2,
+            "opacity": 1,
+            "fillOpacity": 0,
+        };
+
     function map_init_basic (map, options) {
         var geojsonFeature = {{ object.get_geojson|safe }};
         var SiteLayer = L.geoJson(geojsonFeature).setStyle(SiteStyle);
         SiteLayer.addTo(map);
         map.fitBounds(SiteLayer.getBounds());
+        {% if object.has_archent.all %}
+            {% for x in object.has_archent.all %}
+                var geojsonFeatureArchEnt = {{ x.get_geojson|safe }};
+                L.geoJson(geojsonFeatureArchEnt, {
+                    style: ArchEntStyle,
+                    onEachFeature: onEachFeature
+                }).addTo(map);
+          	{% endfor %}
+      	{% endif %}
     }
 </script>
 <script type="text/javascript">
