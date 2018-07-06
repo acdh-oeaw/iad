@@ -68,3 +68,17 @@ RESEARCHEVENT = [
     (('research_question__question'), ('Research Question')),
     (('generation_data_set'), ('When was the data-set generated?')),
 ]
+
+MONUMENTPROTECTION = [
+    (('pk'), ('internal id')),
+    (('identifier'), ('Identifier')),
+    (('description'), ('Description')),
+    (('comment'), ('Comment')),
+    (('public'), ('Public')),
+    (('literature__zotero_item__zoterokey'), ('Literatur')),
+    (('site_id__name'), ('Site')),
+    (('current_land_use__pref_label'), ('Current Land Use')),
+    (('heritage_status'), ('Cultural Heritage Status')),
+    (('natural_heritage_status__pref_label'), ('Natural Heritage Status')),
+    (('threats'), ('Threats')),
+]

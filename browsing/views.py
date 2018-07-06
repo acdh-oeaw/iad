@@ -133,6 +133,42 @@ class MonumentProtectionListView(GenericListView):
         return table
 
 
+class MonumentProtectionDl(MonumentProtectionListView):
+
+    def render_to_response(self, context, **kwargs):
+        sep = self.request.GET.get('sep', ',')
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+        filename = "export_{}".format(timestamp)
+        response = HttpResponse(content_type='text/csv')
+        conf_items = list(
+            BrowsConf.objects.filter(model_name='monumentprotection').values_list('field_path', 'label')
+        )
+        if conf_items:
+            try:
+                df = pd.DataFrame(
+                    list(
+                        self.model.objects.all().values_list(*[x[0] for x in conf_items])
+                    ),
+                    columns=[x[1] for x in conf_items]
+                )
+            except AssertionError:
+                response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+                return response
+        else:
+            response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            return response
+        if sep == "comma":
+            df.to_csv(response, sep=',', index=False)
+        elif sep == "semicolon":
+            df.to_csv(response, sep=';', index=False)
+        elif sep == "tab":
+            df.to_csv(response, sep='\t', index=False)
+        else:
+            df.to_csv(response, sep=',', index=False)
+        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+        return response
+
+
 class ResearchQuestionListView(GenericListView):
     model = ResearchQuestion
     table_class = ResearchQuestionTable

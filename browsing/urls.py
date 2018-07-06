@@ -28,6 +28,11 @@ urlpatterns = [
         name='browse_monumentprotections'
     ),
     url(
+        r'download/monumentprotection/$',
+        views.MonumentProtectionDl.as_view(),
+        name='dl_monumentprotection'
+    ),
+    url(
         r'references/$', views.ReferenceListView.as_view(),
         name='browse_references'
     ),

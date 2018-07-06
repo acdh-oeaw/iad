@@ -872,6 +872,10 @@ class MonumentProtection(IadBaseClass):
     def get_createview_url(self):
         return reverse('archiv:monumentprotection_create')
 
+    @classmethod
+    def get_dl_url(self):
+        return reverse('browsing:dl_monumentprotection')
+
     def get_next(self):
         next = MonumentProtection.objects.filter(id__gt=self.id)
         if next:
