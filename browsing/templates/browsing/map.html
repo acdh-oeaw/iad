@@ -95,13 +95,14 @@ function onEachFeature(feature, layer) {
     function map_init_basic (map, options) {
 //for x
 {% for object in sites %}
-        var linkToUrl = "{% url 'archiv:site_detail' pk=object.id %}"
-        var itemName = "{{ object }}".replace(/(\r\n\t|\n|\r\t)/gm,"")
-        var sitePopup = '<p><a href="'+linkToUrl+'">'+itemName+'</a></p>'
+        // var linkToUrl = "{% url 'archiv:site_detail' pk=object.id %}"
+        // var itemName = "{{ object }}".replace(/(\r\n\t|\n|\r\t)/gm,"")
+        // var sitePopup = '<p><a href="'+linkToUrl+'">'+itemName+'</a></p>'
         var geojsonFeature = {{ object.get_geojson|safe }};
-        L.geoJson(geojsonFeature, {style: SiteStyle})
-        .bindPopup(sitePopup)
-        .addTo(map);
+        L.geoJson(geojsonFeature, {
+            style: SiteStyle,
+            onEachFeature: onEachFeature
+        }).addTo(map);
         {% if object.has_archent.all %}
             {% for x in object.has_archent.all %}
                 var geojsonFeatureArchEnt = {{ x.get_geojson|safe }};
