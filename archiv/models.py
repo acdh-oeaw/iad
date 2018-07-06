@@ -120,16 +120,19 @@ class IadBaseClass(IdProvider):
 
     @classmethod
     def get_convex_hull(self):
-        geojson = json.loads(
-            Site.objects.exclude(polygon=None)
-            .aggregate(combined=Union('polygon'))['combined']
-            .convex_hull.geojson
-        )
-        geojson['properties'] = {
-            'name': "Convex hull of all {} objects".format(self.__name__)
-        }
-        geojson = json.dumps(geojson)
-        return geojson
+        if Site.objects.exclude(polygon=None):
+            geojson = json.loads(
+                Site.objects.exclude(polygon=None)
+                .aggregate(combined=Union('polygon'))['combined']
+                .convex_hull.geojson
+            )
+            geojson['properties'] = {
+                'name': "Convex hull of all {} objects".format(self.__name__)
+            }
+            geojson = json.dumps(geojson)
+            return geojson
+        else:
+            None
 
     def copy_instance(self):
         """Saves a copy of the current object and returns it"""
