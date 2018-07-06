@@ -202,12 +202,23 @@ class ArchEntDl(ArchEntListView):
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
         filename = "export_{}".format(timestamp)
         response = HttpResponse(content_type='text/csv')
-        df = pd.DataFrame(
-            list(
-                ArchEnt.objects.all().values_list(*[x[0] for x in ARCHENT])
-            ),
-            columns=[x[1] for x in ARCHENT]
+        conf_items = list(
+            BrowsConf.objects.filter(model_name='archent').values_list('field_path', 'label')
         )
+        if conf_items:
+            try:
+                df = pd.DataFrame(
+                    list(
+                        self.model.objects.all().values_list(*[x[0] for x in conf_items])
+                    ),
+                    columns=[x[1] for x in conf_items]
+                )
+            except AssertionError:
+                response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+                return response
+        else:
+            response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            return response
         if sep == "comma":
             df.to_csv(response, sep=',', index=False)
         elif sep == "semicolon":
@@ -258,18 +269,23 @@ class SiteDl(SiteListView):
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
         filename = "export_{}".format(timestamp)
         response = HttpResponse(content_type='text/csv')
-        if BrowsConf:
-            SITE = list(
-                BrowsConf.objects.filter(model_name='site').values_list('field_path', 'label')
-            )
-        else:
-            SITE
-        df = pd.DataFrame(
-            list(
-                Site.objects.all().values_list(*[x[0] for x in SITE])
-            ),
-            columns=[x[1] for x in SITE]
+        conf_items = list(
+            BrowsConf.objects.filter(model_name='site').values_list('field_path', 'label')
         )
+        if conf_items:
+            try:
+                df = pd.DataFrame(
+                    list(
+                        self.model.objects.all().values_list(*[x[0] for x in conf_items])
+                    ),
+                    columns=[x[1] for x in conf_items]
+                )
+            except AssertionError:
+                response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+                return response
+        else:
+            response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            return response
         if sep == "comma":
             df.to_csv(response, sep=',', index=False)
         elif sep == "semicolon":
@@ -337,12 +353,23 @@ class ResearchEventDl(ResearchEventListView):
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
         filename = "export_{}".format(timestamp)
         response = HttpResponse(content_type='text/csv')
-        df = pd.DataFrame(
-            list(
-                ResearchEvent.objects.all().values_list(*[x[0] for x in RESEARCHEVENT])
-            ),
-            columns=[x[1] for x in RESEARCHEVENT]
+        conf_items = list(
+            BrowsConf.objects.filter(model_name='researchevent').values_list('field_path', 'label')
         )
+        if conf_items:
+            try:
+                df = pd.DataFrame(
+                    list(
+                        self.model.objects.all().values_list(*[x[0] for x in conf_items])
+                    ),
+                    columns=[x[1] for x in conf_items]
+                )
+            except AssertionError:
+                response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+                return response
+        else:
+            response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            return response
         if sep == "comma":
             df.to_csv(response, sep=',', index=False)
         elif sep == "semicolon":
