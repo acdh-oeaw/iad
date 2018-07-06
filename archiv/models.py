@@ -426,16 +426,19 @@ class Site(IadBaseClass):
         return reverse('archiv:site_create')
 
     def convex_hull_archents(self):
-        geojson = json.loads(
-            self.has_archent.exclude(polygon=None)
-            .aggregate(combined=Union('polygon'))['combined']
-            .convex_hull.geojson
-        )
-        geojson['properties'] = {
-            'name': "Convex hull of all Archaeological Entities"
-        }
-        geojson = json.dumps(geojson)
-        return geojson
+        if self.has_archent.exclude(polygon=None):
+            geojson = json.loads(
+                self.has_archent.exclude(polygon=None)
+                .aggregate(combined=Union('polygon'))['combined']
+                .convex_hull.geojson
+            )
+            geojson['properties'] = {
+                'name': "Convex hull of all Archaeological Entities"
+            }
+            geojson = json.dumps(geojson)
+            return geojson
+        else:
+            return None
 
     def get_next(self):
         next = Site.objects.filter(id__gt=self.id)
