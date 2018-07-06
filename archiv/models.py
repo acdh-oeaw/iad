@@ -772,6 +772,10 @@ class ArchEnt(IadBaseClass):
     def get_createview_url(self):
         return reverse('archiv:archent_create')
 
+    @classmethod
+    def get_dl_url(self):
+        return reverse('browsing:dl_archent')
+
     def get_next(self):
         next = ArchEnt.objects.filter(id__gt=self.id)
         if next:

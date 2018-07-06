@@ -24,3 +24,18 @@ SITE = [
     (('tourism_comment'), ('Tourism Comment')),
     (('site_checked_by__username'), ('Site checked by')),
 ]
+
+
+ARCHENT = [
+    (('identifier'), ('Identifier')),
+    (('name'), ('Site Name')),
+    (('alt_name'), ('Alternative Name')),
+    (('alt_id'), ('Alt ID')),
+    (('description'), ('Description')),
+    (('comment'), ('Comment')),
+    (('public'), ('Public')),
+    (('literature__zotero_item__zoterokey'), ('Literatur')),
+    (('site_id__name'), ('Site')),
+    (('ent_type__pref_label'), ('Entity Type')),
+    (('burial_type__pref_label'), ('Burial Type')),
+]

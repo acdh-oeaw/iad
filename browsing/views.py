@@ -11,7 +11,7 @@ from browsing.forms import *
 from browsing.tables import *
 from archiv.models import *
 from bib.models import *
-from archiv.utils import SITE
+from archiv.utils import *
 from entities.models import Place, Institution
 from entities.serializer_arche import *
 from django.contrib.auth.decorators import login_required
@@ -191,6 +191,31 @@ class ArchEntListView(GenericListView):
         return table
 
 
+class ArchEntDl(ArchEntListView):
+
+    def render_to_response(self, context, **kwargs):
+        sep = self.request.GET.get('sep', ',')
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+        filename = "export_{}".format(timestamp)
+        response = HttpResponse(content_type='text/csv')
+        df = pd.DataFrame(
+            list(
+                ArchEnt.objects.all().values_list(*[x[0] for x in ARCHENT])
+            ),
+            columns=[x[1] for x in ARCHENT]
+        )
+        if sep == "comma":
+            df.to_csv(response, sep=',', index=False)
+        elif sep == "semicolon":
+            df.to_csv(response, sep=';', index=False)
+        elif sep == "tab":
+            df.to_csv(response, sep='\t', index=False)
+        else:
+            df.to_csv(response, sep=',', index=False)
+        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+        return response
+
+
 class SiteListView(GenericListView):
     model = Site
     table_class = SiteTable
@@ -227,7 +252,7 @@ class SiteDl(SiteListView):
     def render_to_response(self, context, **kwargs):
         sep = self.request.GET.get('sep', ',')
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-        filename = "ecce_export_{}".format(timestamp)
+        filename = "export_{}".format(timestamp)
         response = HttpResponse(content_type='text/csv')
         df = pd.DataFrame(
             list(
