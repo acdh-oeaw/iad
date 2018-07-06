@@ -95,7 +95,9 @@ function onEachFeature(feature, layer) {
     function map_init_basic (map, options) {
 //for x
 {% for object in sites %}
-        var sitePopup = '<p><a href="{%url 'archiv:site_detail' pk=object.id %}">{{ object.name }}</a></p>'
+        var linkToUrl = "{% url 'archiv:site_detail' pk=object.id %}"
+        var itemName = "{{ object }}".replace(/(\r\n\t|\n|\r\t)/gm,"")
+        var sitePopup = '<p><a href="'+linkToUrl+'">'+itemName+'</a></p>'
         var geojsonFeature = {{ object.get_geojson|safe }};
         L.geoJson(geojsonFeature, {style: SiteStyle})
         .bindPopup(sitePopup)
