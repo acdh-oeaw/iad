@@ -3,14 +3,15 @@ import datetime
 from django.http import HttpResponse
 import rdflib
 from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef, RDFS, ConjunctiveGraph
-from rdflib.namespace import DC, FOAF, RDFS
-from rdflib.namespace import SKOS
 from django_tables2 import SingleTableView, RequestConfig
-from .filters import *
-from .forms import *
-from .tables import *
+import pandas as pd
+
+from browsing.filters import *
+from browsing.forms import *
+from browsing.tables import *
 from archiv.models import *
 from bib.models import *
+from archiv.utils import SITE
 from entities.models import Place, Institution
 from entities.serializer_arche import *
 from django.contrib.auth.decorators import login_required
@@ -55,6 +56,10 @@ class GenericListView(SingleTableView):
             context['create_view_link'] = self.model.get_createview_url()
         except AttributeError:
             context['create_view_link'] = None
+        try:
+            context['download'] = self.model.get_dl_url()
+        except AttributeError:
+            context['download'] = None
         return context
 
     @method_decorator(login_required)
@@ -215,6 +220,31 @@ class SiteListView(GenericListView):
         exclude_vals = [x for x in all_cols if x not in selected_cols]
         table.exclude = exclude_vals
         return table
+
+
+class SiteDl(SiteListView):
+
+    def render_to_response(self, context, **kwargs):
+        sep = self.request.GET.get('sep', ',')
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+        filename = "ecce_export_{}".format(timestamp)
+        response = HttpResponse(content_type='text/csv')
+        df = pd.DataFrame(
+            list(
+                Site.objects.all().values_list(*[x[0] for x in SITE])
+            ),
+            columns=[x[1] for x in SITE]
+        )
+        if sep == "comma":
+            df.to_csv(response, sep=',', index=False)
+        elif sep == "semicolon":
+            df.to_csv(response, sep=';', index=False)
+        elif sep == "tab":
+            df.to_csv(response, sep='\t', index=False)
+        else:
+            df.to_csv(response, sep=',', index=False)
+        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+        return response
 
 
 class MapView(SiteListView):

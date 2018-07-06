@@ -19,6 +19,7 @@ urlpatterns = [
         name='browse_researchquestions'
     ),
     url(r'sites/$', views.SiteListView.as_view(), name='browse_sites'),
+    url(r'download/site/$', views.SiteDl.as_view(), name='dl_sites'),
     url(r'archents/$', views.ArchEntListView.as_view(), name='browse_archents'),
     url(
         r'monumentprotections/$', views.MonumentProtectionListView.as_view(),

@@ -425,6 +425,10 @@ class Site(IadBaseClass):
         return reverse('browsing:browse_sites')
 
     @classmethod
+    def get_dl_url(self):
+        return reverse('browsing:dl_sites')
+
+    @classmethod
     def get_createview_url(self):
         return reverse('archiv:site_create')
 
