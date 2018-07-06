@@ -625,6 +625,10 @@ class ResearchEvent(IadBaseClass):
     def get_createview_url(self):
         return reverse('archiv:researchevent_create')
 
+    @classmethod
+    def get_dl_url(self):
+        return reverse('browsing:dl_researchevent')
+
     def get_next(self):
         next = ResearchEvent.objects.filter(id__gt=self.id)
         if next:

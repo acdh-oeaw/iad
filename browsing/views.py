@@ -9,6 +9,10 @@ import pandas as pd
 from browsing.filters import *
 from browsing.forms import *
 from browsing.tables import *
+try:
+    from browsing.models import BrowsConf
+except ImportError:
+    BrowsConf = None
 from archiv.models import *
 from bib.models import *
 from archiv.utils import *
@@ -254,6 +258,12 @@ class SiteDl(SiteListView):
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
         filename = "export_{}".format(timestamp)
         response = HttpResponse(content_type='text/csv')
+        if BrowsConf:
+            SITE = list(
+                BrowsConf.objects.filter(model_name='site').values_list('field_path', 'label')
+            )
+        else:
+            SITE
         df = pd.DataFrame(
             list(
                 Site.objects.all().values_list(*[x[0] for x in SITE])
@@ -318,6 +328,31 @@ class ResearchEventListView(GenericListView):
         exclude_vals = [x for x in all_cols if x not in selected_cols]
         table.exclude = exclude_vals
         return table
+
+
+class ResearchEventDl(ResearchEventListView):
+
+    def render_to_response(self, context, **kwargs):
+        sep = self.request.GET.get('sep', ',')
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+        filename = "export_{}".format(timestamp)
+        response = HttpResponse(content_type='text/csv')
+        df = pd.DataFrame(
+            list(
+                ResearchEvent.objects.all().values_list(*[x[0] for x in RESEARCHEVENT])
+            ),
+            columns=[x[1] for x in RESEARCHEVENT]
+        )
+        if sep == "comma":
+            df.to_csv(response, sep=',', index=False)
+        elif sep == "semicolon":
+            df.to_csv(response, sep=';', index=False)
+        elif sep == "tab":
+            df.to_csv(response, sep='\t', index=False)
+        else:
+            df.to_csv(response, sep=',', index=False)
+        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+        return response
 
 
 class AltNameListView(GenericListView):

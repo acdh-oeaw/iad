@@ -1,4 +1,5 @@
 SITE = [
+    (('pk'), ('internal id')),
     (('identifier'), ('Identifier')),
     (('name'), ('Site Name')),
     (('alt_name'), ('Alternative Name')),
@@ -27,6 +28,7 @@ SITE = [
 
 
 ARCHENT = [
+    (('pk'), ('internal id')),
     (('identifier'), ('Identifier')),
     (('name'), ('Site Name')),
     (('alt_name'), ('Alternative Name')),
@@ -38,4 +40,31 @@ ARCHENT = [
     (('site_id__name'), ('Site')),
     (('ent_type__pref_label'), ('Entity Type')),
     (('burial_type__pref_label'), ('Burial Type')),
+    (('settlement_fortification__pref_label'), ('Settlement Fortification')),
+    (('settlement_occupation__pref_label'), ('Settlement Occupation')),
+    (('topography__pref_label'), ('Topography')),
+    (('type_certainty'), ('Entity Type Certainty')),
+    (('dating_certainty'), ('Dating Certainty')),
+    (('location_certainty'), ('Location Certainty')),
+    (('period__name'), ('Dating')),
+]
+
+
+RESEARCHEVENT = [
+    (('pk'), ('internal id')),
+    (('identifier'), ('Identifier')),
+    (('description'), ('Description')),
+    (('comment'), ('Comment')),
+    (('public'), ('Public')),
+    (('literature__zotero_item__zoterokey'), ('Literatur')),
+    (('site_id__name'), ('Site')),
+    (('legacy_research_id'), ('legacy_research_id')),
+    (('start_date'), ('Start Date')),
+    (('end_date'), ('End Date')),
+    (('responsible_researcher__name'), ('Responsible Researcher')),
+    (('responsible_institution__written_name'), ('Responsible Institution')),
+    (('research_type__pref_label'), ('Research Type')),
+    (('research_method__pref_label'), ('Research Methods')),
+    (('research_question__question'), ('Research Question')),
+    (('generation_data_set'), ('When was the data-set generated?')),
 ]

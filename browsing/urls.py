@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'institutions-rdf/$', views.InstitutionRDFView.as_view(), name='rdf_institutions'),
     url(r'periods/$', views.PeriodListView.as_view(), name='browse_periods'),
     url(r'researchevents/$', views.ResearchEventListView.as_view(), name='browse_researchevents'),
+    url(r'download/researchevent/$', views.ResearchEventDl.as_view(), name='dl_researchevent'),
     url(
         r'researchquestions/$', views.ResearchQuestionListView.as_view(),
         name='browse_researchquestions'
