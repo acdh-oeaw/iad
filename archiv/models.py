@@ -1,10 +1,12 @@
+import reversion
+import json
+
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.gis.db import models
+from django.contrib.gis.db.models import Union
 from django.contrib.gis import geos
 from django.core.serializers import serialize
-
-import reversion
 
 from idprovider.models import IdProvider
 from entities.models import Place, Person, Institution
@@ -115,6 +117,19 @@ class IadBaseClass(IdProvider):
         help_text="Add publication references"
     )
     polygon = models.MultiPolygonField(blank=True, null=True)
+
+    @classmethod
+    def get_convex_hull(self):
+        geojson = json.loads(
+            Site.objects.exclude(polygon=None)
+            .aggregate(combined=Union('polygon'))['combined']
+            .convex_hull.geojson
+        )
+        geojson['properties'] = {
+            'name': "Convex hull of all {} objects".format(self.__name__)
+        }
+        geojson = json.dumps(geojson)
+        return geojson
 
     def copy_instance(self):
         """Saves a copy of the current object and returns it"""
@@ -409,6 +424,18 @@ class Site(IadBaseClass):
     @classmethod
     def get_createview_url(self):
         return reverse('archiv:site_create')
+
+    def convex_hull_archents(self):
+        geojson = json.loads(
+            self.has_archent.exclude(polygon=None)
+            .aggregate(combined=Union('polygon'))['combined']
+            .convex_hull.geojson
+        )
+        geojson['properties'] = {
+            'name': "Convex hull of all Archaeological Entities"
+        }
+        geojson = json.dumps(geojson)
+        return geojson
 
     def get_next(self):
         next = Site.objects.filter(id__gt=self.id)

@@ -474,11 +474,24 @@
             "fillOpacity": 0,
         };
 
+    var ArchConvex = {
+            "color": "#ff7800",
+            "weight": 1,
+            "opacity": 1,
+            "fillOpacity": 0,
+    };
+
     function map_init_basic (map, options) {
+
         var geojsonFeature = {{ object.get_geojson|safe }};
         var SiteLayer = L.geoJson(geojsonFeature).setStyle(SiteStyle);
         SiteLayer.addTo(map);
         map.fitBounds(SiteLayer.getBounds());
+
+        var ArchEntConvex = L.geoJson({{ object.convex_hull_archents|safe }}).setStyle(ArchConvex);
+        ArchEntConvex.addTo(map);
+
+
         {% if object.has_archent.all %}
             {% for x in object.has_archent.all %}
                 var geojsonFeatureArchEnt = {{ x.get_geojson|safe }};

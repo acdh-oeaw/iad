@@ -104,8 +104,12 @@ function onEachFeature(feature, layer) {
     function map_init_basic (map, options) {
 //for x
 {% for object in sites %}
+
+        var allSites = L.geoJson({{ object.get_convex_hull|safe }});
+        map.fitBounds(allSites.getBounds());
+
         var geojsonFeature = {{ object.get_geojson|safe }};
-        console.log(geojsonFeature);
+
         L.geoJson(geojsonFeature, {
             style: SiteStyle,
             onEachFeature: onEachFeature
