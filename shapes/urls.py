@@ -5,15 +5,15 @@ app_name = 'shapes'
 
 urlpatterns = [
     url(
-        r'^cadastralcommunity/$', views.CadastralCommunityListView.as_view(),
-        name='browse_cadastralcommunity'
+        r'^municipality/$', views.MunicipalityListView.as_view(),
+        name='browse_municipality'
     ),
-    url(r'^cadastralcommunity/detail/(?P<pk>[0-9]+)$', views.CadastralCommunityDetailView.as_view(),
-        name='cadastralcommunity_detail'),
-    url(r'^cadastralcommunity/create/$', views.CadastralCommunityCreate.as_view(),
-        name='cadastralcommunity_create'),
-    url(r'^cadastralcommunity/edit/(?P<pk>[0-9]+)$', views.CadastralCommunityUpdate.as_view(),
-        name='cadastralcommunity_edit'),
-    url(r'^cadastralcommunity/delete/(?P<pk>[0-9]+)$', views.CadastralCommunityDelete.as_view(),
-        name='cadastralcommunity_delete'),
+    url(r'^municipality/detail/(?P<pk>[0-9]+)$', views.MunicipalityDetailView.as_view(),
+        name='municipality_detail'),
+    url(r'^municipality/create/$', views.MunicipalityCreate.as_view(),
+        name='municipality_create'),
+    url(r'^municipality/edit/(?P<pk>[0-9]+)$', views.MunicipalityUpdate.as_view(),
+        name='municipality_edit'),
+    url(r'^municipality/delete/(?P<pk>[0-9]+)$', views.MunicipalityDelete.as_view(),
+        name='municipality_delete'),
 ]

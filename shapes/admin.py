@@ -1,23 +1,24 @@
 from django.contrib.gis import admin
 from leaflet.admin import LeafletGeoAdmin
-from .models import CadastralCommunity
+from .models import Municipality
 
 
-class CadastralCommunityAdmin(LeafletGeoAdmin):
+class MunicipalityAdmin(LeafletGeoAdmin):
     list_display = (
-        'cadcom_nam',
-        'nuts2_name',
-        'nuts3_name',
+        'saunam',
+        'lau2nam',
+        'nuts3nam',
+        'nuts2nam',
+        'ctnam'
     )
     list_filter = [
-        'nuts2_name',
-        'nuts3_name',
+        'ctnam',
     ]
     search_fields = [
-        'cadcom_nam',
-        'nuts2_name',
-        'nuts3_name',
+        'saunam',
+        'lau2nam',
+        'nuts3nam',
     ]
 
 
-admin.site.register(CadastralCommunity, CadastralCommunityAdmin)
+admin.site.register(Municipality, MunicipalityAdmin)

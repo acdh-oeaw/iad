@@ -3,110 +3,73 @@ from django.core.serializers import serialize
 from django.contrib.gis.db import models
 
 
-class CadastralCommunity(models.Model):
-    cadcom_num = models.BigIntegerField(
-        blank=True, null=True
+class Municipality(models.Model):
+    sau_id = models.FloatField()
+    saunam = models.CharField(
+        blank=True, max_length=254
     )
-    cadcom_nam = models.CharField(
-        max_length=254, blank=True, null=True
+    lau2_id = models.CharField(
+        blank=True, max_length=254
     )
-    cadcom_alt = models.CharField(
-        max_length=254, blank=True, null=True
+    lau2nam = models.CharField(
+        blank=True, max_length=254
     )
-    lau2_muni_field = models.BigIntegerField(
-        blank=True, null=True
+    nuts3cod = models.CharField(
+        blank=True, max_length=254
     )
-    lau2_mun_1 = models.CharField(
-        max_length=254, blank=True, null=True
+    nuts3nam = models.CharField(
+        blank=True, max_length=254
     )
-    polbez_num = models.BigIntegerField(
-        blank=True, null=True
+    nuts2cod = models.CharField(
+        blank=True, max_length=254
     )
-    polbez_nam = models.CharField(
-        max_length=254, blank=True, null=True
+    nuts2nam = models.CharField(
+        blank=True, max_length=254
     )
-    nuts3_code = models.CharField(
-        max_length=254, blank=True, null=True
+    ctcod = models.CharField(
+        blank=True, max_length=254
     )
-    nuts3_name = models.CharField(
-        max_length=254, blank=True, null=True
+    ctnam = models.CharField(
+        blank=True, max_length=254
     )
-    bundesland = models.BigIntegerField(
-        blank=True, null=True
+    ctalt = models.CharField(
+        blank=True, max_length=254
     )
-    nuts2_name = models.CharField(
-        max_length=254, blank=True, null=True
-    )
-    nuts2_code = models.CharField(
-        max_length=254, blank=True, null=True
-    )
-    state_code = models.CharField(
-        max_length=254, blank=True, null=True
-    )
-    state_name = models.CharField(
-        max_length=254, blank=True, null=True
-    )
-    state_altn = models.CharField(
-        max_length=254, blank=True, null=True
-    )
-    geom = models.MultiPolygonField(blank=True, null=True)
+    geom = models.MultiPolygonField(blank=True, null=True, srid=4326)
 
     def __str__(self):
-        if self.nuts3_name and self.cadcom_nam and self.state_name:
-            return "{} >> {} ({})".format(
-                self.cadcom_nam, self.nuts3_name, self.state_name
-            )
+        if self.saunam and self.lau2nam:
+            name = "{} ({})".format(self.saunam, self.lau2nam)
+        else:
+            name = "{}".format(self.lau2nam)
+        return "{}, {}".format(name, self.nuts3nam)
 
     def get_absolute_url(self):
         return reverse(
-            'shapes:cadastralcommunity_detail', kwargs={'pk': self.id}
+            'shapes:municipality_detail', kwargs={'pk': self.id}
         )
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('shapes:browse_cadastralcommunity')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('shapes:cadastralcommunity_create')
-
-    def get_next(self):
-        next = None
-        if next:
-            return None
-        return False
-
-    def get_prev(self):
-        prev = None
-        if prev:
-            return None
-        return False
 
     def get_geojson(self):
         geojson = serialize(
-            'geojson', CadastralCommunity.objects.filter(id=self.id),
+            'geojson', Municipality.objects.filter(id=self.id),
             geometry_field='geom',
-            fields=('cadcom_nam', 'cadcom_num',)
+            fields=('saunam', 'lau2nam', 'nuts3nam', 'nuts2nam')
         )
         return geojson
 
 
-# Auto-generated `LayerMapping` dictionary for CadastralCommunity model
-cadastralcommunity_mapping = {
-    'cadcom_num': 'CadCom_num',
-    'cadcom_nam': 'CadCom_nam',
-    'cadcom_alt': 'CadCom_alt',
-    # 'lau2_muni_field': 'LAU2_Muni_',
-    # 'lau2_mun_1': 'LAU2_Mun_1',
-    # 'polbez_num': 'PolBez_num',
-    # 'polbez_nam': 'PolBez_nam',
-    'nuts3_code': 'NUTS3_code',
-    'nuts3_name': 'NUTS3_name',
-    # 'bundesland': 'Bundesland',
-    # 'nuts2_name': 'NUTS2_name',
-    # 'nuts2_code': 'NUTS2_code',
-    'state_code': 'STATE_code',
-    'state_name': 'STATE_name',
-    'state_altn': 'STATE_altn',
+# Auto-generated `LayerMapping` dictionary for Municipality model
+municipality_mapping = {
+    'sau_id': 'SAU_ID',
+    'saunam': 'SAUnam',
+    'lau2_id': 'LAU2_ID',
+    'lau2nam': 'LAU2nam',
+    'nuts3cod': 'NUTS3cod',
+    'nuts3nam': 'NUTS3nam',
+    'nuts2cod': 'NUTS2cod',
+    'nuts2nam': 'NUTS2nam',
+    'ctcod': 'CTcod',
+    'ctnam': 'CTnam',
+    'ctalt': 'CTalt',
     'geom': 'MULTIPOLYGON',
 }

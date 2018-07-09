@@ -6,7 +6,7 @@ from bib.models import *
 from entities.models import Place, AlternativeName, Institution, Person
 from vocabs.models import SkosConcept, SkosConceptScheme
 from vocabs.filters import generous_concept_filter
-from shapes.models import CadastralCommunity
+from shapes.models import Municipality
 
 
 django_filters.filters.LOOKUP_TYPES = [
@@ -212,11 +212,11 @@ class SiteListFilter(django_filters.FilterSet):
         label="Research activity"
         )
     cadastral_community = django_filters.ModelMultipleChoiceFilter(
-        queryset=CadastralCommunity.objects.all(),
+        queryset=Municipality.objects.all(),
         help_text=Site._meta.get_field('cadastral_community').help_text,
         label=Site._meta.get_field('cadastral_community').verbose_name,
         widget=autocomplete.Select2Multiple(
-            url='shapes-ac:cadastralcommunity-autocomplete',
+            url='shapes-ac:municipality-autocomplete',
             attrs={
                 'data-placeholder': 'Autocomplete ...',
                 'data-minimum-input-length': 3,

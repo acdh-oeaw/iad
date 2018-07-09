@@ -3,12 +3,12 @@ from dal import autocomplete
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit,  Layout, Fieldset, Div, MultiField, HTML
 from crispy_forms.bootstrap import Accordion, AccordionGroup
-from . models import CadastralCommunity
+from . models import Municipality
 
 
-class CadastralCommunityFilterFormHelper(FormHelper):
+class MunicipalityFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(CadastralCommunityFilterFormHelper, self).__init__(*args, **kwargs)
+        super(MunicipalityFilterFormHelper, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = 'genericFilterForm'
         self.form_method = 'GET'
@@ -31,15 +31,15 @@ class CadastralCommunityFilterFormHelper(FormHelper):
             )
 
 
-class CadastralCommunityForm(forms.ModelForm):
+class MunicipalityForm(forms.ModelForm):
     class Meta:
-        model = CadastralCommunity
+        model = Municipality
         exclude = [
             'geom',
         ]
 
     def __init__(self, *args, **kwargs):
-        super(CadastralCommunityForm, self).__init__(*args, **kwargs)
+        super(MunicipalityForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'

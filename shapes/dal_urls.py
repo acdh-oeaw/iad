@@ -7,8 +7,8 @@ app_name = 'shapes'
 
 urlpatterns = [
     url(
-        r'^cadastralcommunity-autocomplete/$', dal_views.CadastralCommunityAC.as_view(
-            model=CadastralCommunity,),
-        name='cadastralcommunity-autocomplete',
+        r'^municipality-autocomplete/$', dal_views.MunicipalityAC.as_view(
+            model=Municipality,),
+        name='municipality-autocomplete',
     ),
 ]

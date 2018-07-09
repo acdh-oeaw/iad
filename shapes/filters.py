@@ -1,5 +1,5 @@
 import django_filters
-from . models import CadastralCommunity
+from . models import Municipality
 
 django_filters.filters.LOOKUP_TYPES = [
     ('', '---------'),
@@ -18,15 +18,15 @@ django_filters.filters.LOOKUP_TYPES = [
 ]
 
 
-class CadastralCommunityListFilter(django_filters.FilterSet):
-    cadcom_nam = django_filters.CharFilter(
+class MunicipalityListFilter(django_filters.FilterSet):
+    lau2nam = django_filters.CharFilter(
         lookup_expr='icontains',
-        help_text=CadastralCommunity._meta.get_field('cadcom_nam').help_text,
-        label=CadastralCommunity._meta.get_field('cadcom_nam').verbose_name
+        help_text=Municipality._meta.get_field('lau2nam').help_text,
+        label=Municipality._meta.get_field('lau2nam').verbose_name
         )
 
     class Meta:
-        model = CadastralCommunity
+        model = Municipality
         fields = [
             'id'
         ]

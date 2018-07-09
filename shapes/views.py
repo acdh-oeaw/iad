@@ -9,19 +9,19 @@ from django.utils.decorators import method_decorator
 
 from django_tables2 import RequestConfig
 
-from . models import CadastralCommunity
-from . tables import CadastralCommunityTable
-from . filters import CadastralCommunityListFilter
-from . forms import CadastralCommunityFilterFormHelper, CadastralCommunityForm
+from . models import Municipality
+from . tables import MunicipalityTable
+from . filters import MunicipalityListFilter
+from . forms import MunicipalityFilterFormHelper, MunicipalityForm
 
 from webpage.utils import GenericListView, BaseCreateView, BaseUpdateView
 
 
-class CadastralCommunityListView(GenericListView):
-    model = CadastralCommunity
-    table_class = CadastralCommunityTable
-    filter_class = CadastralCommunityListFilter
-    formhelper_class = CadastralCommunityFilterFormHelper
+class MunicipalityListView(GenericListView):
+    model = Municipality
+    table_class = MunicipalityTable
+    filter_class = MunicipalityListFilter
+    formhelper_class = MunicipalityFilterFormHelper
     init_columns = [
         'id',
         'cadcom_nam',
@@ -32,7 +32,7 @@ class CadastralCommunityListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(CadastralCommunityListView, self).get_context_data()
+        context = super(MunicipalityListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
         context['togglable_colums'] = togglable_colums
@@ -51,36 +51,36 @@ class CadastralCommunityListView(GenericListView):
         return table
 
 
-class CadastralCommunityDetailView(DetailView):
-    model = CadastralCommunity
-    template_name = 'shapes/cadastralcommunity_detail.html'
+class MunicipalityDetailView(DetailView):
+    model = Municipality
+    template_name = 'shapes/municipality_detail.html'
 
 
-class CadastralCommunityCreate(BaseCreateView):
+class MunicipalityCreate(BaseCreateView):
 
-    model = CadastralCommunity
-    form_class = CadastralCommunityForm
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(CadastralCommunityCreate, self).dispatch(*args, **kwargs)
-
-
-class CadastralCommunityUpdate(BaseUpdateView):
-
-    model = CadastralCommunity
-    form_class = CadastralCommunityForm
+    model = Municipality
+    form_class = MunicipalityForm
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(CadastralCommunityUpdate, self).dispatch(*args, **kwargs)
+        return super(MunicipalityCreate, self).dispatch(*args, **kwargs)
 
 
-class CadastralCommunityDelete(DeleteView):
-    model = CadastralCommunity
+class MunicipalityUpdate(BaseUpdateView):
+
+    model = Municipality
+    form_class = MunicipalityForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MunicipalityUpdate, self).dispatch(*args, **kwargs)
+
+
+class MunicipalityDelete(DeleteView):
+    model = Municipality
     template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('shapes:browse_cadastralcommunity')
+    success_url = reverse_lazy('shapes:browse_municipality')
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(CadastralCommunityDelete, self).dispatch(*args, **kwargs)
+        return super(MunicipalityDelete, self).dispatch(*args, **kwargs)

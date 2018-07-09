@@ -312,7 +312,7 @@ class SiteForm(forms.ModelForm):
                 url='bib-ac:reference-autocomplete'),
             'polygon': LeafletWidget(),
             'cadastral_community': autocomplete.ModelSelect2Multiple(
-                url='shapes-ac:cadastralcommunity-autocomplete'),
+                url='shapes-ac:municipality-autocomplete'),
             'other_period': autocomplete.ModelSelect2Multiple(
                 url='/vocabs-ac/specific-concept-ac/other-present-archaeological-period'),
             'museum': autocomplete.ModelSelect2Multiple(
