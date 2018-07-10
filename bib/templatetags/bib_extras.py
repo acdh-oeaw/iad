@@ -8,12 +8,15 @@ register = template.Library()
 def bib_quote(item):
     values = {}
     bib = json.loads(item.zot_bibtex.replace("'", '"'))
-    quote = "{} ({}), {}, {}".format(
+    try:
+        quote = "{} ({}), {}, {}".format(
             bib['author'],
             bib['year'],
             bib['title'],
             bib['pages']
         )
+    except KeyError:
+        quote = item
     values['quote'] = quote
     values['object'] = item
     return values

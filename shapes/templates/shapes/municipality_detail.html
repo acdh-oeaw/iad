@@ -15,6 +15,7 @@
         width:  100%;
         height: 800px;
     }
+
 </style>
 <div class="row">
     <div class="col-md-6">
@@ -53,122 +54,90 @@
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>
-                                cadcom_num
+                                sau_id
                             </th>
                             <td>
-                                {{ object.cadcom_num}}
+                                {{ object.sau_id}}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                cadcom_nam
+                                saunam
                             </th>
                             <td>
-                                {{ object.cadcom_nam}}
+                                {{ object.saunam}}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                cadcom_alt
+                                lau2_id
                             </th>
                             <td>
-                                {{ object.cadcom_alt}}
+                                {{ object.lau2_id}}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                lau2_muni_field
+                                lau2nam
                             </th>
                             <td>
-                                {{ object.lau2_muni_field}}
+                                {{ object.lau2nam}}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                lau2_mun_1
+                                nuts3cod
                             </th>
                             <td>
-                                {{ object.lau2_mun_1}}
+                                {{ object.nuts3cod}}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                polbez_num
+                                nuts3nam
                             </th>
                             <td>
-                                {{ object.polbez_num}}
+                                {{ object.nuts3nam}}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                polbez_nam
+                                nuts2cod
                             </th>
                             <td>
-                                {{ object.polbez_nam}}
+                                {{ object.nuts2cod}}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                nuts3_code
+                                nuts2nam
                             </th>
                             <td>
-                                {{ object.nuts3_code}}
+                                {{ object.nuts2nam}}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                nuts3_name
+                                ctcod
                             </th>
                             <td>
-                                {{ object.nuts3_name}}
+                                {{ object.ctcod}}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                bundesland
+                                ctnam
                             </th>
                             <td>
-                                {{ object.bundesland}}
+                                {{ object.ctnam}}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                nuts2_name
+                                ctalt
                             </th>
                             <td>
-                                {{ object.nuts2_name}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                nuts2_code
-                            </th>
-                            <td>
-                                {{ object.nuts2_code}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                state_code
-                            </th>
-                            <td>
-                                {{ object.state_code}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                state_name
-                            </th>
-                            <td>
-                                {{ object.state_name}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                state_altn
-                            </th>
-                            <td>
-                                {{ object.state_altn}}
+                                {{ object.ctalt}}
                             </td>
                         </tr>
                     </table>
@@ -188,7 +157,9 @@
     <script type="text/javascript">
         function map_init_basic (map, options) {
             var geojsonFeature = {{ object.get_geojson|safe }};
-            L.geoJson(geojsonFeature).addTo(map);
+            var geojsonLayer = L.geoJson(geojsonFeature)
+            geojsonLayer.addTo(map);
+            map.fitBounds(geojsonLayer.getBounds());
         }
     </script>
     <script type="text/javascript">

@@ -4,12 +4,12 @@ from . models import *
 
 
 class MunicipalityTable(tables.Table):
-    cadcom_nam = tables.LinkColumn(
+    id = tables.LinkColumn(
         'shapes:municipality_detail',
-        args=[A('pk')], verbose_name='Name'
+        args=[A('pk')], verbose_name='ID'
     )
 
     class Meta:
         model = Municipality
-        sequence = ('cadcom_nam',)
+        sequence = ('id', 'saunam',)
         attrs = {"class": "table table-responsive table-hover"}

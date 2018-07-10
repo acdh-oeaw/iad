@@ -24,7 +24,11 @@ class MunicipalityListView(GenericListView):
     formhelper_class = MunicipalityFilterFormHelper
     init_columns = [
         'id',
-        'cadcom_nam',
+        'saunam',
+        'lau2nam',
+        'nuts3nam',
+        'nuts2nam',
+        'ctnam',
     ]
 
     def get_all_cols(self):
