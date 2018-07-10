@@ -109,18 +109,20 @@
                                 layerGroup.clearLayers();
                                 var newLayer = L.geoJson(data, {style: SiteStyle});
                                 newLayer.addTo(layerGroup);
+                                map.fitBounds(newLayer.getBounds());
                             });
                         });
 
                         // fetch polygon of related municipality
                         $("#id_cadastral_community").change(function() {
-                            var url = "/api/HANSI/" + this.value + "/?format=json";
+                            var url = "/api/municipalities/" + this.value + "?format=json";
                             console.log(url);
-                            // $.getJSON(url, function(data) {
-                            //     layerGroup.clearLayers();
-                            //     var newLayer = L.geoJson(data, {style: SiteStyle});
-                            //     newLayer.addTo(layerGroup);
-                            // });
+                            $.getJSON(url, function(data) {
+                                layerGroup.clearLayers();
+                                var newLayer = L.geoJson(data, {style: SiteStyle});
+                                newLayer.addTo(layerGroup);
+                                map.fitBounds(newLayer.getBounds());
+                            });
                         });
 
                     }, false);
