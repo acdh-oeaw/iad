@@ -87,7 +87,6 @@
                                 layers: 'SI.GURS.ZPDZ:DOF050'
                             })
                         map.layerscontrol.addOverlay(slov_layer, 'Ortho_Sl');
-                        console.log(map.layerscontrol._layers);
 
                     }, false);
                 </script>
@@ -101,13 +100,9 @@
                             })
 
                         map.layerscontrol.addOverlay(slov_layer, 'Ortho_Sl');
-                        console.log(map.layerscontrol._layers);
-
-
-                        // L.control.layers({}, extra_layer).addTo(detail.map);
-                        // L.control.addOverlay(extra_layer)
                         var layerGroup = L.layerGroup().addTo(map);
 
+                        // fetch polygon of related site
                         $("#id_site_id").change(function() {
                             var url = "/api/sites/" + this.value + "/?format=json";
                             $.getJSON(url, function(data) {
@@ -116,6 +111,18 @@
                                 newLayer.addTo(layerGroup);
                             });
                         });
+
+                        // fetch polygon of related municipality
+                        $("#id_cadastral_community").change(function() {
+                            var url = "/api/HANSI/" + this.value + "/?format=json";
+                            console.log(url);
+                            // $.getJSON(url, function(data) {
+                            //     layerGroup.clearLayers();
+                            //     var newLayer = L.geoJson(data, {style: SiteStyle});
+                            //     newLayer.addTo(layerGroup);
+                            // });
+                        });
+
                     }, false);
                 </script>
         {% endif %}

@@ -3,6 +3,6 @@ from .models import Site
 from .api_serializers import SiteSerializer
 
 
-class PlaceViewSet(viewsets.ModelViewSet):
+class SiteViewSet(viewsets.ModelViewSet):
     queryset = Site.objects.all()
     serializer_class = SiteSerializer

@@ -1,21 +1,21 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
-from entities.apis_views import PlaceViewSet, GeoJsonViewSet
 from bib.api_views import BookViewSet
 
 from vocabs import api_views
 from archiv import api_views as archiv_api_views
+from shapes import api_views as shapes_api_vies
 
 router = routers.DefaultRouter()
-router.register(r'geojson', GeoJsonViewSet, base_name='places')
 router.register(r'skoslabels', api_views.SkosLabelViewSet)
 router.register(r'skosnamespaces', api_views.SkosNamespaceViewSet)
 router.register(r'skosconceptschemes', api_views.SkosConceptSchemeViewSet)
 router.register(r'skosconcepts', api_views.SkosConceptViewSet)
-router.register(r'places', PlaceViewSet)
 router.register(r'Book', BookViewSet)
-router.register(r'sites', archiv_api_views.PlaceViewSet)
+router.register(r'sites', archiv_api_views.SiteViewSet)
+router.register(r'municipalities', shapes_api_vies.MunicipalityViewSet)
+
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
