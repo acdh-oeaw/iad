@@ -28,45 +28,7 @@
    </style>
 
     <script type="text/javascript">
-    function includes(container, value) {
-        // https://www.sharmaprakash.com.np/javascript/ie-alternative-to-inludes/
-    	var returnValue = false;
-    	var pos = container.indexOf(value);
-    	if (pos >= 0) {
-    		returnValue = true;
-    	}
-    	return returnValue;
-    }
-        $('#id_finds_type').ready(function(){
-            var selected_option =  $("#id_ent_type option:selected").text()
-            console.log(selected_option);
-            if (includes(selected_option, 'settlement')){
-                $( ".hidden_settlement" ).css("display", 'inline');
-            } else if (includes(selected_option, 'funerary')) {
-                $( ".hidden_burial" ).css("display", 'inline');
-            } else {
 
-            }
-
-        });
-        $("#id_ent_type").change(function() {
-            var selectedText = $("#id_ent_type option:selected").text();
-            var burials = $( ".hidden_burial" );
-            var settlements =  $( ".hidden_settlement" )
-            burials.css("display", "none");
-            settlements.css("display", "none");
-            console.log(selectedText)
-            if (includes(selectedText, 'funerary site')) {
-                burials.toggle();
-                settlements.css("display", "none")
-            } else if (includes(selectedText, 'settlement')) {
-                settlements.toggle();
-                burials.css("display", "none");
-            } else {
-                burials.css("display", "none");
-                settlements.css("display", "none");
-            }
-        });
     </script>
 
     <script type="text/javascript">
@@ -88,6 +50,47 @@
                             })
                         map.layerscontrol.addOverlay(slov_layer, 'Ortho_Sl');
 
+                        function includes(container, value) {
+                            // https://www.sharmaprakash.com.np/javascript/ie-alternative-to-inludes/
+                        	var returnValue = false;
+                        	var pos = container.indexOf(value);
+                        	if (pos >= 0) {
+                        		returnValue = true;
+                        	}
+                        	return returnValue;
+                        }
+                            $('#id_finds_type').ready(function(){
+                                var selected_option =  $("#id_ent_type option:selected").text()
+                                console.log(selected_option);
+                                if (includes(selected_option, 'settlement')){
+                                    $( ".hidden_settlement" ).css("display", 'inline');
+                                } else if (includes(selected_option, 'funerary')) {
+                                    $( ".hidden_burial" ).css("display", 'inline');
+                                } else {
+
+                                }
+
+                            });
+
+                        $("#id_ent_type").change(function() {
+                            console.log('hallo')
+                            var selectedText = $("#id_ent_type option:selected").text();
+                            var burials = $( ".hidden_burial" );
+                            var settlements =  $( ".hidden_settlement" )
+                            burials.css("display", "none");
+                            settlements.css("display", "none");
+                            console.log(selectedText)
+                            if (includes(selectedText, 'funerary site')) {
+                                burials.toggle();
+                                settlements.css("display", "none")
+                            } else if (includes(selectedText, 'settlement')) {
+                                settlements.toggle();
+                                burials.css("display", "none");
+                            } else {
+                                burials.css("display", "none");
+                                settlements.css("display", "none");
+                            }
+                        });
                     }, false);
                 </script>
             {% else %}
@@ -107,9 +110,14 @@
                             var url = "/api/sites/" + this.value + "/?format=json";
                             $.getJSON(url, function(data) {
                                 layerGroup.clearLayers();
-                                var newLayer = L.geoJson(data, {style: SiteStyle});
+                                var newLayer = L.geoJson(data, {style: SiteStyle})
                                 newLayer.addTo(layerGroup);
-                                map.fitBounds(newLayer.getBounds());
+                                try {
+                                    map.fitBounds(newLayer.getBounds());
+                                }
+                                catch(err) {
+                                    console.log(err.message)
+                                }
                             });
                         });
 
@@ -121,8 +129,55 @@
                                 layerGroup.clearLayers();
                                 var newLayer = L.geoJson(data, {style: SiteStyle});
                                 newLayer.addTo(layerGroup);
-                                map.fitBounds(newLayer.getBounds());
+                                try {
+                                    map.fitBounds(newLayer.getBounds());
+                                }
+                                catch(err) {
+                                    console.log(err.message)
+                                }
                             });
+                        });
+
+                        function includes(container, value) {
+                            // https://www.sharmaprakash.com.np/javascript/ie-alternative-to-inludes/
+                        	var returnValue = false;
+                        	var pos = container.indexOf(value);
+                        	if (pos >= 0) {
+                        		returnValue = true;
+                        	}
+                        	return returnValue;
+                        }
+                            $('#id_finds_type').ready(function(){
+                                var selected_option =  $("#id_ent_type option:selected").text()
+                                console.log(selected_option);
+                                if (includes(selected_option, 'settlement')){
+                                    $( ".hidden_settlement" ).css("display", 'inline');
+                                } else if (includes(selected_option, 'funerary')) {
+                                    $( ".hidden_burial" ).css("display", 'inline');
+                                } else {
+
+                                }
+
+                            });
+
+                        $("#id_ent_type").change(function() {
+                            console.log('hallo')
+                            var selectedText = $("#id_ent_type option:selected").text();
+                            var burials = $( ".hidden_burial" );
+                            var settlements =  $( ".hidden_settlement" )
+                            burials.css("display", "none");
+                            settlements.css("display", "none");
+                            console.log(selectedText)
+                            if (includes(selectedText, 'funerary site')) {
+                                burials.toggle();
+                                settlements.css("display", "none")
+                            } else if (includes(selectedText, 'settlement')) {
+                                settlements.toggle();
+                                burials.css("display", "none");
+                            } else {
+                                burials.css("display", "none");
+                                settlements.css("display", "none");
+                            }
                         });
 
                     }, false);
