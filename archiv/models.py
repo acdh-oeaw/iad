@@ -322,6 +322,10 @@ class Site(IadBaseClass):
         help_text="The cadastral community where the site is located.",
         related_name="has_sites"
     )
+    sm_adm = models.TextField(
+        blank=True, verbose_name="Smallest Administrative Unit",
+        help_text="Smallest Administrative Unit."
+    )
     cadastral_number = models.CharField(
         blank=True, null=True, max_length=250,
         verbose_name="Cadastral Number (will be moved to Place-Class)",

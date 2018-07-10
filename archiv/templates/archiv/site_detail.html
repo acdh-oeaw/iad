@@ -189,6 +189,16 @@
                             </td>
                         </tr>
                     {% endif %}
+                    {% if object.sm_adm %}
+                        <tr>
+                            <th>
+                                {% get_verbose_name site "sm_adm" %}
+                            </th>
+                            <td>
+                                {{ object.sm_adm }}
+                            </td>
+                        </tr>
+                    {% endif %}
                     {% if object.cadastral_number %}
                         <tr>
                             <th>

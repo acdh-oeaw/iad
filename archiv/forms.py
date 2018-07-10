@@ -296,8 +296,8 @@ class SiteForm(forms.ModelForm):
     class Meta:
         model = Site
         fields = [
-            'public', 'name', 'polygon', 'alt_id', 'alt_name',
-            'cadastral_community', 'heritage_number', 'plot_number',
+            'public', 'name', 'cadastral_community', 'polygon', 'alt_id', 'alt_name',
+            'sm_adm', 'heritage_number', 'plot_number',
             'ownership', 'other_period', 'description', 'comment', 'literature',
             # tourism field
             'accessibility', 'visibility', 'infrastructure', 'long_term_management',
@@ -338,6 +338,7 @@ class SiteForm(forms.ModelForm):
                 Div(
                     'public',
                     'name',
+                    'cadastral_community',
                     css_class="col-md-9"
                 ),
                 Div(
@@ -347,7 +348,7 @@ class SiteForm(forms.ModelForm):
                 Div(
                     'alt_id',
                     'alt_name',
-                    'cadastral_community',
+                    'sm_adm',
                     'heritage_number',
                     'plot_number',
                     'ownership',
