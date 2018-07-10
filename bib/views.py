@@ -1,4 +1,5 @@
 import requests
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -7,9 +8,14 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
-from .models import Book, Reference
-from .forms import ReferenceForm
+from . models import ZotItem, Reference
+from . zot_utils import items_to_dict, create_zotitem
+from . forms import ReferenceForm
 from django.conf import settings
+
+library_id = settings.Z_ID
+library_type = settings.Z_LIBRARY_TYPE
+api_key = settings.Z_API_KEY
 
 
 class BaseCreateView(CreateView):
@@ -80,89 +86,26 @@ class ReferenceDelete(DeleteView):
 def sync_zotero(request):
     """ renders a simple template with a button to trigger sync_zotero_action function """
     context = {}
-    try:
-        context['base_url'] = settings.Z_COLLECTION_URL
-        context['collection_title'] = settings.Z_TITLE
-    except:
-        context['base_url'] = ''
-        context['collection_title'] = 'PLEASE PROVIDE TITEL IN SETTINGS FILE'
     return render(request, 'bib/synczotero.html', context)
 
 
 @login_required
-def sync_zotero_action(request):
-    """ fetches the last n items form zoter and syncs it with the bib entries in defc-db"""
-    root = "https://api.zotero.org/"
-    if settings.Z_COLLECTION:
-        try:
-            params = "{}/{}/collections/{}/items/top?v=3&key={}".format(
-                settings.Z_ID_TYPE, settings.Z_ID, settings.Z_COLLECTION, settings.Z_API_KEY
-            )
-        except AttributeError as err:
-            context = {}
-            context['error'] = "{}".format(err)
-            return render(request, 'bib/synczotero_action.html', context)
-    else:
-        try:
-            params = "{}/{}/items/top?v=3&key={}".format(
-                settings.Z_ID_TYPE, settings.Z_ID, settings.Z_API_KEY
-            )
-        except AttributeError as err:
-            context = {}
-            context['error'] = "{}".format(err)
-            return render(request, 'bib/synczotero_action.html', context)
+def update_zotitems(request):
+    """ fetches all items with higher version number then the highest stored in db """
+    context = {}
+    context["saved"] = []
+    limit = None
+    since = None
+    context["books_before"] = ZotItem.objects.all().count()
     try:
-        limit = settings.Z_LIMIT
-    except AttributeError:
-        limit = "25"
-    url = root + params + "&sort=dateModified&limit={}".format(limit)
-    print(url)
-    books_before = len(Book.objects.all())
-    try:
-        r = requests.get(url)
-        error = "No errors from ZoteroAPI"
-    except:
-        error = "aa! errors! The API didn´t response with a proper json-file"
-    try:
-        response = r.json()
-    except:
-        response = None
+        first_object = ZotItem.objects.all()[:1].get()
+        since = first_object.zot_version
+    except ObjectDoesNotExist:
+        since = None
 
-    if response:
-        failed = []
-        saved = []
-        for x in response:
-            try:
-                x["data"]["creators"][0]
-                try:
-                    x["data"]["creators"][0]["name"]
-                    name = x["data"]["creators"][0]["name"]
-                except:
-                    firstname = x["data"]["creators"][0]["firstName"]
-                    lastname = x["data"]["creators"][0]["lastName"]
-                    name = "{}, {}".format(lastname, firstname)
-            except:
-                name = "no name provided"
-            NewBook = Book(
-                zoterokey=x["data"]["key"], item_type=x["data"]["itemType"],
-                author=name,
-                title=x["data"]["title"],
-                short_title=x["data"]["shortTitle"]
-            )
-            try:
-                NewBook.save()
-                saved.append(NewBook)
-            except:
-                failed(x['data'])
-        books_after = len(Book.objects.all())
-        context = {}
-        context["error"] = error
-        context["saved"] = saved
-        context["failed"] = failed
-        context["books_before"] = [books_before]
-        context["books_after"] = [books_after]
-        return render(request, 'bib/synczotero_action.html', context)
-    else:
-        context = {}
-        context["error"] = "something went wrong, please check your zotero settings"
-        return render(request, 'bib/synczotero_action.html', context)
+    items = items_to_dict(library_id, library_type, api_key, limit=limit, since_version=since)
+    for x in items['bibs']:
+        temp_item = create_zotitem(x)
+        context["saved"].append(temp_item)
+    context["books_after"] = ZotItem.objects.all().count()
+    return render(request, 'bib/synczotero_action.html', context)
