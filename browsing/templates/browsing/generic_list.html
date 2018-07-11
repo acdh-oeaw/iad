@@ -1,12 +1,14 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% load django_tables2 %}
+{% load charts_extras %}
 {% load browsing_extras %}
 {% load i18n %}
 {% load crispy_forms_field %}
 {% load crispy_forms_tags %}
 {% block Titel %} Browse {{ class_name }} {% endblock %}
 {% block scriptHeader %}
+{% load_highcharts_js %}
 {% endblock %}
 {% block content %}
 
@@ -57,7 +59,49 @@ $("#goto option").each(function() {
             </form>
           {% block reset_button %}
           <a class ="btn btn-outline-secondary"  href=".">Reset search</a>
+          {% if vis_list %}
+              <div class="btn-group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                  Visualize <span class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu">
+                      {% for x in vis_list %}
+                          <li>
+                              {% for y in x.chart_types.all %}
+                                  <a class="dropdown-item" title="{{ x.help_text }}" href="?{{ request.GET.urlencode }}&charttype={{ y }}&property={{ x.field_path }}">{{ x.label }} {{ y.icon|safe }}</a>
+                              {% endfor %}
+                          </li>
+                          <hr/>
+
+                      {% endfor %}
+                  </ul>
+              </div>
+          {% endif %}
+          {% if vis_list %}
+            {% if data %}
+              <div class="card">
+                  <div class="card-heading" style="text-align:center;">
+
+                          <h1>{{ data.title }}</h1>
+                          <legend>{{ data.items }}</legend>
+                          <button  type="button" class="btn btn-default" data-toggle="collapse" data-target="#howtocite" id="howtocite-btn">JSON data</button>
+                          <div id="howtocite" class="collapse">
+                              <p>{{data}}</p>
+                          </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="bar"></div>
+                    </div>
+                    {% if error %}
+                        <h4>{{ error_msg|safe }}</h4>
+                    {% endif %}
+
+                  </div>
+            {% endif %}
+          {% endif %}
+
+
           {% endblock %}
+
             </div>
             </div>
             </div>
@@ -236,5 +280,7 @@ $("#goto option").each(function() {
         </div>
         </div>
 </div>
+
+{% config_highcharts %}
 
 {% endblock %}

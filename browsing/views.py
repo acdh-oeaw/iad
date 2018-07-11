@@ -21,6 +21,9 @@ from entities.serializer_arche import *
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+from charts.models import ChartConfig
+from charts.views import create_payload
+
 
 class GenericListView(SingleTableView):
     filter_class = None
@@ -64,6 +67,22 @@ class GenericListView(SingleTableView):
             context['download'] = self.model.get_dl_url()
         except AttributeError:
             context['download'] = None
+        model_name = self.model.__name__.lower()
+        context['entity'] = model_name
+        print(context['entity'])
+        context['vis_list'] = ChartConfig.objects.filter(model_name=model_name)
+        context['property_name'] = self.request.GET.get('property')
+        context['charttype'] = self.request.GET.get('charttype')
+        if context['charttype'] and context['property_name']:
+            qs = self.get_queryset()
+            chartdata = create_payload(
+                context['entity'],
+                context['property_name'],
+                context['charttype'],
+                qs
+            )
+            context = dict(context, **chartdata)
+            print(chartdata)
         return context
 
     @method_decorator(login_required)
@@ -141,7 +160,8 @@ class MonumentProtectionDl(MonumentProtectionListView):
         filename = "export_{}".format(timestamp)
         response = HttpResponse(content_type='text/csv')
         conf_items = list(
-            BrowsConf.objects.filter(model_name='monumentprotection').values_list('field_path', 'label')
+            BrowsConf.objects.filter(model_name='monumentprotection')
+            .values_list('field_path', 'label')
         )
         if conf_items:
             try:
