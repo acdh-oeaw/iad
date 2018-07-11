@@ -23,8 +23,8 @@ class MunicipalityFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'nuts3_name',
-                    'nuts2_name',
+                    'nuts3nam',
+                    'ctnam',
                     css_id="more"
                     ),
                 )

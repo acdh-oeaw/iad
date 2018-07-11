@@ -37,6 +37,9 @@ class Municipality(models.Model):
     )
     geom = models.MultiPolygonField(blank=True, null=True, srid=4326)
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         if self.saunam and self.lau2nam:
             name = "{} ({})".format(self.saunam, self.lau2nam)
