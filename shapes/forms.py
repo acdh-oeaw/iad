@@ -17,7 +17,7 @@ class MunicipalityFilterFormHelper(FormHelper):
         self.layout = Layout(
             Fieldset(
                 'Basic search options',
-                'cadcom_nam',
+                'lau2nam',
                 css_id="basic_search_fields"
                 ),
             Accordion(

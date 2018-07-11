@@ -598,7 +598,7 @@ class InstitutionListFilter(django_filters.FilterSet):
     class Meta:
         model = Institution
         fields = [
-            'id', 'written_name', 'authority_url', 'location'
+            'written_name', 'authority_url', 'location'
         ]
 
 
@@ -626,9 +626,7 @@ class PlaceListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Place
-        fields = [
-            'id'
-        ]
+        fields = "__all__"
 
 
 class AlternativeNameListFilter(django_filters.FilterSet):
@@ -640,6 +638,4 @@ class AlternativeNameListFilter(django_filters.FilterSet):
 
     class Meta:
         model = AlternativeName
-        fields = [
-            'id'
-        ]
+        fields = "__all__"

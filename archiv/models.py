@@ -202,7 +202,7 @@ class Period(IadBaseClass):
     )
 
     class Meta:
-        ordering = ['id']
+        ordering = ['pk']
         verbose_name = "Chronology"
 
     def get_geojson(self):
@@ -413,7 +413,7 @@ class Site(IadBaseClass):
     )
 
     class Meta:
-        ordering = ['id']
+        ordering = ['pk']
         verbose_name = "Site"
 
     def get_geojson(self):
@@ -510,7 +510,7 @@ class ResearchQuestion(IdProvider):
         return self.question
 
     class Meta:
-        ordering = ['id']
+        ordering = ['pk']
         verbose_name = "Research Question"
 
 
@@ -582,7 +582,7 @@ class ResearchEvent(IadBaseClass):
     )
 
     class Meta:
-        ordering = ['id']
+        ordering = ['pk']
         verbose_name = "Research Activity"
         verbose_name_plural = "Research Activities"
 
@@ -761,7 +761,7 @@ class ArchEnt(IadBaseClass):
         return geojson
 
     class Meta:
-        ordering = ['id']
+        ordering = ['pk']
         verbose_name = "Archaeological Entity"
 
     def get_geojson(self):
@@ -857,7 +857,7 @@ class MonumentProtection(IadBaseClass):
     )
 
     class Meta:
-        ordering = ['id']
+        ordering = ['pk']
         verbose_name = 'Monument Protection'
 
     def get_geojson(self):
