@@ -28,7 +28,7 @@ django_filters.filters.LOOKUP_TYPES = [
 
 class ReferenceListFilter(django_filters.FilterSet):
     zotero_item = django_filters.ModelMultipleChoiceFilter(
-        queryset=Reference.objects.all(),
+        queryset=ZotItem.objects.all(),
         help_text=Reference._meta.get_field('zotero_item').help_text,
         label=Reference._meta.get_field('zotero_item').verbose_name
         )

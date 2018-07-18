@@ -98,7 +98,6 @@ class ZotItem(models.Model):
         else:
             super(ZotItem, self).save(*args, **kwargs)
 
-
     def get_zotero_url(self):
         "Returns the objects URL pointing to its Zotero entry"
         if self.zot_html_link:

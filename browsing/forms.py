@@ -25,20 +25,11 @@ class ReferenceFormHelper(FormHelper):
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
             Fieldset(
-               'Basic search options',
+                'Basic search options',
                 'zotero_item',
                 'page',
                 css_id="basic_search_fields"
                 ),
-####### Uncomment if there are advanced options ####################
-            # Accordion(
-            #     AccordionGroup(
-            #         'Advanced search options',
-            #         'zotero_item',
-            #         'page',
-            #         css_id="more"
-            #     )
-            #     )
             )
 
 
