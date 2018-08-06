@@ -16,6 +16,7 @@ class ZotItemAdmin(admin.ModelAdmin):
         'zot_version'
     ]
 
+
 class ReferenceAdmin(admin.ModelAdmin):
     search_fields = ['id', 'zotero_item', 'page']
     list_display = ['id', 'zotero_item', 'page']

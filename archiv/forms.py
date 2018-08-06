@@ -306,6 +306,7 @@ class SiteForm(forms.ModelForm):
         ]
         widgets = {
             'public': forms.CheckboxInput(),
+            'sm_adm': forms.TextInput(),
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(

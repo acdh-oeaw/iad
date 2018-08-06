@@ -153,7 +153,6 @@ class Institution(IdProvider):
     alt_names = models.ManyToManyField(
         AlternativeName,
         max_length=250, blank=True,
-        help_text="Alternative names",
         related_name="altname_of_inst",
         verbose_name="Alternative names"
     )
