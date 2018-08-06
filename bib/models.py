@@ -81,10 +81,12 @@ class ZotItem(models.Model):
         ordering = ['-zot_version']
 
     def __str__(self):
-        if self.zot_bibtex:
-            return "{}".format(self.zot_bibtex)
+        if self.zot_title:
+            return "{}".format(self.zot_title)
+        elif self.zot_pub_title:
+            return "{}".format(self.zot_pub_title)
         else:
-            return "{}: {}; {}".format(self.zot_creator, self.zot_title, self.zot_pub_title)
+            return "{}; {}".format(self.zot_creator, self.zot_title, self.zot_pub_title)
 
     def save(self, get_bibtex=False, *args, **kwargs):
         if get_bibtex:
