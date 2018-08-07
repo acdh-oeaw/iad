@@ -54,6 +54,7 @@ class ArchEntTable(tables.Table):
         'archiv:archent_detail',
         args=[A('pk')], verbose_name='Name'
     )
+    comment = tables.TemplateColumn("{{ record.comment|truncatechars:250 }}")
     site_id = tables.Column()
     public = tables.Column()
 
@@ -72,6 +73,7 @@ class SiteTable(tables.Table):
         'archiv:site_detail',
         args=[A('pk')], verbose_name='Name'
     )
+
     public = tables.Column()
 
     class Meta:

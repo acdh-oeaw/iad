@@ -292,7 +292,7 @@ class SiteListView(GenericListView):
     table_class = SiteTable
     filter_class = SiteListFilter
     formhelper_class = SiteFilterFormHelper
-    init_columns = ['id', 'name', 'comment']
+    init_columns = ['id', 'name', ]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
