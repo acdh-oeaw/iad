@@ -33,7 +33,7 @@ include 'autocomplete_light/static.html
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                        <small>Institution:</small> {{ object }}
+                        <small><a href="{{ object.get_listview_url }}">Institution</a></small> {{ object }}
                         {% if user.is_authenticated %}
                         <small>
                         <a href="{% url 'entities:institution_edit' pk=object.id %}">

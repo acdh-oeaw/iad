@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                        <small>Monument Protection:</small> {{ object }}
+                        <small><a href="{{ object.get_listview_url }}">Monument Protection</a></small> {{ object }}
                         {% if user.is_authenticated %}
                             <small>
                                 <a href="{% url 'archiv:monumentprotection_edit' pk=object.id %}">
@@ -69,6 +69,7 @@
                             <button type="submit" class="btn btn-primary">Copy</button>
                         </form>
                     {% endif %}
+
                 </div>
             <div class="col-md-2">
                 <h2>

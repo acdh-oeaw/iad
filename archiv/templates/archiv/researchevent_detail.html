@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                        <small>Research Activity:</small> {{ object }}
+                        <small><a href="{{ object.get_listview_url }}">Research Activity</a></small> {{ object }}
                         {% if user.is_authenticated %}
                             <small>
                                 <a href="{% url 'archiv:researchevent_edit' pk=object.id %}">
