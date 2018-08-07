@@ -149,6 +149,9 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="nav-link" href="{% url 'webpage:user_logout' %}">Log-Out</a>
+                                {% if 'reversion' in APPS %}
+                                    <a class="nav-link" href="{% url 'webpage:user_detail' pk=user.id %}">My Page</a>
+                                {% endif %}
                             </div>
                         {% else %}
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

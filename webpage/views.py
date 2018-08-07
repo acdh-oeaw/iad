@@ -5,6 +5,8 @@ from django.template import RequestContext, loader
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from . forms import form_user_login
 
 
@@ -21,6 +23,10 @@ if 'reversion' in settings.INSTALLED_APPS:
             versions = Version.objects.filter(revision__user__id=current_user)[:500]
             context['versions'] = versions
             return context
+
+        @method_decorator(login_required)
+        def dispatch(self, *args, **kwargs):
+            return super(UserDetailView, self).dispatch(*args, **kwargs)
 else:
     pass
 
