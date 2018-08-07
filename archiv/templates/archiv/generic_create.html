@@ -43,12 +43,16 @@
                 <script type="text/javascript">
                     window.addEventListener("map:init", function (e) {
                         var detail = e.detail;
+                        var map = detail.map;
                         var siteGeojsonFeature = {{ site_poly|safe }};
-                        L.geoJson(siteGeojsonFeature, {style: SiteStyle}).addTo(detail.map);
+                        var sitesLayer = L.geoJson(siteGeojsonFeature, {style: SiteStyle});
+                        sitesLayer.addTo(map);
                         var slov_layer =  L.tileLayer.wms('https://prostor4.gov.si/ows2-m-pub/wms?', {
                                 layers: 'SI.GURS.ZPDZ:DOF050'
                             })
                         map.layerscontrol.addOverlay(slov_layer, 'Ortho_Sl');
+                        map.fitBounds(sitesLayer.getBounds());
+
 
                         function includes(container, value) {
                             // https://www.sharmaprakash.com.np/javascript/ie-alternative-to-inludes/

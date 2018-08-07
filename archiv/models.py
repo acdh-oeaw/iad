@@ -895,6 +895,17 @@ class MonumentProtection(IadBaseClass):
     def get_dl_url(self):
         return reverse('browsing:dl_monumentprotection')
 
+    def get_site_geojson(self):
+        if self.site_id:
+            geojson = serialize(
+                'geojson', Site.objects.filter(has_monument_protection__in=[self.id]),
+                geometry_field='polygon',
+                fields=('name', 'identifier',)
+            )
+        else:
+            geojson = None
+        return geojson
+
     def get_next(self):
         next = MonumentProtection.objects.filter(id__gt=self.id)
         if next:

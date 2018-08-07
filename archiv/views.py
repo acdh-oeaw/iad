@@ -149,7 +149,6 @@ class ResearchEventCreate(BaseCreateView):
 
     model = ResearchEvent
     form_class = ResearchEventForm
-    # template_name = "archiv/researchevent_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -160,7 +159,6 @@ class ResearchEventUpdate(BaseUpdateView):
 
     model = ResearchEvent
     form_class = ResearchEventForm
-    # template_name = "archiv/researchevent_create.html"
 
     def get_context_data(self, **kwargs):
         context = super(ResearchEventUpdate, self).get_context_data()
