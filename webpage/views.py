@@ -1,9 +1,28 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
+from django.conf import settings
 from django.template import RequestContext, loader
 from django.views.generic import TemplateView
-from django.contrib.auth import authenticate, login, logout
-from .forms import form_user_login
+from django.views.generic.detail import DetailView
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from . forms import form_user_login
+
+
+if 'reversion' in settings.INSTALLED_APPS:
+    from reversion.models import Version
+
+    class UserDetailView(DetailView):
+        model = get_user_model()
+        template_name = 'webpage/user_detail.html'
+
+        def get_context_data(self, **kwargs):
+            context = super(UserDetailView, self).get_context_data()
+            current_user = self.kwargs['pk']
+            versions = Version.objects.filter(revision__user__id=current_user)[:500]
+            context['versions'] = versions
+            return context
+else:
+    pass
 
 
 class GenericWebpageView(TemplateView):
