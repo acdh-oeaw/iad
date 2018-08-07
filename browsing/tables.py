@@ -34,7 +34,7 @@ class ResearchQuestionTable(tables.Table):
         'archiv:researchquestion_detail',
         args=[A('pk')], verbose_name='ID'
     )
-    qeustion = tables.LinkColumn(
+    question = tables.LinkColumn(
         'archiv:researchquestion_detail',
         args=[A('pk')], verbose_name='Question'
     )
@@ -87,6 +87,9 @@ class ResearchEventTable(tables.Table):
     )
     start_date = tables.DateColumn(format='Y-m-d')
     end_date = tables.DateColumn(format='Y-m-d')
+    site_id = tables.ManyToManyColumn()
+    responsible_researcher = tables.ManyToManyColumn()
+    responsible_institution = tables.ManyToManyColumn()
 
     class Meta:
         model = ResearchEvent
