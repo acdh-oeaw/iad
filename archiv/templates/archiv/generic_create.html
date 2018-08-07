@@ -105,6 +105,13 @@
                         map.layerscontrol.addOverlay(slov_layer, 'Ortho_Sl');
                         var layerGroup = L.layerGroup().addTo(map);
 
+                        {% if convex_hulls %}
+                            var siteGeojsonFeature = {{ convex_hulls|safe }};
+                            var sitesLayer = L.geoJson(siteGeojsonFeature).setStyle({fillColor: 'green'});
+                            sitesLayer.addTo(map);
+                            map.fitBounds(sitesLayer.getBounds());
+                        {% endif %}
+
                         // fetch polygon of related site
                         $("#id_site_id").change(function() {
                             var url = "/api/sites/" + this.value + "/?format=json";

@@ -650,6 +650,21 @@ class ResearchEvent(IadBaseClass):
             'archiv:researchevent_detail', kwargs={'pk': self.id}
         )
 
+    def convex_hulls(self):
+        if self.site_id.exclude(polygon=None):
+            geojson = json.loads(
+                self.site_id.exclude(polygon=None)
+                .aggregate(combined=Union('polygon'))['combined']
+                .convex_hull.geojson
+            )
+            geojson['properties'] = {
+                'name': "Convex hull of all related Sites"
+            }
+            geojson = json.dumps(geojson)
+            return geojson
+        else:
+            return None
+
 
 ARCHENT_CERTAINTY = (
     (

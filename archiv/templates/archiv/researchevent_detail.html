@@ -290,10 +290,11 @@
     function map_init_basic (map, options) {
         var geojsonFeature = {{ object.get_geojson|safe }};
         L.geoJson(geojsonFeature).addTo(map);
-        {% if object.get_site_geojson %}
-            var siteGeojsonFeature = {{ object.get_site_geojson|safe }};
-
-            L.geoJson(siteGeojsonFeature).setStyle({fillColor: 'green'}).addTo(map);
+        {% if object.convex_hulls %}
+            var siteGeojsonFeature = {{ object.convex_hulls|safe }};
+            var sitesLayer = L.geoJson(siteGeojsonFeature).setStyle({fillColor: 'green'});
+            sitesLayer.addTo(map);
+            map.fitBounds(sitesLayer.getBounds());
         {% endif %}
     }
 </script>
