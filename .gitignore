@@ -44,3 +44,15 @@ dev_secret.py
 /db.json
 /auth.json
 /shapes.json
+/ae__ent_type__pref_label.csv
+/ae__period__name.csv
+/ae__settlement_fortification.csv
+/ae__settlement_occupation.csv
+/ae__topography.csv
+/mp__current_land_use.csv
+/mp__threats.csv
+/re_research_method__pref_label.csv
+/re_research_type__pref_label.csv
+/site__other_period.csv
+/ae__burial_construction.csv
+/ae__burial_type.csv
