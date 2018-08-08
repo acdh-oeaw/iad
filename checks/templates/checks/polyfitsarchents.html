@@ -1,0 +1,17 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load leaflet_tags %}
+{% load webpage_extras %}
+{% load archiv_extras %}
+{% block title %} Hello {{ object}}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Sum of ArchEnts does not fit Site-Polygon</h2>
+        {% for x in errors %}
+            <li>
+                <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+            </li>
+        {% endfor %}
+    </div>
+{% endblock content %}
