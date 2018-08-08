@@ -35,5 +35,6 @@ urlpatterns = [
     url(r'^bib-ac/', include('bib.dal_urls', namespace='bib-ac')),
     url(r'^archiv/', include('archiv.urls', namespace='archiv')),
     url(r'^charts/', include('charts.urls', namespace='charts')),
+    url(r'^checks/', include('checks.urls', namespace='checks')),
     url(r'^', include('webpage.urls', namespace='webpage')),
 ]

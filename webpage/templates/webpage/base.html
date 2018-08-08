@@ -129,6 +129,21 @@
                         <a class="dropdown-item" href="{% url 'charts:chart_selector' %}">Charts</a>
                         </div>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                           Quality Checks <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'checks:poly_exists' model_name='site' %}">
+                                Poly for Site?
+                            </a>
+                            <a class="dropdown-item" href="{% url 'checks:poly_exists' model_name='archent' %}">
+                                Poly for Archaelogical Entity?
+                            </a>
+                        </div>
+                    </li>
+                    {% endif %}
                     {% if user.is_superuser %}
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

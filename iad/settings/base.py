@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'browsing',
     'arche',
     'archiv',
+    'checks',
     'shapes',
     'charts',
 ]

@@ -6,10 +6,12 @@
 {% block title %} Hello {{ object}}{% endblock %}
 
 {% block content %}
-    <h1>Hallo {{ object }}</h1>
-    {% for x in versions %}
-        <li>
-            <a href="{{ x.object.get_absolute_url }}">{{ x.revision.date_created }} {{ x }}</a>
-        </li>
-    {% endfor %}
+    <div class="container">
+        <h1>Hallo {{ object }}</h1>
+        {% for x in versions %}
+            <li>
+                <a href="{{ x.object.get_absolute_url }}">{{ x.revision.date_created }} {{ x }}</a>
+            </li>
+        {% endfor %}
+    </div>
 {% endblock content %}

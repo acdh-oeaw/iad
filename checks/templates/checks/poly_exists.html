@@ -1,0 +1,23 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load leaflet_tags %}
+{% load webpage_extras %}
+{% load archiv_extras %}
+{% block title %} Hello {{ object}}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>class: {{ class }}</h1>
+        <h2>{{ no_poly_count }} out of {{ all }} without polygon</h2>
+        listing the last 50 (or less)
+
+        <ul>
+            {% for x in no_poly %}
+                <li>
+                    <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+{% endblock content %}
