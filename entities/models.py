@@ -146,6 +146,11 @@ class Institution(IdProvider):
         max_length=300, blank=True,
         verbose_name="Written name"
         )
+    inst_alt_name = models.CharField(
+        max_length=500, blank=True,
+        verbose_name="Alternative Name(s) for this Institution",
+        help_text="Use '; ' to separate many alterantive names."
+        )
     authority_url = models.CharField(
         max_length=300, blank=True,
         verbose_name="Authority url"
@@ -238,6 +243,11 @@ class Person(IdProvider):
     name = models.CharField(
         max_length=300, blank=True,
         verbose_name="Name"
+        )
+    pers_alt_name = models.CharField(
+        max_length=500, blank=True,
+        verbose_name="Alternative Name(s) for this Person",
+        help_text="Use '; ' to separate many alterantive names."
         )
     acad_title = models.CharField(
         max_length=300, blank=True,

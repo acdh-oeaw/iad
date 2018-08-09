@@ -95,6 +95,16 @@ include 'autocomplete_light/static.html
                         </td>
                     </tr>
                     {% endif %}
+                    {% if object.pers_alt_name %}
+                    <tr>
+                        <th>
+                            {% get_verbose_name person "pers_alt_name" %}
+                        </th>
+                        <td>
+                            {{ object.pers_alt_name }}
+                        </td>
+                    </tr>
+                    {% endif %}
                     {% if object.place_of_birth %}
                     <tr>
                         <th>
