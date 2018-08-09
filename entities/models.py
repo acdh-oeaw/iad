@@ -150,6 +150,21 @@ class Institution(IdProvider):
         max_length=300, blank=True,
         verbose_name="Authority url"
         )
+    adress = models.CharField(
+        max_length=500, blank=True,
+        verbose_name="Adress",
+        help_text="Adress of the research institution/museum."
+        )
+    contact = models.CharField(
+        max_length=200, blank=True,
+        verbose_name="Contact",
+        help_text="Contact (email) of the research institution/museum."
+        )
+    homepage = models.CharField(
+        max_length=200, blank=True,
+        verbose_name="Homepage",
+        help_text="URL of the research institution/museum."
+        )
     alt_names = models.ManyToManyField(
         AlternativeName,
         max_length=250, blank=True,

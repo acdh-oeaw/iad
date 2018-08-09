@@ -9,7 +9,9 @@ from .models import Place, AlternativeName, Institution, Person
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
-        fields = "__all__"
+        exclude = [
+            'alt_names',
+        ]
         widgets = {
             'belongs_to_institution': autocomplete.ModelSelect2(
                 url='entities-ac:institution-autocomplete'),
@@ -32,7 +34,9 @@ class PersonForm(forms.ModelForm):
 class InstitutionForm(forms.ModelForm):
     class Meta:
         model = Institution
-        fields = "__all__"
+        exclude = [
+            'alt_names',
+        ]
         widgets = {
             'location': autocomplete.ModelSelect2(url='entities-ac:place-autocomplete'),
             'parent_institution': autocomplete.ModelSelect2(
