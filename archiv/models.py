@@ -217,9 +217,9 @@ class Period(IadBaseClass):
     def get_listview_url(self):
         return reverse('browsing:browse_periods')
 
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:period_create')
+    # @classmethod
+    # def get_createview_url(self):
+    #     return reverse('archiv:period_create')
 
     def get_next(self):
         next = Period.objects.filter(id__gt=self.id)
