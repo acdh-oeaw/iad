@@ -169,7 +169,16 @@
                             <td>
                                 {% for x in object.literature.all %}
                                     <li>
-                                        {{ x }} <a href="{{ x.zotero_item.get_zotero_url }}" target="_blank"><i class="fas fa-book"></i></a>
+                                        {% if x.zotero_item.zot_title %}
+                                            {{ x.zotero_item.zot_title }}
+                                        {% endif %}
+                                        {% if x.zotero_item.zot_pub_title %}
+                                            - {{ x.zotero_item.zot_pub_title }}
+                                        {% endif %}
+                                        {% if x.zotero_item.zot_date %}
+                                            - {{ x.zotero_item.zot_date }}
+                                        {% endif %}
+                                        <a href="{{ x.zotero_item.get_zotero_url }}" target="_blank"><i class="fas fa-book"></i></a>
                                     </li>
                                 {% endfor %}
                             </td>
