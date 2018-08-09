@@ -436,9 +436,6 @@ class Site(IadBaseClass):
     def get_createview_url(self):
         return reverse('archiv:site_create')
 
-    # def convex_hull_poly_archents(self):
-
-
     def convex_hull_archents(self):
         if self.has_archent.exclude(polygon=None):
             geojson = json.loads(

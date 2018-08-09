@@ -57,10 +57,12 @@ class ArchEntTable(tables.Table):
     comment = tables.TemplateColumn("{{ record.comment|truncatechars:250 }}")
     site_id = tables.Column()
     public = tables.Column()
+    topography = tables.ManyToManyColumn()
+    period = tables.ManyToManyColumn()
 
     class Meta:
         model = ArchEnt
-        sequence = ('id', 'name', 'site_id')
+        sequence = ('id', 'name', 'site_id', 'ent_type')
         attrs = {"class": "table table-responsive table-hover"}
 
 
@@ -92,6 +94,7 @@ class ResearchEventTable(tables.Table):
     site_id = tables.ManyToManyColumn()
     responsible_researcher = tables.ManyToManyColumn()
     responsible_institution = tables.ManyToManyColumn()
+    research_method = tables.ManyToManyColumn()
 
     class Meta:
         model = ResearchEvent

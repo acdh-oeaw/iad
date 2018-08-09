@@ -225,7 +225,7 @@ class ArchEntListView(GenericListView):
     table_class = ArchEntTable
     filter_class = ArchEntListFilter
     formhelper_class = ArchEntFilterFormHelper
-    init_columns = ['name', 'site_id', 'comment']
+    init_columns = ['name', 'site_id', 'ent_type']
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -376,7 +376,7 @@ class ResearchEventListView(GenericListView):
     table_class = ResearchEventTable
     filter_class = ResearchEventListFilter
     formhelper_class = ResearchEventFilterFormHelper
-    init_columns = ['id', 'start_date', 'end_date', 'site_id']
+    init_columns = ['id', 'start_date', 'site_id', 'research_type', 'research_method']
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
