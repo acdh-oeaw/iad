@@ -15,4 +15,8 @@ urlpatterns = [
         name='reference_edit'),
     url(r'^reference/delete/(?P<pk>[0-9]+)$', views.ReferenceDelete.as_view(),
         name='reference_delete'),
+    url(
+        r'references/$', views.ReferenceListView.as_view(),
+        name='browse_references'
+    ),
 ]

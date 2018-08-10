@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -16,6 +17,38 @@ from django.conf import settings
 library_id = settings.Z_ID
 library_type = settings.Z_LIBRARY_TYPE
 api_key = settings.Z_API_KEY
+
+
+class ReferenceListView(ListView):
+    model = Reference
+    template_naem = 'bib/reference_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ReferenceListView, self).get_context_data(**kwargs)
+        context['docstring'] = "{}".format(self.model.__doc__)
+        if self.model._meta.verbose_name_plural:
+            context['class_name'] = "{}".format(self.model._meta.verbose_name.title())
+        else:
+            if self.model.__name__.endswith('s'):
+                context['class_name'] = "{}".format(self.model.__name__)
+            else:
+                context['class_name'] = "{}s".format(self.model.__name__)
+        try:
+            context['get_arche_dump'] = self.model.get_arche_dump()
+        except AttributeError:
+            context['get_arche_dump'] = None
+        try:
+            context['create_view_link'] = self.model.get_createview_url()
+        except AttributeError:
+            context['create_view_link'] = None
+        try:
+            context['download'] = self.model.get_dl_url()
+        except AttributeError:
+            context['download'] = None
+        model_name = self.model.__name__.lower()
+        context['entity'] = model_name
+        context['count'] = self.get_queryset().count()
+        return context
 
 
 class BaseCreateView(CreateView):

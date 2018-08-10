@@ -1,0 +1,60 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load leaflet_tags %}
+{% load webpage_extras %}
+{% block title %}References{% endblock %}
+{% block scriptHeader %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header" style="text-align:center;">
+            <h1>{{ count }} References</h1><br />
+            {% if user.is_authenticated %}
+            {% if create_view_link  %}
+              <a class ="btn btn-outline-secondary"  href="{{ create_view_link }}">Create new {{class_name}}</a>
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Pub-Title</th>
+                        <th>Date</th>
+                        <th>Pages</th>
+                        <th>Zotero-Key</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for x in object_list %}
+                        <tr>
+                            <td>
+                                {{ x.zotero_item.zot_title }}
+                            </td>
+                            <td>
+                                {{ x.zotero_item.zot_pub_title }}
+                            </td>
+                            <td>
+                                {{ x.zotero_item.zot_date }}
+                            </td>
+                            <td>
+                                {{ x.zotero_item.zot_pages }}
+                            </td>
+                            <td>
+                                <a href="{{ x.get_absolute_url }}">{{ x.zotero_item.zot_key }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    </script>
+{% endblock %}
