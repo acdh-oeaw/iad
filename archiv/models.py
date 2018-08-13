@@ -438,15 +438,18 @@ class Site(IadBaseClass):
 
     def convex_hull_archents(self):
         if self.has_archent.exclude(polygon=None):
-            geojson = json.loads(
-                self.has_archent.exclude(polygon=None)
-                .aggregate(combined=Union('polygon'))['combined']
-                .convex_hull.geojson
-            )
-            geojson['properties'] = {
-                'name': "Convex hull of all Archaeological Entities"
-            }
-            geojson = json.dumps(geojson)
+            try:
+                geojson = json.loads(
+                    self.has_archent.exclude(polygon=None)
+                    .aggregate(combined=Union('polygon'))['combined']
+                    .convex_hull.geojson
+                )
+                geojson['properties'] = {
+                    'name': "Convex hull of all Archaeological Entities"
+                }
+                geojson = json.dumps(geojson)
+            except:
+                geojson = None
             return geojson
         else:
             return None

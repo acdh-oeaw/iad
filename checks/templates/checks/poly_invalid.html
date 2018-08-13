@@ -1,0 +1,22 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load leaflet_tags %}
+{% load webpage_extras %}
+{% load archiv_extras %}
+{% block title %} Invalid Polygons {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Invalid Polygons}</h1>
+        <h2>{{ nr_invalid }} out of {{ all }} polygons are not valid</h2>
+
+        <ul>
+            {% for x in invalid %}
+                <li>
+                    <a href="{{ x }}">{{ x }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+{% endblock content %}

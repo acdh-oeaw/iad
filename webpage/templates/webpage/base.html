@@ -140,6 +140,9 @@
                            Quality Checks <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'checks:invalid_poly' %}">
+                                Polygon Valid?
+                            </a>
                             <a class="dropdown-item" href="{% url 'checks:poly_exists' model_name='site' %}">
                                 Poly for Site?
                             </a>

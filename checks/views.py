@@ -5,7 +5,25 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.gis.db.models import Union
 from django.utils.decorators import method_decorator
 
-from archiv.models import Site
+from archiv.models import Site, ArchEnt, MonumentProtection, ResearchEvent
+
+
+class InValidPoly(TemplateView):
+    template_name = "checks/poly_invalid.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(InValidPoly, self).get_context_data()
+        classes = [Site, ArchEnt, MonumentProtection, ResearchEvent]
+        invalid = []
+        all = []
+        for x in classes:
+            objects = x.objects.exclude(polygon=None)
+            invalid = invalid + [y.get_absolute_url() for y in objects if not y.polygon.valid]
+            all = all + [x['polygon'] for x in objects.values().values('polygon')]
+        context['nr_invalid'] = len(invalid)
+        context['all'] = len(all)
+        context['invalid'] = invalid
+        return context
 
 
 class PolygonExists(TemplateView):
@@ -37,13 +55,20 @@ class PolyFitsArchEnts(TemplateView):
         for x in Site.objects.exclude(polygon=None):
             archs = None
             poly = None
-            archs = x.has_archent.exclude(polygon=None).aggregate(combined=Union('polygon'))
-            archs = archs['combined']
+            try:
+                archs = x.has_archent.exclude(polygon=None).aggregate(combined=Union('polygon'))
+            except:
+                archs = None
+            if archs:
+                archs = archs['combined']
             poly = x.polygon
             if archs:
-                if Site.objects.filter(id=x.id).filter(polygon__covers=archs):
+                try:
+                    if Site.objects.filter(id=x.id).filter(polygon__covers=archs):
+                        pass
+                    else:
+                        errors.append(x)
+                except:
                     pass
-                else:
-                    errors.append(x)
         context['errors'] = errors
         return context
