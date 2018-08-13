@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -64,6 +65,25 @@ class ArchEntUpdate(BaseUpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(ArchEntUpdate, self).get_context_data()
+        burial = None
+        instance = self.object
+
+        if self.model.objects.filter(id=instance.id).filter(
+            Q(ent_type__pref_label__startswith='funerary')
+            | Q(ent_type__broader_concept__pref_label__startswith='funerary')
+        ):
+            context['no_burial'] = False
+        else:
+            context['no_burial'] = True
+
+        if self.model.objects.filter(id=instance.id).filter(
+            Q(ent_type__pref_label__startswith='settlement')
+            | Q(ent_type__broader_concept__pref_label__startswith='settlement')
+        ):
+            context['no_settlement'] = False
+        else:
+            context['settlement'] = True
+
         try:
             instance = self.object
             site_poly = instance.site_id.get_geojson()

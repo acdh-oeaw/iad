@@ -13,19 +13,24 @@
         {% endif %}
     </h1>
     {% block aditionaljs %}
-    <style>
+    {% if no_burial %}
+        <style>
+           .hidden_burial {
+               display:none;
+           }
 
-       .hidden_burial {
-           display:none;
-       }
-
-       .hidden_settlement {
-           display:none;
-       }
-       .controls > span > strong {
-        color: red;
-       }
-   </style>
+       </style>
+    {% endif %}
+    {% if no_settlement %}
+        <style>
+           .hidden_settlement {
+               display:none;
+           }
+           .controls > span > strong {
+            color: red;
+           }
+       </style>
+      {% endif %}
 
     <script type="text/javascript">
 
