@@ -177,7 +177,7 @@
                                         {% endif %}
                                         {% if x.zotero_item.zot_date %}
                                             - {{ x.zotero_item.zot_date }}
-                                        {% endif %}
+                                        {% endif %}p. {{x.page}}
                                         <a href="{{ x.zotero_item.get_zotero_url }}" target="_blank"><i class="fas fa-book"></i></a>
                                     </li>
                                 {% endfor %}
