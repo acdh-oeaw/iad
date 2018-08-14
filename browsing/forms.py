@@ -133,14 +133,14 @@ class SiteFilterFormHelper(FormHelper):
             Fieldset(
                 'Basic search options',
                 'name',
-                'has_research_activity',
+                # 'has_research_activity',
                 css_id="basic_search_fields"
                 ),
             Accordion(
                 AccordionGroup(
                     'Advanced search options',
                     # 'public',
-                    'cadastral_community',
+                    # 'cadastral_community',
                     # 'cadastral_number',
                     'heritage_number',
                     'plot_number',

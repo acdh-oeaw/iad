@@ -7,6 +7,7 @@ from entities.models import Place, AlternativeName, Institution, Person
 from vocabs.models import SkosConcept, SkosConceptScheme
 from vocabs.filters import generous_concept_filter
 from shapes.models import Municipality
+from django import forms
 
 
 django_filters.filters.LOOKUP_TYPES = [
@@ -206,23 +207,23 @@ class SiteListFilter(django_filters.FilterSet):
         help_text=Site._meta.get_field('name').help_text,
         label=Site._meta.get_field('name').verbose_name
         )
-    has_research_activity = django_filters.ModelMultipleChoiceFilter(
-        queryset=ResearchEvent.objects.all(),
-        name='has_research_activity',
-        label="Research activity"
-        )
-    cadastral_community = django_filters.ModelMultipleChoiceFilter(
-        queryset=Municipality.objects.all(),
-        help_text=Site._meta.get_field('cadastral_community').help_text,
-        label=Site._meta.get_field('cadastral_community').verbose_name,
-        widget=autocomplete.Select2Multiple(
-            url='shapes-ac:municipality-autocomplete',
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        )
-        )
+    # has_research_activity = django_filters.ModelMultipleChoiceFilter(
+    #     queryset=ResearchEvent.objects.all(),
+    #     name='has_research_activity',
+    #     label="Research activity"
+    #     )
+    # cadastral_community = django_filters.ModelMultipleChoiceFilter(
+    #     queryset=Municipality.objects.all(),
+    #     help_text=Site._meta.get_field('cadastral_community').help_text,
+    #     label=Site._meta.get_field('cadastral_community').verbose_name,
+    #     widget=autocomplete.Select2Multiple(
+    #         url='shapes-ac:municipality-autocomplete',
+    #         attrs={
+    #             'data-placeholder': 'Autocomplete ...',
+    #             'data-minimum-input-length': 3,
+    #             },
+    #     )
+    #     )
     cadastral_number = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Site._meta.get_field('cadastral_number').help_text,
@@ -355,9 +356,10 @@ class SiteListFilter(django_filters.FilterSet):
         queryset=SkosConcept.objects.filter(
             scheme__dc_title__icontains="burial-type"
             ),
-        help_text=ArchEnt._meta.get_field('burial_type').help_text,
+        # help_text=ArchEnt._meta.get_field('burial_type').help_text,
         label=ArchEnt._meta.get_field('burial_type').verbose_name,
-        method=generous_concept_filter
+        method=generous_concept_filter,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
     has_archent__settlement_fortification = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
@@ -365,7 +367,8 @@ class SiteListFilter(django_filters.FilterSet):
             ),
         help_text=ArchEnt._meta.get_field('settlement_fortification').help_text,
         label=ArchEnt._meta.get_field('settlement_fortification').verbose_name,
-        method=generous_concept_filter
+        method=generous_concept_filter,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
     has_archent__settlement_occupation = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
@@ -373,7 +376,8 @@ class SiteListFilter(django_filters.FilterSet):
             ),
         help_text=ArchEnt._meta.get_field('settlement_occupation').help_text,
         label=ArchEnt._meta.get_field('settlement_occupation').verbose_name,
-        method=generous_concept_filter
+        method=generous_concept_filter,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
     has_archent__topography = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
@@ -381,7 +385,8 @@ class SiteListFilter(django_filters.FilterSet):
             ),
         help_text=ArchEnt._meta.get_field('topography').help_text,
         label=ArchEnt._meta.get_field('topography').verbose_name,
-        method=generous_concept_filter
+        method=generous_concept_filter,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
     has_archent__type_certainty = django_filters.ChoiceFilter(
         help_text=ArchEnt._meta.get_field('type_certainty').help_text,
@@ -462,7 +467,8 @@ class SiteListFilter(django_filters.FilterSet):
             ),
         help_text=MonumentProtection._meta.get_field('threats').help_text,
         label=MonumentProtection._meta.get_field('threats').verbose_name,
-        method=generous_concept_filter
+        method=generous_concept_filter,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
 
 

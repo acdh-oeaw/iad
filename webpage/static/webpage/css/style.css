@@ -81,3 +81,22 @@ footer {
  /*   width: 100%;*/
 }
 
+/* css for checkbox widget in filters */
+.chbx-select-multi {
+  /* 1.5-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.8); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  padding: 10px;
+  margin: 5px 10px 5px 10px;
+  border: 1px solid #aaa;
+
+}
+/*overriding css for field labels, helptext in filters*/
+.control-label {
+    font-weight: 600;
+}
+.help-block {
+    font-size: 0.8rem;
+}
