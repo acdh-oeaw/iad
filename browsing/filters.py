@@ -81,7 +81,8 @@ class MonumentProtectionListFilter(django_filters.FilterSet):
             ),
         help_text=MonumentProtection._meta.get_field('threats').help_text,
         label=MonumentProtection._meta.get_field('threats').verbose_name,
-        method=generous_concept_filter
+        method=generous_concept_filter,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
 
     class Meta:
@@ -128,7 +129,8 @@ class ArchEntListFilter(django_filters.FilterSet):
             ),
         help_text=ArchEnt._meta.get_field('burial_type').help_text,
         label=ArchEnt._meta.get_field('burial_type').verbose_name,
-        method=generous_concept_filter
+        method=generous_concept_filter,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
     burial_construction = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
@@ -136,7 +138,8 @@ class ArchEntListFilter(django_filters.FilterSet):
             ),
         help_text=ArchEnt._meta.get_field('burial_construction').help_text,
         label=ArchEnt._meta.get_field('burial_construction').verbose_name,
-        method=generous_concept_filter
+        method=generous_concept_filter,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
     site_id = django_filters.ModelMultipleChoiceFilter(
         queryset=Site.objects.all(),
@@ -149,7 +152,8 @@ class ArchEntListFilter(django_filters.FilterSet):
             ),
         help_text=ArchEnt._meta.get_field('settlement_fortification').help_text,
         label=ArchEnt._meta.get_field('settlement_fortification').verbose_name,
-        method=generous_concept_filter
+        method=generous_concept_filter,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
     settlement_occupation = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
@@ -157,7 +161,8 @@ class ArchEntListFilter(django_filters.FilterSet):
             ),
         help_text=ArchEnt._meta.get_field('settlement_occupation').help_text,
         label=ArchEnt._meta.get_field('settlement_occupation').verbose_name,
-        method=generous_concept_filter
+        method=generous_concept_filter,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
     topography = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
@@ -165,7 +170,8 @@ class ArchEntListFilter(django_filters.FilterSet):
             ),
         help_text=ArchEnt._meta.get_field('topography').help_text,
         label=ArchEnt._meta.get_field('topography').verbose_name,
-        method=generous_concept_filter
+        method=generous_concept_filter,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
     type_certainty = django_filters.ChoiceFilter(
         help_text=ArchEnt._meta.get_field('type_certainty').help_text,
@@ -356,7 +362,7 @@ class SiteListFilter(django_filters.FilterSet):
         queryset=SkosConcept.objects.filter(
             scheme__dc_title__icontains="burial-type"
             ),
-        # help_text=ArchEnt._meta.get_field('burial_type').help_text,
+        help_text=ArchEnt._meta.get_field('burial_type').help_text,
         label=ArchEnt._meta.get_field('burial_type').verbose_name,
         method=generous_concept_filter,
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
