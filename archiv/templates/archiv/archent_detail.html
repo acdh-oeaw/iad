@@ -85,7 +85,7 @@
                 <legend>Basic Information</legend>
                 <table class="table table-bordered table-hover">
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name archent "site_id" %}
                         </th>
                         <td>
@@ -96,7 +96,7 @@
                     </tr>
                     {% if object.public %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "public" %}
                             </th>
                             <td>
@@ -105,7 +105,7 @@
                         </tr>
                     {% endif %}
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name archent "name" %}
                         </th>
                         <td>
@@ -114,7 +114,7 @@
                     </tr>
                     {% if object.ent_type %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "ent_type" %}
                             </th>
                             <td>
@@ -124,7 +124,7 @@
                     {% endif %}
                     {% if object.burial_type %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "burial_type" %}
                             </th>
                             <td>
@@ -134,7 +134,7 @@
                     {% endif %}
                     {% if object.burial_construction.all %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "burial_construction" %}
                             </th>
                             <td>
@@ -148,7 +148,7 @@
                     {% endif %}
                     {% if object.settlement_fortification.all %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "settlement_fortification" %}
                             </th>
                             <td>
@@ -162,7 +162,7 @@
                     {% endif %}
                     {% if object.settlement_occupation %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "settlement_occupation" %}
                             </th>
                             <td>
@@ -172,7 +172,7 @@
                     {% endif %}
                     {% if object.topography.all %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "topography" %}
                             </th>
                             <td>
@@ -186,8 +186,8 @@
                     {% endif %}
                     {% if object.alt_name.all %}
                         <tr>
-                            <th>
-                                {% get_verbose_name iadbaseclass "alt_name" %}
+                            <th class="w-25">
+                                {% get_verbose_name archent "alt_name" %}
                             </th>
                             <td>
                                 {% for x in object.alt_name.all %}
@@ -200,7 +200,7 @@
                     {% endif %}
                     {% if object.alt_id %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "alt_id" %}
                             </th>
                             <td>
@@ -210,7 +210,7 @@
                     {% endif %}
                     {% if object.description %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "description" %}
                             </th>
                             <td>
@@ -220,7 +220,7 @@
                     {% endif %}
                     {% if object.comment %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "comment" %}
                             </th>
                             <td>
@@ -230,7 +230,7 @@
                     {% endif %}
                     {% if object.literature.all %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "literature" %}
                             </th>
                             <td>
@@ -244,7 +244,7 @@
                     {% endif %}
                     {% if object.period.all %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name archent "period" %}
                             </th>
                             <td>
@@ -262,7 +262,7 @@
                 <table class="table table-bordered table-hover">
                 {% if object.type_certainty %}
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name archent "type_certainty" %}
                         </th>
                         <td>
@@ -272,7 +272,7 @@
                 {% endif %}
                 {% if object.dating_certainty %}
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name archent "dating_certainty" %}
                         </th>
                         <td>
@@ -282,7 +282,7 @@
                 {% endif %}
                 {% if object.location_certainty %}
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name archent "location_certainty" %}
                         </th>
                         <td>
@@ -297,8 +297,8 @@
 </div>
 <div class="col-md-6">
     {% leaflet_map "yourmap" callback="window.map_init_basic" %}
-    <legend>GeoJSON</legend>
-    {{ object.get_geojson }}
+    <!-- <legend>GeoJSON</legend>
+    {{ object.get_geojson }} -->
 </div>
 </div><!--main row-->
 <!-- </div> -->
