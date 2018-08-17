@@ -19,7 +19,8 @@
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                        <small><a href="{{ object.get_listview_url }}">Research Question</a></small> {{ object }}
+                        <small><a href="{{ object.get_listview_url }}">Research Question</a></small><br>
+                        ID {{ object.id }} {{ object }}
                         {% if user.is_authenticated %}
                             <small>
                                 <a href="{% url 'archiv:researchquestion_edit' pk=object.id %}">
@@ -47,14 +48,7 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <p>{{ object.question }}</p>
-            </div>
-            <div class="col-md-6">
-                <legend>
-                    related objects
-                </legend>
+                <legend>related Research Activity</legend>
                 {% if object.is_research_question_of.all %}
                     <ul>
                         {% for x in object.is_research_question_of.all %}
@@ -64,8 +58,7 @@
                         {% endfor %}
                     </ul>
                 {% endif %}
-            </div>
-        </div>
+            
     </div>
 </div>
 </div>
