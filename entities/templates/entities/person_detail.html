@@ -32,7 +32,7 @@ include 'autocomplete_light/static.html
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                        <a href="{{ object.get_listview_url }}">person</a></small> {{ object }}
+                        <small><a href="{{ object.get_listview_url }}">Person</a></small> {{ object }}
                         {% if user.is_authenticated %}
                         <small>
                             <a href="{% url 'entities:person_edit' pk=object.id %}">
@@ -70,7 +70,7 @@ include 'autocomplete_light/static.html
                         </td>
                     </tr>
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name person "forename" %}
                         </th>
                         <td>
@@ -78,7 +78,7 @@ include 'autocomplete_light/static.html
                         </td>
                     </tr>
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name person "name" %}
                         </th>
                         <td>
@@ -87,7 +87,7 @@ include 'autocomplete_light/static.html
                     </tr>
                     {% if object.acad_title %}
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name person "acad_title" %}
                         </th>
                         <td>
@@ -97,7 +97,7 @@ include 'autocomplete_light/static.html
                     {% endif %}
                     {% if object.pers_alt_name %}
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name person "pers_alt_name" %}
                         </th>
                         <td>
@@ -107,7 +107,7 @@ include 'autocomplete_light/static.html
                     {% endif %}
                     {% if object.place_of_birth %}
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name person "place_of_birth" %}
                         </th>
                         <td>
@@ -117,7 +117,7 @@ include 'autocomplete_light/static.html
                     {% endif %}
                     {% if object.date_of_birth %}
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name person "date_of_birth" %}
                         </th>
                         <td>
@@ -127,7 +127,7 @@ include 'autocomplete_light/static.html
                     {% endif %}
                     {% if object.public %}
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name person "public" %}
                         </th>
                         <td>
@@ -137,7 +137,7 @@ include 'autocomplete_light/static.html
                     {% endif %}
                     {% if object.authority_url %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name person "authority_url" %}
                             </th>
                             <td>
@@ -147,7 +147,7 @@ include 'autocomplete_light/static.html
                     {% endif %}
                     {% if object.belongs_to_institution %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name person "belongs_to_institution" %}
                             </th>
                             <td>
@@ -155,21 +155,17 @@ include 'autocomplete_light/static.html
                             </td>
                         </tr>
                     {% endif %}
-                    {% if object.has_research.all %}
-                        <tr>
-                            <th>
-                                related research activities
-                            </th>
-                            <td>
-                                {% for x in object.has_research.all %}
-                                    <li>
-                                        <a href="{{ x.get_absolute_url }}">{{ x }}</a>
-                                    </li>
-                                {% endfor %}
-                            </td>
-                        </tr>
-                    {% endif %}
                 </table>
+                {% if object.has_research.all %}
+                <legend>related Research Activity</legend>
+                    <ul>
+                       {% for x in object.has_research.all %}
+                            <li>
+                                <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
     </div>
 </div>
