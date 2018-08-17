@@ -72,7 +72,7 @@ include 'autocomplete_light/static.html
                         </td>
                     </tr>
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name institution "authority_url" %}
                         </th>
                         <td>
@@ -80,7 +80,7 @@ include 'autocomplete_light/static.html
                         </td>
                     </tr>
                     <tr>
-                        <th>
+                        <th class="w-25">
                             {% get_verbose_name institution "inst_alt_name" %}
                         </th>
                         <td>
@@ -89,7 +89,7 @@ include 'autocomplete_light/static.html
                     </tr>
                     {% if object.parent_institution %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name institution "parent_institution" %}
                             </th>
                             <td>
@@ -99,7 +99,7 @@ include 'autocomplete_light/static.html
                     {% endif %}
                     {% if object.children_institutions.all %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 Children institutions
                             </th>
                             <td>
@@ -116,7 +116,7 @@ include 'autocomplete_light/static.html
                     {% endif %}
                     {% if object.location %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name institution "location" %}
                             </th>
                             <td>
@@ -126,7 +126,7 @@ include 'autocomplete_light/static.html
                     {% endif %}
                     {% if object.comment %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name institution "comment" %}
                             </th>
                             <td>
@@ -134,23 +134,21 @@ include 'autocomplete_light/static.html
                             </td>
                         </tr>
                     {% endif %}
-                    {% if object.has_research.all %}
-                        <tr>
-                            <th>
-                                related research activities
-                            </th>
-                            <td>
-                                {% for x in object.has_research.all %}
-                                    <li>
-                                        <a href="{{ x.get_absolute_url }}">{{ x }}</a>
-                                    </li>
-                                {% endfor %}
-                            </td>
-                        </tr>
-                    {% endif %}
                 </table>
+
+                {% if object.has_research.all %}
+                <legend>related Research Activity</legend>
+                <ul>
+                   {% for x in object.has_research.all %}
+                        <li>
+                            <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
                 {% if object.has_member.all %}
-                <legend>Related Persons</legend>
+                <legend>related Persons</legend>
                 <ul>
                     {% for x in object.has_member.all %}
                     <li>
