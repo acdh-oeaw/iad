@@ -49,11 +49,11 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <legend>Basic Information</legend>
                     <table class="table table-bordered table-hover">
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 sau_id
                             </th>
                             <td>
@@ -61,7 +61,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 saunam
                             </th>
                             <td>
@@ -69,7 +69,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 lau2_id
                             </th>
                             <td>
@@ -77,7 +77,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 lau2nam
                             </th>
                             <td>
@@ -85,7 +85,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 nuts3cod
                             </th>
                             <td>
@@ -93,7 +93,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 nuts3nam
                             </th>
                             <td>
@@ -101,7 +101,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 nuts2cod
                             </th>
                             <td>
@@ -109,7 +109,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 nuts2nam
                             </th>
                             <td>
@@ -117,7 +117,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 ctcod
                             </th>
                             <td>
@@ -125,7 +125,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 ctnam
                             </th>
                             <td>
@@ -133,7 +133,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 ctalt
                             </th>
                             <td>
@@ -149,8 +149,8 @@
     </div>
     <div class="col-md-6">
     {% leaflet_map "yourmap" callback="window.map_init_basic" %}
-            <legend>GeoJSON</legend>
-            {{ object.get_geojson }}
+            <!-- <legend>GeoJSON</legend>
+            {{ object.get_geojson }} -->
     </div>
     </div>
     <!-- </div> -->
