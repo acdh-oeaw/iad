@@ -87,7 +87,7 @@
                 <table class="table table-bordered table-hover">
                     {% if object.site_id %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "site_id" %}
                             </th>
                             <td>
@@ -97,7 +97,7 @@
                     {% endif %}
                     {% if object.threats.all %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "threats" %}
                             </th>
                             <td>
@@ -111,7 +111,7 @@
                     {% endif %}
                     {% if object.current_land_use.all %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "current_land_use" %}
                             </th>
                             <td>
@@ -125,7 +125,7 @@
                     {% endif %}
                     {% if object.heritage_status %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "heritage_status" %}
                             </th>
                             <td>
@@ -135,7 +135,7 @@
                     {% endif %}
                     {% if object.natural.heritage_status %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "natural.heritage_status" %}
                             </th>
                             <td>
@@ -145,7 +145,7 @@
                     {% endif %}
                     {% if object.identifier %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "identifier" %}
                             </th>
                             <td>
@@ -155,7 +155,7 @@
                     {% endif %}
                     {% if object.alt_name.all %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "alt_name" %}
                             </th>
                             <td>
@@ -169,7 +169,7 @@
                     {% endif %}
                     {% if object.alt_id %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "alt_id" %}
                             </th>
                             <td>
@@ -179,7 +179,7 @@
                     {% endif %}
                     {% if object.description %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "description" %}
                             </th>
                             <td>
@@ -189,7 +189,7 @@
                     {% endif %}
                     {% if object.comment %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "comment" %}
                             </th>
                             <td>
@@ -199,7 +199,7 @@
                     {% endif %}
                     {% if object.public %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "public" %}
                             </th>
                             <td>
@@ -209,7 +209,7 @@
                     {% endif %}
                     {% if object.literature.all %}
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 {% get_verbose_name monumentprotection "literature" %}
                             </th>
                             <td>
@@ -227,8 +227,8 @@
 </div><!--col-6-->
 <div class="col-md-6">
 {% leaflet_map "yourmap" callback="window.map_init_basic" %}
-                <legend>GeoJSON</legend>
-                {{ object.get_geojson }}
+                <!-- <legend>GeoJSON</legend>
+                {{ object.get_geojson }} -->
 </div>
 </div><!--main row-->
 <!-- </div> -->
