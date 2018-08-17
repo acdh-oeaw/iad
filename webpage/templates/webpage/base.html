@@ -144,16 +144,16 @@
                                 Polygon Valid?
                             </a>
                             <a class="dropdown-item" href="{% url 'checks:poly_exists' model_name='site' %}">
-                                Poly for Site?
+                                Polygon for Site?
                             </a>
                             <a class="dropdown-item" href="{% url 'checks:poly_exists' model_name='archent' %}">
-                                Poly for Archaelogical Entity?
+                                Polygon for Archaelogical Entity?
                             </a>
                             <a class="dropdown-item" href="{% url 'checks:poly_exists' model_name='researchevent' %}">
-                                Poly for Research Activity?
+                                Polygon for Research Activity?
                             </a>
                             <a class="dropdown-item" href="{% url 'checks:poly_exists' model_name='monumentprotection' %}">
-                                Poly for Monument Protection?
+                                Polygon for Monument Protection?
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{% url 'checks:poly_fits_archents' %}">
@@ -200,7 +200,7 @@
     </nav>
 </header>
 <section class="main-content">
-    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="content" class="container-fluid">{% block content %}{% endblock %}</div>
 </section>
 <!-- <div style="text-align:center">
     <span class="socialShare">The share buttons will be inserted here</span>

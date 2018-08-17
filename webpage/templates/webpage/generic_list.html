@@ -24,8 +24,11 @@ $("#goto option").each(function() {
 
 </style>
 <div class="container-fluid">
-
-        <h1 style="margin-bottom:15px; margin-top:15px;"><i class="fas fa-search" style="padding-left:10px; padding-right: 10px;"></i>Browse {% class_definition %} {% block list_title %}{% endblock %}</h1>
+        <div class="row">
+            <div class="col-md-4">
+            <div class="card">
+            <div class="card-body">
+             <h3 style="margin-bottom:15px;">Browse {% class_definition %} {% block list_title %}{% endblock %}</h3>
         {% if get_arche_dump %}
             <a class ="btn btn-outline-secondary"  href="{{ get_arche_dump}}{% querystring %}">Dump as RDF</a>
         {% endif %}
@@ -40,10 +43,7 @@ $("#goto option").each(function() {
     {% block customView %}{% endblock %}
     {% block create_button %}{% endblock %}
 
-        <div class="row">
-            <div class="col-md-4">
-            <div class="card">
-            <div class="card-body">
+
                 {% load django_tables2 crispy_forms_tags %}
             <form action="." class="uniForm" method="get">
                 {% if togglable_colums %}
