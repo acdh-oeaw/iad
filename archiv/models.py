@@ -121,11 +121,13 @@ class IadBaseClass(IdProvider):
     @classmethod
     def get_convex_hull(self):
         if Site.objects.exclude(polygon=None):
+            sites = [x.id for x in Site.objects.exclude(polygon=None) if x.polygon.valid]
+            valid_sites = Site.objects.filter(id__in=sites)
             geojson = json.loads(
-                Site.objects.exclude(polygon=None)
-                .aggregate(combined=Union('polygon'))['combined']
-                .convex_hull.geojson
-            )
+                    valid_sites.exclude(polygon=None)
+                    .aggregate(combined=Union('polygon'))['combined']
+                    .convex_hull.geojson
+                )
             geojson['properties'] = {
                 'name': "Convex hull of all {} objects".format(self.__name__)
             }
