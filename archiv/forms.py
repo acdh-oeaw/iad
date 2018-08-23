@@ -12,6 +12,8 @@ from . utils import geojson_to_poly
 class ArchivBaseForm(forms.ModelForm):
     paste_geojson = forms.CharField(
         widget=forms.Textarea, label="Paste a valid(!) GeoJson in this form",
+        help_text="GeoJson must be of type 'FeatureCollection'\
+        with features of type 'MultiPolygon'.",
         required=False
     )
     delete_polygon = forms.BooleanField(
