@@ -14,6 +14,11 @@ class ArchivBaseForm(forms.ModelForm):
         widget=forms.Textarea, label="Paste a valid(!) GeoJson in this form",
         required=False
     )
+    delete_polygon = forms.BooleanField(
+        required=False, initial=False,
+        label='Delete existing Polygon?',
+        help_text="Would you like to delete any existing Polygon?"
+    )
 
     def clean(self):
         cleaned_data = super(ArchivBaseForm, self).clean()
@@ -32,6 +37,9 @@ class ArchivBaseForm(forms.ModelForm):
         if geo_json_str:
             processed_geojson = geojson_to_poly(geo_json_str)
             instance.polygon = processed_geojson['mpoly']
+            instance.save()
+        if self.cleaned_data['delete_polygon']:
+            instance.polygon = None
             instance.save()
         return instance
 
@@ -83,6 +91,7 @@ class MonumentProtectionForm(forms.ModelForm):
                 'threats',
                 'comment',
                 'paste_geojson',
+                'delete_polygon',
                 css_class="col-md-9"
                 ),
             )
@@ -191,6 +200,7 @@ class ArchEntForm(ArchivBaseForm):
                 'location_certainty',
                 'comment',
                 'paste_geojson',
+                'delete_polygon',
                 css_class="col-md-9"
                 )
             )
@@ -259,6 +269,7 @@ class ResearchEventForm(ArchivBaseForm):
                 'comment',
                 'generation_data_set',
                 'paste_geojson',
+                'delete_polygon',
                 css_class="col-md-9"
                 )
             )
@@ -274,10 +285,6 @@ class PeriodForm(ArchivBaseForm):
             'bibl', 'comment'
         ]
         widgets = {
-            # 'alt_name': autocomplete.ModelSelect2Multiple(
-            #     url='archiv-ac:altname-autocomplete'),
-            # 'literature': autocomplete.ModelSelect2Multiple(
-            #     url='bib-ac:reference-autocomplete'),
             'polygon': LeafletWidget(),
         }
 
@@ -307,6 +314,7 @@ class PeriodForm(ArchivBaseForm):
                 'bibl',
                 'comment',
                 'paste_geojson',
+                'delete_polygon',
                 css_class="col-md-9"
                 )
             )
@@ -415,6 +423,7 @@ class SiteForm(ArchivBaseForm):
                 Div(
                     'site_checked_by',
                     'paste_geojson',
+                    'delete_polygon',
                     css_class="col-md-9"
                 ),
                 css_class="separate-panel",
