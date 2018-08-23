@@ -9,17 +9,40 @@ from .models import *
 from . utils import geojson_to_poly
 
 
-class MonumentProtectionForm(forms.ModelForm):
+class ArchivBaseForm(forms.ModelForm):
     paste_geojson = forms.CharField(
         widget=forms.Textarea, label="Paste a valid(!) GeoJson in this form",
         required=False
     )
 
+    def clean(self):
+        cleaned_data = super(ArchivBaseForm, self).clean()
+        print('HALLO FROM OVERRIDEN CLEAN METHOD')
+        geo_json_str = cleaned_data['paste_geojson']
+        if geo_json_str:
+            processed_geojson = geojson_to_poly(geo_json_str)
+            if processed_geojson['errors']:
+                self._errors['paste_geojson'] = self.error_class(processed_geojson['errors'])
+        return cleaned_data
+
+    def save(self, commit=True):
+        instance = super(ArchivBaseForm, self).save(commit=False)
+        print("HI from SAVE METHOD")
+        geo_json_str = self.cleaned_data['paste_geojson']
+        if geo_json_str:
+            processed_geojson = geojson_to_poly(geo_json_str)
+            instance.polygon = processed_geojson['mpoly']
+            instance.save()
+        return instance
+
+
+class MonumentProtectionForm(forms.ModelForm):
+
     class Meta:
         model = MonumentProtection
         fields = [
             'site_id', 'public', 'polygon', 'current_land_use',
-            'heritage_status', 'natural_heritage_status', 'threats', 'comment', 'paste_geojson'
+            'heritage_status', 'natural_heritage_status', 'threats', 'comment'
             ]
         widgets = {
             'public': forms.CheckboxInput(),
@@ -64,28 +87,8 @@ class MonumentProtectionForm(forms.ModelForm):
                 ),
             )
 
-    def clean(self):
-        cleaned_data = super(MonumentProtectionForm, self).clean()
-        print('HALLO FROM OVERRIDEN CLEAN METHOD')
-        geo_json_str = cleaned_data['paste_geojson']
-        if geo_json_str:
-            processed_geojson = geojson_to_poly(geo_json_str)
-            if processed_geojson['errors']:
-                self._errors['paste_geojson'] = self.error_class(processed_geojson['errors'])
-        return cleaned_data
 
-    def save(self, commit=True):
-        instance = super(MonumentProtectionForm, self).save(commit=False)
-        print("HI from SAVE METHOD")
-        geo_json_str = self.cleaned_data['paste_geojson']
-        if geo_json_str:
-            processed_geojson = geojson_to_poly(geo_json_str)
-            instance.polygon = processed_geojson['mpoly']
-            instance.save()
-        return instance
-
-
-class ResearchQuestionForm(forms.ModelForm):
+class ResearchQuestionForm(ArchivBaseForm):
     class Meta:
         model = ResearchQuestion
         fields = "__all__"
@@ -100,7 +103,7 @@ class ResearchQuestionForm(forms.ModelForm):
         self.helper.add_input(Submit('submit', 'save'),)
 
 
-class ArchEntForm(forms.ModelForm):
+class ArchEntForm(ArchivBaseForm):
     class Meta:
         model = ArchEnt
         fields = [
@@ -187,13 +190,13 @@ class ArchEntForm(forms.ModelForm):
                 'dating_certainty',
                 'location_certainty',
                 'comment',
+                'paste_geojson',
                 css_class="col-md-9"
                 )
             )
 
 
-class ResearchEventForm(forms.ModelForm):
-    #start_date = forms.DateField(input_formats=['%Y-%m-%d'])
+class ResearchEventForm(ArchivBaseForm):
 
     class Meta:
         model = ResearchEvent
@@ -255,12 +258,13 @@ class ResearchEventForm(forms.ModelForm):
                 'research_question',
                 'comment',
                 'generation_data_set',
+                'paste_geojson',
                 css_class="col-md-9"
                 )
             )
 
 
-class PeriodForm(forms.ModelForm):
+class PeriodForm(ArchivBaseForm):
     class Meta:
         model = Period
         fields = [
@@ -302,12 +306,13 @@ class PeriodForm(forms.ModelForm):
                 'norm_id',
                 'bibl',
                 'comment',
+                'paste_geojson',
                 css_class="col-md-9"
                 )
             )
 
 
-class SiteForm(forms.ModelForm):
+class SiteForm(ArchivBaseForm):
     try:
         OPTIONS = [(x.id, x) for x in ResearchEvent.objects.all()]
     except:
@@ -409,6 +414,7 @@ class SiteForm(forms.ModelForm):
                 'Quality Control',
                 Div(
                     'site_checked_by',
+                    'paste_geojson',
                     css_class="col-md-9"
                 ),
                 css_class="separate-panel",
