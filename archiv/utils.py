@@ -1,3 +1,37 @@
+import geojson
+from django.contrib.gis.geos import GEOSGeometry
+
+
+def geojson_to_poly(geo_json_str):
+    """ tries to convert a geojson-string to a GEOSGeometry object """
+    result = {}
+    errors = []
+    result['mpoly'] = None
+    try:
+        geo_json = geojson.loads(geo_json_str)
+    except Exception as e:
+        geo_json = None
+        errors.append('Failed to read JSON because of: {}'.format(e))
+    if geo_json:
+        try:
+            coords = geo_json['features'][0]['geometry']
+        except Exception as e:
+            coords = None
+            errors.append(
+                'Failed extract coordinates from Featurecollection because of: {}'.format(e)
+            )
+        if coords:
+            try:
+                result['mpoly'] = GEOSGeometry(geo_input=str(coords))
+            except Exception as e:
+                errors.append(
+                    'Failed to transform coordinates to GEOSGeomentry because of: {}'.format(e)
+                )
+    result["errors"] = errors
+
+    return result
+
+
 SITE = [
     (('pk'), ('internal id')),
     (('identifier'), ('Identifier')),

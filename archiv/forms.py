@@ -6,14 +6,20 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML, Field
 
 from .models import *
+from . utils import geojson_to_poly
 
 
 class MonumentProtectionForm(forms.ModelForm):
+    paste_geojson = forms.CharField(
+        widget=forms.Textarea, label="Paste a valid(!) GeoJson in this form",
+        required=False
+    )
+
     class Meta:
         model = MonumentProtection
         fields = [
             'site_id', 'public', 'polygon', 'current_land_use',
-            'heritage_status', 'natural_heritage_status', 'threats', 'comment'
+            'heritage_status', 'natural_heritage_status', 'threats', 'comment', 'paste_geojson'
             ]
         widgets = {
             'public': forms.CheckboxInput(),
@@ -53,9 +59,30 @@ class MonumentProtectionForm(forms.ModelForm):
                 'natural_heritage_status',
                 'threats',
                 'comment',
+                'paste_geojson',
                 css_class="col-md-9"
-                )
+                ),
             )
+
+    def clean(self):
+        cleaned_data = super(MonumentProtectionForm, self).clean()
+        print('HALLO FROM OVERRIDEN CLEAN METHOD')
+        geo_json_str = cleaned_data['paste_geojson']
+        if geo_json_str:
+            processed_geojson = geojson_to_poly(geo_json_str)
+            if processed_geojson['errors']:
+                self._errors['paste_geojson'] = self.error_class(processed_geojson['errors'])
+        return cleaned_data
+
+    def save(self, commit=True):
+        instance = super(MonumentProtectionForm, self).save(commit=False)
+        print("HI from SAVE METHOD")
+        geo_json_str = self.cleaned_data['paste_geojson']
+        if geo_json_str:
+            processed_geojson = geojson_to_poly(geo_json_str)
+            instance.polygon = processed_geojson['mpoly']
+            instance.save()
+        return instance
 
 
 class ResearchQuestionForm(forms.ModelForm):

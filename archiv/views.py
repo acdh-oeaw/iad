@@ -9,8 +9,9 @@ from django.utils.decorators import method_decorator
 
 from reversion.models import Version
 
-from .forms import *
-from .models import *
+from . forms import *
+from . models import *
+from . utils import geojson_to_poly
 
 
 class BaseCreateView(CreateView):
