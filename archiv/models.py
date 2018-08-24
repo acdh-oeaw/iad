@@ -541,7 +541,6 @@ class ResearchEvent(IadBaseClass):
         blank=True, null=True,
         max_length=250,
     )
-
     start_date = models.DateField(
         blank=True, null=True,
         verbose_name="Start Date.",

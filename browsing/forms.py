@@ -54,6 +54,7 @@ class MonumentProtectionFormHelper(FormHelper):
                     'heritage_status',
                     'natural_heritage_status',
                     'threats',
+                    'identifier',
                     css_id="more"
                 )
                 )
@@ -74,15 +75,6 @@ class ResearchQuestionFormHelper(FormHelper):
                 'question',
                 css_id="basic_search_fields"
                 ),
-####### Uncomment if there are advanced options ####################
-            # Accordion(
-            #     AccordionGroup(
-            #         'Advanced search options',
-            #         'zotero_item',
-            #         'page',
-            #         css_id="more"
-            #     )
-            #     )
             )
 
 
@@ -115,6 +107,7 @@ class ArchEntFilterFormHelper(FormHelper):
                     'location_certainty',
                     'period',
                     # 'public',
+                    'identifier',
                     css_id="more"
                     ),
                 )
@@ -151,6 +144,7 @@ class SiteFilterFormHelper(FormHelper):
                     'infrastructure',
                     'long_term_management',
                     'potential_surrounding',
+                    'identifier',
                     # 'museum',
                     css_id="more",
                     css_class="test"
@@ -227,6 +221,7 @@ class ResearchEventFilterFormHelper(FormHelper):
                     'research_method',
                     'research_question',
                     'generation_data_set',
+                    'identifier',
                     css_id="more"
                 )
                 )
