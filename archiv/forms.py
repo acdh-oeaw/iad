@@ -33,7 +33,7 @@ class ArchivBaseForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, commit=True):
-        instance = super(ArchivBaseForm, self).save(commit=False)
+        instance = super(ArchivBaseForm, self).save(commit=True)
         print("HI from SAVE METHOD")
         geo_json_str = self.cleaned_data['paste_geojson']
         if geo_json_str:
