@@ -220,6 +220,9 @@
         </div>
         <div style="text-align:right">
             <small>Version: {% projects_metadata 'version' %}</small>
+            {% if DEV_VERSION %}
+                <small>dev</small>
+            {% endif %}
         </div>
     </div>
 </footer>
