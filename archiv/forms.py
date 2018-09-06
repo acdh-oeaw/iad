@@ -1,11 +1,12 @@
 from dal import autocomplete
 from django import forms
-from .models import ResearchEvent
+from django.contrib.gis.geos import GEOSGeometry
+
 from leaflet.forms.widgets import LeafletWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML, Field
 
-from .models import *
+from . models import *
 from . utils import geojson_to_poly
 
 
@@ -14,6 +15,11 @@ class ArchivBaseForm(forms.ModelForm):
         widget=forms.Textarea, label="Paste a valid(!) GeoJson in this form",
         help_text="GeoJson must be of type 'FeatureCollection'\
         with features of type 'MultiPolygon'.",
+        required=False
+    )
+    paste_wkt = forms.CharField(
+        widget=forms.Textarea, label="Paste a valid(!) WKT(Mulitpolygon) in this form",
+        help_text="WKT must have srid=4326",
         required=False
     )
     delete_polygon = forms.BooleanField(
@@ -26,19 +32,30 @@ class ArchivBaseForm(forms.ModelForm):
         cleaned_data = super(ArchivBaseForm, self).clean()
         print('HALLO FROM OVERRIDEN CLEAN METHOD')
         geo_json_str = cleaned_data['paste_geojson']
+        paste_wkt = self.cleaned_data['paste_wkt']
         if geo_json_str:
             processed_geojson = geojson_to_poly(geo_json_str)
             if processed_geojson['errors']:
                 self._errors['paste_geojson'] = self.error_class(processed_geojson['errors'])
+        elif paste_wkt:
+            try:
+                GEOSGeometry(paste_wkt, srid=4326)
+            except Exception as e:
+                self._errors['paste_wkt'] = self.error_class(["{}".format(e)])
         return cleaned_data
 
     def save(self, commit=True):
         instance = super(ArchivBaseForm, self).save(commit=True)
         print("HI from SAVE METHOD")
         geo_json_str = self.cleaned_data['paste_geojson']
+        paste_wkt = self.cleaned_data['paste_wkt']
         if geo_json_str:
             processed_geojson = geojson_to_poly(geo_json_str)
             instance.polygon = processed_geojson['mpoly']
+            instance.save()
+        elif paste_wkt:
+            instance.polygon = GEOSGeometry(paste_wkt, srid=4326)
+            'PASTE_WKT'
             instance.save()
         if self.cleaned_data['delete_polygon']:
             instance.polygon = None
@@ -93,6 +110,7 @@ class MonumentProtectionForm(forms.ModelForm):
                 'threats',
                 'comment',
                 'paste_geojson',
+                'paste_wkt',
                 'delete_polygon',
                 css_class="col-md-9"
                 ),
@@ -202,6 +220,7 @@ class ArchEntForm(ArchivBaseForm):
                 'location_certainty',
                 'comment',
                 'paste_geojson',
+                'paste_wkt',
                 'delete_polygon',
                 css_class="col-md-9"
                 )
@@ -271,6 +290,7 @@ class ResearchEventForm(ArchivBaseForm):
                 'comment',
                 'generation_data_set',
                 'paste_geojson',
+                'paste_wkt',
                 'delete_polygon',
                 css_class="col-md-9"
                 )
@@ -316,6 +336,7 @@ class PeriodForm(ArchivBaseForm):
                 'bibl',
                 'comment',
                 'paste_geojson',
+                'paste_wkt',
                 'delete_polygon',
                 css_class="col-md-9"
                 )
@@ -425,6 +446,7 @@ class SiteForm(ArchivBaseForm):
                 Div(
                     'site_checked_by',
                     'paste_geojson',
+                    'paste_wkt',
                     'delete_polygon',
                     css_class="col-md-9"
                 ),
