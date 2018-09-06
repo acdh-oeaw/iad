@@ -199,6 +199,11 @@
     </nav>
 </header>
 <section class="main-content">
+    {% if DEV_VERSION %}
+    <div class="alert alert-danger" role="alert">
+        This is a the DEVELOPEMENT instance. Click <a href="https://iad-dev.acdh.oeaw.ac.at">here</a> for the Production version
+    </div>
+    {% endif %}
     <div id="content" class="container-fluid">{% block content %}{% endblock %}</div>
 </section>
 <!-- <div style="text-align:center">
