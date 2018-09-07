@@ -1,3 +1,7 @@
+import io
+import pandas as pd
+import geopandas as gp
+from shapely import wkt
 from dal import autocomplete
 from django import forms
 from django.contrib.gis.geos import GEOSGeometry
@@ -7,7 +11,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML, Field
 
 from . models import *
-from . utils import geojson_to_poly
+from . utils import geojson_to_poly, copy_shape_str_to_poly
 
 
 class ArchivBaseForm(forms.ModelForm):
@@ -22,6 +26,17 @@ class ArchivBaseForm(forms.ModelForm):
         help_text="WKT must have srid=4326",
         required=False
     )
+    shape_string_epsg = forms.CharField(
+        label="The shapes EPSG Number",
+        help_text="The EPSG number form the polygon you copied, e.g.: '32633'",
+        required=False
+    )
+    shape_string = forms.CharField(
+        widget=forms.Textarea, label="Paste the Polygon",
+        help_text="Select the feature, hit 'strg+c' to copy it\
+        an paste the content into this field",
+        required=False
+    )
     delete_polygon = forms.BooleanField(
         required=False, initial=False,
         label='Delete existing Polygon?',
@@ -33,6 +48,8 @@ class ArchivBaseForm(forms.ModelForm):
         print('HALLO FROM OVERRIDEN CLEAN METHOD')
         geo_json_str = cleaned_data['paste_geojson']
         paste_wkt = self.cleaned_data['paste_wkt']
+        shape_string_epsg = self.cleaned_data['shape_string_epsg']
+        shape_string = self.cleaned_data['shape_string']
         if geo_json_str:
             processed_geojson = geojson_to_poly(geo_json_str)
             if processed_geojson['errors']:
@@ -42,6 +59,10 @@ class ArchivBaseForm(forms.ModelForm):
                 GEOSGeometry(paste_wkt, srid=4326)
             except Exception as e:
                 self._errors['paste_wkt'] = self.error_class(["{}".format(e)])
+        elif shape_string_epsg and shape_string:
+            data = copy_shape_str_to_poly(shape_string, shape_string_epsg)
+            if data['errors']:
+                self._errors['shape_string'] = data['errors']
         return cleaned_data
 
     def save(self, commit=True):
@@ -49,6 +70,9 @@ class ArchivBaseForm(forms.ModelForm):
         print("HI from SAVE METHOD")
         geo_json_str = self.cleaned_data['paste_geojson']
         paste_wkt = self.cleaned_data['paste_wkt']
+        paste_wkt = self.cleaned_data['paste_wkt']
+        shape_string_epsg = self.cleaned_data['shape_string_epsg']
+        shape_string = self.cleaned_data['shape_string']
         if geo_json_str:
             processed_geojson = geojson_to_poly(geo_json_str)
             instance.polygon = processed_geojson['mpoly']
@@ -56,6 +80,10 @@ class ArchivBaseForm(forms.ModelForm):
         elif paste_wkt:
             instance.polygon = GEOSGeometry(paste_wkt, srid=4326)
             'PASTE_WKT'
+            instance.save()
+        elif shape_string and shape_string_epsg:
+            polygon = copy_shape_str_to_poly(shape_string, shape_string_epsg)['geom']
+            instance.polygon = polygon
             instance.save()
         if self.cleaned_data['delete_polygon']:
             instance.polygon = None
@@ -111,6 +139,8 @@ class MonumentProtectionForm(forms.ModelForm):
                 'comment',
                 'paste_geojson',
                 'paste_wkt',
+                'shape_string_epsg',
+                'shape_string',
                 'delete_polygon',
                 css_class="col-md-9"
                 ),
@@ -221,6 +251,8 @@ class ArchEntForm(ArchivBaseForm):
                 'comment',
                 'paste_geojson',
                 'paste_wkt',
+                'shape_string_epsg',
+                'shape_string',
                 'delete_polygon',
                 css_class="col-md-9"
                 )
@@ -291,6 +323,8 @@ class ResearchEventForm(ArchivBaseForm):
                 'generation_data_set',
                 'paste_geojson',
                 'paste_wkt',
+                'shape_string_epsg',
+                'shape_string',
                 'delete_polygon',
                 css_class="col-md-9"
                 )
@@ -337,6 +371,8 @@ class PeriodForm(ArchivBaseForm):
                 'comment',
                 'paste_geojson',
                 'paste_wkt',
+                'shape_string_epsg',
+                'shape_string',
                 'delete_polygon',
                 css_class="col-md-9"
                 )
@@ -447,6 +483,8 @@ class SiteForm(ArchivBaseForm):
                     'site_checked_by',
                     'paste_geojson',
                     'paste_wkt',
+                    'shape_string_epsg',
+                    'shape_string',
                     'delete_polygon',
                     css_class="col-md-9"
                 ),
