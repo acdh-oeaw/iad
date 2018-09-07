@@ -126,7 +126,7 @@ class SiteFilterFormHelper(FormHelper):
             Fieldset(
                 'Basic search options',
                 'name',
-                # 'has_research_activity',
+                'identifier',
                 css_id="basic_search_fields"
                 ),
             Accordion(
@@ -144,7 +144,6 @@ class SiteFilterFormHelper(FormHelper):
                     'infrastructure',
                     'long_term_management',
                     'potential_surrounding',
-                    'identifier',
                     # 'museum',
                     css_id="more",
                     css_class="test"
@@ -323,15 +322,6 @@ class AlternativeNameFilterFormHelper(FormHelper):
                 'name',
                 css_id="basic_search_fields"
                 ),
-####### Uncomment and add your fields if there are advanced options ####################
-            # Accordion(
-            #     AccordionGroup(
-            #         'Advanced search options',
-            #         'zotero_item',
-            #         'page',
-            #         css_id="more"
-            #     )
-            #     )
             )
 
 

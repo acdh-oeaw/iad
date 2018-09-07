@@ -213,6 +213,11 @@ class SiteListFilter(django_filters.FilterSet):
         help_text=Site._meta.get_field('name').help_text,
         label=Site._meta.get_field('name').verbose_name
         )
+    identifier = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Site._meta.get_field('identifier').help_text,
+        label=Site._meta.get_field('identifier').verbose_name
+        )
     # has_research_activity = django_filters.ModelMultipleChoiceFilter(
     #     queryset=ResearchEvent.objects.all(),
     #     name='has_research_activity',
@@ -251,7 +256,9 @@ class SiteListFilter(django_filters.FilterSet):
         label=Site._meta.get_field('ownership').verbose_name
         )
     other_period = django_filters.ModelMultipleChoiceFilter(
-        queryset=SkosConcept.objects.filter(scheme__dc_title__icontains="other-present-archaeological-period"),
+        queryset=SkosConcept.objects.filter(
+            scheme__dc_title__icontains="other-present-archaeological-period"
+        ),
         help_text=Site._meta.get_field('other_period').help_text,
         label=Site._meta.get_field('other_period').verbose_name,
         method=generous_concept_filter,
@@ -293,7 +300,7 @@ class SiteListFilter(django_filters.FilterSet):
     #     help_text=Site._meta.get_field('museum').help_text,
     #     label=Site._meta.get_field('museum').verbose_name,
     #     )
-##################### Research Activity Fields ####################
+    # #################### Research Activity Fields ####################
     has_research_activity__start_date = django_filters.DateFilter(
         lookup_expr='gte',
         help_text=ResearchEvent._meta.get_field('start_date').help_text,
@@ -342,7 +349,7 @@ class SiteListFilter(django_filters.FilterSet):
         help_text=ResearchEvent._meta.get_field('generation_data_set').help_text,
         label=ResearchEvent._meta.get_field('generation_data_set').verbose_name
         )
-##################### Arch.Entity Fields ####################
+    # #################### Arch.Entity Fields ####################
     has_archent__ent_type = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
             scheme__dc_title__icontains="archaeological-entity-type"
@@ -441,7 +448,7 @@ class SiteListFilter(django_filters.FilterSet):
         help_text=Period._meta.get_field('end_date_latest').help_text,
         label=Period._meta.get_field('end_date_latest').verbose_name
         )
-##################### Monument Protection Fields ####################
+    # #################### Monument Protection Fields ####################
     has_monument_protection__current_land_use = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
             scheme__dc_title__icontains="current-land-use"
@@ -476,8 +483,6 @@ class SiteListFilter(django_filters.FilterSet):
         method=generous_concept_filter,
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
-
-
 
     class Meta:
         model = Site
