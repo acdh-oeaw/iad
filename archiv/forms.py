@@ -46,7 +46,7 @@ class ArchivBaseForm(forms.ModelForm):
         return instance
 
 
-class MonumentProtectionForm(forms.ModelForm):
+class MonumentProtectionForm(ArchivBaseForm):
 
     class Meta:
         model = MonumentProtection
