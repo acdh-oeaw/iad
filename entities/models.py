@@ -97,7 +97,7 @@ class Place(IdProvider):
         try:
             number = re.findall(r'\d+', str(self.geonames_id))[0]
             return None
-        except:
+        except Exception as e:
             return None
 
     def save(self, *args, **kwargs):
