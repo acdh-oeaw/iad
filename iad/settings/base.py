@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'checks',
     'shapes',
     'charts',
-    'public',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"

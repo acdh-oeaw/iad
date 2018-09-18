@@ -84,6 +84,10 @@
             </div>
         </div>
     </div>
+    {% if not_logged_in %}
+        <h1>Work in progess</h1>
+        <h3>We are currently working on this Site. Therefore only internal users have access to it</h3>
+    {% else %}
     <div class="card-body">
         <!-- <div class="row"> -->
             <div class="col-md-12">
@@ -525,5 +529,6 @@
         return confirm('Are you sure?');
     });
 </script>
+{% endif %}
 
 {% endblock %}

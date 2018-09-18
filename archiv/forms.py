@@ -382,7 +382,8 @@ class PeriodForm(ArchivBaseForm):
 class SiteForm(ArchivBaseForm):
     try:
         OPTIONS = [(x.id, x) for x in ResearchEvent.objects.all()]
-    except:
+    except exception as e:
+        print(e)
         OPTIONS = [('Populate database first'), ('populate database first')]
 
     research_activities = forms.MultipleChoiceField(
@@ -429,6 +430,7 @@ class SiteForm(ArchivBaseForm):
         except AttributeError:
             pass
         self.fields['name'].required = True
+        self.fields['public'].required = False
         self.helper.form_tag = True
         self.helper.form_class = 'form-group'
         self.helper.add_input(Submit('submit', 'save'),)

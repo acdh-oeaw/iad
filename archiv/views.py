@@ -113,14 +113,20 @@ class SiteDetailView(DetailView):
     template_name = 'archiv/site_detail.html'
 
     def get_context_data(self, **kwargs):
+        user = self.request.user
         context = super(SiteDetailView, self).get_context_data()
-        try:
-            information_source = self.object.has_research_activity.order_by('start_date')[0]
-        except IndexError:
-            information_source = None
-        context['information_source'] = information_source
-        context['history'] = Version.objects.get_for_object(self.object)
+        if (self.object.public and self.object.site_checked_by) or user.is_authenticated:
+            try:
+                information_source = self.object.has_research_activity.order_by('start_date')[0]
+            except IndexError:
+                information_source = None
+            context['information_source'] = information_source
+            context['history'] = Version.objects.get_for_object(self.object)
+        else:
+            context['not_logged_in'] = True
+            return context
         return context
+
 
 
 class SiteCreate(BaseCreateView):

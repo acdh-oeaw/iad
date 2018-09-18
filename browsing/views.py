@@ -294,6 +294,17 @@ class SiteListView(GenericListView):
     formhelper_class = SiteFilterFormHelper
     init_columns = ['id', 'name', ]
 
+    def get_queryset(self, **kwargs):
+        user = self.request.user
+        qs = super(SiteListView, self).get_queryset()
+        if user.is_authenticated:
+            pass
+        else:
+            qs = qs.exclude(site_checked_by=None).exclude(public=False)
+        self.filter = self.filter_class(self.request.GET, queryset=qs)
+        self.filter.form.helper = self.formhelper_class()
+        return self.filter.qs
+
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
         return all_cols

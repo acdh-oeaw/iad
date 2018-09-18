@@ -468,6 +468,20 @@ class Site(IadBaseClass):
             return prev.first().id
         return False
 
+    def get_next_public(self):
+        next = Site.objects.filter(id__gt=self.id)\
+            .exclude(site_checked_by=None).exclude(public=False)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev_public(self):
+        prev = Site.objects.filter(id__lt=self.id)\
+            .exclude(site_checked_by=None).exclude(public=False).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
     def get_absolute_url(self):
         return reverse(
             'archiv:site_detail', kwargs={'pk': self.id}
