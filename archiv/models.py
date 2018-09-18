@@ -117,6 +117,11 @@ class IadBaseClass(IdProvider):
         help_text="Add publication references"
     )
     polygon = models.MultiPolygonField(blank=True, null=True)
+    polygon_proxy = models.BooleanField(
+        default=False, verbose_name="No precise polygon",
+        choices=BOOLEAN_CHOICES,
+        help_text="Please set to 'Yes' in case the polygon is merely a place holder"
+    )
 
     @classmethod
     def get_convex_hull(self):

@@ -382,7 +382,7 @@ class PeriodForm(ArchivBaseForm):
 class SiteForm(ArchivBaseForm):
     try:
         OPTIONS = [(x.id, x) for x in ResearchEvent.objects.all()]
-    except exception as e:
+    except Exception as e:
         print(e)
         OPTIONS = [('Populate database first'), ('populate database first')]
 
@@ -402,7 +402,7 @@ class SiteForm(ArchivBaseForm):
             # tourism field
             'accessibility', 'visibility', 'infrastructure', 'long_term_management',
             'potential_surrounding', 'museum', 'iad_app', 'app_description',
-            'tourism_comment', 'site_checked_by',
+            'tourism_comment', 'site_checked_by', 'polygon_proxy'
         ]
         widgets = {
             'public': forms.CheckboxInput(),
@@ -431,6 +431,7 @@ class SiteForm(ArchivBaseForm):
             pass
         self.fields['name'].required = True
         self.fields['public'].required = False
+        self.fields['polygon_proxy'].required = False
         self.helper.form_tag = True
         self.helper.form_class = 'form-group'
         self.helper.add_input(Submit('submit', 'save'),)
@@ -488,6 +489,7 @@ class SiteForm(ArchivBaseForm):
                     'shape_string_epsg',
                     'shape_string',
                     'delete_polygon',
+                    'polygon_proxy',
                     css_class="col-md-9"
                 ),
                 css_class="separate-panel",

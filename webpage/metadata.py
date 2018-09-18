@@ -11,5 +11,6 @@ PROJECT_METADATA = {
     'purpose_en': 'The purpose of IRON-AGE-DANUBE is the publication of research data.',
     'version': '0.1.0',
     'matomo_id': '81',
-    'matomo_url': '//piwik.apollo.arz.oeaw.ac.at/'
+    'matomo_url': '//piwik.apollo.arz.oeaw.ac.at/',
+    'imprint': '/imprint',
 }
