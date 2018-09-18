@@ -48,6 +48,10 @@ class ArchEntDetailView(DetailView):
     model = ArchEnt
     template_name = 'archiv/archent_detail.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ArchEntDetailView, self).dispatch(*args, **kwargs)
+
 
 class ArchEntCreate(BaseCreateView):
 
