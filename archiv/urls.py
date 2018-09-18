@@ -1,4 +1,6 @@
 from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from . import views
 from . import copy_views
 
@@ -21,7 +23,7 @@ urlpatterns = [
         name='archent_edit'),
     url(r'^archent/delete/(?P<pk>[0-9]+)$', views.ArchEntDelete.as_view(),
         name='archent_delete'),
-    url(r'^site/detail/(?P<pk>[0-9]+)$', views.SiteDetailView.as_view(),
+    url(r'^site/detail/(?P<pk>[0-9]+)$', login_required(views.SiteDetailView.as_view()),
         name='site_detail'),
     url(r'^site/create/$', views.SiteCreate.as_view(),
         name='site_create'),

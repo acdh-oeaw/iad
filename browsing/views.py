@@ -85,9 +85,9 @@ class GenericListView(SingleTableView):
             print(chartdata)
         return context
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(GenericListView, self).dispatch(*args, **kwargs)
+    # @method_decorator(login_required)
+    # def dispatch(self, *args, **kwargs):
+    #     return super(GenericListView, self).dispatch(*args, **kwargs)
 
 
 class ReferenceListView(GenericListView):

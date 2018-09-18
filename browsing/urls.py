@@ -1,4 +1,6 @@
 from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from . import views
 
 app_name = 'browsing'
@@ -19,7 +21,7 @@ urlpatterns = [
         r'researchquestions/$', views.ResearchQuestionListView.as_view(),
         name='browse_researchquestions'
     ),
-    url(r'sites/$', views.SiteListView.as_view(), name='browse_sites'),
+    url(r'sites/$', login_required(views.SiteListView.as_view()), name='browse_sites'),
     url(r'download/site/$', views.SiteDl.as_view(), name='dl_sites'),
     url(r'archents/$', views.ArchEntListView.as_view(), name='browse_archents'),
     url(r'download/archent/$', views.ArchEntDl.as_view(), name='dl_archent'),

@@ -122,10 +122,6 @@ class SiteDetailView(DetailView):
         context['history'] = Version.objects.get_for_object(self.object)
         return context
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(SiteDetailView, self).dispatch(*args, **kwargs)
-
 
 class SiteCreate(BaseCreateView):
 
