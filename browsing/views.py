@@ -77,6 +77,7 @@ class GenericListView(SingleTableView):
                 )
             )
             context['shapes'] = shapes
+        context['self_model_name'] = self.model.__name__.lower()
         context[self.context_filter_name] = self.filter
         context['docstring'] = "{}".format(self.model.__doc__)
         if self.model._meta.verbose_name_plural:

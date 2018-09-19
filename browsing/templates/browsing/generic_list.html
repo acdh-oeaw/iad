@@ -294,9 +294,26 @@ $("#goto option").each(function() {
                 {% leaflet_map "yourmap" callback="window.map_init_basic" %}
             </div>
             <script type="text/javascript">
+
+                function createLink(propertyObject){
+                    var model_name = "{{ self_model_name}}"
+                    var url = "/archiv/"+model_name+"/detail/"+propertyObject.pk;
+                    var link = '<a href="'+url+'">'+propertyObject.name+'</a>';
+                    return link
+                }
+
+                function onEachFeature(feature, layer) {
+                    // if (feature.properties && feature.properties.name) {
+                        var popupContent = createLink(feature.properties);
+                        layer.bindPopup(popupContent);
+                    // }
+                }
+
                 function map_init_basic (map, options) {
                     var geojsonFeature = {{ shapes|safe }};
-                    var GeoJsonLayer = L.geoJson(geojsonFeature);
+                    var GeoJsonLayer = L.geoJson(geojsonFeature, {
+                        onEachFeature: onEachFeature
+                    });
                     GeoJsonLayer.addTo(map);
                     map.fitBounds(GeoJsonLayer.getBounds());
                 }
