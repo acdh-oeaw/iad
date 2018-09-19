@@ -17,6 +17,7 @@ body {
 .card {
     overflow: visible;
     border: 0 solid rgba(0,0,0,.125);
+    box-shadow: 16px 19px 9px 0px #866161;
 }
 
 .site-page {
