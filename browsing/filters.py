@@ -87,7 +87,10 @@ class MonumentProtectionListFilter(django_filters.FilterSet):
 
     class Meta:
         model = MonumentProtection
-        exclude = ['polygon']
+        exclude = [
+            'polygon',
+            'centroid',
+        ]
 
 
 class ResearchQuestionListFilter(django_filters.FilterSet):
@@ -203,7 +206,10 @@ class ArchEntListFilter(django_filters.FilterSet):
 
     class Meta:
         model = ArchEnt
-        exclude = ['polygon']
+        exclude = [
+            'polygon',
+            'centroid',
+        ]
 
 
 class SiteListFilter(django_filters.FilterSet):
@@ -486,7 +492,10 @@ class SiteListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Site
-        exclude = ['polygon']
+        exclude = [
+            'polygon',
+            'centroid',
+        ]
 
 
 class AltNameListFilter(django_filters.FilterSet):
@@ -498,7 +507,10 @@ class AltNameListFilter(django_filters.FilterSet):
 
     class Meta:
         model = AltName
-        exclude = ['polygon']
+        exclude = [
+            'polygon',
+            'centroid',
+        ]
 
 
 class ResearchEventListFilter(django_filters.FilterSet):
@@ -558,7 +570,10 @@ class ResearchEventListFilter(django_filters.FilterSet):
 
     class Meta:
         model = ResearchEvent
-        exclude = ['polygon']
+        exclude = [
+            'polygon',
+            'centroid',
+        ]
 
 
 class PeriodListFilter(django_filters.FilterSet):
@@ -570,7 +585,10 @@ class PeriodListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Period
-        exclude = ['polygon']
+        exclude = [
+            'polygon',
+            'centroid',
+        ]
 
 
 class PersonListFilter(django_filters.FilterSet):
