@@ -3,6 +3,7 @@ import json
 
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Union
 from django.contrib.gis.db.models.functions import Centroid
@@ -132,6 +133,42 @@ class IadBaseClass(IdProvider):
         super().save(*args, **kwargs)
 
     @classmethod
+    def get_points(self):
+        model_name = self.__name__
+        ct = ContentType.objects.get(
+            app_label='archiv',
+            model=model_name.lower()
+        ).model_class()
+        geojson = serialize(
+            'geojson',
+            ct.objects.all(),
+            geometry_field='centroid',
+            fields=(
+                'name',
+                'pk',
+            )
+        )
+        return geojson
+
+    @classmethod
+    def get_shapes(self):
+        model_name = self.__name__
+        ct = ContentType.objects.get(
+            app_label='archiv',
+            model=model_name.lower()
+        ).model_class()
+        geojson = serialize(
+            'geojson',
+            ct.objects.all(),
+            geometry_field='polygon',
+            fields=(
+                'name',
+                'pk',
+            )
+        )
+        return geojson
+
+    @classmethod
     def get_convex_hull(self):
         if Site.objects.exclude(polygon=None):
             sites = [x.id for x in Site.objects.exclude(polygon=None) if x.polygon.valid]
@@ -164,8 +201,6 @@ class IadBaseClass(IdProvider):
 
     class Meta:
         abstract = True
-
-
 
 
 @modify_fields(
@@ -439,6 +474,17 @@ class Site(IadBaseClass):
             geometry_field='polygon',
             fields=('name', 'identifier', 'pk')
         )
+        return geojson
+
+    def get_point(self):
+        if self.centroid:
+            geojson = serialize(
+                'geojson', Site.objects.filter(id=self.id),
+                geometry_field='centroid',
+                fields=('name', 'identifier', 'pk')
+            )
+        else:
+            geojson = None
         return geojson
 
     @classmethod
