@@ -3,16 +3,56 @@
 {% load stats_extras %}
 {% load webpage_extras %}
 {% block content %}
-    <div class="container">
-        <div class="jumbotron" style="background-image: url({% static 'webpage/img/DanubeTP_map_A3-Final.png' %}) ">
-            <div class="container">
-                <h1 style="text-align:center; color: #111;">{% projects_metadata 'title' %}</h1>
-                <h3 style="text-align:center; color: #111;">{% projects_metadata 'subtitle' %}</h3>
-
+<div class="container">
+    <div class="jumbotron" style="background-image: url({% static 'webpage/img/DanubeTP_map_A3-Final.png' %}) ">
+        <div class="container">
+            <h1 style="text-align:center; color: #111;">{% projects_metadata 'title' %}</h1>
+            <h3 style="text-align:center; color: #111;">{% projects_metadata 'subtitle' %}</h3>
+        </div>
+    </div>
+        <div class="row" style="padding:10px;">
+            <div class="col-md-6">
+                <div class="card site-page">
+                    <div class="card-body">
+                        <h5 class="card-title">Sites</h5>
+                        <p class="card-text">Provide some short text.</p>
+                        <a href="{% url 'browsing:browse_sites' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">browse</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card archent-page">
+                    <div class="card-body">
+                        <h5 class="card-title">Archaelogical Entities</h5>
+                        <p class="card-text">Provide some short text.</p>
+                        <a href="{% url 'browsing:browse_archents' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">browse</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <p>
-            {% projects_metadata 'description' %}
-        </p>
-    </div>
+        <div class="row" style="padding:10px;">
+            <div class="col-md-6">
+                <div class="card researchevent-page">
+                    <div class="card-body">
+                        <h5 class="card-title">Research Activities</h5>
+                        <p class="card-text">Provide some short text.</p>
+                        <a href="{% url 'browsing:browse_researchevents' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">browse</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card monumentprotection-page">
+                    <div class="card-body">
+                        <h5 class="card-title">Monument Protection</h5>
+                        <p class="card-text">Provide some short text.</p>
+                        <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">browse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <p>
+        {% projects_metadata 'description' %}
+    </p>
+</div>
 {% endblock %}
