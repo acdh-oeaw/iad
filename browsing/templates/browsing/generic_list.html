@@ -1,14 +1,23 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
+{% load leaflet_tags %}
 {% load django_tables2 %}
 {% load charts_extras %}
 {% load browsing_extras %}
 {% load i18n %}
 {% load crispy_forms_field %}
 {% load crispy_forms_tags %}
-{% block Titel %} Browse {{ class_name }} {% endblock %}
+{% block title %} Browse {{ class_name }} {% endblock %}
 {% block scriptHeader %}
-{% load_highcharts_js %}
+    {% load_highcharts_js %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <style>
+        .leaflet-container {  /* all maps */
+            width:  100%;
+            height: 800px;
+        }
+    </style>
 {% endblock %}
 {% block content %}
 
@@ -279,6 +288,22 @@ $("#goto option").each(function() {
         </div>
         </div>
         </div>
+    {% if shapes %}
+        <div class="card">
+            <div class="card-body">
+                {% leaflet_map "yourmap" callback="window.map_init_basic" %}
+            </div>
+            <script type="text/javascript">
+                function map_init_basic (map, options) {
+                    var geojsonFeature = {{ shapes|safe }};
+                    var GeoJsonLayer = L.geoJson(geojsonFeature);
+                    GeoJsonLayer.addTo(map);
+                    map.fitBounds(GeoJsonLayer.getBounds());
+                }
+            </script>
+        </div>
+    {% endif %}
+
 </div>
 
 {% config_highcharts %}
