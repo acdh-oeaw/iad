@@ -22,6 +22,7 @@ class BaseCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(BaseCreateView, self).get_context_data()
         context['docstring'] = "{}".format(self.model.__doc__)
+        context['self_model_name'] = self.model.__name__.lower()
         if self.model._meta.verbose_name:
             context['class_name'] = "{}".format(self.model._meta.verbose_name.title())
         else:
@@ -36,6 +37,7 @@ class BaseUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(BaseUpdateView, self).get_context_data()
+        context['self_model_name'] = self.model.__name__.lower()
         context['docstring'] = "{}".format(self.model.__doc__)
         if self.model._meta.verbose_name:
             context['class_name'] = "{}".format(self.model._meta.verbose_name.title())
@@ -130,7 +132,6 @@ class SiteDetailView(DetailView):
             context['not_logged_in'] = True
             return context
         return context
-
 
 
 class SiteCreate(BaseCreateView):
