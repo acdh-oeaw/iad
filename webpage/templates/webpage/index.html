@@ -2,15 +2,21 @@
 {% load staticfiles %}
 {% load stats_extras %}
 {% load webpage_extras %}
+{% load leaflet_tags %}
+{% block scriptHeader %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+{% endblock %}
 {% block content %}
+<div class="jumbotron" style="padding:0;">
+
+    {% leaflet_map "yourmap" callback="window.map_init_basic" %}%}
+
+</div>
 <div class="container">
-    <div class="jumbotron" style="background-image: url({% static 'webpage/img/DanubeTP_map_A3-Final.png' %}) ">
-        <div class="container">
-            <h1 style="text-align:center; color: #111;">{% projects_metadata 'title' %}</h1>
-            <h3 style="text-align:center; color: #111;">{% projects_metadata 'subtitle' %}</h3>
-        </div>
-    </div>
+    <h1 style="text-align:center; color: #111;">{% projects_metadata 'title' %}</h1>
         <div class="row" style="padding:10px;">
+
             <div class="col-md-6">
                 <div class="card site-page">
                     <div class="card-body">
@@ -55,4 +61,18 @@
         {% projects_metadata 'description' %}
     </p>
 </div>
+<script>
+    var SiteStyle = {
+        "color": "#F18C8E",
+        "weight": 1,
+        "opacity": 1,
+        "fillOpacity": 0.5,
+    };
+    function map_init_basic (map, options) {
+        var geojsonFeature = {{shapes|safe }};
+        var GeoJsonLayer = L.geoJson(geojsonFeature).setStyle(SiteStyle);
+        GeoJsonLayer.addTo(map);
+        map.fitBounds(GeoJsonLayer.getBounds());
+    }
+</script>
 {% endblock %}
