@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from . forms import form_user_login
-from archiv.models import Site
+from archiv.models import Site, ArchEnt
 
 
 if 'reversion' in settings.INSTALLED_APPS:
@@ -39,6 +39,7 @@ class GenericWebpageView(TemplateView):
         context = super(GenericWebpageView, self).get_context_data()
         context['points'] = Site.get_points()
         context['shapes'] = Site.get_shapes()
+        context['shapes_archent'] = ArchEnt.get_shapes()
         return context
 
     def get_template_names(self):

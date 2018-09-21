@@ -88,19 +88,39 @@
         "opacity": 1,
         "fillOpacity": 0.5,
     };
+
+    var ArchentStyle = {
+        "color": "#F0B7A4",
+        "weight": 1,
+        "opacity": 1,
+        "fillOpacity": 1,
+    };
     function map_init_basic (map, options) {
+
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
             maxZoom: 18,
             id: 'mapbox.light',
             accessToken: 'pk.eyJ1Ijoic2VubmllcmVyIiwiYSI6ImNpbHk1YWV0bDAwZnB2dW01d2l1Y3phdmkifQ.OljQLEhqeAygai2y6VoSwQ'
         }).addTo(map);
-        var geojsonFeature = {{shapes|safe }};
-        var GeoJsonLayer = L.geoJson(geojsonFeature, {
+
+        var SiteShapeLayer = L.geoJson({{shapes|safe }}, {
             onEachFeature: onEachFeature
         }).setStyle(SiteStyle);
-        GeoJsonLayer.addTo(map);
-        map.fitBounds(GeoJsonLayer.getBounds());
+        SiteShapeLayer.addTo(map);
+        map.layerscontrol.addOverlay(SiteShapeLayer, 'Sites (Shapes)');
+        map.fitBounds(SiteShapeLayer.getBounds());
+
+        var SitePointLayer = L.geoJson({{points|safe }}, {
+            onEachFeature: onEachFeature
+        });
+        map.layerscontrol.addOverlay(SitePointLayer, 'Sites (Points)');
+        map.fitBounds(SitePointLayer.getBounds());
+
+        var ArchentShapeLayer = L.geoJson({{shapes_archent|safe }}, {}).setStyle(ArchentStyle);
+        ArchentShapeLayer.addTo(map);
+        map.layerscontrol.addOverlay(ArchentShapeLayer, 'Archents (Shapes)');
+        map.fitBounds(ArchentShapeLayer.getBounds());
     }
 </script>
 {% endblock %}
