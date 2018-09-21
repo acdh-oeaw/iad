@@ -158,7 +158,7 @@ LEAFLET_CONFIG = {
             }
         ),
         (
-            'Ortho_World', 'https://api.mapbox.com/styles/v1/csae8092/cjj5eznid0gpu2sqau1eqiqr3/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY3NhZTgwOTIiLCJhIjoiY2lnM2FoZWpjMDJqZnY1a2gxdWl6a29kaiJ9.FQXlsKIu60WhiXLrfI59VA',
+            'Ortho World', 'https://api.mapbox.com/styles/v1/csae8092/cjj5eznid0gpu2sqau1eqiqr3/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY3NhZTgwOTIiLCJhIjoiY2lnM2FoZWpjMDJqZnY1a2gxdWl6a29kaiJ9.FQXlsKIu60WhiXLrfI59VA',
             {
                 'maxZoom': 25,
                 'attribution': 'MapBox'

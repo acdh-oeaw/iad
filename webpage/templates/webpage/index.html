@@ -56,12 +56,32 @@
                 </div>
             </div>
         </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {% projects_metadata 'subtitle' %}
+                </h5>
+                <p class="card-text">
+                    {% projects_metadata 'description' %}
+                </p>
+            </div>
+        </div>
 
-    <p>
-        {% projects_metadata 'description' %}
-    </p>
+
 </div>
 <script>
+    function createLink(propertyObject) {
+        var model_name = "{{ self_model_name }}"
+        var url = "/archiv/site/detail/" + propertyObject.pk;
+        var link = '<a href="' + url + '">' + propertyObject.name + '</a>';
+        return link
+    }
+    function onEachFeature(feature, layer) {
+        // if (feature.properties && feature.properties.name) {
+        var popupContent = createLink(feature.properties);
+        layer.bindPopup(popupContent);
+        // }
+    }
     var SiteStyle = {
         "color": "#F18C8E",
         "weight": 1,
@@ -69,8 +89,16 @@
         "fillOpacity": 0.5,
     };
     function map_init_basic (map, options) {
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.light',
+            accessToken: 'pk.eyJ1Ijoic2VubmllcmVyIiwiYSI6ImNpbHk1YWV0bDAwZnB2dW01d2l1Y3phdmkifQ.OljQLEhqeAygai2y6VoSwQ'
+        }).addTo(map);
         var geojsonFeature = {{shapes|safe }};
-        var GeoJsonLayer = L.geoJson(geojsonFeature).setStyle(SiteStyle);
+        var GeoJsonLayer = L.geoJson(geojsonFeature, {
+            onEachFeature: onEachFeature
+        }).setStyle(SiteStyle);
         GeoJsonLayer.addTo(map);
         map.fitBounds(GeoJsonLayer.getBounds());
     }
