@@ -479,47 +479,83 @@
             var popupContent = createLink(feature.properties, 'archent');
             layer.bindPopup(popupContent);
         }
-      }
+    }
 
     var SiteStyle = {
         "color": "#F18C8E",
         "weight": 2,
         "opacity": 1,
-        "fillOpacity": 0,
-    };
+        "fillOpacity": 0.2,
+        };
 
     var ArchEntStyle = {
             "color": "#F0B7A4",
             "weight": 2,
             "opacity": 1,
-            "fillOpacity": 0,
+            "fillOpacity": 0.8,
         };
+
+    var MonumentProtectionStyle = {
+            "color": "#568EA6",
+            "weight": 2,
+            "opacity": 1,
+            "fillOpacity": 0.8,
+        };
+
+        var ResearchEventStyle = {
+                "color": "#F1D1B5",
+                "weight": 2,
+                "opacity": 1,
+                "fillOpacity": 0.8,
+            };
 
     var ArchConvex = {
             "color": "#F0B7A4",
             "weight": 1,
             "opacity": 1,
-            "fillOpacity": 0,
-    };
+            "fillOpacity": 0.5,
+        };
 
     function map_init_basic (map, options) {
 
         var geojsonFeature = {{ object.get_geojson|safe }};
         var SiteLayer = L.geoJson(geojsonFeature).setStyle(SiteStyle);
         SiteLayer.addTo(map);
+        map.layerscontrol.addOverlay(SiteLayer, 'Sites');
         map.fitBounds(SiteLayer.getBounds());
 
         var ArchEntConvex = L.geoJson({{ object.convex_hull_archents|safe }}).setStyle(ArchConvex);
+        map.layerscontrol.addOverlay(ArchEntConvex, 'Sum of ArchEnts');
         ArchEntConvex.addTo(map);
 
 
         {% if object.has_archent.all %}
             {% for x in object.has_archent.all %}
-                var geojsonFeatureArchEnt = {{ x.get_geojson|safe }};
-                L.geoJson(geojsonFeatureArchEnt, {
+                var ItemLayer = L.geoJson({{ x.get_geojson|safe }}, {
                     style: ArchEntStyle,
                     onEachFeature: onEachFeature
                 }).addTo(map);
+                map.layerscontrol.addOverlay(ItemLayer, 'Archent');
+          	{% endfor %}
+      	{% endif %}
+
+        {% if object.has_monument_protection.all %}
+            {% for x in object.has_monument_protection.all %}
+                var ItemLayer = L.geoJson({{ x.get_geojson|safe }}, {
+                    style: MonumentProtectionStyle,
+                    onEachFeature: onEachFeature
+                }).addTo(map);
+                map.layerscontrol.addOverlay(ItemLayer, 'Monument Protection');
+          	{% endfor %}
+      	{% endif %}
+
+        {% if object.has_research_activity.all %}
+            {% for x in object.has_research_activity.all %}
+                var ItemLayer = L.geoJson({{ x.get_geojson|safe }}, {
+                    style: MonumentProtectionStyle,
+                    onEachFeature: onEachFeature
+                }).addTo(map);
+                map.layerscontrol.addOverlay(ItemLayer, 'Research Event');
           	{% endfor %}
       	{% endif %}
     }
