@@ -208,6 +208,13 @@
     <div class="footer-imprint-bar">
         <a href="{% projects_metadata 'imprint' %}">Impressum/Imprint</a>
     </div>
+    {% if user.is_authenticated %}
+        {% if DB_NAME %}
+            <div class="footer-imprint-bar">
+                <small>{{ DB_NAME }}</small>
+            </div>
+        {% endif %}
+    {% endif %}
 </footer>
 {% block scripts %}
 <script src="https://fundament.acdh.oeaw.ac.at/dist/fundament/vendor/js/fontawesome-all.min.js"></script>
