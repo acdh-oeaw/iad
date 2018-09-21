@@ -19,7 +19,7 @@
 <div class="row">
 <div class="col-md-6">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header archent-page">
             <div class="row">
                 <div class="col-md-2">
                     {% if object.get_prev %}
@@ -304,17 +304,25 @@
 <!-- </div> -->
 <script type="text/javascript">
     var SiteStyle = {
-            "color": "#ff7800",
-            "weight": 2,
-            "opacity": 1,
-            "fillOpacity": 0,
-        };
+        "color": "#F18C8E",
+        "weight": 2,
+        "opacity": 1,
+        "fillOpacity": 0,
+    };
+
     var ArchEntStyle = {
-            "color": "#3589ff",
+            "color": "#F0B7A4",
             "weight": 2,
             "opacity": 1,
             "fillOpacity": 0,
         };
+
+    var ArchConvex = {
+            "color": "#F0B7A4",
+            "weight": 1,
+            "opacity": 1,
+            "fillOpacity": 0,
+    };
     function map_init_basic (map, options) {
         var geojsonFeature = {{ object.get_geojson|safe }};
         var ArchEntGeoJsonLayer = L.geoJson(geojsonFeature).setStyle(ArchEntStyle);

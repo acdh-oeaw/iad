@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from . forms import form_user_login
+from archiv.models import Site
 
 
 if 'reversion' in settings.INSTALLED_APPS:
@@ -33,6 +34,12 @@ else:
 
 class GenericWebpageView(TemplateView):
     template_name = 'webpage/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericWebpageView, self).get_context_data()
+        context['points'] = Site.get_points()
+        context['shapes'] = Site.get_shapes()
+        return context
 
     def get_template_names(self):
         template_name = "webpage/{}.html".format(self.kwargs.get("template", 'index'))

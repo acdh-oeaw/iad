@@ -1,5 +1,50 @@
+import io
 import geojson
+import pandas as pd
+import geopandas as gp
+from shapely import wkt
+from shapely.geometry.multipolygon import MultiPolygon
 from django.contrib.gis.geos import GEOSGeometry
+
+
+def copy_shape_str_to_poly(shape_string, shape_string_epsg):
+    errors = []
+    try:
+        df = pd.read_table(io.StringIO(shape_string), sep="\t")
+        worked = True
+    except Exception as e:
+        gdf = None
+        worked = False
+        errors.append(e)
+    if worked:
+        try:
+            df['geometry'] = df['wkt_geom'].apply(wkt.loads)
+            gdf = gp.GeoDataFrame(df, geometry='geometry')
+        except Exception as e:
+            gdf = None
+            worked = False
+            errors.append(e)
+        if worked:
+            try:
+                epsg = "epsg:{}".format(shape_string_epsg)
+                gdf.crs = {'init': epsg}
+                gdf = gdf.to_crs({'proj': 'longlat', 'ellps': 'WGS84', 'datum': 'WGS84'})
+            except Exception as e:
+                gdf = None
+                errors.append(e)
+    if worked:
+        try:
+            geom = GEOSGeometry(gdf['geometry'].values[0].wkt)
+        except Exception as e:
+            geom = None
+            errors.append(e)
+    else:
+        geom = None
+    return {
+        'gdf': gdf,
+        'errors': errors,
+        'geom': geom
+    }
 
 
 def geojson_to_poly(geo_json_str):

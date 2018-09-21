@@ -19,8 +19,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__
 
 INSTALLED_APPS = [
     'dal',
-    'dal_select2',
     'django.contrib.admin',
+    'dal_select2',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -82,6 +82,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'webpage.webpage_content_processors.installed_apps',
+                'webpage.webpage_content_processors.is_dev_version',
             ],
         },
     },
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -157,7 +158,7 @@ LEAFLET_CONFIG = {
             }
         ),
         (
-            'Ortho_World', 'https://api.mapbox.com/styles/v1/csae8092/cjj5eznid0gpu2sqau1eqiqr3/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY3NhZTgwOTIiLCJhIjoiY2lnM2FoZWpjMDJqZnY1a2gxdWl6a29kaiJ9.FQXlsKIu60WhiXLrfI59VA',
+            'Ortho World', 'https://api.mapbox.com/styles/v1/csae8092/cjj5eznid0gpu2sqau1eqiqr3/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY3NhZTgwOTIiLCJhIjoiY2lnM2FoZWpjMDJqZnY1a2gxdWl6a29kaiJ9.FQXlsKIu60WhiXLrfI59VA',
             {
                 'maxZoom': 25,
                 'attribution': 'MapBox'

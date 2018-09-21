@@ -56,3 +56,4 @@ dev_secret.py
 /site__other_period.csv
 /ae__burial_construction.csv
 /ae__burial_type.csv
+dump.sql

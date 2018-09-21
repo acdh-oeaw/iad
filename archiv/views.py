@@ -22,6 +22,7 @@ class BaseCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(BaseCreateView, self).get_context_data()
         context['docstring'] = "{}".format(self.model.__doc__)
+        context['self_model_name'] = self.model.__name__.lower()
         if self.model._meta.verbose_name:
             context['class_name'] = "{}".format(self.model._meta.verbose_name.title())
         else:
@@ -36,6 +37,7 @@ class BaseUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(BaseUpdateView, self).get_context_data()
+        context['self_model_name'] = self.model.__name__.lower()
         context['docstring'] = "{}".format(self.model.__doc__)
         if self.model._meta.verbose_name:
             context['class_name'] = "{}".format(self.model._meta.verbose_name.title())
@@ -47,6 +49,10 @@ class BaseUpdateView(UpdateView):
 class ArchEntDetailView(DetailView):
     model = ArchEnt
     template_name = 'archiv/archent_detail.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ArchEntDetailView, self).dispatch(*args, **kwargs)
 
 
 class ArchEntCreate(BaseCreateView):
@@ -113,18 +119,19 @@ class SiteDetailView(DetailView):
     template_name = 'archiv/site_detail.html'
 
     def get_context_data(self, **kwargs):
+        user = self.request.user
         context = super(SiteDetailView, self).get_context_data()
-        try:
-            information_source = self.object.has_research_activity.order_by('start_date')[0]
-        except IndexError:
-            information_source = None
-        context['information_source'] = information_source
-        context['history'] = Version.objects.get_for_object(self.object)
+        if (self.object.public and self.object.site_checked_by) or user.is_authenticated:
+            try:
+                information_source = self.object.has_research_activity.order_by('start_date')[0]
+            except IndexError:
+                information_source = None
+            context['information_source'] = information_source
+            context['history'] = Version.objects.get_for_object(self.object)
+        else:
+            context['not_logged_in'] = True
+            return context
         return context
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(SiteDetailView, self).dispatch(*args, **kwargs)
 
 
 class SiteCreate(BaseCreateView):

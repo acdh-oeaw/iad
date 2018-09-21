@@ -3,8 +3,10 @@ import json
 
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Union
+from django.contrib.gis.db.models.functions import Centroid
 from django.contrib.gis import geos
 from django.core.serializers import serialize
 
@@ -117,6 +119,54 @@ class IadBaseClass(IdProvider):
         help_text="Add publication references"
     )
     polygon = models.MultiPolygonField(blank=True, null=True)
+    polygon_proxy = models.BooleanField(
+        default=False, verbose_name="No precise polygon",
+        choices=BOOLEAN_CHOICES,
+        help_text="Please set to 'Yes' in case the polygon is merely a place holder"
+    )
+    centroid = models.PointField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.polygon and not self.centroid:
+            cent = self.polygon.centroid
+            self.centroid = cent
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def get_points(self):
+        model_name = self.__name__
+        ct = ContentType.objects.get(
+            app_label='archiv',
+            model=model_name.lower()
+        ).model_class()
+        geojson = serialize(
+            'geojson',
+            ct.objects.all(),
+            geometry_field='centroid',
+            fields=(
+                'name',
+                'pk',
+            )
+        )
+        return geojson
+
+    @classmethod
+    def get_shapes(self):
+        model_name = self.__name__
+        ct = ContentType.objects.get(
+            app_label='archiv',
+            model=model_name.lower()
+        ).model_class()
+        geojson = serialize(
+            'geojson',
+            ct.objects.all(),
+            geometry_field='polygon',
+            fields=(
+                'name',
+                'pk',
+            )
+        )
+        return geojson
 
     @classmethod
     def get_convex_hull(self):
@@ -426,6 +476,17 @@ class Site(IadBaseClass):
         )
         return geojson
 
+    def get_point(self):
+        if self.centroid:
+            geojson = serialize(
+                'geojson', Site.objects.filter(id=self.id),
+                geometry_field='centroid',
+                fields=('name', 'identifier', 'pk')
+            )
+        else:
+            geojson = None
+        return geojson
+
     @classmethod
     def get_listview_url(self):
         return reverse('browsing:browse_sites')
@@ -464,6 +525,20 @@ class Site(IadBaseClass):
 
     def get_prev(self):
         prev = Site.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+    def get_next_public(self):
+        next = Site.objects.filter(id__gt=self.id)\
+            .exclude(site_checked_by=None).exclude(public=False)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev_public(self):
+        prev = Site.objects.filter(id__lt=self.id)\
+            .exclude(site_checked_by=None).exclude(public=False).order_by('-id')
         if prev:
             return prev.first().id
         return False

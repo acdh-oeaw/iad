@@ -124,6 +124,7 @@
                         // fetch polygon of related site
                         $("#id_site_id").change(function() {
                             var url = "/api/sites/" + this.value + "/?format=json";
+                            console.log('hallo hansi')
                             $.getJSON(url, function(data) {
                                 layerGroup.clearLayers();
                                 var newLayer = L.geoJson(data, {style: SiteStyle})

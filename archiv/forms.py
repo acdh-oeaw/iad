@@ -1,12 +1,17 @@
+import io
+import pandas as pd
+import geopandas as gp
+from shapely import wkt
 from dal import autocomplete
 from django import forms
-from .models import ResearchEvent
+from django.contrib.gis.geos import GEOSGeometry
+
 from leaflet.forms.widgets import LeafletWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML, Field
 
-from .models import *
-from . utils import geojson_to_poly
+from . models import *
+from . utils import geojson_to_poly, copy_shape_str_to_poly
 
 
 class ArchivBaseForm(forms.ModelForm):
@@ -14,6 +19,22 @@ class ArchivBaseForm(forms.ModelForm):
         widget=forms.Textarea, label="Paste a valid(!) GeoJson in this form",
         help_text="GeoJson must be of type 'FeatureCollection'\
         with features of type 'MultiPolygon'.",
+        required=False
+    )
+    paste_wkt = forms.CharField(
+        widget=forms.Textarea, label="Paste a valid(!) WKT(Mulitpolygon) in this form",
+        help_text="WKT must have srid=4326",
+        required=False
+    )
+    shape_string_epsg = forms.CharField(
+        label="The shapes EPSG Number",
+        help_text="The EPSG number form the polygon you copied, e.g.: '32633'",
+        required=False
+    )
+    shape_string = forms.CharField(
+        widget=forms.Textarea, label="Paste the Polygon",
+        help_text="Select the feature, hit 'strg+c' to copy it\
+        an paste the content into this field",
         required=False
     )
     delete_polygon = forms.BooleanField(
@@ -26,19 +47,43 @@ class ArchivBaseForm(forms.ModelForm):
         cleaned_data = super(ArchivBaseForm, self).clean()
         print('HALLO FROM OVERRIDEN CLEAN METHOD')
         geo_json_str = cleaned_data['paste_geojson']
+        paste_wkt = self.cleaned_data['paste_wkt']
+        shape_string_epsg = self.cleaned_data['shape_string_epsg']
+        shape_string = self.cleaned_data['shape_string']
         if geo_json_str:
             processed_geojson = geojson_to_poly(geo_json_str)
             if processed_geojson['errors']:
                 self._errors['paste_geojson'] = self.error_class(processed_geojson['errors'])
+        elif paste_wkt:
+            try:
+                GEOSGeometry(paste_wkt, srid=4326)
+            except Exception as e:
+                self._errors['paste_wkt'] = self.error_class(["{}".format(e)])
+        elif shape_string_epsg and shape_string:
+            data = copy_shape_str_to_poly(shape_string, shape_string_epsg)
+            if data['errors']:
+                self._errors['shape_string'] = data['errors']
         return cleaned_data
 
     def save(self, commit=True):
         instance = super(ArchivBaseForm, self).save(commit=True)
         print("HI from SAVE METHOD")
         geo_json_str = self.cleaned_data['paste_geojson']
+        paste_wkt = self.cleaned_data['paste_wkt']
+        paste_wkt = self.cleaned_data['paste_wkt']
+        shape_string_epsg = self.cleaned_data['shape_string_epsg']
+        shape_string = self.cleaned_data['shape_string']
         if geo_json_str:
             processed_geojson = geojson_to_poly(geo_json_str)
             instance.polygon = processed_geojson['mpoly']
+            instance.save()
+        elif paste_wkt:
+            instance.polygon = GEOSGeometry(paste_wkt, srid=4326)
+            'PASTE_WKT'
+            instance.save()
+        elif shape_string and shape_string_epsg:
+            polygon = copy_shape_str_to_poly(shape_string, shape_string_epsg)['geom']
+            instance.polygon = polygon
             instance.save()
         if self.cleaned_data['delete_polygon']:
             instance.polygon = None
@@ -55,7 +100,6 @@ class MonumentProtectionForm(ArchivBaseForm):
             'heritage_status', 'natural_heritage_status', 'threats', 'comment'
             ]
         widgets = {
-            'public': forms.CheckboxInput(),
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
@@ -93,6 +137,9 @@ class MonumentProtectionForm(ArchivBaseForm):
                 'threats',
                 'comment',
                 'paste_geojson',
+                'paste_wkt',
+                'shape_string_epsg',
+                'shape_string',
                 'delete_polygon',
                 css_class="col-md-9"
                 ),
@@ -136,7 +183,6 @@ class ArchEntForm(ArchivBaseForm):
             'comment'
         ]
         widgets = {
-            'public': forms.CheckboxInput(),
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
             'literature': autocomplete.ModelSelect2Multiple(
@@ -202,6 +248,9 @@ class ArchEntForm(ArchivBaseForm):
                 'location_certainty',
                 'comment',
                 'paste_geojson',
+                'paste_wkt',
+                'shape_string_epsg',
+                'shape_string',
                 'delete_polygon',
                 css_class="col-md-9"
                 )
@@ -219,7 +268,6 @@ class ResearchEventForm(ArchivBaseForm):
             'research_question', 'comment', 'generation_data_set'
         ]
         widgets = {
-            'public': forms.CheckboxInput(),
             'site_id': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:site-autocomplete'),
             'alt_name': autocomplete.ModelSelect2Multiple(
@@ -271,6 +319,9 @@ class ResearchEventForm(ArchivBaseForm):
                 'comment',
                 'generation_data_set',
                 'paste_geojson',
+                'paste_wkt',
+                'shape_string_epsg',
+                'shape_string',
                 'delete_polygon',
                 css_class="col-md-9"
                 )
@@ -316,6 +367,9 @@ class PeriodForm(ArchivBaseForm):
                 'bibl',
                 'comment',
                 'paste_geojson',
+                'paste_wkt',
+                'shape_string_epsg',
+                'shape_string',
                 'delete_polygon',
                 css_class="col-md-9"
                 )
@@ -325,7 +379,8 @@ class PeriodForm(ArchivBaseForm):
 class SiteForm(ArchivBaseForm):
     try:
         OPTIONS = [(x.id, x) for x in ResearchEvent.objects.all()]
-    except:
+    except Exception as e:
+        print(e)
         OPTIONS = [('Populate database first'), ('populate database first')]
 
     research_activities = forms.MultipleChoiceField(
@@ -344,10 +399,9 @@ class SiteForm(ArchivBaseForm):
             # tourism field
             'accessibility', 'visibility', 'infrastructure', 'long_term_management',
             'potential_surrounding', 'museum', 'iad_app', 'app_description',
-            'tourism_comment', 'site_checked_by',
+            'tourism_comment', 'site_checked_by', 'polygon_proxy'
         ]
         widgets = {
-            'public': forms.CheckboxInput(),
             'sm_adm': forms.TextInput(),
             'alt_name': autocomplete.ModelSelect2Multiple(
                 url='archiv-ac:altname-autocomplete'),
@@ -372,6 +426,8 @@ class SiteForm(ArchivBaseForm):
         except AttributeError:
             pass
         self.fields['name'].required = True
+        self.fields['public'].required = False
+        self.fields['polygon_proxy'].required = False
         self.helper.form_tag = True
         self.helper.form_class = 'form-group'
         self.helper.add_input(Submit('submit', 'save'),)
@@ -425,7 +481,11 @@ class SiteForm(ArchivBaseForm):
                 Div(
                     'site_checked_by',
                     'paste_geojson',
+                    'paste_wkt',
+                    'shape_string_epsg',
+                    'shape_string',
                     'delete_polygon',
+                    'polygon_proxy',
                     css_class="col-md-9"
                 ),
                 css_class="separate-panel",

@@ -1,6 +1,8 @@
 import time
 import datetime
 from django.http import HttpResponse
+from django.core.serializers import serialize
+from django.contrib.contenttypes.models import ContentType
 import rdflib
 from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef, RDFS, ConjunctiveGraph
 from django_tables2 import SingleTableView, RequestConfig
@@ -29,7 +31,7 @@ class GenericListView(SingleTableView):
     filter_class = None
     formhelper_class = None
     context_filter_name = 'filter'
-    paginate_by = 25
+    paginate_by = 10
     template_name = 'browsing/generic_list.html'
 
     def get_queryset(self, **kwargs):
@@ -46,6 +48,36 @@ class GenericListView(SingleTableView):
 
     def get_context_data(self, **kwargs):
         context = super(GenericListView, self).get_context_data()
+        ct = ContentType.objects.get(
+            model=self.model.__name__.lower()
+        ).model_class()
+        try:
+            ct._meta.get_field('polygon')
+            poly = True
+        except Exception as e:
+            poly = False
+        if poly:
+            points = serialize(
+                'geojson',
+                self.get_queryset(),
+                geometry_field='centroid',
+                fields=(
+                    'name',
+                    'pk',
+                )
+            )
+            context['points'] = points
+            shapes = serialize(
+                'geojson',
+                self.get_queryset(),
+                geometry_field='polygon',
+                fields=(
+                    'name',
+                    'pk',
+                )
+            )
+            context['shapes'] = shapes
+        context['self_model_name'] = self.model.__name__.lower()
         context[self.context_filter_name] = self.filter
         context['docstring'] = "{}".format(self.model.__doc__)
         if self.model._meta.verbose_name_plural:
@@ -85,9 +117,9 @@ class GenericListView(SingleTableView):
             print(chartdata)
         return context
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(GenericListView, self).dispatch(*args, **kwargs)
+    # @method_decorator(login_required)
+    # def dispatch(self, *args, **kwargs):
+    #     return super(GenericListView, self).dispatch(*args, **kwargs)
 
 
 class ReferenceListView(GenericListView):
@@ -293,6 +325,17 @@ class SiteListView(GenericListView):
     filter_class = SiteListFilter
     formhelper_class = SiteFilterFormHelper
     init_columns = ['id', 'name', ]
+
+    def get_queryset(self, **kwargs):
+        user = self.request.user
+        qs = super(SiteListView, self).get_queryset()
+        if user.is_authenticated:
+            pass
+        else:
+            qs = qs.exclude(site_checked_by=None).exclude(public=False)
+        self.filter = self.filter_class(self.request.GET, queryset=qs)
+        self.filter.form.helper = self.formhelper_class()
+        return self.filter.qs
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())

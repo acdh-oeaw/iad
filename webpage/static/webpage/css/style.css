@@ -14,6 +14,32 @@ body {
 /** {
   border-radius: 0 !important;
 }*/
+.card {
+    overflow: visible;
+    border: 0 solid rgba(0,0,0,.125);
+    box-shadow: 16px 19px 9px 0px #866161;
+}
+
+.site-page {
+    background-color: #F18C8E;
+    color: white;
+}
+.archent-page {
+    background-color: #F0B7A4;
+    color: white;
+}
+.researchevent-page {
+    background-color: #F1D1B5;
+    color: white;
+}
+.monumentprotection-page {
+    background-color: #568EA6;
+    color: white;
+}
+
+a {
+    color: #673ab7;
+}
 
 header {
     flex: 0 0 auto;
