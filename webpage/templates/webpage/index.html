@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% load stats_extras %}
 {% load webpage_extras %}
+{% load archiv_extras %}
 {% load leaflet_tags %}
 {% block scriptHeader %}
     {% leaflet_js %}
@@ -70,31 +71,10 @@
 
 </div>
 <script>
-    function createLink(propertyObject) {
-        var model_name = "{{ self_model_name }}"
-        var url = "/archiv/site/detail/" + propertyObject.pk;
-        var link = '<a href="' + url + '">' + propertyObject.name + '</a>';
-        return link
-    }
-    function onEachFeature(feature, layer) {
-        // if (feature.properties && feature.properties.name) {
-        var popupContent = createLink(feature.properties);
-        layer.bindPopup(popupContent);
-        // }
-    }
-    var SiteStyle = {
-        "color": "#F18C8E",
-        "weight": 1,
-        "opacity": 1,
-        "fillOpacity": 0.5,
-    };
+    {% archiv_custom_js %}
 
-    var ArchentStyle = {
-        "color": "#F0B7A4",
-        "weight": 1,
-        "opacity": 1,
-        "fillOpacity": 1,
-    };
+    {% archiv_colors %}
+
     function map_init_basic (map, options) {
 
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -105,22 +85,33 @@
         }).addTo(map);
 
         var SiteShapeLayer = L.geoJson({{shapes|safe }}, {
-            onEachFeature: onEachFeature
+            onEachFeature: onEachFeatureClosure('site')
         }).setStyle(SiteStyle);
         SiteShapeLayer.addTo(map);
         map.layerscontrol.addOverlay(SiteShapeLayer, 'Sites (Shapes)');
         map.fitBounds(SiteShapeLayer.getBounds());
 
         var SitePointLayer = L.geoJson({{points|safe }}, {
-            onEachFeature: onEachFeature
+            onEachFeature: onEachFeatureClosure('site')
         });
         map.layerscontrol.addOverlay(SitePointLayer, 'Sites (Points)');
-        map.fitBounds(SitePointLayer.getBounds());
 
-        var ArchentShapeLayer = L.geoJson({{shapes_archent|safe }}, {}).setStyle(ArchentStyle);
+        var ArchentShapeLayer = L.geoJson({{shapes_archent|safe }}, {
+            onEachFeature: onEachFeatureClosure('archent')
+        }).setStyle(ArchEntStyle);
         ArchentShapeLayer.addTo(map);
         map.layerscontrol.addOverlay(ArchentShapeLayer, 'Archents (Shapes)');
-        map.fitBounds(ArchentShapeLayer.getBounds());
+
+        var ResearchEventShapeLayer = L.geoJson({{shapes_researchevent|safe }}, {
+            onEachFeature: onEachFeatureClosure('researchevent')
+        }).setStyle(ResearchEventStyle);
+        map.layerscontrol.addOverlay(ResearchEventShapeLayer, 'Research Activities (Shapes)');
+
+        var MonumentProtectionShapeLayer = L.geoJson({{shapes_monumentprotection|safe }}, {
+            onEachFeature: onEachFeatureClosure('monumentprotection')
+        }).setStyle(MonumentProtectionStyle);
+        map.layerscontrol.addOverlay(MonumentProtectionShapeLayer, 'Monument Protection (Shapes)');
+
     }
 </script>
 {% endblock %}

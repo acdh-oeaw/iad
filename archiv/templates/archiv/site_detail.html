@@ -469,57 +469,16 @@
 </div>
 <!-- </div> -->
 <script type="text/javascript">
-    function createLink(propertyObject, objectType){
-        console.log(propertyObject);
-        var url = "/archiv/"+objectType+"/detail/"+propertyObject.pk;
-        var link = '<a href="'+url+'">'+propertyObject.name+'</a>';
-        return link
-    }
-    function onEachFeatureClosure(objectType) {
-        return function onEachFeature(feature, layer) {
-            var popupContent = createLink(feature.properties, objectType);
-            layer.bindPopup(popupContent);
-        }
-    }
 
+    {% archiv_custom_js %}
 
-
-    var SiteStyle = {
-        "color": "#F18C8E",
-        "weight": 2,
-        "opacity": 1,
-        "fillOpacity": 0.2,
-    };
-
-    var ArchEntStyle = {
-        "color": "#F0B7A4",
-        "weight": 2,
-        "opacity": 1,
-        "fillOpacity": 0.8,
-    };
-
-    var MonumentProtectionStyle = {
-        "color": "#568EA6",
-        "weight": 2,
-        "opacity": 1,
-        "fillOpacity": 0.8,
-    };
-
-    var ResearchEventStyle = {
-        "color": "#F1D1B5",
-        "weight": 2,
-        "opacity": 1,
-        "fillOpacity": 0.8,
-    };
-
-    var ArchConvex = {
-            "color": "#F0B7A4",
-            "weight": 1,
-            "opacity": 1,
-            "fillOpacity": 0.5,
-        };
+    {% archiv_colors %}
 
     function map_init_basic (map, options) {
+
+        var ArchEntConvex = L.geoJson({{ object.convex_hull_archents|safe }}).setStyle(ArchConvex);
+        map.layerscontrol.addOverlay(ArchEntConvex, 'Sum of ArchEnts');
+        ArchEntConvex.addTo(map);
 
         var geojsonFeature = {{ object.get_geojson|safe }};
         var SiteLayer = L.geoJson(geojsonFeature, {
@@ -530,9 +489,7 @@
         map.layerscontrol.addOverlay(SiteLayer, '{{ x }}');
         map.fitBounds(SiteLayer.getBounds());
 
-        var ArchEntConvex = L.geoJson({{ object.convex_hull_archents|safe }}).setStyle(ArchConvex);
-        map.layerscontrol.addOverlay(ArchEntConvex, 'Sum of ArchEnts');
-        ArchEntConvex.addTo(map);
+
 
 
         {% if object.has_archent.all %}

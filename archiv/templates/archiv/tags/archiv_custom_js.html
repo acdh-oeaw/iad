@@ -1,0 +1,11 @@
+function createLink(propertyObject, objectType){
+    var url = "/archiv/"+objectType+"/detail/"+propertyObject.pk;
+    var link = '<a href="'+url+'">'+propertyObject.name+'</a>';
+    return link
+}
+function onEachFeatureClosure(objectType) {
+    return function onEachFeature(feature, layer) {
+        var popupContent = createLink(feature.properties, objectType);
+        layer.bindPopup(popupContent);
+    }
+}
