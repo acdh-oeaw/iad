@@ -669,7 +669,7 @@ class ResearchEvent(IadBaseClass):
         geojson = serialize(
             'geojson', ResearchEvent.objects.filter(id=self.id),
             geometry_field='polygon',
-            fields=('name', 'identifier',)
+            fields=('name', 'identifier', 'pk',)
         )
         return geojson
 
@@ -958,7 +958,7 @@ class MonumentProtection(IadBaseClass):
         geojson = serialize(
             'geojson', MonumentProtection.objects.filter(id=self.id),
             geometry_field='polygon',
-            fields=('name', 'identifier',)
+            fields=('name', 'identifier', 'pk',)
         )
         return geojson
 

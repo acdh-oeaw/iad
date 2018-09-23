@@ -470,44 +470,47 @@
 <!-- </div> -->
 <script type="text/javascript">
     function createLink(propertyObject, objectType){
+        console.log(propertyObject);
         var url = "/archiv/"+objectType+"/detail/"+propertyObject.pk;
         var link = '<a href="'+url+'">'+propertyObject.name+'</a>';
         return link
     }
-    function onEachFeature(feature, layer, objectType) {
-        if (feature.properties && feature.properties.name) {
-            var popupContent = createLink(feature.properties, 'archent');
+    function onEachFeatureClosure(objectType) {
+        return function onEachFeature(feature, layer) {
+            var popupContent = createLink(feature.properties, objectType);
             layer.bindPopup(popupContent);
         }
     }
+
+
 
     var SiteStyle = {
         "color": "#F18C8E",
         "weight": 2,
         "opacity": 1,
         "fillOpacity": 0.2,
-        };
+    };
 
     var ArchEntStyle = {
-            "color": "#F0B7A4",
-            "weight": 2,
-            "opacity": 1,
-            "fillOpacity": 0.8,
-        };
+        "color": "#F0B7A4",
+        "weight": 2,
+        "opacity": 1,
+        "fillOpacity": 0.8,
+    };
 
     var MonumentProtectionStyle = {
-            "color": "#568EA6",
-            "weight": 2,
-            "opacity": 1,
-            "fillOpacity": 0.8,
-        };
+        "color": "#568EA6",
+        "weight": 2,
+        "opacity": 1,
+        "fillOpacity": 0.8,
+    };
 
-        var ResearchEventStyle = {
-                "color": "#F1D1B5",
-                "weight": 2,
-                "opacity": 1,
-                "fillOpacity": 0.8,
-            };
+    var ResearchEventStyle = {
+        "color": "#F1D1B5",
+        "weight": 2,
+        "opacity": 1,
+        "fillOpacity": 0.8,
+    };
 
     var ArchConvex = {
             "color": "#F0B7A4",
@@ -519,9 +522,12 @@
     function map_init_basic (map, options) {
 
         var geojsonFeature = {{ object.get_geojson|safe }};
-        var SiteLayer = L.geoJson(geojsonFeature).setStyle(SiteStyle);
+        var SiteLayer = L.geoJson(geojsonFeature, {
+            style: SiteStyle,
+            onEachFeature: onEachFeatureClosure('site')
+        });
         SiteLayer.addTo(map);
-        map.layerscontrol.addOverlay(SiteLayer, 'Sites');
+        map.layerscontrol.addOverlay(SiteLayer, '{{ x }}');
         map.fitBounds(SiteLayer.getBounds());
 
         var ArchEntConvex = L.geoJson({{ object.convex_hull_archents|safe }}).setStyle(ArchConvex);
@@ -533,9 +539,9 @@
             {% for x in object.has_archent.all %}
                 var ItemLayer = L.geoJson({{ x.get_geojson|safe }}, {
                     style: ArchEntStyle,
-                    onEachFeature: onEachFeature
+                    onEachFeature: onEachFeatureClosure('archent')
                 }).addTo(map);
-                map.layerscontrol.addOverlay(ItemLayer, 'Archent');
+                map.layerscontrol.addOverlay(ItemLayer, '{{ x }}');
           	{% endfor %}
       	{% endif %}
 
@@ -543,19 +549,19 @@
             {% for x in object.has_monument_protection.all %}
                 var ItemLayer = L.geoJson({{ x.get_geojson|safe }}, {
                     style: MonumentProtectionStyle,
-                    onEachFeature: onEachFeature
+                    onEachFeature: onEachFeatureClosure('monumentprotection')
                 }).addTo(map);
-                map.layerscontrol.addOverlay(ItemLayer, 'Monument Protection');
+                map.layerscontrol.addOverlay(ItemLayer, '{{ x }}');
           	{% endfor %}
       	{% endif %}
 
         {% if object.has_research_activity.all %}
             {% for x in object.has_research_activity.all %}
                 var ItemLayer = L.geoJson({{ x.get_geojson|safe }}, {
-                    style: MonumentProtectionStyle,
-                    onEachFeature: onEachFeature
+                    style: ResearchEventStyle,
+                    onEachFeature: onEachFeatureClosure('researchevent')
                 }).addTo(map);
-                map.layerscontrol.addOverlay(ItemLayer, 'Research Event');
+                map.layerscontrol.addOverlay(ItemLayer, '{{ x }}');
           	{% endfor %}
       	{% endif %}
     }
