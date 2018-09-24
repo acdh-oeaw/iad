@@ -220,7 +220,10 @@ class SiteListFilter(django_filters.FilterSet):
     cadastral_community__ctnam = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text="Country",
-        label="Country"
+        label="Country",
+        widget=autocomplete.Select2(
+            url='shapes-ac:countries-ac',
+            )
         )
     cadastral_community = django_filters.ModelMultipleChoiceFilter(
         queryset=Municipality.objects.exclude(has_sites=None),

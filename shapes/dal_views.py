@@ -29,3 +29,10 @@ class MunicipalitySearchAC(autocomplete.Select2QuerySetView):
             )
 
         return qs
+
+
+class CountriesAC(autocomplete.Select2ListView):
+    def get_list(self):
+        values = set(Municipality.objects.values_list('ctnam').distinct())
+        countries = [x[0] for x in values]
+        return countries
