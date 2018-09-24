@@ -11,4 +11,9 @@ urlpatterns = [
             model=Municipality,),
         name='municipality-autocomplete',
     ),
+    url(
+        r'^municipality-autocomplete-search/$', dal_views.MunicipalitySearchAC.as_view(
+            model=Municipality,),
+        name='municipality-autocomplete-search',
+    ),
 ]

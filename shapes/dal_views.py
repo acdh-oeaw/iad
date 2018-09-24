@@ -15,3 +15,17 @@ class MunicipalityAC(autocomplete.Select2QuerySetView):
             )
 
         return qs
+
+
+class MunicipalitySearchAC(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Municipality.objects.exclude(has_sites=None)
+
+        if self.q:
+            qs = qs.filter(
+                Q(saunam__icontains=self.q) |
+                Q(lau2nam__icontains=self.q) |
+                Q(nuts3nam__icontains=self.q)
+            )
+
+        return qs

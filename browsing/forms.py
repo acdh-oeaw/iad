@@ -133,7 +133,8 @@ class SiteFilterFormHelper(FormHelper):
                 AccordionGroup(
                     'Advanced search options',
                     # 'public',
-                    # 'cadastral_community',
+                    'cadastral_community__ctnam',
+                    'cadastral_community',
                     # 'cadastral_number',
                     'heritage_number',
                     'plot_number',

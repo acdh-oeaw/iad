@@ -59,11 +59,7 @@ class MonumentProtectionListFilter(django_filters.FilterSet):
         method=generous_concept_filter,
         widget=autocomplete.Select2Multiple(
             url="/vocabs-ac/specific-concept-ac/current-land-use",
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        )
+            )
         )
     heritage_status = django_filters.ChoiceFilter(
         help_text=MonumentProtection._meta.get_field('heritage_status').help_text,
@@ -120,11 +116,7 @@ class ArchEntListFilter(django_filters.FilterSet):
         method=generous_concept_filter,
         widget=autocomplete.Select2Multiple(
             url="/vocabs-ac/specific-concept-ac/archaeological-entity-type",
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        )
+            )
         )
     burial_type = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
@@ -197,11 +189,7 @@ class ArchEntListFilter(django_filters.FilterSet):
         label=ArchEnt._meta.get_field('period').verbose_name,
         widget=autocomplete.Select2Multiple(
             url="/archiv-ac/period-autocomplete",
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        )
+            )
         )
 
     class Meta:
@@ -229,18 +217,19 @@ class SiteListFilter(django_filters.FilterSet):
     #     name='has_research_activity',
     #     label="Research activity"
     #     )
-    # cadastral_community = django_filters.ModelMultipleChoiceFilter(
-    #     queryset=Municipality.objects.all(),
-    #     help_text=Site._meta.get_field('cadastral_community').help_text,
-    #     label=Site._meta.get_field('cadastral_community').verbose_name,
-    #     widget=autocomplete.Select2Multiple(
-    #         url='shapes-ac:municipality-autocomplete',
-    #         attrs={
-    #             'data-placeholder': 'Autocomplete ...',
-    #             'data-minimum-input-length': 3,
-    #             },
-    #     )
-    #     )
+    cadastral_community__ctnam = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text="Country",
+        label="Country"
+        )
+    cadastral_community = django_filters.ModelMultipleChoiceFilter(
+        queryset=Municipality.objects.exclude(has_sites=None),
+        help_text=Site._meta.get_field('cadastral_community').help_text,
+        label=Site._meta.get_field('cadastral_community').verbose_name,
+        widget=autocomplete.Select2Multiple(
+            url='shapes-ac:municipality-autocomplete-search',
+            )
+        )
     cadastral_number = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Site._meta.get_field('cadastral_number').help_text,
@@ -270,11 +259,7 @@ class SiteListFilter(django_filters.FilterSet):
         method=generous_concept_filter,
         widget=autocomplete.Select2Multiple(
             url="/vocabs-ac/specific-concept-ac/other-present-archaeological-period",
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        )
+            )
         )
     accessibility = django_filters.ChoiceFilter(
         choices=SITE_ACCESSIBILITY,
@@ -339,11 +324,7 @@ class SiteListFilter(django_filters.FilterSet):
         method=generous_concept_filter,
         widget=autocomplete.Select2Multiple(
             url="/vocabs-ac/specific-concept-ac/research-methods",
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        )
+            )
         )
     has_research_activity__research_question = django_filters.ModelMultipleChoiceFilter(
         queryset=ResearchQuestion.objects.all(),
@@ -365,11 +346,7 @@ class SiteListFilter(django_filters.FilterSet):
         method=generous_concept_filter,
         widget=autocomplete.Select2Multiple(
             url="/vocabs-ac/specific-concept-ac/archaeological-entity-type",
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        )
+            )
         )
     has_archent__burial_type = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
@@ -428,11 +405,7 @@ class SiteListFilter(django_filters.FilterSet):
         label=ArchEnt._meta.get_field('period').verbose_name,
         widget=autocomplete.Select2Multiple(
             url="/archiv-ac/period-autocomplete",
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        )
+            )
         )
     has_archent__period__start_date = django_filters.NumberFilter(
         lookup_expr='exact',
@@ -464,11 +437,7 @@ class SiteListFilter(django_filters.FilterSet):
         method=generous_concept_filter,
         widget=autocomplete.Select2Multiple(
             url="/vocabs-ac/specific-concept-ac/current-land-use",
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        )
+            )
         )
     has_monument_protection__heritage_status = django_filters.ChoiceFilter(
         help_text=MonumentProtection._meta.get_field('heritage_status').help_text,
@@ -551,11 +520,7 @@ class ResearchEventListFilter(django_filters.FilterSet):
         method=generous_concept_filter,
         widget=autocomplete.Select2Multiple(
             url="/vocabs-ac/specific-concept-ac/research-methods",
-            attrs={
-                'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
-                },
-        )
+            )
         )
     research_question = django_filters.ModelMultipleChoiceFilter(
         queryset=ResearchQuestion.objects.all(),
