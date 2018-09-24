@@ -14,6 +14,7 @@ router.register(r'skosconceptschemes', api_views.SkosConceptSchemeViewSet)
 router.register(r'skosconcepts', api_views.SkosConceptViewSet)
 router.register(r'ZotItem', ZotItemViewSet)
 router.register(r'sites', archiv_api_views.SiteViewSet)
+router.register(r'archents', archiv_api_views.ArchEntViewSet)
 router.register(r'municipalities', shapes_api_vies.MunicipalityViewSet)
 
 

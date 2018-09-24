@@ -101,7 +101,7 @@ class ResearchQuestionListFilter(django_filters.FilterSet):
         fields = '__all__'
 
 
-class ArchEntListFilter(django_filters.FilterSet):
+class ArchEntListFilter(django_filters.rest_framework.FilterSet):
     name = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ArchEnt._meta.get_field('name').help_text,

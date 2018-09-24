@@ -342,10 +342,16 @@ class SiteListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
+        qs = self.get_queryset()
         context = super(SiteListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
         context['togglable_colums'] = togglable_colums
+        aes = ArchEnt.objects.filter(site_id__in=qs)
+        context['shapes_archent'] = serialize(
+            'geojson', aes, geometry_field="polygon",
+            fields=('name', 'pk', 'identifier')
+        )
         return context
 
     def get_table(self, **kwargs):

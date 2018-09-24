@@ -1,5 +1,6 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
+{% load archiv_extras %}
 {% load leaflet_tags %}
 {% load django_tables2 %}
 {% load charts_extras %}
@@ -310,27 +311,24 @@
                     {% leaflet_map "yourmap" callback="window.map_init_basic" %}
                 </div>
                 <script type="text/javascript">
-                    function createLink(propertyObject) {
-                        var model_name = "{{ self_model_name }}"
-                        var url = "/archiv/" + model_name + "/detail/" + propertyObject.pk;
-                        var link = '<a href="' + url + '">' + propertyObject.name + '</a>';
-                        return link
-                    }
-
-                    function onEachFeature(feature, layer) {
-                        // if (feature.properties && feature.properties.name) {
-                        var popupContent = createLink(feature.properties);
-                        layer.bindPopup(popupContent);
-                        // }
-                    }
+                    {% archiv_custom_js %}
+                    {% archiv_colors %}
 
                     function map_init_basic(map, options) {
-                        var geojsonFeature = {{shapes|safe}};
-                        var GeoJsonLayer = L.geoJson(geojsonFeature, {
-                            onEachFeature: onEachFeature
+                        var SiteLayer = L.geoJson({{shapes|safe }}, {
+                            onEachFeature: onEachFeatureClosure('site'),
+                            style: SiteStyle
                         });
-                        GeoJsonLayer.addTo(map);
-                        map.fitBounds(GeoJsonLayer.getBounds());
+                        SiteLayer.addTo(map);
+                        map.fitBounds(SiteLayer.getBounds());
+                        map.layerscontrol.addOverlay(SiteLayer, 'Sites');
+
+                        {% if shapes_archent %}
+                            var ArchentShapeLayer = L.geoJson({{shapes_archent|safe }}, {
+                                onEachFeature: onEachFeatureClosure('archent')
+                            }).setStyle(ArchEntStyle);
+                            map.layerscontrol.addOverlay(ArchentShapeLayer, 'Archents (Shapes)');
+                        {% endif %}
                     }
                 </script>
             </div>
