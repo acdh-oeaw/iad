@@ -347,9 +347,19 @@ class SiteListView(GenericListView):
         context[self.context_filter_name] = self.filter
         togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
         context['togglable_colums'] = togglable_colums
-        aes = ArchEnt.objects.filter(site_id__in=qs)
+        item_qs = ArchEnt.objects.filter(site_id__in=qs)
         context['shapes_archent'] = serialize(
-            'geojson', aes, geometry_field="polygon",
+            'geojson', item_qs, geometry_field="polygon",
+            fields=('name', 'pk', 'identifier')
+        )
+        item_qs = ResearchEvent.objects.filter(site_id__in=qs)
+        context['shapes_researchevent'] = serialize(
+            'geojson', item_qs, geometry_field="polygon",
+            fields=('name', 'pk', 'identifier')
+        )
+        item_qs = MonumentProtection.objects.filter(site_id__in=qs)
+        context['shapes_monumentprotection'] = serialize(
+            'geojson', item_qs, geometry_field="polygon",
             fields=('name', 'pk', 'identifier')
         )
         return context
