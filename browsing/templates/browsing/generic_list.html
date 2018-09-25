@@ -10,10 +10,10 @@
 {% load crispy_forms_tags %}
 {% block title %} Browse {{ class_name }} {% endblock %}
 {% block scriptHeader %}
-    {% leaflet_js %}
-    {% leaflet_css %}
-    <style>
-        .leaflet-container {  /* all maps */
+{% leaflet_js %}
+{% leaflet_css %}
+<style>
+    .leaflet-container {  /* all maps */
                 width:  100%;
                 height: 800px;
             }
@@ -21,133 +21,152 @@
 {% endblock scriptHeader%}
 {% block content %}
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var fetchedParameter = "{{ table.page.number }}";
-            $("#goto option").each(function() {
-                if ($(this).text() == fetchedParameter) {
-                    $(this).attr('selected', 'selected');
-                }
-            });
+<script type="text/javascript">
+    $(document).ready(function() {
+        var fetchedParameter = "{{ table.page.number }}";
+        $("#goto option").each(function() {
+            if ($(this).text() == fetchedParameter) {
+                $(this).attr('selected', 'selected');
+            }
         });
-    </script>
-    <style>
+    });
+</script>
+<style>
 
-    </style>
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-header {{self_model_name}}-page">
-                <h1>Browse {% class_definition %} {% block list_title %}{% endblock %}</h1>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header {{self_model_name}}-page">
-                                <h4>customize search</h4>
-                            </div>
-                            <div class="card-body">
-                                {% if get_arche_dump %}
-                                <a class ="btn btn-outline-secondary"  href="{{ get_arche_dump}}{% querystring %}">Dump as RDF</a>
+</style>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header {{self_model_name}}-page">
+            <h1>Browse {% class_definition %} {% block list_title %}{% endblock %}</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header {{self_model_name}}-page">
+                            <h4>customize search</h4>
+                        </div>
+                        <div class="card-body">
+                            {% if get_arche_dump %}
+                            <a class ="btn btn-outline-secondary"  href="{{ get_arche_dump}}{% querystring %}">Dump as RDF</a>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                            {% if create_view_link %}
+                            <a class ="btn btn-outline-secondary"  href="{{ create_view_link }}">Create new {{class_name}}</a>
+                            {% endif %}
+                            {% endif %}
+                            {% block customView %}{% endblock %}
+                            {% block create_button %}{% endblock %}
+                            <!--Search mask-->
+                            {% load django_tables2 crispy_forms_tags %}
+                            <form action="." class="uniForm" method="get">
+                                {% if togglable_colums %}
+                                <legend>Select additional columns</legend>
+                                {% column_selector %}
                                 {% endif %}
-                                {% if user.is_authenticated %}
-                                {% if create_view_link %}
-                                <a class ="btn btn-outline-secondary"  href="{{ create_view_link }}">Create new {{class_name}}</a>
-                                {% endif %}
-                                {% endif %}
-                                {% block customView %}{% endblock %}
-                                {% block create_button %}{% endblock %}
-                                <!--Search mask-->
-                                {% load django_tables2 crispy_forms_tags %}
-                                <form action="." class="uniForm" method="get">
-                                    {% if togglable_colums %}
-                                    <legend>Select additional columns</legend>
-                                    {% column_selector %}
-                                    {% endif %}
-                                    <br/>
+                                <br/>
                                     {% crispy filter.form filter.form.helper %}
 
+
+
                                 </form>
-                                {% block reset_button %}
-                                <a class ="btn btn-outline-secondary"  href=".">Reset search</a>
-                                {% if vis_list %}
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            {% block reset_button %}
+                            <a class ="btn btn-outline-secondary"  href=".">Reset search</a>
+                            {% if vis_list %}
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                         Visualize <span class="caret"></span>
                                     </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        {% for x in vis_list %}
-                                        <li>
-                                            {% for y in x.chart_types.all %}
-                                            <a class="dropdown-item" title="{{ x.help_text }}" href="?{{ request.GET.urlencode }}&charttype={{ y }}&property={{ x.field_path }}">{{ x.label }} {{ y.icon|safe }}</a>
-                                            {% endfor %}
-                                        </li>
-                                        <hr />
-
+                                <ul class="dropdown-menu" role="menu">
+                                    {% for x in vis_list %}
+                                    <li>
+                                        {% for y in x.chart_types.all %}
+                                        <a class="dropdown-item" title="{{ x.help_text }}" href="?{{ request.GET.urlencode }}&charttype={{ y }}&property={{ x.field_path }}">{{ x.label }} {{ y.icon|safe }}</a>
                                         {% endfor %}
-                                    </ul>
-                                </div>
-                                {% endif %}
-                                {% if vis_list %}
-                                {% if data %}
-                                <div class="card">
-                                    <div class="card-heading" style="text-align:center;">
+                                    </li>
+                                    <hr />
 
-                                        <h1>{{ data.title }}</h1>
-                                        <legend>{{ data.items }}</legend>
-                                        <button  type="button" class="btn btn-default" data-toggle="collapse" data-target="#howtocite" id="howtocite-btn">JSON data</button>
-                                        <div id="howtocite" class="collapse">
-                                            <p>{{data}}</p>
-                                        </div>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+                            {% if vis_list %}
+                            {% if data %}
+                            <div class="card">
+                                <div class="card-heading" style="text-align:center;">
+
+                                    <h1>{{ data.title }}</h1>
+                                    <legend>{{ data.items }}</legend>
+                                    <button  type="button" class="btn btn-default" data-toggle="collapse" data-target="#howtocite" id="howtocite-btn">JSON data</button>
+                                    <div id="howtocite" class="collapse">
+                                        <p>{{data}}</p>
                                     </div>
-                                    <div class="card-body">
-                                        <div id="bar"></div>
-                                    </div>
-                                    {% if error %}
-                                    <h4>{{ error_msg|safe }}</h4>
-                                    {% endif %}
-
                                 </div>
+                                <div class="card-body">
+                                    <div id="bar"></div>
+                                </div>
+                                {% if error %}
+                                <h4>{{ error_msg|safe }}</h4>
                                 {% endif %}
-                                {% endif %}
-
-
-                                {% endblock %}
 
                             </div>
+                            {% endif %}
+                            {% endif %}
+
+
+                            {% endblock %}
+
                         </div>
                     </div>
-                    <div class="col-md-8" id="results">
-                        <div class="card">
-                            <div class="card-header {{self_model_name}}-page">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <h4>
-                                            {% with table.paginator.count as total %}
-                                                Total results: {{ total }}
-                                            {% endwith %}
-                                        </h4>
-                                    </div>
-                                    <div class="col-md-0">
-                                        {% if download %}
+                </div>
+
+                <div class="col-md-8" id="results">
+                {% if shapes %}
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">MAP</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">TABLE</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            {% leaflet_map "yourmap" callback="window.map_init_basic" %}
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="card">
+                {% endif %}
+                                <div class="card-header {{self_model_name}}-page">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <h4>
+                                                      {% with table.paginator.count as total %}
+                                                          Total results: {{ total }}
+                                                      {% endwith %}
+                                                  </h4>
+                                        </div>
+                                        <div class="col-md-0">
+                                            {% if download %}
                                             <div class="dropdown">
                                                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding:1px; color:white; border-color:white;">
-                                                    <i class="fas fa-download"></i>
-                                                    Download
-                                                    <span class="caret"></span>
-                                                </button>
+                                                          <i class="fas fa-download"></i>
+                                                          Download
+                                                          <span class="caret"></span>
+                                                      </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                     <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=comma">"," separated</a></li>
                                                     <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=semicolon">";" separated</a></li>
                                                     <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=tab">"tab" separated</a></li>
                                                 </ul>
                                             </div>
-                                        {% endif %}
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                {% block table %}
+                                <div class="card-body">
+                                    {% block table %}
                                     <table class="table" {% if table.attrs %} {{ table.attrs.as_html }} {% endif %}>
                                         {% block table.thead %}
                                         {% if table.show_header %}
@@ -198,158 +217,149 @@
                                         {% endif %}
                                         {% endblock table.tfoot %}
                                     </table>
-                                {% endblock table %}
+                                    {% endblock table %}
 
-                                {% block pagination.allpages %}
+                                    {% block pagination.allpages %}
 
-                                <div>
-                                    {% with table.page.object_list|length as count %}
-                                    <p>Page total: {{ count }}</p>
-                                    {% endwith %}
-                                </div>
+                                    <div>
+                                        {% with table.page.object_list|length as count %}
+                                        <p>Page total: {{ count }}</p>
+                                        {% endwith %}
+                                    </div>
 
-                                <ul class="pagination">
+                                    <ul class="pagination">
 
 
-                                    <!--if more than 10 pages switches to select page form -->
+                                        <!--if more than 10 pages switches to select page form -->
 
-                                    {% if table.paginator.page_range|length > 10 %}
+                                        {% if table.paginator.page_range|length > 10 %}
 
-                                    <!--if has previous page - previous button -->
+                                        <!--if has previous page - previous button -->
+
+                                        {% if table.page.has_previous %}
+                                        {% block pagination.previous.goto %}
+                                        <li class="previous">
+                                            <a style="margin-right: 10px;"  href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}">{% trans "Previous" %}</a>
+                                        </li>
+                                        {% endblock pagination.previous.goto %}
+                                        {% endif %}
+
+
+                                        <!--Page # of total -->
+                                        {% if table.page.has_previous or table.page.has_next %}
+                                        {% block pagination.cardinality %}
+                                        {% blocktrans with table.page.number as current and table.paginator.num_pages as total %}
+                                        <p>Page {{ current }} of {{ total }}</p>
+                                        {% endblocktrans %}
+                                        {% endblock pagination.cardinality %}
+                                        {% endif %}
+
+                                        <!--if has next page - next button -->
+
+                                        {% if table.page.has_next %}
+                                        {% block pagination.next.goto %}
+                                        <li class="next">
+                                            <a style="margin-left: 10px;" href="{% querystring table.prefixed_page_field=table.page.next_page_number %}" style="border-radius: 0px;">{% trans "Next" %}</a>
+                                        </li>
+                                        {% endblock pagination.next.goto %}
+                                        {% endif %}
+                                    </ul>
+                                    <!--select form if more than 10 pages -->
+
+                                    <div class="form-group" style="width: 20%;">
+                                        <label for="goto">Go to page</label>
+                                        <select class="form-control" id="goto" onchange="javascript:location.href = this.value;">
+                                              {% for p in table.paginator.page_range %}
+                                                  <option value="{% querystring table.prefixed_page_field=p %}">{{ p }}</option>
+                                              {% endfor %}
+                                          </select>
+                                    </div>
+
+
+                                    <!--else condition  - if less than 10 pages  - shows page number buttons-->
+
+                                    {% else %}
+
 
                                     {% if table.page.has_previous %}
-                                    {% block pagination.previous.goto %}
+                                    {% block pagination.previous %}
                                     <li class="previous">
                                         <a style="margin-right: 10px;"  href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}">{% trans "Previous" %}</a>
                                     </li>
-                                    {% endblock pagination.previous.goto %}
+                                    {% endblock pagination.previous %}
                                     {% endif %}
 
-
-                                    <!--Page # of total -->
-                                    {% if table.page.has_previous or table.page.has_next %}
-                                    {% block pagination.cardinality %}
-                                    {% blocktrans with table.page.number as current and table.paginator.num_pages as total %}
-                                    <p>Page {{ current }} of {{ total }}</p>
-                                    {% endblocktrans %}
-                                    {% endblock pagination.cardinality %}
+                                    {% for p in table.paginator.page_range %}
+                                    {% if p == table.page.number %}
+                                    <li><a href="{% querystring table.prefixed_page_field=p %}" style="background-color:#007bff; border-color: #2e6da4; color: #ffffff; padding: 5px 10px 5px 10px;">{{ p }}</a>
+                                    </li>
+                                    {% else %}
+                                    <li>
+                                        <a href="{% querystring table.prefixed_page_field=p %}" style="padding: 5px 10px 5px 10px;"> {{ p }}</a>
+                                    </li>
                                     {% endif %}
+                                    {% endfor %}
 
-                                    <!--if has next page - next button -->
 
                                     {% if table.page.has_next %}
-                                    {% block pagination.next.goto %}
+                                    {% block pagination.next %}
                                     <li class="next">
-                                        <a style="margin-left: 10px;" href="{% querystring table.prefixed_page_field=table.page.next_page_number %}" style="border-radius: 0px;">{% trans "Next" %}</a>
+                                        <a style="margin-left: 10px;"  href="{% querystring table.prefixed_page_field=table.page.next_page_number %}">{% trans "Next" %}</a>
                                     </li>
-                                    {% endblock pagination.next.goto %}
+                                    {% endblock pagination.next %}
                                     {% endif %}
-                                </ul>
-                                <!--select form if more than 10 pages -->
 
-                                <div class="form-group" style="width: 20%;">
-                                    <label for="goto">Go to page</label>
-                                    <select class="form-control" id="goto" onchange="javascript:location.href = this.value;">
-                                        {% for p in table.paginator.page_range %}
-                                            <option value="{% querystring table.prefixed_page_field=p %}">{{ p }}</option>
-                                        {% endfor %}
-                                    </select>
+                                    </ul>
+                                    {% endif %}
+
+
+                                    <!-- </ul> -->
+                                    {% endblock pagination.allpages %}
+
                                 </div>
-
-
-                                <!--else condition  - if less than 10 pages  - shows page number buttons-->
-
-                                {% else %}
-
-
-                                {% if table.page.has_previous %}
-                                {% block pagination.previous %}
-                                <li class="previous">
-                                    <a style="margin-right: 10px;"  href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}">{% trans "Previous" %}</a>
-                                </li>
-                                {% endblock pagination.previous %}
-                                {% endif %}
-
-                                {% for p in table.paginator.page_range %}
-                                {% if p == table.page.number %}
-                                <li><a href="{% querystring table.prefixed_page_field=p %}" style="background-color:#007bff; border-color: #2e6da4; color: #ffffff; padding: 5px 10px 5px 10px;">{{ p }}</a>
-                                </li>
-                                {% else %}
-                                <li>
-                                    <a href="{% querystring table.prefixed_page_field=p %}" style="padding: 5px 10px 5px 10px;"> {{ p }}</a>
-                                </li>
-                                {% endif %}
-                                {% endfor %}
-
-
-                                {% if table.page.has_next %}
-                                {% block pagination.next %}
-                                <li class="next">
-                                    <a style="margin-left: 10px;"  href="{% querystring table.prefixed_page_field=table.page.next_page_number %}">{% trans "Next" %}</a>
-                                </li>
-                                {% endblock pagination.next %}
-                                {% endif %}
-
-                                </ul>
-                                {% endif %}
-
-
-                                <!-- </ul> -->
-                                {% endblock pagination.allpages %}
-
+                            {% if shapes %}
                             </div>
                         </div>
+                            {% endif %}
                     </div>
-            </div>
-            </div>
-            {% if shapes %}
-            <div class="card">
-                <div class="card-header {{self_model_name}}-page">
-                    <h2>Map</h2>
                 </div>
-                <div class="card-body">
-                    {% leaflet_map "yourmap" callback="window.map_init_basic" %}
-                </div>
-                <script type="text/javascript">
-                    {% archiv_custom_js %}
-                    {% archiv_colors %}
-
-                    function map_init_basic(map, options) {
-                        var SiteLayer = L.geoJson({{shapes|safe }}, {
-                            onEachFeature: onEachFeatureClosure('site'),
-                            style: SiteStyle
-                        });
-                        SiteLayer.addTo(map);
-                        map.fitBounds(SiteLayer.getBounds());
-                        map.layerscontrol.addOverlay(SiteLayer, 'Sites');
-
-                        {% if shapes_archent %}
-                            var ArchentShapeLayer = L.geoJson({{shapes_archent|safe }}, {
-                                onEachFeature: onEachFeatureClosure('archent')
-                            }).setStyle(ArchEntStyle);
-                            map.layerscontrol.addOverlay(ArchentShapeLayer, 'Archents (Shapes)');
-
-                            var ResearchEventShapeLayer = L.geoJson({{shapes_researchevent|safe }}, {
-                                onEachFeature: onEachFeatureClosure('researchevent')
-                            }).setStyle(ResearchEventStyle);
-                            map.layerscontrol.addOverlay(ResearchEventShapeLayer, 'Research Activities (Shapes)');
-                            
-                            var MonumentProtectionShapeLayer = L.geoJson({{shapes_monumentprotection|safe }}, {
-                                onEachFeature: onEachFeatureClosure('monumentprotection')
-                            }).setStyle(MonumentProtectionStyle);
-                            map.layerscontrol.addOverlay(MonumentProtectionShapeLayer, 'Monument Protection (Shapes)');
-                        {% endif %}
-                    }
-                </script>
             </div>
-            {% endif %}
         </div>
     </div>
-
-
+</div>
 
 {% endblock content %}
 {% block scripts2 %}
-    {% load_highcharts_js %}
-    {% config_highcharts %}
+{% load_highcharts_js %}
+{% config_highcharts %}
+{% if shapes %}
+<script type="text/javascript">
+{% archiv_custom_js %}
+{% archiv_colors %}
+function map_init_basic(map, options) {
+    var SiteLayer = L.geoJson({{shapes|safe }}, {
+        onEachFeature: onEachFeatureClosure('site'),
+        style: SiteStyle
+    });
+    SiteLayer.addTo(map);
+    map.fitBounds(SiteLayer.getBounds());
+    map.layerscontrol.addOverlay(SiteLayer, 'Sites');
+    {% if shapes_archent %}
+        var ArchentShapeLayer = L.geoJson({{shapes_archent|safe }}, {
+            onEachFeature: onEachFeatureClosure('archent')
+        }).setStyle(ArchEntStyle);
+        map.layerscontrol.addOverlay(ArchentShapeLayer, 'Archents (Shapes)');
+        var ResearchEventShapeLayer = L.geoJson({{shapes_researchevent|safe }}, {
+            onEachFeature: onEachFeatureClosure('researchevent')
+        }).setStyle(ResearchEventStyle);
+        map.layerscontrol.addOverlay(ResearchEventShapeLayer, 'Research Activities (Shapes)');
+
+        var MonumentProtectionShapeLayer = L.geoJson({{shapes_monumentprotection|safe }}, {
+            onEachFeature: onEachFeatureClosure('monumentprotection')
+        }).setStyle(MonumentProtectionStyle);
+        map.layerscontrol.addOverlay(MonumentProtectionShapeLayer, 'Monument Protection (Shapes)');
+    {% endif %}
+}
+</script>
+{% endif %}
 {% endblock scripts2 %}
