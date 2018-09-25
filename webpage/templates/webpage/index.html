@@ -17,7 +17,6 @@
 <div class="container">
     <h1 style="text-align:center; color: #111;">{% projects_metadata 'title' %}</h1>
         <div class="row" style="padding:10px;">
-
             <div class="col-md-6">
                 <div class="card site-page">
                     <div class="card-body">
@@ -65,6 +64,57 @@
                 <p class="card-text">
                     {% projects_metadata 'description' %}
                 </p>
+            </div>
+        </div>
+        <div class="card" style="text-align:center;">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Statistics
+                </h5>
+                <div class="row" style="padding:10px;">
+                    <div class="col-md-6">
+                        <div class="card site-page">
+                            <div class="card-body">
+                                <h5 class="card-title">The number of sites entered per country</h5>
+                                <p class="card-text">
+                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">AT: 37 | SL: 45 | HU: 12</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card archent-page">
+                            <div class="card-body">
+                                <h5 class="card-title">The number of sites with high touristic potential</h5>
+                                <p class="card-text">
+                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">12</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding:10px;">
+                    <div class="col-md-6">
+                        <div class="card researchevent-page">
+                            <div class="card-body">
+                                <h5 class="card-title">The number of sites that are protected</h5>
+                                <p class="card-text">
+                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">89</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card monumentprotection-page">
+                            <div class="card-body">
+                                <h5 class="card-title">the extent of the sites that have been researched</h5>
+                                <p class="card-text">
+                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">587 km<sup>2</sup></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
