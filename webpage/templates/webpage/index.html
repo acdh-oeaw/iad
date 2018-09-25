@@ -77,7 +77,12 @@
                             <div class="card-body">
                                 <h5 class="card-title">The number of sites entered per country</h5>
                                 <p class="card-text">
-                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">AT: 37 | SL: 45 | HU: 12</a>
+                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">
+                                        {% sites_by_country as result %}
+                                        {% for key, value in result.items %}
+                                            {{ key }}: {{ value }} {% if not forloop.last %}|{% endif %}
+                                        {% endfor %}
+                                    </a>
                                 </p>
                             </div>
                         </div>

@@ -1,4 +1,7 @@
 from django import template
+from collections import Counter
+
+from archiv.models import Site
 
 register = template.Library()
 
@@ -22,3 +25,16 @@ def archiv_colors(context):
 @register.inclusion_tag('archiv/tags/archiv_custom_js.html', takes_context=True)
 def archiv_custom_js(context):
     return context
+
+
+@register.simple_tag
+def sites_by_country():
+    sites = Site.objects.all()
+    result = dict(
+        Counter(
+            [x['cadastral_community__ctcod'] for x in list(
+                sites.values('cadastral_community__ctcod')
+            )]
+        )
+    )
+    return result
