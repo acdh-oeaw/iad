@@ -503,7 +503,7 @@ class SiteForm(ArchivBaseForm):
         instance = forms.ModelForm.save(self, True)
         try:
             res_acts = [int(x) for x in self.cleaned_data['research_activities']]
-        except:
+        except Exception as e:
             res_acts = None
         if res_acts:
             res_obj = [x for x in ResearchEvent.objects.filter(pk__in=res_acts)]
