@@ -38,3 +38,8 @@ def sites_by_country():
         )
     )
     return result
+
+
+@register.simple_tag
+def site_count():
+    return Site.objects.all().count()

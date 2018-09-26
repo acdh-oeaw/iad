@@ -477,15 +477,22 @@ class SiteForm(ArchivBaseForm):
                 css_class="separate-panel",
             ),
             Fieldset(
-                'Quality Control',
+                'Import/Delete Spatial Data',
                 Div(
-                    'site_checked_by',
                     'paste_geojson',
                     'paste_wkt',
                     'shape_string_epsg',
                     'shape_string',
                     'delete_polygon',
                     'polygon_proxy',
+                    css_class="col-md-9"
+                ),
+                css_class="separate-panel",
+            ),
+            Fieldset(
+                'Quality Control',
+                Div(
+                    'site_checked_by',
                     css_class="col-md-9"
                 ),
                 css_class="separate-panel",

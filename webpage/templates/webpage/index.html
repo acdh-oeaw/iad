@@ -16,46 +16,8 @@
 </div>
 <div class="container">
     <h1 style="text-align:center; color: #111;">{% projects_metadata 'title' %}</h1>
-        <div class="row" style="padding:10px;">
-            <div class="col-md-6">
-                <div class="card site-page">
-                    <div class="card-body">
-                        <h5 class="card-title">Sites</h5>
-                        <p class="card-text">Provide some short text.</p>
-                        <a href="{% url 'browsing:browse_sites' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">browse</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card archent-page">
-                    <div class="card-body">
-                        <h5 class="card-title">Archaelogical Entities</h5>
-                        <p class="card-text">Provide some short text.</p>
-                        <a href="{% url 'browsing:browse_archents' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">browse</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="padding:10px;">
-            <div class="col-md-6">
-                <div class="card researchevent-page">
-                    <div class="card-body">
-                        <h5 class="card-title">Research Activities</h5>
-                        <p class="card-text">Provide some short text.</p>
-                        <a href="{% url 'browsing:browse_researchevents' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">browse</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card monumentprotection-page">
-                    <div class="card-body">
-                        <h5 class="card-title">Monument Protection</h5>
-                        <p class="card-text">Provide some short text.</p>
-                        <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">browse</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">
@@ -63,6 +25,11 @@
                 </h5>
                 <p class="card-text">
                     {% projects_metadata 'description' %}
+                </p>
+                <p>
+                    <a type="button" class="btn btn-lg btn-block" href="{% url 'browsing:browse_sites' %}" role="button">
+                        EXPLORE
+                    </a>
                 </p>
             </div>
         </div>
@@ -82,6 +49,8 @@
                                         {% for key, value in result.items %}
                                             {{ key }}: {{ value }} {% if not forloop.last %}|{% endif %}
                                         {% endfor %}
+                                        <br />
+                                        <small>(total {% site_count %})</small>
                                     </a>
                                 </p>
                             </div>
@@ -92,7 +61,9 @@
                             <div class="card-body">
                                 <h5 class="card-title">The number of sites with high touristic potential</h5>
                                 <p class="card-text">
-                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">12 (out of 133)</a>
+                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">12<br />
+                                        <small>(out of {% site_count %})</small>
+                                    </a>
                                 </p>
                             </div>
                         </div>
@@ -104,7 +75,9 @@
                             <div class="card-body">
                                 <h5 class="card-title">The number of sites that are protected</h5>
                                 <p class="card-text">
-                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">89</a>
+                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">89<br />
+                                        <small>(out of {% site_count %})</small>
+                                    </a>
                                 </p>
                             </div>
                         </div>
@@ -114,7 +87,9 @@
                             <div class="card-body">
                                 <h5 class="card-title">the extent of the sites that have been researched</h5>
                                 <p class="card-text">
-                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">587 km<sup>2</sup></a>
+                                    <a href="{% url 'browsing:browse_monumentprotections' %}" class="btn btn-outline-secondary" style="color:white; border-color:white;">587 km<sup>2</sup>
+                                        <br /><small>(out of 900 km<sup>2</sup>)</small>
+                                    </a>
                                 </p>
                             </div>
                         </div>
