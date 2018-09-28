@@ -5,7 +5,6 @@ from .models import Municipality
 
 class MunicipalityAdmin(LeafletGeoAdmin):
     list_display = (
-        'saunam',
         'lau2nam',
         'nuts3nam',
         'nuts2nam',
@@ -15,7 +14,6 @@ class MunicipalityAdmin(LeafletGeoAdmin):
         'ctnam',
     ]
     search_fields = [
-        'saunam',
         'lau2nam',
         'nuts3nam',
     ]

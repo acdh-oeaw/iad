@@ -11,5 +11,5 @@ class MunicipalityTable(tables.Table):
 
     class Meta:
         model = Municipality
-        sequence = ('id', 'saunam',)
+        sequence = ('id',)
         attrs = {"class": "table table-responsive table-hover"}

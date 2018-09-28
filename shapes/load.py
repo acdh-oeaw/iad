@@ -4,7 +4,7 @@ from . models import Municipality, municipality_mapping
 
 cc_shps = os.path.abspath(
     os.path.join(
-        os.path.dirname(__file__), 'data', 'LAU_IAD_merged.shp')
+        os.path.dirname(__file__), 'data', 'LAU_NUTS_IAD_v3.shp')
 )
 
 

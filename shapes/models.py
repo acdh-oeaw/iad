@@ -4,10 +4,6 @@ from django.contrib.gis.db import models
 
 
 class Municipality(models.Model):
-    sau_id = models.FloatField()
-    saunam = models.CharField(
-        blank=True, max_length=254
-    )
     lau2_id = models.CharField(
         blank=True, max_length=254
     )
@@ -41,10 +37,7 @@ class Municipality(models.Model):
         ordering = ['id']
 
     def __str__(self):
-        if self.saunam and self.lau2nam:
-            name = "{} ({})".format(self.saunam, self.lau2nam)
-        else:
-            name = "{}".format(self.lau2nam)
+        name = "{}".format(self.lau2nam)
         return "{}, {}".format(name, self.nuts3nam)
 
     def get_absolute_url(self):
@@ -63,8 +56,6 @@ class Municipality(models.Model):
 
 # Auto-generated `LayerMapping` dictionary for Municipality model
 municipality_mapping = {
-    'sau_id': 'SAU_ID',
-    'saunam': 'SAUnam',
     'lau2_id': 'LAU2_ID',
     'lau2nam': 'LAU2nam',
     'nuts3cod': 'NUTS3cod',

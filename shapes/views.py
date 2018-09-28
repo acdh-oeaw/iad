@@ -24,7 +24,6 @@ class MunicipalityListView(GenericListView):
     formhelper_class = MunicipalityFilterFormHelper
     init_columns = [
         'id',
-        'saunam',
         'lau2nam',
         'nuts3nam',
         'nuts2nam',
