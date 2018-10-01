@@ -57,3 +57,5 @@ dev_secret.py
 /ae__burial_construction.csv
 /ae__burial_type.csv
 dump.sql
+sites_cc.csv
+errors_lau2sau.txt

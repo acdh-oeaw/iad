@@ -13,4 +13,4 @@ def import_shapes(verbose=True):
         Municipality, cc_shps, municipality_mapping,
         transform=True, encoding='utf-8',
     )
-    lm.save(strict=True, verbose=verbose)
+    lm.save(strict=True, verbose=False)
