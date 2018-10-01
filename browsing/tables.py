@@ -75,7 +75,7 @@ class SiteTable(tables.Table):
         'archiv:site_detail',
         args=[A('pk')], verbose_name='Name'
     )
-
+    cadastral_community = tables.ManyToManyColumn()
     public = tables.Column()
 
     class Meta:
