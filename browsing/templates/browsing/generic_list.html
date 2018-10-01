@@ -121,23 +121,20 @@
                 </div>
 
                 <div class="col-md-8" id="results">
-                {% if shapes %}
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">MAP</a>
+                        <li class="nav-item active">
+                            <a class="nav-link" id="tabletab-tab" data-toggle="tab" href="#tabletab" role="tab" aria-controls="tabletab" aria-selected="true">TABLE</a>
                         </li>
+                        {% if shapes %}
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">TABLE</a>
+                            <a class="nav-link" id="maptab-tab" data-toggle="tab" href="#maptab" role="tab" aria-controls="maptab" aria-selected="false">MAP</a>
                         </li>
+                        {% endif %}
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            {% leaflet_map "yourmap" callback="window.map_init_basic" %}
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-pane fade show active" id="tabletab" role="tabpanel" aria-labelledby="tabletab-tab">
                             <div class="card">
-                {% endif %}
                                 <div class="card-header {{self_model_name}}-page">
                                     <div class="row">
                                         <div class="col-md-10">
@@ -320,6 +317,11 @@
                             {% if shapes %}
                             </div>
                         </div>
+                            {% endif %}
+                            {% if shapes %}
+                            <div class="tab-pane fade" id="maptab" role="tabpanel" aria-labelledby="maptab-tab">
+                                {% leaflet_map "yourmap" callback="window.map_init_basic" %}
+                            </div>
                             {% endif %}
                     </div>
                 </div>
