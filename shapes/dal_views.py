@@ -9,7 +9,6 @@ class MunicipalityAC(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(
-                Q(saunam__icontains=self.q) |
                 Q(lau2nam__icontains=self.q) |
                 Q(nuts3nam__icontains=self.q)
             )
@@ -23,7 +22,6 @@ class MunicipalitySearchAC(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(
-                Q(saunam__icontains=self.q) |
                 Q(lau2nam__icontains=self.q) |
                 Q(nuts3nam__icontains=self.q)
             )
