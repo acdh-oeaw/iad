@@ -1,6 +1,7 @@
 from django import template
 from collections import Counter
 from django.db.models import Q
+from django.contrib.gis.db.models import Union
 
 from archiv.models import Site, MonumentProtection
 
@@ -53,3 +54,14 @@ def protected_site_count():
         )
     sites = len(set([x.site_id for x in mps]))
     return sites
+
+
+@register.simple_tag
+def site_extent():
+    u = Site.objects.filter(polygon__isvalid=True).aggregate(Union('polygon'))['polygon__union']
+    u.transform(ct=3035)
+    try:
+        sq_m = "{:,.0f}".format(u.area/1000000)
+    except Exception as e:
+        sq_m = "{}".format(e)
+    return sq_m
