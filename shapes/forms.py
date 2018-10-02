@@ -25,6 +25,7 @@ class MunicipalityFilterFormHelper(FormHelper):
                     'Advanced search',
                     'nuts3nam',
                     'ctnam',
+                    'lau2_id',
                     css_id="more"
                     ),
                 )

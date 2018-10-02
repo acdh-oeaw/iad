@@ -24,6 +24,11 @@ class MunicipalityListFilter(django_filters.FilterSet):
         help_text=Municipality._meta.get_field('lau2nam').help_text,
         label=Municipality._meta.get_field('lau2nam').verbose_name
         )
+    lau2_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Municipality._meta.get_field('lau2_id').help_text,
+        label=Municipality._meta.get_field('lau2_id').verbose_name
+        )
     nuts3nam = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Municipality._meta.get_field('nuts3nam').help_text,
