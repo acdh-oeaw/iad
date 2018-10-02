@@ -1,7 +1,8 @@
 from django import template
 from collections import Counter
+from django.db.models import Q
 
-from archiv.models import Site
+from archiv.models import Site, MonumentProtection
 
 register = template.Library()
 
@@ -43,3 +44,12 @@ def sites_by_country():
 @register.simple_tag
 def site_count():
     return Site.objects.all().count()
+
+
+@register.simple_tag
+def protected_site_count():
+    mps = MonumentProtection.objects.filter(
+            Q(heritage_status='yes') | Q(heritage_status='partially')
+        )
+    sites = len(set([x.site_id for x in mps]))
+    return sites
