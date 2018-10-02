@@ -10,7 +10,6 @@ class MunicipalitySerializer(GeoFeatureModelSerializer):
 
         fields = (
             'id',
-            'saunam',
             'lau2nam',
             'nuts3nam',
             'nuts2nam',
