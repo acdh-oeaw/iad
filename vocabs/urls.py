@@ -59,7 +59,7 @@ urlpatterns = [
         r'^metadata/delete/(?P<pk>[0-9]+)$', views.MetadataDelete.as_view(),
         name='metadata_delete',
     ),
-     url(
+    url(
         r'^collection/$', views.SkosCollectionListView.as_view(),
         name='browse_skoscollections'),
     url(
@@ -72,7 +72,7 @@ urlpatterns = [
         r'^collection/update/(?P<pk>[0-9]+)$', views.SkosCollectionUpdate.as_view(),
         name='skoscollection_update'),
     url(
-        r'^collection/delete/(?P<pk>[0-9]+)$',views.SkosCollectionDelete.as_view(),
+        r'^collection/delete/(?P<pk>[0-9]+)$', views.SkosCollectionDelete.as_view(),
         name='skoscollection_delete',
     ),
 ]

@@ -147,9 +147,9 @@
                             Vocabs Curation <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'vocabs:skosconceptscheme_list' %}">Concept Schemes</a>
+                            <a class="dropdown-item" href="{% url 'vocabs:browse_schemes' %}">Concept Schemes</a>
                             <a class="dropdown-item" href="{% url 'vocabs:browse_vocabs' %}">Concepts</a>
-                            <a class="dropdown-item" href="{% url 'vocabs:skoslabel_list' %}">Labels</a>
+                            <a class="dropdown-item" href="{% url 'vocabs:browse_skoslabels' %}">Labels</a>
                     </li>
                     {% endif %}
                     {% if user.is_authenticated %}
