@@ -395,6 +395,9 @@ class SkosConcept(models.Model):
     def dc_creator_as_list(self):
         return self.dc_creator.split(';')
 
+    def same_as_external_as_list(self):
+        return self.same_as_external.split(';')
+
     @cached_property
     def label(self):
         # 'borrowed from https://github.com/sennierer'

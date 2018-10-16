@@ -71,6 +71,22 @@ def graph_construct(results):
 				if x['has_members']:
 					for y in x['has_members']:
 						g.add((collection, SKOS.member, URIRef(y[:-12])))
+
+		############################# ConceptScheme as SkosCollection ###############################
+		if obj['scheme']:
+			for x in obj['scheme']:
+				scheme = URIRef(str(x['url'][:-12]))
+				g.add((scheme, RDF.type, SKOS.Collection))
+				g.add((scheme, DCT.created, Literal(x['date_created'], datatype=XSD.dateTime)))
+				g.add((scheme, DCT.modified, Literal(x['date_modified'], datatype=XSD.dateTime)))
+				if x['dc_title']:
+					g.add((scheme, SKOS.prefLabel, Literal(x['dc_title'], lang=x['dc_title_lang'])))
+				if x['dc_description']:
+					g.add((scheme, SKOS.scopeNote, Literal(x['dc_description'], lang=x['dc_description_lang'])))
+				if x['has_concepts']:
+					for y in x['has_concepts']:
+						g.add((scheme, SKOS.member, URIRef(y[:-12])))
+		#############################################################################################
 		if obj['definition']:
 			g.add((concept, SKOS.definition, Literal(obj['definition'], lang=obj['definition_lang'])))
 		# modelling labels
@@ -92,6 +108,9 @@ def graph_construct(results):
 		# modelling broader/narrower relationships
 		if obj['broader_concept']:
 			g.add((concept, SKOS.broader, URIRef(obj['broader_concept'][:-12])))
+		else:
+			g.add((mainConceptScheme, SKOS.hasTopConcept, URIRef(concept)))
+			g.add((concept, SKOS.topConceptOf, mainConceptScheme ))
 		if obj['narrower_concepts']:
 			#g.add((mainConceptScheme, SKOS.hasTopConcept, URIRef(concept)))
 			#g.add((concept, SKOS.topConceptOf, mainConceptScheme ))
