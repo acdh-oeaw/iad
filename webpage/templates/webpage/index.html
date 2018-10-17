@@ -11,26 +11,28 @@
 {% block content %}
 <div class="jumbotron" style="padding:0;">
 
-    {% leaflet_map "yourmap" callback="window.map_init_basic" %}%}
+    {% leaflet_map "yourmap" callback="window.map_init_basic" %}
 
 </div>
 <div class="container">
-    <h1 style="text-align:center; color: #111;">{% projects_metadata 'title' %}</h1>
 
-
-        <div class="card">
+        <div class="card card-index">
             <div class="card-body">
-                <h5 class="card-title">
-                    {% projects_metadata 'subtitle' %}
-                </h5>
-                <p class="card-text">
+            <h1 class="text-center title-index">
+            IRON-AGE-DANUBE
+            </h1>
+            <p class="text-center text-muted paragraph-index">
+                {% projects_metadata 'subtitle' %}
+            </p>
+            <hr class="hr-index"/>
+            <p class="text-justify">
                     {% projects_metadata 'description' %}
-                </p>
-                <p>
-                    <a type="button" class="btn btn-lg btn-block" href="{% url 'browsing:browse_sites' %}" role="button">
-                        EXPLORE
-                    </a>
-                </p>
+            </p>
+            <div class="text-right">
+                <a href="{% url 'browsing:browse_sites' %}" class="btn btn-lg btn-index pulse" class="pull-right">
+                <b><i class="fa fa-angle-right"></i></b>&nbsp;&nbsp;explore
+                </a>
+            </div>
             </div>
         </div>
         <div class="card" style="text-align:center;">
@@ -97,8 +99,6 @@
                 </div>
             </div>
         </div>
-
-
 </div>
 <script>
     {% archiv_custom_js %}
