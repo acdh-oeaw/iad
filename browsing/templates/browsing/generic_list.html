@@ -31,20 +31,25 @@
         });
     });
 </script>
+<!--used to shift the window when using on page links-->
+<script>
+    var shiftWindow = function() { scrollBy(0, -100) };
+    window.addEventListener("hashchange", shiftWindow);
+    function load() { if (window.location.hash) shiftWindow(); }
+  </script>
 <style>
-
 </style>
 <div class="container-fluid">
-    <div class="card">
+<!--     <div class="card">
         <div class="card-header {{self_model_name}}-page">
-            <h1>Browse {% class_definition %} {% block list_title %}{% endblock %}</h1>
+            <h1>Browse </h1>
         </div>
-        <div class="card-body">
+        <div class="card-body"> -->
             <div class="row">
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header {{self_model_name}}-page">
-                            <h4>customize search</h4>
+                            <h4>Browse {% class_definition %} {% block list_title %}{% endblock %}</h4>
                         </div>
                         <div class="card-body">
                             {% if get_arche_dump %}
@@ -65,11 +70,8 @@
                                 {% column_selector %}
                                 {% endif %}
                                 <br/>
-                                    {% crispy filter.form filter.form.helper %}
-
-
-
-                                </form>
+                                {% crispy filter.form filter.form.helper %}
+                            </form>
                             {% block reset_button %}
                             <a class ="btn btn-outline-secondary"  href=".">Reset search</a>
                             {% if vis_list %}
@@ -85,7 +87,6 @@
                                         {% endfor %}
                                     </li>
                                     <hr />
-
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -94,7 +95,6 @@
                             {% if data %}
                             <div class="card">
                                 <div class="card-heading" style="text-align:center;">
-
                                     <h1>{{ data.title }}</h1>
                                     <legend>{{ data.items }}</legend>
                                     <button  type="button" class="btn btn-default" data-toggle="collapse" data-target="#howtocite" id="howtocite-btn">JSON data</button>
@@ -108,12 +108,9 @@
                                 {% if error %}
                                 <h4>{{ error_msg|safe }}</h4>
                                 {% endif %}
-
                             </div>
                             {% endif %}
                             {% endif %}
-
-
                             {% endblock %}
 
                         </div>
@@ -121,213 +118,207 @@
                 </div>
 
                 <div class="col-md-8" id="results">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item active">
-                            <a class="nav-link active show" id="tabletab-tab" data-toggle="tab" href="#tabletab" role="tab" aria-controls="tabletab" aria-selected="true">TABLE</a>
-                        </li>
-                        {% if shapes %}
-                        <li class="nav-item">
-                            <a class="nav-link" id="maptab-tab" data-toggle="tab" href="#maptab" role="tab" aria-controls="maptab" aria-selected="false">MAP</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="tabletab" role="tabpanel" aria-labelledby="tabletab-tab">
-                            <div class="card">
-                                <div class="card-header {{self_model_name}}-page">
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <h4>
-                                                      {% with table.paginator.count as total %}
-                                                          Total results: {{ total }}
-                                                      {% endwith %}
-                                                  </h4>
+                        <div class="card" id="table-results">
+                            <div class="card-header {{self_model_name}}-page">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <h4>
+                                            {% with table.paginator.count as total %}
+                                                Total results: {{ total }}
+                                            {% endwith %}
+                                        </h4>
+                                    </div>
+                                    <div class="col-md-0">
+                                        {% if download %}
+                                        <div class="dropdown">
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding:5px; color:white; border-color:white; margin-bottom: 0px;">
+                                                      <i class="fas fa-download"></i>
+                                                      Download
+                                                      <span class="caret"></span>
+                                                  </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=comma">"," separated</a></li>
+                                                <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=semicolon">";" separated</a></li>
+                                                <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=tab">"tab" separated</a></li>
+                                            </ul>
                                         </div>
-                                        <div class="col-md-0">
-                                            {% if download %}
-                                            <div class="dropdown">
-                                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding:1px; color:white; border-color:white;">
-                                                          <i class="fas fa-download"></i>
-                                                          Download
-                                                          <span class="caret"></span>
-                                                      </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                    <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=comma">"," separated</a></li>
-                                                    <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=semicolon">";" separated</a></li>
-                                                    <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=tab">"tab" separated</a></li>
-                                                </ul>
-                                            </div>
-                                            {% endif %}
-                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    {% block table %}
-                                    <table class="table" {% if table.attrs %} {{ table.attrs.as_html }} {% endif %}>
-                                        {% block table.thead %}
-                                        {% if table.show_header %}
-                                        <thead>
-                                            <tr>
-                                                {% for column in table.columns %}
-                                                {% if column.orderable %}
-                                                <th {{ column.attrs.th.as_html }}><a href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}">{{ column.header }}</a></th>
-                                                {% else %}
-                                                <th {{ column.attrs.th.as_html }}>{{ column.header }}</th>
-                                                {% endif %}
-                                                {% endfor %}
-                                            </tr>
-                                        </thead>
-                                        {% endif %}
-                                        {% endblock table.thead %}
-                                        {% block table.tbody %}
-                                        <tbody>
-                                            {% for row in table.page.object_list|default:table.rows %} {# support pagination #}
-                                            {% block table.tbody.row %}
-                                            <tr {{ row.attrs.as_html }}>
-                                                {% for column, cell in row.items %}
-                                                <td {{ column.attrs.td.as_html }}>{% if column.localize == None %}{{ cell }}{% else %}{% if column.localize %}{{ cell|localize }}{% else %}{{ cell|unlocalize }}{% endif %}{% endif %}</td>
-
-                                                {% endfor %}
-                                            </tr>
-                                            {% endblock table.tbody.row %}
-                                            {% empty %}
-                                            {% if table.empty_text %}
-                                            {% block table.tbody.empty_text %}
-                                            <tr>
-                                                <td colspan="{{ table.columns|length }}">{{ table.empty_text }}</td>
-                                            </tr>
-                                            {% endblock table.tbody.empty_text %}
+                            </div>
+                            <div class="card-body">
+                            {% if shapes %}
+                            <a class="btn btn-outline-secondary" href="#map-results">Map</a>
+                            {% endif %}
+                            {% block table %}
+                                <table class="table" {% if table.attrs %} {{ table.attrs.as_html }} {% endif %}>
+                                    {% block table.thead %}
+                                    {% if table.show_header %}
+                                    <thead>
+                                        <tr>
+                                            {% for column in table.columns %}
+                                            {% if column.orderable %}
+                                            <th {{ column.attrs.th.as_html }}><a href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}">{{ column.header }}</a></th>
+                                            {% else %}
+                                            <th {{ column.attrs.th.as_html }}>{{ column.header }}</th>
                                             {% endif %}
                                             {% endfor %}
-                                        </tbody>
-                                        {% endblock table.tbody %}
-                                        {% block table.tfoot %}
-                                        {% if table.has_footer %}
-                                        <tfoot>
-                                            <tr>
-                                                {% for column in table.columns %}
-                                                <td>{{ column.footer }}</td>
-                                                {% endfor %}
-                                            </tr>
-                                        </tfoot>
+                                        </tr>
+                                    </thead>
+                                    {% endif %}
+                                    {% endblock table.thead %}
+                                    {% block table.tbody %}
+                                    <tbody>
+                                        {% for row in table.page.object_list|default:table.rows %} {# support pagination #}
+                                        {% block table.tbody.row %}
+                                        <tr {{ row.attrs.as_html }}>
+                                            {% for column, cell in row.items %}
+                                            <td {{ column.attrs.td.as_html }}>{% if column.localize == None %}{{ cell }}{% else %}{% if column.localize %}{{ cell|localize }}{% else %}{{ cell|unlocalize }}{% endif %}{% endif %}</td>
+
+                                            {% endfor %}
+                                        </tr>
+                                        {% endblock table.tbody.row %}
+                                        {% empty %}
+                                        {% if table.empty_text %}
+                                        {% block table.tbody.empty_text %}
+                                        <tr>
+                                            <td colspan="{{ table.columns|length }}">{{ table.empty_text }}</td>
+                                        </tr>
+                                        {% endblock table.tbody.empty_text %}
                                         {% endif %}
-                                        {% endblock table.tfoot %}
-                                    </table>
-                                    {% endblock table %}
+                                        {% endfor %}
+                                    </tbody>
+                                    {% endblock table.tbody %}
+                                    {% block table.tfoot %}
+                                    {% if table.has_footer %}
+                                    <tfoot>
+                                        <tr>
+                                            {% for column in table.columns %}
+                                            <td>{{ column.footer }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    </tfoot>
+                                    {% endif %}
+                                    {% endblock table.tfoot %}
+                                </table>
+                                {% endblock table %}
 
-                                    {% block pagination.allpages %}
+                                {% block pagination.allpages %}
 
-                                    <div>
-                                        {% with table.page.object_list|length as count %}
-                                        <p>Page total: {{ count }}</p>
-                                        {% endwith %}
-                                    </div>
+                                <div>
+                                    {% with table.page.object_list|length as count %}
+                                    <p>Page total: {{ count }}</p>
+                                    {% endwith %}
+                                </div>
 
-                                    <ul class="pagination">
-
-
-                                        <!--if more than 10 pages switches to select page form -->
-
-                                        {% if table.paginator.page_range|length > 10 %}
-
-                                        <!--if has previous page - previous button -->
-
-                                        {% if table.page.has_previous %}
-                                        {% block pagination.previous.goto %}
-                                        <li class="previous">
-                                            <a style="margin-right: 10px;"  href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}">{% trans "Previous" %}</a>
-                                        </li>
-                                        {% endblock pagination.previous.goto %}
-                                        {% endif %}
+                                <ul class="pagination">
 
 
-                                        <!--Page # of total -->
-                                        {% if table.page.has_previous or table.page.has_next %}
-                                        {% block pagination.cardinality %}
-                                        {% blocktrans with table.page.number as current and table.paginator.num_pages as total %}
-                                        <p>Page {{ current }} of {{ total }}</p>
-                                        {% endblocktrans %}
-                                        {% endblock pagination.cardinality %}
-                                        {% endif %}
+                                    <!--if more than 10 pages switches to select page form -->
 
-                                        <!--if has next page - next button -->
+                                    {% if table.paginator.page_range|length > 10 %}
 
-                                        {% if table.page.has_next %}
-                                        {% block pagination.next.goto %}
-                                        <li class="next">
-                                            <a style="margin-left: 10px;" href="{% querystring table.prefixed_page_field=table.page.next_page_number %}" style="border-radius: 0px;">{% trans "Next" %}</a>
-                                        </li>
-                                        {% endblock pagination.next.goto %}
-                                        {% endif %}
-                                    </ul>
-                                    <!--select form if more than 10 pages -->
-
-                                    <div class="form-group" style="width: 20%;">
-                                        <label for="goto">Go to page</label>
-                                        <select class="form-control" id="goto" onchange="javascript:location.href = this.value;">
-                                              {% for p in table.paginator.page_range %}
-                                                  <option value="{% querystring table.prefixed_page_field=p %}">{{ p }}</option>
-                                              {% endfor %}
-                                          </select>
-                                    </div>
-
-
-                                    <!--else condition  - if less than 10 pages  - shows page number buttons-->
-
-                                    {% else %}
-
+                                    <!--if has previous page - previous button -->
 
                                     {% if table.page.has_previous %}
-                                    {% block pagination.previous %}
+                                    {% block pagination.previous.goto %}
                                     <li class="previous">
-                                        <a style="margin-right: 10px;"  href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}">{% trans "Previous" %}</a>
+                                        <a style="margin-right: 10px;"  href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}">
+                                        {% trans "Previous" %}
+                                        </a>
                                     </li>
-                                    {% endblock pagination.previous %}
+                                    {% endblock pagination.previous.goto %}
                                     {% endif %}
 
-                                    {% for p in table.paginator.page_range %}
-                                    {% if p == table.page.number %}
-                                    <li><a href="{% querystring table.prefixed_page_field=p %}" style="background-color:#007bff; border-color: #2e6da4; color: #ffffff; padding: 5px 10px 5px 10px;">{{ p }}</a>
-                                    </li>
-                                    {% else %}
-                                    <li>
-                                        <a href="{% querystring table.prefixed_page_field=p %}" style="padding: 5px 10px 5px 10px;"> {{ p }}</a>
-                                    </li>
-                                    {% endif %}
-                                    {% endfor %}
 
+                                    <!--Page # of total -->
+                                    {% if table.page.has_previous or table.page.has_next %}
+                                    {% block pagination.cardinality %}
+                                    {% blocktrans with table.page.number as current and table.paginator.num_pages as total %}
+                                    <p>Page {{ current }} of {{ total }}</p>
+                                    {% endblocktrans %}
+                                    {% endblock pagination.cardinality %}
+                                    {% endif %}
+
+                                    <!--if has next page - next button -->
 
                                     {% if table.page.has_next %}
-                                    {% block pagination.next %}
+                                    {% block pagination.next.goto %}
                                     <li class="next">
-                                        <a style="margin-left: 10px;"  href="{% querystring table.prefixed_page_field=table.page.next_page_number %}">{% trans "Next" %}</a>
+                                        <a style="margin-left: 10px;" href="{% querystring table.prefixed_page_field=table.page.next_page_number %}" style="border-radius: 0px;">{% trans "Next" %}
+                                        </a>
                                     </li>
-                                    {% endblock pagination.next %}
+                                    {% endblock pagination.next.goto %}
                                     {% endif %}
+                                </ul>
+                                <!--select form if more than 10 pages -->
 
-                                    </ul>
-                                    {% endif %}
-
-
-                                    <!-- </ul> -->
-                                    {% endblock pagination.allpages %}
-
+                                <div class="form-group" style="width: 20%;">
+                                    <label for="goto">Go to page</label>
+                                    <select class="form-control" id="goto" onchange="javascript:location.href = this.value;">
+                                        {% for p in table.paginator.page_range %}
+                                            <option value="{% querystring table.prefixed_page_field=p %}">{{ p }}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
-                            {% if shapes %}
+
+                                <!--else condition  - if less than 10 pages  - shows page number buttons-->
+
+                                {% else %}
+
+                                {% if table.page.has_previous %}
+                                {% block pagination.previous %}
+                                <li class="previous">
+                                    <a style="margin-right: 10px;"  href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}">{% trans "Previous" %}</a>
+                                </li>
+                                {% endblock pagination.previous %}
+                                {% endif %}
+
+                                {% for p in table.paginator.page_range %}
+                                {% if p == table.page.number %}
+                                <li><a href="{% querystring table.prefixed_page_field=p %}" style="background-color:#007bff; border-color: #2e6da4; color: #ffffff; padding: 5px 10px 5px 10px;">{{ p }}</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a href="{% querystring table.prefixed_page_field=p %}" style="padding: 5px 10px 5px 10px;"> {{ p }}</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+
+
+                                {% if table.page.has_next %}
+                                {% block pagination.next %}
+                                <li class="next">
+                                    <a style="margin-left: 10px;"  href="{% querystring table.prefixed_page_field=table.page.next_page_number %}">{% trans "Next" %}</a>
+                                </li>
+                                {% endblock pagination.next %}
+                                {% endif %}
+
+                                {% endif %}
+
+                                {% endblock pagination.allpages %}
+
                             </div>
                         </div>
-                            {% endif %}
-                            {% if shapes %}
-                            <div class="tab-pane fade" id="maptab" role="tabpanel" aria-labelledby="maptab-tab">
+                            <br>
+                       <!--  </div> -->
+                        {% if shapes %}
+                        <div class="card" id="map-results" >
+                            <div class="card-header {{self_model_name}}-page">
+                                <h4>Map</h4>
+                            </div>
+                            <div class="card-body">
+                               <a class="btn btn-outline-secondary" href="#table-results">Table</a>
                                 {% leaflet_map "yourmap" callback="window.map_init_basic" %}
                             </div>
-                            {% endif %}
-                    </div>
+                        </div>
+                        <!-- </div> -->
+                        {% endif %}
                 </div>
             </div>
         </div>
-    </div>
+   <!--      </div>
+    </div> -->
 </div>
 
 {% endblock content %}
