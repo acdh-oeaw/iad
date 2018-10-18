@@ -445,12 +445,14 @@ class SiteListFilter(django_filters.FilterSet):
     has_monument_protection__heritage_status = django_filters.ChoiceFilter(
         help_text=MonumentProtection._meta.get_field('heritage_status').help_text,
         label=MonumentProtection._meta.get_field('heritage_status').verbose_name,
-        choices=HERITAGE_STATUS_CHOICES
+        choices=HERITAGE_STATUS_CHOICES,
+        distinct=True
         )
     has_monument_protection__natural_heritage_status = django_filters.ChoiceFilter(
         help_text=MonumentProtection._meta.get_field('natural_heritage_status').help_text,
         label=MonumentProtection._meta.get_field('natural_heritage_status').verbose_name,
-        choices=HERITAGE_STATUS_CHOICES
+        choices=HERITAGE_STATUS_CHOICES,
+        distinct=True
         )
     has_monument_protection__threats = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(

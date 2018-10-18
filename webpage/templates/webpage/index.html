@@ -18,29 +18,25 @@
 
         <div class="card card-index">
             <div class="card-body">
-            <h1 class="text-center title-index">
-            IRON-AGE-DANUBE
-            </h1>
-            <p class="text-center text-muted paragraph-index">
-                {% projects_metadata 'subtitle' %}
-            </p>
-            <hr class="hr-index"/>
-            <p class="text-justify">
-                    {% projects_metadata 'description' %}
-            </p>
-            <div class="text-right">
-                <a href="{% url 'browsing:browse_sites' %}" class="btn btn-lg btn-index pulse" class="pull-right">
-                <b><i class="fa fa-angle-right"></i></b>&nbsp;&nbsp;explore
-                </a>
-            </div>
-            </div>
-        </div>
-        <div class="card" style="text-align:center;">
-            <div class="card-body">
-                <h2 class="card-title">
-                    Statistics
-                </h5>
-                <div class="row" style="padding:10px;">
+                <h1 class="text-center title-index">
+                IRON-AGE-DANUBE
+                </h1>
+                <p class="text-center text-muted paragraph-index">
+                    {% projects_metadata 'subtitle' %}
+                </p>
+                <hr class="hr-index"/>
+                <p class="text-justify">
+                        {% projects_metadata 'description' %}
+                </p>
+                <div class="text-right">
+                    <a href="{% url 'browsing:browse_sites' %}" class="btn btn-lg btn-index pulse" class="pull-right">
+                    <b><i class="fa fa-angle-right"></i></b>&nbsp;&nbsp;explore
+                    </a>
+                </div>
+                <br>
+                <h2 class="h2-index">Statistics</h2>
+                <!--cards with statistics-->
+                <div class="row" style="padding:10px; text-align:center;">
                     <div class="col-md-6">
                         <div class="card site-page">
                             <div class="card-body">
@@ -71,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="padding:10px;">
+                <div class="row" style="padding:10px; text-align:center;">
                     <div class="col-md-6">
                         <div class="card researchevent-page">
                             <div class="card-body">

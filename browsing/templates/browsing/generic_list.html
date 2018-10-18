@@ -91,18 +91,24 @@
                                 </ul>
                             </div>
                             {% endif %}
-                            {% if vis_list %}
+                            
+
+                        </div>
+                    </div>
+                    {% if vis_list %}
                             {% if data %}
+                            <br>
                             <div class="card">
-                                <div class="card-heading" style="text-align:center;">
-                                    <h1>{{ data.title }}</h1>
-                                    <legend>{{ data.items }}</legend>
+                                <div class="card-header {{self_model_name}}-page">
+                                    <h4>Visualize</h4>
+                                </div>
+                                <div class="card-body" style="text-align:center;">
+                                <h4>{{ data.title }}</h4>
+                                    <h4>{{ data.items }}</h4>
                                     <button  type="button" class="btn btn-default" data-toggle="collapse" data-target="#howtocite" id="howtocite-btn">JSON data</button>
                                     <div id="howtocite" class="collapse">
                                         <p>{{data}}</p>
                                     </div>
-                                </div>
-                                <div class="card-body">
                                     <div id="bar"></div>
                                 </div>
                                 {% if error %}
@@ -112,9 +118,6 @@
                             {% endif %}
                             {% endif %}
                             {% endblock %}
-
-                        </div>
-                    </div>
                 </div>
 
                 <div class="col-md-8" id="results">
