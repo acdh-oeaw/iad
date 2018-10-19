@@ -2,7 +2,7 @@ from django import template
 from collections import Counter
 from django.db.models import Q
 from django.contrib.gis.db.models import Union
-
+from vocabs.models import SkosConcept
 from archiv.models import Site, MonumentProtection
 
 register = template.Library()
@@ -65,3 +65,9 @@ def site_extent():
     except Exception as e:
         sq_m = "{}".format(e)
     return sq_m
+
+
+@register.inclusion_tag('archiv/tags/skos_info.html')
+def skos_info(concept):
+    concepts = SkosConcept.objects.filter(pref_label=concept)
+    return {'concepts': concepts}
