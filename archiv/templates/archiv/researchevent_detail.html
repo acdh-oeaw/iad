@@ -133,7 +133,9 @@
                             {% get_verbose_name researchevent "research_type" %}
                         </th>
                         <td>
-                            {{ object.research_type }}
+                            <abbr data-toggle="tooltip" data-placement="right" data-html="true" title="{% skos_info object.research_type %}">
+                               {{ object.research_type }}
+                            </abbr>
                         </td>
                     </tr>
                     {% endif %}
@@ -187,7 +189,9 @@
                             <td>
                                 {% for x in object.research_method.all %}
                                     <li>
+                                     <abbr data-toggle="tooltip" data-placement="right" data-html="true" title="{% skos_info x %}">
                                         {{ x }}
+                                    </abbr>
                                     </li>
                                 {% endfor %}
                             </td>

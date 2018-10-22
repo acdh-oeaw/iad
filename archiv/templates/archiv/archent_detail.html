@@ -118,7 +118,9 @@
                                 {% get_verbose_name archent "ent_type" %}
                             </th>
                             <td>
-                                <abbr title="{% skos_info object.ent_type %}">{{ object.ent_type }}</abbr>
+                                <abbr data-toggle="tooltip" data-placement="right" data-html="true" title="{% skos_info object.ent_type %}">
+                                {{ object.ent_type }}
+                                </abbr>
                             </td>
                         </tr>
                     {% endif %}
@@ -128,7 +130,9 @@
                                 {% get_verbose_name archent "burial_type" %}
                             </th>
                             <td>
-                                <abbr title="{% skos_info object.burial_type %}">{{ object.burial_type }}</abbr>
+                                <abbr data-toggle="tooltip" data-placement="right" data-html="true" title="{% skos_info object.burial_type %}">
+                                {{ object.burial_type }}
+                                </abbr>
                             </td>
                         </tr>
                     {% endif %}
@@ -140,7 +144,9 @@
                             <td>
                                 {% for x in object.burial_construction.all %}
                                     <li>
-                                        <abbr title="{% skos_info x %}">{{ x }}</abbr>
+                                        <abbr data-toggle="tooltip" data-placement="right" data-html="true" title="{% skos_info x %}">
+                                        {{ x }}
+                                        </abbr>
                                     </li>
                                 {% endfor %}
                             </td>
@@ -154,7 +160,9 @@
                             <td>
                                 {% for x in object.settlement_fortification.all %}
                                     <li>
-                                        <abbr title="{% skos_info x %}">{{x }}</abbr>
+                                         <abbr data-toggle="tooltip" data-placement="right" data-html="true" title="{% skos_info x %}">
+                                         {{x }}
+                                         </abbr>
                                     </li>
                                 {% endfor %}
                             </td>
@@ -166,7 +174,7 @@
                                 {% get_verbose_name archent "settlement_occupation" %}
                             </th>
                             <td>
-                                <abbr title="{% skos_info object.settlement_occupation %}">
+                                 <abbr data-toggle="tooltip" data-placement="right" data-html="true" title="{% skos_info object.settlement_occupation %}">
                                 {{ object.settlement_occupation }}
                                 </abbr>
                             </td>
@@ -180,7 +188,9 @@
                             <td>
                                 {% for x in object.topography.all %}
                                     <li>
-                                        <abbr title="{% skos_info x %}">{{x }}</abbr>
+                                         <abbr data-toggle="tooltip" data-placement="right" data-html="true" title="{% skos_info x %}">
+                                         {{x }}
+                                         </abbr>
                                     </li>
                                 {% endfor %}
                             </td>

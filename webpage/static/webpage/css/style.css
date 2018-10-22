@@ -206,3 +206,30 @@ footer {
    box-shadow: 0px 0px 0px 2px #254aa5; 
 
 }
+
+
+.tooltip-inner {
+  background-color: #fff !important;
+  /*!important is not necessary if you place custom.css at the end of your css calls. For the purpose of this demo, it seems to be required in SO snippet*/
+  color: #000;
+  border: 1px solid #000;
+  text-align: left;
+  max-width: auto;
+}
+
+.tooltip.top .tooltip-arrow {
+  border-top-color: #000;
+}
+
+.tooltip.right .tooltip-arrow {
+  border-right-color: #fff;
+  color: #fff;
+}
+
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #000;
+}
+
+.tooltip.left .tooltip-arrow {
+  border-left-color: #000;
+}
