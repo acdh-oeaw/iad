@@ -233,3 +233,7 @@ footer {
 .tooltip.left .tooltip-arrow {
   border-left-color: #000;
 }
+
+a > .fa-2x {
+    color: #444;
+}

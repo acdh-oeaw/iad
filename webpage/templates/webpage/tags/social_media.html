@@ -1,0 +1,7 @@
+<div class="row">
+    {% for x in sm_items %}
+        <div class="col-sm-1">
+            <a href="{{ x.1 }}"><i class="{{x.0}}"></i></a>
+        </div>
+    {% endfor %}
+</div>

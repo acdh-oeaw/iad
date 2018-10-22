@@ -13,4 +13,11 @@ PROJECT_METADATA = {
     'matomo_id': '81',
     'matomo_url': '//piwik.apollo.arz.oeaw.ac.at/',
     'imprint': '/imprint',
+    'social_media': [
+        ('fab fa-twitter fa-2x', 'https://twitter.com/ironagedanube?lang=en'),
+        ('fab fa-youtube fa-2x', 'https://www.youtube.com/channel/UCx9Vnpkkf5ayEmtj2p-kc7w'),
+        ('fab fa-facebook-f fa-2x', 'https://www.facebook.com/IronAgeDanube/'),
+        ('fab fa-instagram fa-2x', 'https://www.instagram.com/ironagedanube/?hl=en'),
+        ('fab fa-wikipedia-w fa-2x', 'https://en.wikipedia.org/wiki/Iron-Age-Danube_project'),
+    ]
 }
