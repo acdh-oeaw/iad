@@ -2,6 +2,7 @@ import rdflib
 from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef, RDFS, ConjunctiveGraph, XSD
 from rdflib.namespace import DC, FOAF, RDFS, SKOS
 from .models import Metadata
+from django.utils import timezone
 
 
 SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
@@ -35,7 +36,10 @@ def graph_construct(results):
 		g.add((mainConceptScheme, DC.rights, Literal(x.license)))
 		g.add((mainConceptScheme, DCT.created, Literal(x.date_created)))
 		g.add((mainConceptScheme, DCT.modified, Literal(x.date_modified, datatype=XSD.dateTime)))
-		g.add((mainConceptScheme, DCT.issued, Literal(x.date_issued, datatype=XSD.dateTime)))		
+		if x.date_issued:
+			g.add((mainConceptScheme, DCT.issued, Literal(x.date_issued, datatype=XSD.dateTime)))
+		else:
+			g.add((mainConceptScheme, DCT.issued, Literal(timezone.now(), datatype=XSD.dateTime)))		
 		# accessing lists with ; in TextField
 		if x.language:
 			for i in x.language.split(';'):				
