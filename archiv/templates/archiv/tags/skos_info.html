@@ -1,0 +1,8 @@
+{% for concept in concepts %}
+{% if concept.definition %}
+<b>definition:</b> {{concept.definition}}<br>{% endif %}
+{% if concept.other_label.all %}{% for x in concept.other_label.all %}
+<b>{{x.label_type}}@{{x.isoCode}}:</b> {{x.name}}<br>
+{% endfor %}
+{% endif %}
+{% endfor %}

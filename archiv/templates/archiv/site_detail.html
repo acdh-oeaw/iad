@@ -252,15 +252,15 @@
                             </td>
                         </tr>
                     {% endif %}
-                    {% if object.period.all %}
+                    {% if object.other_period.all %}
                         <tr>
                             <th class="w-25">
-                                {% get_verbose_name site "period" %}
+                                {% get_verbose_name site "other_period" %}
                             </th>
                             <td>
-                                {% for x in object.period.all %}
+                                {% for x in object.other_period.all %}
                                     <li>
-                                        <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                                        <abbr data-toggle="tooltip" data-placement="right" data-html="true" title="{% skos_info x %}">{{ x }}</abbr>
                                     </li>
                                 {% endfor %}
                             </td>

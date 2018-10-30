@@ -11,34 +11,32 @@
 {% block content %}
 <div class="jumbotron" style="padding:0;">
 
-    {% leaflet_map "yourmap" callback="window.map_init_basic" %}%}
+    {% leaflet_map "yourmap" callback="window.map_init_basic" %}
 
 </div>
 <div class="container">
-    <h1 style="text-align:center; color: #111;">{% projects_metadata 'title' %}</h1>
 
-
-        <div class="card">
+        <div class="card card-index">
             <div class="card-body">
-                <h5 class="card-title">
+                <h1 class="text-center title-index">
+                IRON-AGE-DANUBE
+                </h1>
+                <p class="text-center text-muted paragraph-index">
                     {% projects_metadata 'subtitle' %}
-                </h5>
-                <p class="card-text">
-                    {% projects_metadata 'description' %}
                 </p>
-                <p>
-                    <a type="button" class="btn btn-lg btn-block" href="{% url 'browsing:browse_sites' %}" role="button">
-                        EXPLORE
+                <hr class="hr-index"/>
+                <p class="text-justify">
+                        {% projects_metadata 'description' %}
+                </p>
+                <div class="text-right">
+                    <a href="{% url 'browsing:browse_sites' %}" class="btn btn-lg btn-index pulse" class="pull-right">
+                    <b><i class="fa fa-angle-right"></i></b>&nbsp;&nbsp;explore
                     </a>
-                </p>
-            </div>
-        </div>
-        <div class="card" style="text-align:center;">
-            <div class="card-body">
-                <h2 class="card-title">
-                    Statistics
-                </h5>
-                <div class="row" style="padding:10px;">
+                </div>
+                <br>
+                <h2 class="h2-index">Statistics</h2>
+                <!--cards with statistics-->
+                <div class="row" style="padding:10px; text-align:center;">
                     <div class="col-md-6">
                         <div class="card site-page">
                             <div class="card-body">
@@ -69,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="padding:10px;">
+                <div class="row" style="padding:10px; text-align:center;">
                     <div class="col-md-6">
                         <div class="card researchevent-page">
                             <div class="card-body">
@@ -97,8 +95,6 @@
                 </div>
             </div>
         </div>
-
-
 </div>
 <script>
     {% archiv_custom_js %}

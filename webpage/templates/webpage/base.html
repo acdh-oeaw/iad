@@ -13,6 +13,7 @@
     {% endblock %}
     <!-- favicons -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,500" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'webpage/css/fundament.css' %}" rel="stylesheet"/>
     <!-- <link rel="stylesheet" href="{% static 'webpage/css/fundament_new.css' %}" rel="stylesheet"/> -->
@@ -147,9 +148,10 @@
                             Vocabs Curation <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'vocabs:skosconceptscheme_list' %}">Concept Schemes</a>
+                            <a class="dropdown-item" href="{% url 'vocabs:metadata' %}">Metadata</a>
+                            <a class="dropdown-item" href="{% url 'vocabs:browse_schemes' %}">Concept Schemes</a>
                             <a class="dropdown-item" href="{% url 'vocabs:browse_vocabs' %}">Concepts</a>
-                            <a class="dropdown-item" href="{% url 'vocabs:skoslabel_list' %}">Labels</a>
+                            <a class="dropdown-item" href="{% url 'vocabs:browse_skoslabels' %}">Labels</a>
                     </li>
                     {% endif %}
                     {% if user.is_authenticated %}
@@ -198,6 +200,7 @@
         <div class="footer-sep">
           <i class="far fa-comment"></i> CONTACT
         </div>
+        {% social_media %}
         <div class="row">
             <div class="col-md-3 ml-auto">
                 <img src="{% static 'webpage/img/interreg_logo.png' %}" alt="logo" title="logo"/>
@@ -226,6 +229,11 @@
     $(document).ready(function() {
         $.apScrollTop({'onInit': function(evt) {console.log('apScrollTop: init');}});
     });
+</script>
+<script type="text/javascript">
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
 </script>
 {% endblock %}
 {% block scripts2 %}

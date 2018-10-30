@@ -17,7 +17,10 @@ body {
 .card {
     overflow: visible;
     border: 0 solid rgba(0,0,0,.125);
-    box-shadow: 16px 19px 9px 0px #866161;
+    /*box-shadow: 16px 19px 9px 0px #866161;*/
+    /*box-shadow: 16px 19px 9px 0px #bfbfbf;*/
+    box-shadow: 4px 4px 9px 0 rgba(0, 0, 0, .1);
+    /*box-shadow: 2px 2px 24px 0 rgba(0, 0, 0, .1);*/
 }
 
 .site-page {
@@ -125,4 +128,112 @@ footer {
 }
 .help-block {
     font-size: 0.8rem;
+}
+.card-index {
+    padding: 80px;
+    z-index: 1;
+    /*margin-top: -900px;*/
+    margin-top: -80px;
+
+}
+.title-index {
+    font-weight: 900;
+    color: #254aa5;
+    font-size: 350%;
+}
+@media (max-width: 768px) {
+    .card-index {
+        padding: 30px !important;
+    }
+    .title-index {
+    font-weight: 900;
+    font-size: 200% !important;
+}
+
+}
+
+.paragraph-index {
+    font-weight: 900;
+}
+.hr-index {
+    height: 4px;
+    border: 0;
+    background: #254aa5;
+    width: 40%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.h2-index {
+    color:#254aa5;
+    font-weight: 800;
+    text-align: center;
+}
+#yourmap {
+    z-index: 0;
+    /*min-height: 1000px;*/
+   /* min-height: 450px;*/
+}
+.special-index {
+    padding: 30px;
+    border-radius: 50%;
+    background-color: #fbbf18ff;
+    color: #fff;
+    font-weight: 800;
+    margin-left: -80px;
+    margin-top: -450px;
+    width: 10rem;
+    height: 10rem;
+    z-index: 2;
+}
+
+.btn-index {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    /*margin-left: 10px;
+    margin-right: 10px;*/
+    background-color: #ffffff;
+    color: #254aa5;
+    border: 3px solid #254aa5;
+    font-weight: 800;
+    white-space: normal;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-shadow: 0px 0px 0px 0px #254aa5;
+    transition: box-shadow 0.6s linear;
+}
+
+.btn-index:hover {
+   box-shadow: 0px 0px 0px 2px #254aa5; 
+
+}
+
+
+.tooltip-inner {
+  background-color: #fff !important;
+  /*!important is not necessary if you place custom.css at the end of your css calls. For the purpose of this demo, it seems to be required in SO snippet*/
+  color: #000;
+  border: 1px solid #000;
+  text-align: left;
+  max-width: auto;
+}
+
+.tooltip.top .tooltip-arrow {
+  border-top-color: #000;
+}
+
+.tooltip.right .tooltip-arrow {
+  border-right-color: #fff;
+  color: #fff;
+}
+
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #000;
+}
+
+.tooltip.left .tooltip-arrow {
+  border-left-color: #000;
+}
+
+a > .fa-2x {
+    color: #444;
 }
