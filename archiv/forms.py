@@ -287,7 +287,9 @@ class ResearchEventForm(ArchivBaseForm):
             'end_date': forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD'}, format=('%Y-%m-%d')),
             'research_question': autocomplete.ModelSelect2(
                 url='archiv-ac:researchquestion-autocomplete'),
-            'generation_data_set': forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD'}, format=('%Y-%m-%d'))
+            'generation_data_set': forms.DateInput(
+                attrs={'placeholder': 'YYYY-MM-DD'}, format=('%Y-%m-%d')
+            )
         }
 
     def __init__(self, *args, **kwargs):
