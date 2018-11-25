@@ -1,12 +1,15 @@
 import time
 import datetime
+import pandas as pd
+import geopandas as gp
 from django.http import HttpResponse
 from django.core.serializers import serialize
 from django.contrib.contenttypes.models import ContentType
 import rdflib
 from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef, RDFS, ConjunctiveGraph
 from django_tables2 import SingleTableView, RequestConfig
-import pandas as pd
+
+from shapely import wkt
 
 from browsing.filters import *
 from browsing.forms import *
@@ -116,6 +119,30 @@ class GenericListView(SingleTableView):
             context = dict(context, **chartdata)
             print(chartdata)
         return context
+
+    def render_to_response(self, context, **kwargs):
+        if context['shapes']:
+            if self.request.GET.get('dl-geojson', None) and self.get_queryset().exclude(polygon=None):
+                qs = self.get_queryset().exclude(polygon=None)
+                df = pd.DataFrame(list(qs.values()))
+                df['geometry'] = df.apply(
+                    lambda row: wkt.loads(row['polygon'].wkt), axis=1
+                )
+                print('#######################')
+                str_df = df.astype('str').drop(['polygon'], axis=1)
+                gdf = gp.GeoDataFrame(str_df)
+                gdf['geometry'] = gdf.apply(
+                    lambda row: wkt.loads(row['geometry']), axis=1
+                )
+                response = HttpResponse(gdf.to_json(), content_type='application/json')
+                response['Content-Disposition'] = 'attachment; filename="out.geojson"'
+                return response
+            else:
+                response = super(GenericListView, self).render_to_response(context)
+                return response
+        else:
+            response = super(GenericListView, self).render_to_response(context)
+            return response
 
     # @method_decorator(login_required)
     # def dispatch(self, *args, **kwargs):
