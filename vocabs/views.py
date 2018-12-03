@@ -10,6 +10,11 @@ from .forms import *
 from .tables import *
 from .filters import SkosConceptListFilter, SkosConceptSchemeListFilter, SkosLabelListFilter, SkosCollectionListFilter
 from browsing.browsing_utils import GenericListView, BaseCreateView, BaseUpdateView
+from .rdf_utils import *
+import time
+import datetime
+from django.shortcuts import render_to_response
+from django.http import HttpResponse
 
 
 #####################################################
@@ -340,3 +345,27 @@ class SkosLabelDelete(DeleteView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(SkosLabelDelete, self).dispatch(*args, **kwargs)
+
+
+###################################################
+# SkosConcepts download as one ConceptScheme
+###################################################
+
+class SkosConceptDL(GenericListView):
+    model = SkosConcept
+    table_class = SkosConceptTable
+    filter_class = SkosConceptListFilter
+    formhelper_class = SkosConceptFormHelper
+
+    def render_to_response(self, context):
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+        response = HttpResponse(content_type='application/xml; charset=utf-8')
+        filename = "download_{}".format(timestamp)
+        get_format = self.request.GET.get('format', default='pretty-xml')
+        if get_format == 'turtle':
+            response['Content-Disposition'] = 'attachment; filename="{}.ttl"'.format(filename)
+        else:
+            response['Content-Disposition'] = 'attachment; filename="{}.rdf"'.format(filename)
+        g = graph_construct_qs(self.get_queryset()) 
+        result = g.serialize(destination=response, format=get_format)
+        return response
