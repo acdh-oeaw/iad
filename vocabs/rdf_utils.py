@@ -223,7 +223,9 @@ def graph_construct_qs(results):
 				g.add((mainConceptScheme, DC.contributor, Literal(i.strip())))
 		if x.subject:
 			for i in x.subject.split(';'):				
-				g.add((mainConceptScheme, DC.subject, Literal(i.strip())))					
+				g.add((mainConceptScheme, DC.subject, Literal(i.strip())))
+		if x.relation:
+			g.add((mainConceptScheme, DC.relation, Literal(x.relation)))					
 	for obj in results:
 		concept = URIRef(mainConceptScheme + "#concept" +str(obj.id))
 		g.add((concept, RDF.type, SKOS.Concept))
