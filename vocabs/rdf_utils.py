@@ -204,7 +204,8 @@ def graph_construct_qs(results):
 		g.add((mainConceptScheme, RDFS.label, Literal(x.title)))
 		g.add((mainConceptScheme, DC.description, Literal(x.description, lang=x.description_lang)))
 		g.add((mainConceptScheme, OWL.versionInfo, Literal(x.version)))
-		g.add((mainConceptScheme, DC.rights, Literal(x.license)))
+		g.add((mainConceptScheme, DCT.license, Literal(x.license)))
+		g.add((mainConceptScheme, DCT.rightsHolder, Literal(x.owner)))
 		g.add((mainConceptScheme, DCT.created, Literal(x.date_created)))
 		g.add((mainConceptScheme, DCT.modified, Literal(x.date_modified, datatype=XSD.dateTime)))
 		if x.date_issued:
