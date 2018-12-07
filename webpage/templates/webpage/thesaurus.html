@@ -1,0 +1,203 @@
+{% extends "webpage/base.html" %}
+{% block content %}
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>   
+<style type="text/css">
+.node circle {
+  cursor: pointer;
+  fill: #fff;
+  stroke: #254aa5;
+  stroke-width: 2.5px;
+}
+.node text {
+  font-size: 12px;
+}
+path.link {
+  fill: none;
+  stroke: #fbbf18; /*#aaa*/
+  stroke-width: 2.5px;
+}
+.ext-link {
+  font-weight: bold;
+}
+</style>
+<div class="card">
+  <div class="card-header" style="text-align:center;">
+    <h1>Iron-Age-Danube Thesaurus</h1>
+    <i id="help-popover" style="text-align:center;"  class="far fa-question-circle"></i> help
+  </div>
+<div class="card-body">
+  <div id="body">
+  </div>
+  <p class="text-muted" style="padding-left: 20px;">Learn more about IAD thesaurus <a href="https://vocabs.acdh.oeaw.ac.at/iad_thesaurus/en/">here</a></p>
+</div>
+</div>
+<script type="text/javascript">
+
+var m = [20, 120, 20, 120],
+    w = 1700 - m[1] - m[3],
+    h = 800 - m[0] - m[2],
+    i = 0,
+    root;
+
+var tree = d3.layout.tree()
+    .size([h, w]);
+
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+
+var vis = d3.select("#body").append("svg:svg")
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+  	.append("svg:g")
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+
+var dataset ={"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme","name":"IAD thesaurus","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/collection13","name":"archaeological entity type","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept323","name":"agriculture","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept324","name":"land use site","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept325","name":"fishing site","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept354","name":"construction","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept355","name":"stone construction","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept341","name":"deposit","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept342","name":"ritual","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept343","name":"profane","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept344","name":"undetermined","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept356","name":"ditch","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept319","name":"extraction area","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept320","name":"extraction remains","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept321","name":"quarry","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept322","name":"mine","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept303","name":"funerary site","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept304","name":"barrow grave","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept305","name":"flat grave","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept306","name":"grave with rectangular ditch","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept307","name":"polymorphic cemetery","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept326","name":"industrial","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept327","name":"thermal structure","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept328","name":"food and drink industry site","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept329","name":"metal industry site","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept330","name":"textile industry site","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept331","name":"pottery manufacturing site","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept332","name":"tool workshop","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept358","name":"man-made terrace","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept357","name":"rampart","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept333","name":"ritual site","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept334","name":"burning activity","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept335","name":"stone setting","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept336","name":"ritual pit","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept337","name":"deposition area","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept338","name":"sanctuary","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept339","name":"ritual cave","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept340","name":"abri","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept308","name":"settlement","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept309","name":"enclosed","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept310","name":"unenclosed","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept345","name":"single find","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept346","name":"bone","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept347","name":"metal","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept348","name":"coin","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept349","name":"pottery","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept350","name":"stone","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept351","name":"glass","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept352","name":"amber","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept353","name":"wood","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept311","name":"transport","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept312","name":"road transport site","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept313","name":"road","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept314","name":"hollow way","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept315","name":"plank walkway","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept316","name":"transport infrastructure","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept317","name":"terrain preparation","size":1}],"size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept318","name":"water transport site","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept359","name":"wall / wall system","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept360","name":"well","size":1}]},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/collection15","name":"burial construction","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept364","name":"urn","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept365","name":"ceramic urn","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept366","name":"metal urn","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept367","name":"stone urn","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept368","name":"urn made of organic material","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept369","name":"pit","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept370","name":"strayed","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept371","name":"cist","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept372","name":"wooden construction","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/collection14","name":"burial type","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept361","name":"cremation burial","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept362","name":"inhumation burial","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept363","name":"biritual burial","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/collection19","name":"current land use","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept389","name":"agricultural areas","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept390","name":"arable land","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept391","name":"permanent crops","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept392","name":"pastures","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept393","name":"heterogeneous agricultural areas","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept394","name":"artificial surfaces","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept395","name":"urban fabric","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept396","name":"industrial, commercial and transport units","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept397","name":"mine, dump and construction sites","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept398","name":"artificial non-agricultural vegetated areas","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept399","name":"single building","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept400","name":"forests and semi-natural areas","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept401","name":"forests","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept402","name":"shrub and/or herbaceous vegetation association","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept403","name":"open spaces with little or no vegetation","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept404","name":"water bodies","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept405","name":"inland waters","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept406","name":"marine waters","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept407","name":"wetlands","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept408","name":"inland wetlands","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept409","name":"coastal wetlands","size":1}],"size":1}]},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/collection12","name":"other present archaeological period","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept282","name":"Prehistory","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept283","name":"Palaeolithic","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept284","name":"Mesolithic","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept285","name":"Neolithic","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept286","name":"Eneolithic","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept287","name":"Bronze Age","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept288","name":"Early Bronze Age","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept289","name":"Middle Bronze Age","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept290","name":"Late Bronze Age","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept291","name":"Iron Age","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept292","name":"Late Iron Age","size":1}],"size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept293","name":"Roman Empire","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept294","name":"Late Antiquity","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept295","name":"Medieval Age","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept296","name":"Early Middle Age","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept297","name":"High Middle Age","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept298","name":"Late Middle Age","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept299","name":"Modern Era","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept300","name":"Early Modern Era","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept301","name":"Late Modern Era","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept302","name":"Contemporary","size":1}],"size":1}]},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/collection21","name":"research methods","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept514","name":"anthropological studies","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept510","name":"artefact studies","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept511","name":"stylistic studies","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept512","name":"technological studies","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept513","name":"usage studies","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept506","name":"desktop assessment","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept507","name":"historical landscape analysis","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept508","name":"historical aerial photographs analysis","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept509","name":"historical literature research","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept479","name":"environmental survey","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept480","name":"archaeobotany","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept481","name":"charcoal analysis","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept482","name":"macroscopic charcoal screening","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept483","name":"palynology","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept484","name":"phytolith analysis","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept485","name":"pollen analysis","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept486","name":"starch grain analysis","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept487","name":"archaeoparasitology","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept488","name":"archaeozoology","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept489","name":"soil analysis","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept490","name":"geochemical analysis","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept491","name":"heavy mineral analysis","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept492","name":"phosphate analysis","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept493","name":"particle size analysis","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept494","name":"soil micromorphology","size":1}],"size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept495","name":"excavation","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept496","name":"arbitrary level excavation","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept497","name":"core drilling","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept498","name":"flotation","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept499","name":"microstratigraphic excavation","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept500","name":"sieving","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept501","name":"dry-sieving","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept502","name":"wet-sieving","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept503","name":"stratigraphic excavation","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept504","name":"test pit","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept505","name":"trial trench","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept416","name":"remote sensing survey","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept417","name":"satellite imaging","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept418","name":"spaceborne photography","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept419","name":"spaceborne imaging spectroscopy","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept420","name":"spaceborne multispectral imaging","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept421","name":"spaceborne laser scanning","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept422","name":"spaceborne thermography","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept423","name":"spaceborne radar imaging","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept424","name":"airborne sensing","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept425","name":"aerial photography","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept426","name":"total covarage","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept427","name":"observer directed","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept428","name":"aerial thermography","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept429","name":"airborne multispectral imaging","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept430","name":"airborne imaging spectroscopy","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept431","name":"airborne laser scanning","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept432","name":"airborne radar imaging","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept433","name":"airborne magnetometer survey","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept434","name":"low altitude survey","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept435","name":"UAV photography survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept436","name":"kite aerial photography (KAP) survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept437","name":"balloon aerial photography (BAP) survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept438","name":"pole aerial photography (PAP) survey","size":1}],"size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept515","name":"supporting analysis","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept516","name":"dating","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept517","name":"amino acid recemization dating","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept518","name":"archaeomagnetism","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept519","name":"Carbon-14 dating","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept520","name":"dendrochronology","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept521","name":"electron spin resonance dating","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept522","name":"fission track analysis","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept523","name":"Fluorine, Uranium and Nitrogen tests","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept524","name":"Lead isotope dating","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept525","name":"luminescence dating","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept526","name":"infra-red stimulated luminescence","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept527","name":"optically stimulated luminescence","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept528","name":"thermoluminescence","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept529","name":"mitochondrial DNA","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept530","name":"Oxygen isotope analysis","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept531","name":"Potassium Argon dating","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept532","name":"relative dating","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept533","name":"Uranium series dating","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept534","name":"elemental and molecular analysis","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept535","name":"amino acid analysis","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept536","name":"atomic absorption spectroscopy (AAS)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept537","name":"Auger-electron spectroscopy (AES)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept538","name":"capillar electrophoresis","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept539","name":"electron probe microanalysis (EPMA)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept540","name":"gas chromatography","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept541","name":"liquid chromatography","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept542","name":"nuclear magnetic resonance (NMR)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept543","name":"mass spectrometry","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept544","name":"isotopic ratio mass spectometry (IRMS)","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept545","name":"accelerator mass spectrometry (AMS)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept546","name":"multi collector inductively coupled plasma mass spectrometry (MC-ICP-MS)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept547","name":"secondary-ion mass spectrometry (SIMS)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept548","name":"solid-source thermal ionization mass spectrometry (TIMS)","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept549","name":"inductively coupled plasma mass spectrometry (ICP-MS)","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept550","name":"Fourier-transform Infrared spectrometry (FT-IR)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept551","name":"Raman spectroscopy","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept552","name":"inductively coupled plasma atomic emission spectroscopy (ICP-AES)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept553","name":"molecular spectroscopy","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept554","name":"neutron activation analysis (NAA)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept555","name":"optical emission spectrometery (OES)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept556","name":"proton induced X-rays (PIXE) and gamma rays (PIGME)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept557","name":"synchrotron-induced radiation","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept558","name":"X-ray flourescence","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept559","name":"X-ray photoelectron spectroscopy","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept560","name":"crystallography","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept561","name":"X-ray (powder) diffraction (XRD)","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept562","name":"microscopic examination","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept563","name":"scanning electron microsopy (SEM)","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept564","name":"transmission electron microsopy","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept565","name":"polarised light microscopy","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept566","name":"metallographic analysis","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept567","name":"laser ablation","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept439","name":"terrestrial survey","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept440","name":"geophysical survey","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept441","name":"ground-penetrating radar survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept442","name":"magnetometry survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept443","name":"earth-resistance survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept444","name":"electromagnetic induction survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept445","name":"electrical resistivity tomography survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept446","name":"magnetic susceptibility survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept447","name":"metal detecting survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept448","name":"microgravity survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept449","name":"terrestrial seismic survey","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept450","name":"seismic refraction survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept451","name":"seismic reflection survey","size":1}],"size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept452","name":"field-walking survey","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept453","name":"intensive fieldwalking survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept454","name":"non-intensive fieldwalking survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept455","name":"undetermined fieldwalking survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept456","name":"shovel test","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept457","name":"geomorphological survey","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept458","name":"climate research","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept459","name":"hydrological survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept460","name":"lithology research","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept461","name":"tectonics research","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept462","name":"topography research","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept463","name":"surface geometry survey","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept464","name":"GNSS survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept465","name":"image-based modelling","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept466","name":"terrestrial laser scanning","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept467","name":"total station survey","size":1}],"size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept468","name":"underwater survey","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept469","name":"acoustic ground discrimination radar","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept470","name":"underwater seismic survey","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept471","name":"3D seismic survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept472","name":"bathymetric survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept473","name":"multi beam echo sounder survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept474","name":"side scan sonar survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept475","name":"single beam echo sounder survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept476","name":"sonar survey","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept477","name":"sub bottom profiling survey","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept478","name":"underwater photography","size":1}],"size":1}]},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/collection22","name":"research type","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept568","name":"development led research","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept569","name":"preventive archaeology","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept569","name":"preventive archaeology","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept570","name":"scientific research","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/collection16","name":"settlement fortification","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept373","name":"naturally fortified","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept374","name":"man-made fortification","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept375","name":"fortification ditch","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept376","name":"fortification rampart","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept377","name":"fortification wall","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept375","name":"fortification ditch","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept376","name":"fortification rampart","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept377","name":"fortification wall","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/collection17","name":"settlement occupation","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept378","name":"permanent","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept379","name":"seasonal","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept380","name":"temporary","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/collection20","name":"threats","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept410","name":"agriculture/land use","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept411","name":"construction/industry","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept412","name":"intensive forest activities","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept413","name":"looting","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept414","name":"mine suspected area","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept415","name":"natural erosion","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/collection18","name":"topography","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept381","name":"hilltop","children":[{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept571","name":"flattened hilltop","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept572","name":"terraced hilltop","size":1}],"size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept382","name":"lowland","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept383","name":"natural terrace","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept384","name":"wetland","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept385","name":"lakeside","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept386","name":"riverside","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept387","name":"cave","size":1},{"uri":"https://vocabs.acdh.oeaw.ac.at/iadthesaurus/scheme/concept388","name":"slope","size":1}],"size":1}],"size":1};
+  console.log(dataset.uri);
+  //var json = JSON.parse(dataset);
+// d3.json("json?language=&root=", function(json) {
+  root = dataset;
+  root.x0 = h / 2;
+  root.y0 = 0;
+
+  function toggleAll(d) {
+    if (d.children) {
+      d.children.forEach(toggleAll);
+      toggle(d);
+    }
+  }
+
+  // Initialize the display to show a few nodes.
+  root.children.forEach(toggleAll);
+  update(root);
+// });
+
+function update(source) {
+  var duration = d3.event && d3.event.altKey ? 5000 : 500;
+
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse();
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+  // Update the nodes…
+  var node = vis.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("svg:g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("click", function(d) { toggle(d); update(d); });
+
+  nodeEnter.append("svg:circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  // add a link to the concept
+  var a = nodeEnter.append("a")
+	  .attr("xlink:href", function(d){ return d.uri; })
+	  .attr("target", "_blank");
+  
+  a.append("svg:text")
+      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+      .text(function(d) { return (d.name != null)?d.name:d.uri ; })
+      .style("fill-opacity", 1e-6);
+
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  nodeUpdate.select("circle")
+      .attr("r", 6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeUpdate.select("text")
+      .style("fill-opacity", 1);
+
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .remove();
+
+  nodeExit.select("circle")
+      .attr("r", 1e-6);
+
+  nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+
+  // Update the links…
+  var link = vis.selectAll("path.link")
+      .data(tree.links(nodes), function(d) { return d.target.id; });
+
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("svg:path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      })
+    .transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition links to their new position.
+  link.transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+}
+
+// Toggle children.
+function toggle(d) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+}
+
+</script>
+    
+<script>
+    $(document).ready(function () {
+      // add external link behavior to every external link
+      $('text').mouseover(function() {
+        $(this).attr("class", "ext-link");
+      });
+      $('text').mouseout(function() {
+        $(this).attr("class", "");
+      });
+      
+      $('#help-popover').popover({
+    	  html: true,
+          trigger : "click",
+          delay: { show: 0, hide: 400 },
+          content: '<ol><li>Click a blue circle to unfold the tree (white circles are the tree leaves and are inactive).</li><li>Click an open node to fold it.</li><li>Click a label to navigate to this concept URI.</li></ol>',
+          placement: "bottom"
+      });
+      $('#help-popover').css("text-decoration", "underline").css("cursor", "pointer");
+    });         
+</script>
+{% endblock %}
