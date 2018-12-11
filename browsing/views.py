@@ -121,8 +121,14 @@ class GenericListView(SingleTableView):
         return context
 
     def render_to_response(self, context, **kwargs):
+        try:
+            context['shapes']
+        except KeyError:
+            context['shapes'] = None
         if context['shapes']:
-            if self.request.GET.get('dl-geojson', None) and self.get_queryset().exclude(polygon=None):
+            if self.request.GET.get(
+                'dl-geojson', None
+            ) and self.get_queryset().exclude(polygon=None):
                 qs = self.get_queryset().exclude(polygon=None)
                 df = pd.DataFrame(list(qs.values()))
                 df['geometry'] = df.apply(
