@@ -102,10 +102,17 @@ class GenericListView(SingleTableView):
             context['download'] = self.model.get_dl_url()
         except AttributeError:
             context['download'] = None
-        model_name = self.model.__name__.lower()
-        context['entity'] = model_name
-        print(context['entity'])
-        context['vis_list'] = ChartConfig.objects.filter(model_name=model_name)
+        model = self.model
+        app_label = model._meta.app_label
+        print("App label: {}".format(app_label))
+        context['entity'] = model.__name__.lower()
+        print("Model: {}".format(model.__name__.lower()))
+        # print(context['entity'])
+        filtered_objs = ChartConfig.objects.filter(
+            model_name=model.__name__.lower(),
+            app_name=app_label
+        )
+        context['vis_list'] = filtered_objs
         context['property_name'] = self.request.GET.get('property')
         context['charttype'] = self.request.GET.get('charttype')
         if context['charttype'] and context['property_name']:
@@ -114,7 +121,8 @@ class GenericListView(SingleTableView):
                 context['entity'],
                 context['property_name'],
                 context['charttype'],
-                qs
+                qs,
+                app_label=app_label
             )
             context = dict(context, **chartdata)
             print(chartdata)
