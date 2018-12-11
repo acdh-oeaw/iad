@@ -3,7 +3,8 @@ from collections import Counter
 from django.db.models import Q
 from django.contrib.gis.db.models import Union
 from vocabs.models import SkosConcept
-from archiv.models import Site, MonumentProtection
+from vocabs.filters import generous_concept_filter
+from archiv.models import Site, MonumentProtection, ResearchEvent
 
 register = template.Library()
 
@@ -59,6 +60,36 @@ def protected_site_count():
 @register.simple_tag
 def site_extent():
     u = Site.objects.filter(polygon__isvalid=True).aggregate(Union('polygon'))['polygon__union']
+    u.transform(ct=3035)
+    try:
+        sq_m = "{:,.0f}".format(u.area/1000000)
+    except Exception as e:
+        sq_m = "{}".format(e)
+    return sq_m
+
+
+@register.simple_tag
+def excavation_extent():
+    excavation = SkosConcept.objects.filter(pref_label='excavation')
+    u = generous_concept_filter(
+        ResearchEvent.objects.filter(polygon__isvalid=True),
+        'research_method', excavation
+    ).aggregate(Union('polygon'))['polygon__union']
+    u.transform(ct=3035)
+    try:
+        sq_m = "{:,.0f}".format(u.area/1000000)
+    except Exception as e:
+        sq_m = "{}".format(e)
+    return sq_m
+
+
+@register.simple_tag
+def geophysical_extent():
+    excavation = SkosConcept.objects.filter(pref_label='geophysical survey')
+    u = generous_concept_filter(
+        ResearchEvent.objects.filter(polygon__isvalid=True),
+        'research_method', excavation
+    ).aggregate(Union('polygon'))['polygon__union']
     u.transform(ct=3035)
     try:
         sq_m = "{:,.0f}".format(u.area/1000000)
