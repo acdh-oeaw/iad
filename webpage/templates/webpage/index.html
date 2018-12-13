@@ -57,10 +57,15 @@
                     <div class="col-md-6">
                         <div class="card archent-page">
                             <div class="card-body">
-                                <h5 class="card-title">Sites with high touristic potential</h5>
+                                <h5 class="card-title">Touristic potential of sites</h5>
                                 <p class="card-text">
-                                    <p>12<br />
-                                        <small>(out of {% site_count %})</small>
+                                    <p>
+                                        {% touristic_potential as result %}
+                                        {% for key, value in result.items %}
+                                            {{ key }}: {{ value }} {% if not forloop.last %}|{% endif %}
+                                        {% endfor %}
+                                        <br />
+                                        <small>(total {% site_count %})</small>
                                     </p>
                                 </p>
                             </div>
