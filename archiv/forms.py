@@ -444,7 +444,7 @@ class SiteForm(ArchivBaseForm):
         self.helper = FormHelper()
         try:
             instance = kwargs['instance']
-            init_data = [x.id for x in ResearchEvent.objects.filter(site_id=instance.id)]
+            init_data = [x.id for x in ResearchEvent.objects.filter(site_id__in=[instance.id])]
             self.fields['research_activities'].initial = init_data
         except AttributeError:
             pass
