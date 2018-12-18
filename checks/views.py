@@ -16,7 +16,7 @@ class ResearchEventCheck(TemplateView):
         context['all'] = ResearchEvent.objects.all().count()
         context['no_site'] = ResearchEvent.objects.filter(site_id__isnull=True)
         context['no_polygon'] = ResearchEvent.objects.filter(polygon=None)
-        context['no_polygon_count'] = context['no_polygon'].count()
+        context['no_nothing'] = context['no_polygon'].filter(site_id__isnull=True)
         return context
 
 
