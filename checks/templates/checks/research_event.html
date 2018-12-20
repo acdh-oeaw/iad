@@ -1,0 +1,45 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load leaflet_tags %}
+{% load webpage_extras %}
+{% load archiv_extras %}
+{% block title %} Quality checks {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1>Research Event</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>{{ no_site|length }} out of {{ all }} without related site(s)</h2>
+                <ul>
+                    {% for x in no_site %}
+                        <li>
+                            <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h2>{{ no_polygon|length }} out of {{ all }} without polygon</h2>
+                <ul>
+                    {% for x in no_polygon %}
+                        <li>
+                            <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h2>{{ no_nothing|length }} out of {{ all }} without polygon and site</h2>
+                <ul>
+                    {% for x in no_nothing %}
+                        <li>
+                            <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

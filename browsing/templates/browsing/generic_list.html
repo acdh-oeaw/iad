@@ -141,7 +141,7 @@
                                                   </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                 {% if shapes %}
-                                                    <li><a class="dropdown-item" href="{% querystring %}&?dl-geojson=true">GeoJSON</a></li>
+                                                    <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true">GeoJSON</a></li>
                                                 {% endif %}
                                                 <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=comma">"," separated</a></li>
                                                 <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=semicolon">";" separated</a></li>

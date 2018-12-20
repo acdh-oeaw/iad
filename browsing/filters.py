@@ -562,15 +562,30 @@ class PeriodListFilter(django_filters.FilterSet):
 
 
 class PersonListFilter(django_filters.FilterSet):
-    current_land_use = django_filters.ModelMultipleChoiceFilter(
-        queryset=SkosConcept.objects.filter(),
-        help_text=MonumentProtection._meta.get_field('site_id').help_text,
-        label=MonumentProtection._meta.get_field('site_id').verbose_name
+    forename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Person._meta.get_field('forename').help_text,
+        label=Person._meta.get_field('forename').verbose_name
         )
-    belongs_to_institution = django_filters.ModelMultipleChoiceFilter(
-        queryset=Site.objects.all(),
-        help_text=MonumentProtection._meta.get_field('site_id').help_text,
-        label=MonumentProtection._meta.get_field('site_id').verbose_name
+    name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Person._meta.get_field('name').help_text,
+        label=Person._meta.get_field('name').verbose_name
+        )
+    pers_alt_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Person._meta.get_field('pers_alt_name').help_text,
+        label=Person._meta.get_field('pers_alt_name').verbose_name
+        )
+    acad_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Person._meta.get_field('acad_title').help_text,
+        label=Person._meta.get_field('acad_title').verbose_name
+        )
+    authority_url = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Person._meta.get_field('authority_url').help_text,
+        label=Person._meta.get_field('authority_url').verbose_name
         )
 
     class Meta:

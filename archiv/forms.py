@@ -136,13 +136,20 @@ class MonumentProtectionForm(ArchivBaseForm):
                 'natural_heritage_status',
                 'threats',
                 'comment',
-                'paste_geojson',
-                'paste_wkt',
-                'shape_string_epsg',
-                'shape_string',
-                'delete_polygon',
                 css_class="col-md-9"
                 ),
+            Fieldset(
+                'Import/Delete Spatial Data',
+                Div(
+                    'paste_geojson',
+                    'paste_wkt',
+                    'shape_string_epsg',
+                    'shape_string',
+                    'delete_polygon',
+                    css_class="col-md-9"
+                ),
+                css_class="separate-panel",
+            ),
             )
 
 
@@ -247,13 +254,20 @@ class ArchEntForm(ArchivBaseForm):
                 'dating_certainty',
                 'location_certainty',
                 'comment',
-                'paste_geojson',
-                'paste_wkt',
-                'shape_string_epsg',
-                'shape_string',
-                'delete_polygon',
                 css_class="col-md-9"
-                )
+                ),
+            Fieldset(
+                'Import/Delete Spatial Data',
+                Div(
+                    'paste_geojson',
+                    'paste_wkt',
+                    'shape_string_epsg',
+                    'shape_string',
+                    'delete_polygon',
+                    css_class="col-md-9"
+                ),
+                css_class="separate-panel",
+            ),
             )
 
 
@@ -320,13 +334,20 @@ class ResearchEventForm(ArchivBaseForm):
                 'research_question',
                 'comment',
                 'generation_data_set',
-                'paste_geojson',
-                'paste_wkt',
-                'shape_string_epsg',
-                'shape_string',
-                'delete_polygon',
                 css_class="col-md-9"
-                )
+                ),
+            Fieldset(
+                'Import/Delete Spatial Data',
+                Div(
+                    'paste_geojson',
+                    'paste_wkt',
+                    'shape_string_epsg',
+                    'shape_string',
+                    'delete_polygon',
+                    css_class="col-md-9"
+                ),
+                css_class="separate-panel",
+            ),
             )
 
 

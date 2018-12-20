@@ -1,11 +1,23 @@
+import pandas as pd
 from django import template
 from collections import Counter
 from django.db.models import Q
 from django.contrib.gis.db.models import Union
 from vocabs.models import SkosConcept
-from archiv.models import Site, MonumentProtection
+from vocabs.filters import generous_concept_filter
+from archiv.models import Site, MonumentProtection, ResearchEvent
 
 register = template.Library()
+
+
+def calculate_potential(x):
+    if x <= 8:
+        status = 'High'
+    elif x <= 12:
+        status = 'Middle'
+    else:
+        status = 'Low'
+    return status
 
 
 @register.simple_tag
@@ -65,6 +77,52 @@ def site_extent():
     except Exception as e:
         sq_m = "{}".format(e)
     return sq_m
+
+
+@register.simple_tag
+def excavation_extent():
+    excavation = SkosConcept.objects.filter(pref_label='excavation')
+    u = generous_concept_filter(
+        ResearchEvent.objects.filter(polygon__isvalid=True),
+        'research_method', excavation
+    ).aggregate(Union('polygon'))['polygon__union']
+    u.transform(ct=3035)
+    try:
+        sq_m = "{:,.0f}".format(u.area/1000000)
+    except Exception as e:
+        sq_m = "{}".format(e)
+    return sq_m
+
+
+@register.simple_tag
+def geophysical_extent():
+    excavation = SkosConcept.objects.filter(pref_label='geophysical survey')
+    u = generous_concept_filter(
+        ResearchEvent.objects.filter(polygon__isvalid=True),
+        'research_method', excavation
+    ).aggregate(Union('polygon'))['polygon__union']
+    u.transform(ct=3035)
+    try:
+        sq_m = "{:,.0f}".format(u.area/1000000)
+    except Exception as e:
+        sq_m = "{}".format(e)
+    return sq_m
+
+
+@register.simple_tag
+def touristic_potential():
+    potential = ['accessibility', 'visibility', 'infrastructure', 'long_term_management']
+    df = pd.DataFrame(
+        list(Site.objects.all().values_list(*potential))).fillna(4).applymap(
+            lambda x: int((str(x)[0]))
+    )
+    df['sum'] = df.sum(axis=1)
+    df['status'] = df.apply(lambda x: calculate_potential(x['sum']), axis=1)
+    result = pd.DataFrame(df.groupby('status').count()[0])
+    data = {}
+    for i, row in result.iterrows():
+        data[i] = row[0]
+    return data
 
 
 @register.inclusion_tag('archiv/tags/skos_info.html')

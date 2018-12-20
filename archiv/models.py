@@ -371,7 +371,7 @@ class Site(IadBaseClass):
 
     cadastral_community = models.ManyToManyField(
         Municipality, blank=True, verbose_name="Municipality",
-        help_text="The cadastral community where the site is located.",
+        help_text="The municipality where the site is located.",
         related_name="has_sites"
     )
     sm_adm = models.TextField(

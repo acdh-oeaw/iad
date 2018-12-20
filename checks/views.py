@@ -8,6 +8,18 @@ from django.utils.decorators import method_decorator
 from archiv.models import Site, ArchEnt, MonumentProtection, ResearchEvent
 
 
+class ResearchEventCheck(TemplateView):
+    template_name = "checks/research_event.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ResearchEventCheck, self).get_context_data()
+        context['all'] = ResearchEvent.objects.all().count()
+        context['no_site'] = ResearchEvent.objects.filter(site_id__isnull=True)
+        context['no_polygon'] = ResearchEvent.objects.filter(polygon=None)
+        context['no_nothing'] = context['no_polygon'].filter(site_id__isnull=True)
+        return context
+
+
 class InValidPoly(TemplateView):
     template_name = "checks/poly_invalid.html"
 

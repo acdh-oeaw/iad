@@ -69,6 +69,7 @@
                       </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'webpage:staticpage' template='about' %}">About project</a>
+                        <a class="dropdown-item" href="{% url 'webpage:staticpage' template='thesaurus' %}">IAD Thesaurus</a>
                         <a class="dropdown-item" href="{% url 'webpage:staticpage' template='imprint' %}">Imprint | Impressum</a>
                     </div>
                     </li>
@@ -98,8 +99,6 @@
                             <a class="dropdown-item" href="{% url 'shapes:browse_municipality' %}">
                                 Places
                             </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'browsing:map' %}">Map</a>
                             {% if user.is_authenticated %}
                                 <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a>
@@ -138,6 +137,10 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{% url 'checks:poly_fits_archents' %}">
                                 ArchEnts fit Site Polygon?
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'checks:research_event_check' %}">
+                                Research Event Check
                             </a>
                         </div>
                     </li>

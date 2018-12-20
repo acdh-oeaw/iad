@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                        <small>Reference:</small> {{ object }}
+                        <small><a href="{{object.get_listview_url }}">Reference:</a></small> {{ object }}
                         {% if user.is_authenticated %}
                             <small>
                                 <a href="{% url 'bib:reference_edit' pk=object.id %}">

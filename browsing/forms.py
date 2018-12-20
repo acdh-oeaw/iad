@@ -292,15 +292,15 @@ class PersonFilterFormHelper(FormHelper):
         self.layout = Layout(
             Fieldset(
                 'Basic search options',
+                'forename',
                 'name',
-                'written_name',
+                'pers_alt_name',
                 css_id="basic_search_fields"
                 ),
             Accordion(
                 AccordionGroup(
                     'Advanced search options',
                     'acad_title',
-                    'alt_names',
                     'authority_url',
                     'belongs_to_institution',
                     css_id="more"
