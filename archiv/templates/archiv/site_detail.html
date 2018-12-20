@@ -476,10 +476,6 @@
 
     function map_init_basic (map, options) {
 
-        var ArchEntConvex = L.geoJson({{ object.convex_hull_archents|safe }}).setStyle(ArchConvex);
-        map.layerscontrol.addOverlay(ArchEntConvex, 'Sum of ArchEnts');
-        ArchEntConvex.addTo(map);
-
         var geojsonFeature = {{ object.get_geojson|safe }};
         var SiteLayer = L.geoJson(geojsonFeature, {
             style: SiteStyle,
@@ -493,6 +489,9 @@
 
 
         {% if object.has_archent.all %}
+        var ArchEntConvex = L.geoJson({{ object.convex_hull_archents|safe }}).setStyle(ArchConvex);
+        map.layerscontrol.addOverlay(ArchEntConvex, 'Sum of ArchEnts');
+        ArchEntConvex.addTo(map);
             {% for x in object.has_archent.all %}
                 var ItemLayer = L.geoJson({{ x.get_geojson|safe }}, {
                     style: ArchEntStyle,
