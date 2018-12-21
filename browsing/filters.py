@@ -411,22 +411,22 @@ class SiteListFilter(django_filters.FilterSet):
             )
         )
     has_archent__period__start_date = django_filters.NumberFilter(
-        lookup_expr='exact',
+        lookup_expr='lte',
         help_text=Period._meta.get_field('start_date').help_text,
         label=Period._meta.get_field('start_date').verbose_name
         )
     has_archent__period__start_date_latest = django_filters.NumberFilter(
-        lookup_expr='exact',
+        lookup_expr='lte',
         help_text=Period._meta.get_field('start_date_latest').help_text,
         label=Period._meta.get_field('start_date_latest').verbose_name
         )
     has_archent__period__end_date = django_filters.NumberFilter(
-        lookup_expr='exact',
+        lookup_expr='gte',
         help_text=Period._meta.get_field('end_date').help_text,
         label=Period._meta.get_field('end_date').verbose_name
         )
     has_archent__period__end_date_latest = django_filters.NumberFilter(
-        lookup_expr='exact',
+        lookup_expr='gte',
         help_text=Period._meta.get_field('end_date_latest').help_text,
         label=Period._meta.get_field('end_date_latest').verbose_name
         )

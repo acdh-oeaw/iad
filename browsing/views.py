@@ -41,7 +41,7 @@ class GenericListView(SingleTableView):
         qs = super(GenericListView, self).get_queryset()
         self.filter = self.filter_class(self.request.GET, queryset=qs)
         self.filter.form.helper = self.formhelper_class()
-        return self.filter.qs
+        return self.filter.qs.distinct()
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
