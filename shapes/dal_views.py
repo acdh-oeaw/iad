@@ -34,3 +34,21 @@ class CountriesAC(autocomplete.Select2ListView):
         values = set(Municipality.objects.values_list('ctnam').distinct())
         countries = [x[0] for x in values]
         return countries
+
+
+class CountiesAC(autocomplete.Select2ListView):
+    def get_list(self):
+        values = set(
+            Municipality.objects.exclude(has_sites=None).values_list('nuts2nam').distinct()
+        )
+        countries = [x[0] for x in values]
+        return countries
+
+
+class RegionsAC(autocomplete.Select2ListView):
+    def get_list(self):
+        values = set(
+            Municipality.objects.exclude(has_sites=None).values_list('nuts3nam').distinct()
+        )
+        countries = [x[0] for x in values]
+        return countries

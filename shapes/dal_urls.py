@@ -20,4 +20,12 @@ urlpatterns = [
         r'^countries-ac/$', dal_views.CountriesAC.as_view(),
         name='countries-ac',
     ),
+    url(
+        r'^counties-ac/$', dal_views.CountiesAC.as_view(),
+        name='counties-ac',
+    ),
+    url(
+        r'^regions-ac/$', dal_views.RegionsAC.as_view(),
+        name='regions-ac',
+    ),
 ]

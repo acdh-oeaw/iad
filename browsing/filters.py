@@ -225,6 +225,22 @@ class SiteListFilter(django_filters.FilterSet):
             url='shapes-ac:countries-ac',
             )
         )
+    cadastral_community__nuts2nam = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text="Counties",
+        label="Counties",
+        widget=autocomplete.Select2(
+            url='shapes-ac:counties-ac',
+            )
+        )
+    cadastral_community__nuts3nam = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text="Regions",
+        label="Regions",
+        widget=autocomplete.Select2(
+            url='shapes-ac:regions-ac',
+            )
+        )
     cadastral_community = django_filters.ModelMultipleChoiceFilter(
         queryset=Municipality.objects.exclude(has_sites=None),
         help_text=Site._meta.get_field('cadastral_community').help_text,

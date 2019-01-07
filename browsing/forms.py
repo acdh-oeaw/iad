@@ -133,9 +133,6 @@ class SiteFilterFormHelper(FormHelper):
                 AccordionGroup(
                     'Advanced search options',
                     # 'public',
-                    'cadastral_community__ctnam',
-                    'cadastral_community',
-                    # 'cadastral_number',
                     'heritage_number',
                     'plot_number',
                     'ownership',
@@ -148,6 +145,17 @@ class SiteFilterFormHelper(FormHelper):
                     # 'museum',
                     css_id="more",
                     css_class="test"
+                    ),
+                ),
+            Accordion(
+                AccordionGroup(
+                    'Location search options',
+                    'cadastral_community__ctnam',
+                    'cadastral_community__nuts2nam',
+                    'cadastral_community__nuts3nam',
+                    'cadastral_community',
+                    css_id="location",
+                    css_class="location"
                     ),
                 ),
             Accordion(
