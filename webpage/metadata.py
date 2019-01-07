@@ -21,5 +21,6 @@ PROJECT_METADATA = {
         ('fab fa-wikipedia-w fa-2x', 'https://en.wikipedia.org/wiki/Iron-Age-Danube_project'),
         ('fas fa-graduation-cap fa-2x', 'http://museum-joanneum.academia.edu/IronAgeDanubeMonumentalizedEarlyIronAgeLandscapesintheDanuberiverbasin'),
         ('fas fa-home fa-2x', 'http://www.interreg-danube.eu/approved-projects/iron-age-danube'),
-    ]
+    ],
+    'app_type': 'database',
 }
