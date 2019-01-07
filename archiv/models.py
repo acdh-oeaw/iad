@@ -216,22 +216,22 @@ class Period(IadBaseClass):
 
     start_date = models.IntegerField(
         blank=True, null=True,
-        verbose_name="Earliest beginning of the period.",
+        verbose_name="Earliest beginning of the period (BC).",
         help_text="Must be a number!"
     )
     start_date_latest = models.IntegerField(
         blank=True, null=True,
-        verbose_name="Latest beginning of the period.",
+        verbose_name="Latest beginning of the period (BC).",
         help_text="Must be a number!"
     )
     end_date = models.IntegerField(
         blank=True, null=True,
-        verbose_name="Earliest end of the period.",
+        verbose_name="Earliest end of the period (BC).",
         help_text="Must be a number!"
     )
     end_date_latest = models.IntegerField(
         blank=True, null=True,
-        verbose_name="Latest end of the period.",
+        verbose_name="Latest end of the period (BC).",
         help_text="Must be a number!"
     )
     norm_id = models.CharField(
