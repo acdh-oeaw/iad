@@ -83,7 +83,10 @@ class GenericListView(SingleTableView):
         context['self_model_name'] = self.model.__name__.lower()
         context[self.context_filter_name] = self.filter
         context['docstring'] = "{}".format(self.model.__doc__)
-        context['class_name'] = "{}".format(self.model.__name__)
+        if self.model._meta.verbose_name:
+            context['class_name'] = "{}".format(self.model._meta.verbose_name.title())
+        else:
+            context['class_name'] = "{}".format(self.model.__name__)
         try:
             context['get_arche_dump'] = self.model.get_arche_dump()
         except AttributeError:
