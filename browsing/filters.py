@@ -432,7 +432,7 @@ class SiteListFilter(django_filters.FilterSet):
         label="Earliest date (BC)"
     )
     has_archent__period__end_date_latest = django_filters.NumberFilter(
-        lookup_expr="lte",
+        lookup_expr="gte",
         help_text="Year not after",
         label="Latest date (BC)"
     )
