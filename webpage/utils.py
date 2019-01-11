@@ -53,7 +53,7 @@ class GenericListView(SingleTableView):
     formhelper_class = None
     context_filter_name = 'filter'
     paginate_by = 25
-    template_name = 'webpage/generic_list.html'
+    template_name = 'browsing/generic_list.html'
 
     def get_queryset(self, **kwargs):
         qs = super(GenericListView, self).get_queryset()
@@ -71,10 +71,7 @@ class GenericListView(SingleTableView):
         context = super(GenericListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
         context['docstring'] = "{}".format(self.model.__doc__)
-        if self.model.__name__.endswith('s'):
-            context['class_name'] = "{}".format(self.model.__name__)
-        else:
-            context['class_name'] = "{}s".format(self.model.__name__)
+        context['class_name'] = "{}".format(self.model.__name__)
         try:
             context['get_arche_dump'] = self.model.get_arche_dump()
         except AttributeError:

@@ -293,6 +293,9 @@ class Person(IdProvider):
         only after data-check was completed."
     )
 
+    class Meta:
+        verbose_name = "Researcher"
+
     @classmethod
     def get_createview_url(self):
         return reverse('entities:person_create')

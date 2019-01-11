@@ -482,7 +482,7 @@
             onEachFeature: onEachFeatureClosure('site')
         });
         SiteLayer.addTo(map);
-        map.layerscontrol.addOverlay(SiteLayer, '{{ x }}');
+        map.layerscontrol.addOverlay(SiteLayer, 'Site');
         map.fitBounds(SiteLayer.getBounds());
 
 
