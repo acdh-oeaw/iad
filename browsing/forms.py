@@ -183,12 +183,18 @@ class SiteFilterFormHelper(FormHelper):
                     'has_archent__type_certainty',
                     'has_archent__dating_certainty',
                     'has_archent__location_certainty',
+                    css_id="arch_entity_options"
+                    ),
+                ),
+            Accordion(
+                AccordionGroup(
+                    'Periods',
                     'has_archent__period',
                     'has_archent__period__start_date',
-                    'has_archent__period__start_date_latest',
-                    'has_archent__period__end_date',
+                    # 'has_archent__period__start_date_latest',
+                    # 'has_archent__period__end_date',
                     'has_archent__period__end_date_latest',
-                    css_id="arch_entity_options"
+                    css_id="period_options"
                     ),
                 ),
             Accordion(
