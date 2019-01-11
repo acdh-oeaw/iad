@@ -191,8 +191,8 @@ class SiteFilterFormHelper(FormHelper):
                     'Periods',
                     'has_archent__period',
                     'has_archent__period__start_date',
-                    # 'has_archent__period__start_date_latest',
-                    # 'has_archent__period__end_date',
+                    'has_archent__period__start_date_latest',
+                    'has_archent__period__end_date',
                     'has_archent__period__end_date_latest',
                     css_id="period_options"
                     ),
