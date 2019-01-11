@@ -437,7 +437,7 @@ class SiteListFilter(django_filters.FilterSet):
     #     label="Latest date (BC)"
     # )
     has_archent__period__start_date = django_filters.RangeFilter(
-        help_text=Period._meta.get_field('start_date').help_text,
+        help_text="Important, currently you have to proivde two values",
         label=Period._meta.get_field('start_date').verbose_name
         )
     # has_archent__period__start_date_latest = django_filters.RangeFilter(
@@ -451,7 +451,7 @@ class SiteListFilter(django_filters.FilterSet):
     #     label=Period._meta.get_field('end_date').verbose_name
     #     )
     has_archent__period__end_date_latest = django_filters.RangeFilter(
-        help_text=Period._meta.get_field('end_date_latest').help_text,
+        help_text="Important, currently you have to proivde two values",
         label=Period._meta.get_field('end_date_latest').verbose_name
         )
     # #################### Monument Protection Fields ####################
