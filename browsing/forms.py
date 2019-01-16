@@ -190,8 +190,8 @@ class SiteFilterFormHelper(FormHelper):
                 AccordionGroup(
                     'Periods',
                     'has_archent__period',
-                    'has_archent__period__start_date',
-                    'has_archent__period__end_date_latest',
+                    'site_start_date',
+                    'site_end_date',
                     css_id="period_options"
                     ),
                 ),

@@ -9,6 +9,7 @@ from django.contrib.gis.db.models import Union
 from django.contrib.gis.db.models.functions import Centroid
 from django.contrib.gis import geos
 from django.core.serializers import serialize
+from django.db.models import Max, Min
 
 from idprovider.models import IdProvider
 from entities.models import Place, Person, Institution
@@ -463,6 +464,16 @@ class Site(IadBaseClass):
         help_text="Who and when checked the entered data (The 'when' is stored automatically).",
         on_delete=models.SET_NULL
     )
+    site_start_date = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Earliest related Archaeological Entity",
+        help_text="Calculated automatically"
+    )
+    site_end_date = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Latest related Archaeological Entity",
+        help_text="Calculated automatically"
+    )
 
     class Meta:
         ordering = ['pk']
@@ -547,6 +558,18 @@ class Site(IadBaseClass):
         return reverse(
             'archiv:site_detail', kwargs={'pk': self.id}
         )
+
+    def get_from_to(self):
+        archents = ArchEnt.objects.filter(site_id__in=[self])
+        periods = Period.objects.filter(has_archents__in=archents)
+        from_to = periods.aggregate(Max('start_date'), Min('end_date_latest'))
+        return from_to
+
+    def save(self, *args, **kwargs):
+        from_to = self.get_from_to()
+        self.site_start_date = from_to['start_date__max']
+        self.site_end_date = from_to['end_date_latest__min']
+        super().save(*args, **kwargs)
 
     def __str__(self):
         if self.name:
@@ -840,7 +863,8 @@ class ArchEnt(IadBaseClass):
     )
     period = models.ManyToManyField(
         Period, blank=True, verbose_name="Dating",
-        help_text="Dating of the archaeological entity."
+        help_text="Dating of the archaeological entity.",
+        related_name="has_archents"
     )
 
     def get_site_geojson(self):
@@ -865,6 +889,14 @@ class ArchEnt(IadBaseClass):
             fields=('name', 'identifier', 'pk')
         )
         return geojson
+
+    def save(self, *args, **kwargs):
+        rel_site = self.site_id
+        try:
+            rel_site.save()
+        except AttributeError:
+            print(self.id)
+        super().save(*args, **kwargs)
 
     @classmethod
     def get_listview_url(self):

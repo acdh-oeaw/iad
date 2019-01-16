@@ -426,34 +426,16 @@ class SiteListFilter(django_filters.FilterSet):
             url="/archiv-ac/period-autocomplete",
             )
         )
-    # has_archent__period__start_date = django_filters.NumberFilter(
-    #     lookup_expr="lte",
-    #     help_text="Year not before",
-    #     label="Earliest date (BC)"
-    # )
-    # has_archent__period__end_date_latest = django_filters.NumberFilter(
-    #     lookup_expr="gte",
-    #     help_text="Year not after",
-    #     label="Latest date (BC)"
-    # )
-    has_archent__period__start_date = django_filters.RangeFilter(
-        help_text="Important, currently you have to proivde two values",
-        label=Period._meta.get_field('start_date').verbose_name
-        )
-    # has_archent__period__start_date_latest = django_filters.RangeFilter(
-    #     lookup_expr='lte',
-    #     help_text=Period._meta.get_field('start_date_latest').help_text,
-    #     label=Period._meta.get_field('start_date_latest').verbose_name
-    #     )
-    # has_archent__period__end_date = django_filters.RangeFilter(
-    #     lookup_expr='gte',
-    #     help_text=Period._meta.get_field('end_date').help_text,
-    #     label=Period._meta.get_field('end_date').verbose_name
-    #     )
-    has_archent__period__end_date_latest = django_filters.RangeFilter(
-        help_text="Important, currently you have to proivde two values",
-        label=Period._meta.get_field('end_date_latest').verbose_name
-        )
+    site_start_date = django_filters.NumberFilter(
+        lookup_expr="lte",
+        help_text="Year not before",
+        label="Earliest date (BC)"
+    )
+    site_end_date = django_filters.NumberFilter(
+        lookup_expr="gte",
+        help_text="Year not after",
+        label="Latest date (BC)"
+    )
     # #################### Monument Protection Fields ####################
     has_monument_protection__current_land_use = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
@@ -576,6 +558,16 @@ class PeriodListFilter(django_filters.FilterSet):
         help_text=Period._meta.get_field('name').help_text,
         label=Period._meta.get_field('name').verbose_name
         )
+    start_date = django_filters.NumberFilter(
+        lookup_expr="lte",
+        help_text="Year not before",
+        label="Earliest date (BC)"
+    )
+    end_date_latest = django_filters.NumberFilter(
+        lookup_expr="gte",
+        help_text="Year not after",
+        label="Latest date (BC)"
+    )
 
     class Meta:
         model = Period
