@@ -8,6 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 import rdflib
 from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef, RDFS, ConjunctiveGraph
 from django_tables2 import SingleTableView, RequestConfig
+from django_tables2.export.views import ExportMixin
 
 from shapely import wkt
 
@@ -30,7 +31,7 @@ from charts.models import ChartConfig
 from charts.views import create_payload
 
 
-class GenericListView(SingleTableView):
+class GenericListView(ExportMixin, SingleTableView):
     filter_class = None
     formhelper_class = None
     context_filter_name = 'filter'
@@ -429,7 +430,7 @@ class SiteDl(SiteListView):
             try:
                 df = pd.DataFrame(
                     list(
-                        self.model.objects.all().values_list(*[x[0] for x in conf_items])
+                        self.get_queryset().distinct().values_list(*[x[0] for x in conf_items])
                     ),
                     columns=[x[1] for x in conf_items]
                 )

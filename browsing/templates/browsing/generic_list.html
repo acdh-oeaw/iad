@@ -146,6 +146,7 @@
                                                 <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=comma">"," separated</a></li>
                                                 <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=semicolon">";" separated</a></li>
                                                 <li><a class="dropdown-item" href="{{ download }}{% querystring %}&sep=tab">"tab" separated</a></li>
+                                                <li><a class="dropdown-item" href="{% export_url 'csv' %}">Table Content as csv</a></li>
                                             </ul>
                                         </div>
                                         {% endif %}
