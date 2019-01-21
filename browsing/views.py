@@ -134,9 +134,20 @@ class GenericListView(ExportMixin, SingleTableView):
         if context['shapes']:
             if self.request.GET.get(
                 'dl-geojson', None
-            ) and self.get_queryset().exclude(polygon=None):
+            ) and self.get_queryset().exclude(polygon=None) and context['entity']:
+                conf_items = list(
+                    BrowsConf.objects.filter(
+                        model_name=context['entity']
+                    ).values_list('field_path', 'label')
+                )
+                conf_items.append(('polygon', 'polygon'))
                 qs = self.get_queryset().exclude(polygon=None)
-                df = pd.DataFrame(list(qs.values()))
+                df = pd.DataFrame(
+                    list(
+                        qs.distinct().values_list(*[x[0] for x in conf_items])
+                    ),
+                    columns=[x[1] for x in conf_items]
+                )
                 df['geometry'] = df.apply(
                     lambda row: wkt.loads(row['polygon'].wkt), axis=1
                 )
@@ -155,10 +166,6 @@ class GenericListView(ExportMixin, SingleTableView):
         else:
             response = super(GenericListView, self).render_to_response(context)
             return response
-
-    # @method_decorator(login_required)
-    # def dispatch(self, *args, **kwargs):
-    #     return super(GenericListView, self).dispatch(*args, **kwargs)
 
 
 class ReferenceListView(GenericListView):
