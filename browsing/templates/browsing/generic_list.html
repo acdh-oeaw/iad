@@ -74,29 +74,42 @@
                             </form>
                             {% block reset_button %}
                             <a class ="btn btn-outline-secondary"  href=".">Reset search</a>
+
                             {% if vis_list %}
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                        Visualize <span class="caret"></span>
-                                    </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    {% for x in vis_list %}
-                                    <li>
-                                        {% for y in x.chart_types.all %}
-                                        <a class="dropdown-item" title="{{ x.help_text }}" href="?{{ request.GET.urlencode }}&charttype={{ y }}&property={{ x.field_path }}">{{ x.label }} {{ y.icon|safe }}</a>
-                                        {% endfor %}
-                                    </li>
-                                    <hr />
-                                    {% endfor %}
-                                </ul>
-                            </div>
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#visualizeModal">
+                              Visualize
+                            </button>
                             {% endif %}
+
+                            <div class="modal fade" id="visualizeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Visualization options</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    {% if vis_list %}
+                                    {% for x in vis_list %}
+                                        {% for y in x.chart_types.all %}
+                                        <li>
+                                        <a title="{{ x.help_text }}" href="?{{ request.GET.urlencode }}&charttype={{ y }}&property={{ x.field_path }}">{{ x.label }} {{ y.icon|safe }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% endif %}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
 
 
                         </div>
                     </div>
                     {% if vis_list %}
-                            {% if data %}
+                        {% if data %}
                             <br>
                             <div class="card">
                                 <div class="card-header {{self_model_name}}-page">
@@ -115,9 +128,9 @@
                                 <h4>{{ error_msg|safe }}</h4>
                                 {% endif %}
                             </div>
-                            {% endif %}
-                            {% endif %}
-                            {% endblock %}
+                        {% endif %}
+                    {% endif %}
+                    {% endblock %}
                 </div>
 
                 <div class="col-md-8" id="results">

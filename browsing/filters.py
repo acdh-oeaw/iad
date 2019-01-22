@@ -48,7 +48,10 @@ class MonumentProtectionListFilter(django_filters.FilterSet):
     site_id = django_filters.ModelMultipleChoiceFilter(
         queryset=Site.objects.all(),
         help_text=MonumentProtection._meta.get_field('site_id').help_text,
-        label=MonumentProtection._meta.get_field('site_id').verbose_name
+        label=MonumentProtection._meta.get_field('site_id').verbose_name,
+        widget=autocomplete.Select2Multiple(
+            url="/archiv-ac/site-autocomplete",
+            )
         )
     current_land_use = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
@@ -101,7 +104,7 @@ class ResearchQuestionListFilter(django_filters.FilterSet):
         fields = '__all__'
 
 
-class ArchEntListFilter(django_filters.rest_framework.FilterSet):
+class ArchEntListFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ArchEnt._meta.get_field('name').help_text,
@@ -139,7 +142,10 @@ class ArchEntListFilter(django_filters.rest_framework.FilterSet):
     site_id = django_filters.ModelMultipleChoiceFilter(
         queryset=Site.objects.all(),
         help_text=ArchEnt._meta.get_field('site_id').help_text,
-        label=ArchEnt._meta.get_field('site_id').verbose_name
+        label=ArchEnt._meta.get_field('site_id').verbose_name,
+        widget=autocomplete.Select2Multiple(
+            url="/archiv-ac/site-autocomplete",
+            )
         )
     settlement_fortification = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(
