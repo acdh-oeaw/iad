@@ -279,7 +279,7 @@ class ResearchEventForm(ArchivBaseForm):
             'public', 'polygon', 'site_id', 'research_type',
             'research_method', 'start_date', 'end_date',
             'identifier', 'responsible_researcher', 'responsible_institution',
-            'research_question', 'comment', 'generation_data_set'
+            'research_question', 'comment', 'generation_data_set', 'polygon_proxy',
         ]
         widgets = {
             'site_id': autocomplete.ModelSelect2Multiple(
@@ -344,6 +344,7 @@ class ResearchEventForm(ArchivBaseForm):
                     'shape_string_epsg',
                     'shape_string',
                     'delete_polygon',
+                    'polygon_proxy',
                     css_class="col-md-9"
                 ),
                 css_class="separate-panel",
