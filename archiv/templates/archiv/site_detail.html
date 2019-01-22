@@ -415,6 +415,9 @@
                 {% endif %}
                     {% if object.has_archent.all %}
                         <legend>related Arch Entities</legend>
+                        {% if user.is_authenticated %}
+                            <small>{{ object.site_start_date }} - {{ object.site_end_date}}</small>
+                        {% endif %}
                         <ul>
                             {% for x in object.has_archent.all %}
                                 <li>
