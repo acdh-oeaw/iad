@@ -432,13 +432,11 @@ class SiteListFilter(django_filters.FilterSet):
             url="/archiv-ac/period-autocomplete",
             )
         )
-    site_start_date = django_filters.NumberFilter(
-        lookup_expr="lte",
+    site_start_date = django_filters.RangeFilter(
         help_text="Year not before",
         label="Earliest date (BC)"
     )
-    site_end_date = django_filters.NumberFilter(
-        lookup_expr="gte",
+    site_end_date = django_filters.RangeFilter(
         help_text="Year not after",
         label="Latest date (BC)"
     )
