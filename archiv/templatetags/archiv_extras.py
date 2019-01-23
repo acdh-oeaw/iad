@@ -71,12 +71,19 @@ def protected_site_count():
 @register.simple_tag
 def site_extent():
     u = Site.objects.filter(polygon__isvalid=True).aggregate(Union('polygon'))['polygon__union']
-    u.transform(ct=3035)
     try:
-        sq_m = "{:,.0f}".format(u.area/1000000)
+        u.transform(ct=3035)
     except Exception as e:
-        sq_m = "{}".format(e)
-    return sq_m
+        print(e)
+        u = None
+    if u:
+        try:
+            sq_m = "{:,.0f}".format(u.area/1000000)
+        except Exception as e:
+            sq_m = "{}".format(e)
+        return sq_m
+    else:
+        return "{} there is currently something going wrong"
 
 
 @register.simple_tag
@@ -86,12 +93,19 @@ def excavation_extent():
         ResearchEvent.objects.filter(polygon__isvalid=True),
         'research_method', excavation
     ).aggregate(Union('polygon'))['polygon__union']
-    u.transform(ct=3035)
     try:
-        sq_m = "{:,.0f}".format(u.area/1000000)
+        u.transform(ct=3035)
     except Exception as e:
-        sq_m = "{}".format(e)
-    return sq_m
+        print(e)
+        u = None
+    if u:
+        try:
+            sq_m = "{:,.0f}".format(u.area/1000000)
+        except Exception as e:
+            sq_m = "{}".format(e)
+        return sq_m
+    else:
+        return "{} there is currently something going wrong"
 
 
 @register.simple_tag
@@ -101,12 +115,19 @@ def geophysical_extent():
         ResearchEvent.objects.filter(polygon__isvalid=True),
         'research_method', excavation
     ).aggregate(Union('polygon'))['polygon__union']
-    u.transform(ct=3035)
     try:
-        sq_m = "{:,.0f}".format(u.area/1000000)
+        u.transform(ct=3035)
     except Exception as e:
-        sq_m = "{}".format(e)
-    return sq_m
+        print(e)
+        u = None
+    if u:
+        try:
+            sq_m = "{:,.0f}".format(u.area/1000000)
+        except Exception as e:
+            sq_m = "{}".format(e)
+        return sq_m
+    else:
+        return "there is currently something going wrong"
 
 
 @register.simple_tag
