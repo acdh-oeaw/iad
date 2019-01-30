@@ -10,6 +10,6 @@ class UserDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data()
         current_user = self.kwargs['pk']
-        versions = Version.objects.filter(revision__user__id=current_user)[:500]
+        versions = Version.objects.filter(revision__user__id=current_user)
         context['versions'] = versions
         return context
