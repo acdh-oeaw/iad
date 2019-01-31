@@ -90,6 +90,7 @@ class ArchEntFilterFormHelper(FormHelper):
             Fieldset(
                 'Basic search options',
                 'name',
+                'alt_name',
                 'ent_type',
                 css_id="basic_search_fields"
                 ),
@@ -126,6 +127,7 @@ class SiteFilterFormHelper(FormHelper):
             Fieldset(
                 'Basic search options',
                 'name',
+                'alt_name',
                 'identifier',
                 css_id="basic_search_fields"
                 ),

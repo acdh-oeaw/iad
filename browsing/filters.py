@@ -83,6 +83,14 @@ class MonumentProtectionListFilter(django_filters.FilterSet):
         method=generous_concept_filter,
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
+    alt_name = django_filters.ModelMultipleChoiceFilter(
+        queryset=AltName.objects.all(),
+        help_text=MonumentProtection._meta.get_field('alt_name').help_text,
+        label=MonumentProtection._meta.get_field('alt_name').verbose_name,
+        widget=autocomplete.Select2Multiple(
+            url="/archiv-ac/altname-autocomplete",
+            )
+        )
 
     class Meta:
         model = MonumentProtection
@@ -197,6 +205,14 @@ class ArchEntListFilter(django_filters.FilterSet):
             url="/archiv-ac/period-autocomplete",
             )
         )
+    alt_name = django_filters.ModelMultipleChoiceFilter(
+        queryset=AltName.objects.all(),
+        help_text=ArchEnt._meta.get_field('alt_name').help_text,
+        label=ArchEnt._meta.get_field('alt_name').verbose_name,
+        widget=autocomplete.Select2Multiple(
+            url="/archiv-ac/altname-autocomplete",
+            )
+        )
 
     class Meta:
         model = ArchEnt
@@ -212,6 +228,14 @@ class SiteListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Site._meta.get_field('name').help_text,
         label=Site._meta.get_field('name').verbose_name
+        )
+    alt_name = django_filters.ModelMultipleChoiceFilter(
+        queryset=AltName.objects.all(),
+        help_text=Site._meta.get_field('alt_name').help_text,
+        label=Site._meta.get_field('alt_name').verbose_name,
+        widget=autocomplete.Select2Multiple(
+            url="/archiv-ac/altname-autocomplete",
+            )
         )
     identifier = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -502,6 +526,14 @@ class ResearchEventListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=ResearchEvent._meta.get_field('name').help_text,
         label=ResearchEvent._meta.get_field('name').verbose_name
+        )
+    alt_name = django_filters.ModelMultipleChoiceFilter(
+        queryset=AltName.objects.all(),
+        help_text=ResearchEvent._meta.get_field('alt_name').help_text,
+        label=ResearchEvent._meta.get_field('alt_name').verbose_name,
+        widget=autocomplete.Select2Multiple(
+            url="/archiv-ac/altname-autocomplete",
+            )
         )
     start_date = django_filters.DateFilter(
         lookup_expr='gte',
