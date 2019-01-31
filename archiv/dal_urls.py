@@ -15,6 +15,11 @@ urlpatterns = [
         name='altname-autocomplete',
     ),
     url(
+        r'^altname-autocomplete-no-create/$', dal_views.AltNameAC.as_view(
+            model=AltName),
+        name='altname-autocomplete-no-create',
+    ),
+    url(
         r'^period-autocomplete/$', dal_views.PeriodAC.as_view(model=Period),
         name='period-autocomplete',
     ),

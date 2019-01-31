@@ -88,7 +88,7 @@ class MonumentProtectionListFilter(django_filters.FilterSet):
         help_text=MonumentProtection._meta.get_field('alt_name').help_text,
         label=MonumentProtection._meta.get_field('alt_name').verbose_name,
         widget=autocomplete.Select2Multiple(
-            url="/archiv-ac/altname-autocomplete",
+            url="/archiv-ac/altname-autocomplete-no-create",
             )
         )
 
@@ -210,7 +210,7 @@ class ArchEntListFilter(django_filters.FilterSet):
         help_text=ArchEnt._meta.get_field('alt_name').help_text,
         label=ArchEnt._meta.get_field('alt_name').verbose_name,
         widget=autocomplete.Select2Multiple(
-            url="/archiv-ac/altname-autocomplete",
+            url="/archiv-ac/altname-autocomplete-no-create",
             )
         )
 
@@ -234,7 +234,7 @@ class SiteListFilter(django_filters.FilterSet):
         help_text=Site._meta.get_field('alt_name').help_text,
         label=Site._meta.get_field('alt_name').verbose_name,
         widget=autocomplete.Select2Multiple(
-            url="/archiv-ac/altname-autocomplete",
+            url="/archiv-ac/altname-autocomplete-no-create",
             )
         )
     identifier = django_filters.CharFilter(
@@ -532,7 +532,7 @@ class ResearchEventListFilter(django_filters.FilterSet):
         help_text=ResearchEvent._meta.get_field('alt_name').help_text,
         label=ResearchEvent._meta.get_field('alt_name').verbose_name,
         widget=autocomplete.Select2Multiple(
-            url="/archiv-ac/altname-autocomplete",
+            url="/archiv-ac/altname-autocomplete-no-create",
             )
         )
     start_date = django_filters.DateFilter(
