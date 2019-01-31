@@ -6,10 +6,13 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Union
+from django.contrib.postgres.fields import IntegerRangeField
 from django.contrib.gis.db.models.functions import Centroid
 from django.contrib.gis import geos
 from django.core.serializers import serialize
 from django.db.models import Max, Min
+
+from psycopg2.extras import NumericRange
 
 from idprovider.models import IdProvider
 from entities.models import Place, Person, Institution
@@ -474,6 +477,7 @@ class Site(IadBaseClass):
         verbose_name="Latest related Archaeological Entity",
         help_text="Calculated automatically"
     )
+    temp_extent = IntegerRangeField(blank=True, null=True)
 
     class Meta:
         ordering = ['pk']
@@ -569,6 +573,16 @@ class Site(IadBaseClass):
         from_to = self.get_from_to()
         self.site_start_date = from_to['start_date__max']
         self.site_end_date = from_to['end_date_latest__min']
+        if self.site_start_date:
+            neg_start = 0 - self.site_start_date
+        else:
+            neg_start = None
+        if self.site_end_date:
+            neg_end = 0 - self.site_end_date
+        else:
+            neg_end = None
+        print("{} - {}".format(neg_start, neg_end))
+        self.temp_extent = NumericRange(lower=neg_start, upper=neg_end)
         super().save(*args, **kwargs)
 
     def __str__(self):

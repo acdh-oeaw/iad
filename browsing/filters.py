@@ -497,6 +497,19 @@ class SiteListFilter(django_filters.FilterSet):
         method=generous_concept_filter,
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'chbx-select-multi'})
         )
+    temp_extent = django_filters.NumericRangeFilter(
+        lookup_expr="contains",
+        label="Site falls temporally within",
+        help_text="E.g. show me all Sites which are related to periods between -1200 and -600;\
+        type -1200 and -600"
+    )
+    temp_extent_intersects = django_filters.NumericRangeFilter(
+        field_name="temp_extent",
+        lookup_expr="overlap",
+        label="Site intersects temporally with",
+        help_text="E.g. search for -1200 and -1000 returns all\
+        Sites wich Periods interscts this range"
+    )
 
     class Meta:
         model = Site

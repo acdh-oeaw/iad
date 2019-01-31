@@ -192,8 +192,8 @@ class SiteFilterFormHelper(FormHelper):
                 AccordionGroup(
                     'Periods',
                     'has_archent__period',
-                    'site_start_date',
-                    'site_end_date',
+                    'temp_extent',
+                    'temp_extent_intersects',
                     css_id="period_options"
                     ),
                 ),
