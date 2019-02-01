@@ -401,18 +401,6 @@ class PeriodForm(ArchivBaseForm):
 
 
 class SiteForm(ArchivBaseForm):
-    try:
-        OPTIONS = [(x.id, x) for x in ResearchEvent.objects.all()]
-    except Exception as e:
-        print(e)
-        OPTIONS = [('Populate database first'), ('populate database first')]
-
-    research_activities = forms.MultipleChoiceField(
-        choices=OPTIONS, required=False, widget=autocomplete.Select2Multiple(
-            url='archiv-ac:researchevent-autocomplete'),
-        label="Research Activity",
-        help_text="How was the site discovered? Choose the corresponding research event."
-    )
 
     class Meta:
         model = Site
@@ -443,12 +431,6 @@ class SiteForm(ArchivBaseForm):
     def __init__(self, *args, **kwargs):
         super(SiteForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        try:
-            instance = kwargs['instance']
-            init_data = [x.id for x in ResearchEvent.objects.filter(site_id__in=[instance.id])]
-            self.fields['research_activities'].initial = init_data
-        except AttributeError:
-            pass
         self.fields['name'].required = True
         self.fields['public'].required = False
         self.fields['polygon_proxy'].required = False
@@ -522,17 +504,6 @@ class SiteForm(ArchivBaseForm):
                 css_class="separate-panel",
             ),
         )
-
-    def save(self, commit=True):
-        instance = forms.ModelForm.save(self, True)
-        try:
-            res_acts = [int(x) for x in self.cleaned_data['research_activities']]
-        except Exception as e:
-            res_acts = None
-        if res_acts:
-            res_obj = [x for x in ResearchEvent.objects.filter(pk__in=res_acts)]
-            instance.has_research_activity.set(res_obj)
-        return super(SiteForm, self).save(commit=commit)
 
 
 class AltNameForm(forms.ModelForm):
