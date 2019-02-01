@@ -5,8 +5,7 @@ app_name = 'checks'
 
 urlpatterns = [
     path('poly-exists/<str:model_name>', views.PolygonExists.as_view(), name='poly_exists'),
+    path('generic-check/<str:model_name>', views.GenericCheck.as_view(), name='generic_check'),
     path('poly-fits/archents', views.PolyFitsArchEnts.as_view(), name='poly_fits_archents'),
     path('poly-invalid', views.InValidPoly.as_view(), name='invalid_poly'),
-    path('poly-invalid', views.InValidPoly.as_view(), name='invalid_poly'),
-    path('research-event-check', views.ResearchEventCheck.as_view(), name='research_event_check'),
 ]

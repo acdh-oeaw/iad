@@ -131,8 +131,14 @@
                                 ArchEnts fit Site Polygon?
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'checks:research_event_check' %}">
-                                Research Event Check
+                            <a class="dropdown-item" href="{% url 'checks:generic_check' model_name='archent' %}">
+                                Check for Archaelogical Entity?
+                            </a>
+                            <a class="dropdown-item" href="{% url 'checks:generic_check' model_name='researchevent' %}">
+                                Check for Research Activity?
+                            </a>
+                            <a class="dropdown-item" href="{% url 'checks:generic_check' model_name='monumentprotection' %}">
+                                Check for Monument Protection?
                             </a>
                         </div>
                     </li>

@@ -7,7 +7,7 @@
 
 {% block content %}
     <div class="container-fluid">
-        <h1>Research Event</h1>
+        <h1>{{ entity|title }}</h1>
         <div class="row">
             <div class="col-md-4">
                 <h2>{{ no_site|length }} out of {{ all }} without related site(s)</h2>
@@ -40,12 +40,6 @@
                 </ul>
             </div>
         </div>
-        <h1 id="archents">{{ archent_no_site_count}} ArchEnts with no related site</h1>
-        {% for x in archent_no_site %}
-            <li>
-                <a href="{{ x.get_absolute_url }}">{{ x }}</a>
-            </li>
-        {% endfor %}
     </div>
 
 {% endblock content %}
