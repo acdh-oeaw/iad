@@ -9,7 +9,7 @@ PROJECT_METADATA = {
     'github': 'https://github.com/acdh-oeaw/iad',
     'purpose_de': 'Ziel von IRON-AGE-DANUBE ist die Publikation von Forschungsdaten.',
     'purpose_en': 'The purpose of IRON-AGE-DANUBE is the publication of research data.',
-    'version': '0.1.0',
+    'version': '0.2.0',
     'matomo_id': '81',
     'matomo_url': '//matomo.acdh.oeaw.ac.at/',
     'imprint': '/imprint',
