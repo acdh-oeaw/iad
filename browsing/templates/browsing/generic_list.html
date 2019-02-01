@@ -375,4 +375,9 @@ function map_init_basic(map, options) {
 }
 </script>
 {% endif %}
+{% if self_model_name == 'site' %}
+    <script type="text/javascript">
+        console.log('HALLO')
+    </script>
+{% endif %}
 {% endblock scripts2 %}
