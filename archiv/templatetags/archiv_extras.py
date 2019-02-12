@@ -44,13 +44,14 @@ def archiv_custom_js(context):
 @register.simple_tag
 def sites_by_country():
     sites = Site.objects.all()
-    result = dict(
-        Counter(
-            [x['cadastral_community__ctcod'] for x in list(
-                sites.values('cadastral_community__ctcod')
-            )]
-        )
-    )
+    values = sites.distinct().values('cadastral_community__ctcod')
+    result = dict(Counter(
+        [x['cadastral_community__ctcod'] for x in list(values)]
+    ))
+    try:
+        result['None'] = result.pop(None)
+    except KeyError:
+        pass
     return result
 
 
