@@ -1,4 +1,4 @@
-acdh-django-charts==0.5.2
+acdh-django-charts==0.5.3
 backcall==0.1.0
 bibtexparser==1.0.1
 bleach==3.0.2

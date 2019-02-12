@@ -76,6 +76,16 @@ class SiteTable(tables.Table):
         args=[A('pk')], verbose_name='Name'
     )
     cadastral_community = tables.ManyToManyColumn()
+    other_period = tables.ManyToManyColumn()
+    country = tables.TemplateColumn(
+        "{% for x in record.cadastral_community.all %}{{ x.ctcod }}|{% endfor %}",
+        orderable=False
+    )
+    arch_ent_type = tables.TemplateColumn(
+        "{% for x in record.has_archent.all %}{{ x.ent_type }}|{% endfor %}",
+        orderable=False
+    )
+    # cadastral_community__ctcod = tables.ManyToManyColumn()
     public = tables.Column()
 
     class Meta:
