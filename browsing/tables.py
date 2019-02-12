@@ -85,7 +85,6 @@ class SiteTable(tables.Table):
         "{% for x in record.has_archent.all %}{{ x.ent_type }}|{% endfor %}",
         orderable=False
     )
-    # cadastral_community__ctcod = tables.ManyToManyColumn()
     public = tables.Column()
 
     class Meta:
