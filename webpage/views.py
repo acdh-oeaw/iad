@@ -26,8 +26,19 @@ if 'reversion' in settings.INSTALLED_APPS:
         def get_context_data(self, **kwargs):
             context = super(UserDetailView, self).get_context_data()
             current_user = self.kwargs['pk']
-            versions = Version.objects.filter(revision__user__id=current_user)[:500]
-            context['versions'] = versions
+            versions = Version.objects.filter(revision__user__id=current_user)
+            versions = list(set([x.object for x in versions]))
+            rows = []
+            for x in versions:
+                row = []
+                row.append(x)
+                try:
+                    row.append(x._meta.verbose_name)
+                except AttributeError:
+                    row.append('no type')
+                rows.append(row)
+            context['versions'] = rows
+            context['amount'] = len(rows)
             return context
 
         @method_decorator(login_required)
