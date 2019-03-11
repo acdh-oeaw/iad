@@ -362,37 +362,6 @@
                         </tr>
                     {% endif %}
                 </table>
-                {% if user.is_authenticated %}
-                    <legend>Quality Control</legend>
-                    <table class="table table-bordered table-hover">
-                        <tr>
-                            <th class="w-25">
-                                {% get_verbose_name site "site_checked_by" %}
-                            </th>
-                            <td>
-                                {% if object.site_checked_by %}
-                                    {{ object.site_checked_by }}
-                                {% else %}
-                                    not checked yet
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="w-25">
-                                Curation history
-                            </th>
-                            <td>
-                                {% if history %}
-                                    {% for x in history %}
-                                        <li>
-                                            {{ x.revision.date_created }} changed by {{ x.revision.user }}
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
-                            </td>
-                        </tr>
-                    </table>
-                {% endif %}
             </div>
             <div class="col-md-12">
                 {% if object.has_research_activity.all %}
@@ -436,16 +405,6 @@
                             {% endfor %}
                         </ul>
                     {% endif %}
-                    {% if object.other_period.all %}
-                        <legend>related other Periods</legend>
-                            <ul>
-                                {% for x in object.other_period.all %}
-                                    <li>
-                                        <a href="{{ x.get_absolute_url }}">{{ x }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                    {% endif %}
                     {% if object.has_monument_protection.all %}
                         <legend>related Monument Protection</legend>
                             <ul>
@@ -455,6 +414,38 @@
                                     </li>
                                 {% endfor %}
                             </ul>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                        <legend>Quality Control</legend>
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <th class="w-25">
+                                    {% get_verbose_name site "site_checked_by" %}
+                                </th>
+                                <td>
+                                    {% if object.site_checked_by %}
+                                        {{ object.site_checked_by }}
+                                    {% else %}
+                                        not checked yet
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="w-25">
+                                    Curation history
+                                </th>
+                                <td>
+                                    {% if history %}
+                                        {% for x in history %}
+                                            <li>
+                                                {{ x.revision.date_created }} changed by {{ x.revision.user }}
+                                            </li>
+                                        {% endfor %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
                     {% endif %}
 
             </div>
