@@ -81,9 +81,51 @@ class SiteTable(tables.Table):
         "{% for x in record.cadastral_community.all %}{{ x.ctcod }}|{% endfor %}",
         orderable=False
     )
+    # ArchEnt-Cols
     arch_ent_type = tables.TemplateColumn(
         "{% for x in record.has_archent.all %}{{ x.ent_type }}|{% endfor %}",
         orderable=False
+    )
+    # ResearchEvent-Cols
+    ra = tables.TemplateColumn(
+        "{% for x in record.has_research_activity.all %}{{ x }}|{% endfor %}",
+        orderable=False, verbose_name="Research Activity"
+    )
+    ra_start = tables.TemplateColumn(
+        "{% for x in record.has_research_activity.all %}{{ x.start_date }}|{% endfor %}",
+        orderable=False, verbose_name="Research Activity start date"
+    )
+    ra_end = tables.TemplateColumn(
+        "{% for x in record.has_research_activity.all %}{{ x.end_date }}|{% endfor %}",
+        orderable=False, verbose_name="Research Activity end date"
+    )
+    ra_id = tables.TemplateColumn(
+        "{% for x in record.has_research_activity.all %}{{ x.id }}|{% endfor %}",
+        orderable=False, verbose_name="Research Activity Identifier"
+    )
+    ra_responsible_researcher = tables.TemplateColumn(
+        "{% for x in record.has_research_activity.all %}{% for y in x.responsible_researcher.all %}{{ y }} # {% endfor %}|{% endfor %}",
+        orderable=False, verbose_name="Research Activity Researcher(s)"
+    )
+    ra_responsible_institution = tables.TemplateColumn(
+        "{% for x in record.has_research_activity.all %}{% for y in x.responsible_institution.all %}{{ y }} # {% endfor %}|{% endfor %}",
+        orderable=False, verbose_name="Research Activity Institution(s)"
+    )
+    ra_type = tables.TemplateColumn(
+        "{% for x in record.has_research_activity.all %}{{ x.research_type }}|{% endfor %}",
+        orderable=False, verbose_name="Research Activity Type"
+    )
+    ra_research_method = tables.TemplateColumn(
+        "{% for x in record.has_research_activity.all %}{% for y in x.research_method.all %}{{ y }} # {% endfor %}|{% endfor %}",
+        orderable=False, verbose_name="Research Activity Method(s)"
+    )
+    ra_research_question = tables.TemplateColumn(
+        "{% for x in record.has_research_activity.all %}{{ x.research_question }}|{% endfor %}",
+        orderable=False, verbose_name="Research Activity Question"
+    )
+    ra_generation_data_set = tables.TemplateColumn(
+        "{% for x in record.has_research_activity.all %}{{ x.generation_data_set }}|{% endfor %}",
+        orderable=False, verbose_name="When was the data-set generated?"
     )
     public = tables.Column()
 
