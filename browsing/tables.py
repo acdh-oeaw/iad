@@ -167,6 +167,27 @@ class SiteTable(tables.Table):
         "{% for x in record.has_research_activity.all %}{{ x.generation_data_set }}|{% endfor %}",
         orderable=False, verbose_name="When was the data-set generated?"
     )
+    # MonumentProtection-Cols
+    monument_protection = tables.TemplateColumn(
+        "{% for x in record.has_monument_protection.all %} {{ x }}|{% endfor %}",
+        orderable=False, verbose_name="Monument Protection"
+    )
+    mp_current_land_use = tables.TemplateColumn(
+        "{% for x in record.has_monument_protection.all %}{% for y in x.current_land_use.all %}{{ y }} # {% endfor %}|{% endfor %}",
+        orderable=False, verbose_name="Current Land Use"
+    )
+    mp_cultural_heritage_status = tables.TemplateColumn(
+        "{% for x in record.has_monument_protection.all %} {{ x.heritage_status }}|{% endfor %}",
+        orderable=False, verbose_name="Cultural Heritage Status"
+    )
+    mp_natural_heritage_status = tables.TemplateColumn(
+        "{% for x in record.has_monument_protection.all %} {{ x.natural_heritage_status }}|{% endfor %}",
+        orderable=False, verbose_name="Natural Heritage Status"
+    )
+    mp_threats = tables.TemplateColumn(
+        "{% for x in record.has_monument_protection.all %}{% for y in x.threats.all %}{{ y }} # {% endfor %}|{% endfor %}",
+        orderable=False, verbose_name="Threats"
+    )
     public = tables.Column()
 
     class Meta:
