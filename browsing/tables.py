@@ -82,12 +82,52 @@ class SiteTable(tables.Table):
         orderable=False
     )
     # ArchEnt-Cols
-    arch_ent_type = tables.TemplateColumn(
+    archaeological_entity = tables.TemplateColumn(
+        "{% for x in record.has_archent.all %}{{ x }}|{% endfor %}",
+        orderable=False, verbose_name="Archaeological Entity"
+    )
+    ae_type = tables.TemplateColumn(
         "{% for x in record.has_archent.all %}{{ x.ent_type }}|{% endfor %}",
-        orderable=False
+        orderable=False, verbose_name="Entity Type"
+    )
+    ae_burial_type = tables.TemplateColumn(
+        "{% for x in record.has_archent.all %}{{ x.burial_type }}|{% endfor %}",
+        orderable=False, verbose_name="Burial Type"
+    )
+    ae_burial_construction = tables.TemplateColumn(
+        "{% for x in record.has_archent.all %}{% for y in x.burial_construction.all %} {{ y }} # {% endfor %}|{% endfor %}",
+        orderable=False, verbose_name="Burial Construction"
+    )
+    ae_settlement_fortification = tables.TemplateColumn(
+        "{% for x in record.has_archent.all %}{% for y in x.settlement_fortification.all %} {{ y }} # {% endfor %}|{% endfor %}",
+        orderable=False, verbose_name="Settlement Fortification"
+    )
+    ae_settlement_occupation = tables.TemplateColumn(
+        "{% for x in record.has_archent.all %}{% for y in x.settlement_occupation.all %} {{ y }} # {% endfor %}|{% endfor %}",
+        orderable=False, verbose_name="Settlement Occupation"
+    )
+    ae_type_certainty = tables.TemplateColumn(
+        "{% for x in record.has_archent.all %}{{ x.type_certainty }}|{% endfor %}",
+        orderable=False, verbose_name="Topography"
+    )
+    ae_topography = tables.TemplateColumn(
+        "{% for x in record.has_archent.all %}{{ x.type_certainty }}|{% endfor %}",
+        orderable=False, verbose_name="Entity Type Certainty"
+    )
+    ae_dating_certainty = tables.TemplateColumn(
+        "{% for x in record.has_archent.all %}{{ x.dating_certainty }}|{% endfor %}",
+        orderable=False, verbose_name="Entity Dating Certainty"
+    )
+    ae_location_certainty = tables.TemplateColumn(
+        "{% for x in record.has_archent.all %}{{ x.location_certainty }}|{% endfor %}",
+        orderable=False, verbose_name="Entity Location Certainty"
+    )
+    ae_period = tables.TemplateColumn(
+        "{% for x in record.has_archent.all %}{% for y in x.period.all %} {{ y }} # {% endfor %}|{% endfor %}",
+        orderable=False, verbose_name="Entity Dating"
     )
     # ResearchEvent-Cols
-    ra = tables.TemplateColumn(
+    research_activity = tables.TemplateColumn(
         "{% for x in record.has_research_activity.all %}{{ x }}|{% endfor %}",
         orderable=False, verbose_name="Research Activity"
     )
