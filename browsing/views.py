@@ -31,6 +31,54 @@ from charts.models import ChartConfig
 from charts.views import create_payload
 
 
+def flatten_df(df):
+    grouped = df.groupby('internal id')
+    for group in grouped:
+        new = group[1]
+        yield [new[x].unique().tolist() for x in new.keys()]
+
+
+def serialize_as_geojson(self, model_name):
+    conf_items = list(
+        BrowsConf.objects.filter(
+            model_name=model_name
+        ).values_list('field_path', 'label')
+    )
+    conf_items.append(('polygon', 'polygon'))
+    sites_qs = self.get_queryset().distinct().exclude(polygon=None)
+    if model_name == 'site':
+        qs = sites_qs
+    elif model_name == 'archent':
+        qs = ArchEnt.objects.filter(
+            site_id__in=[x.id for x in sites_qs]
+        ).exclude(polygon=None)
+    elif model_name == 'monumentprotection':
+        qs = MonumentProtection.objects.filter(
+            site_id__in=[x.id for x in sites_qs]
+        ).exclude(polygon=None)
+    else:
+        qs = ResearchEvent.objects.filter(
+            site_id__in=[x.id for x in sites_qs]
+        ).exclude(polygon=None)
+    df = pd.DataFrame(
+        list(
+            qs.distinct().values_list(*[x[0] for x in conf_items])
+        ),
+        columns=[x[1] for x in conf_items]
+    )
+    df_gen = flatten_df(df)
+    newish = pd.DataFrame(df_gen, columns=[x[1] for x in conf_items])
+    newish['geometry'] = newish.apply(
+            lambda row: wkt.loads(row['polygon'][0].wkt), axis=1
+        )
+    str_df = newish.astype('str').drop(['polygon'], axis=1)
+    gdf = gp.GeoDataFrame(str_df)
+    gdf['geometry'] = gdf.apply(
+        lambda row: wkt.loads(row['geometry']), axis=1
+    )
+    return gdf
+
+
 class GenericListView(ExportMixin, SingleTableView):
     filter_class = None
     formhelper_class = None
@@ -113,6 +161,10 @@ class GenericListView(ExportMixin, SingleTableView):
         context['vis_list'] = filtered_objs
         context['property_name'] = self.request.GET.get('property')
         context['charttype'] = self.request.GET.get('charttype')
+        if context['self_model_name'] == "site":
+            context['enablereldl'] = True
+        else:
+            context['enablereldl'] = False
         if context['charttype'] and context['property_name']:
             qs = self.get_queryset()
             chartdata = create_payload(
@@ -135,28 +187,31 @@ class GenericListView(ExportMixin, SingleTableView):
             if self.request.GET.get(
                 'dl-geojson', None
             ) and self.get_queryset().exclude(polygon=None) and context['entity']:
-                conf_items = list(
-                    BrowsConf.objects.filter(
-                        model_name=context['entity']
-                    ).values_list('field_path', 'label')
-                )
-                conf_items.append(('polygon', 'polygon'))
-                qs = self.get_queryset().exclude(polygon=None)
-                df = pd.DataFrame(
-                    list(
-                        qs.distinct().values_list(*[x[0] for x in conf_items])
-                    ),
-                    columns=[x[1] for x in conf_items]
-                )
-                df['geometry'] = df.apply(
-                    lambda row: wkt.loads(row['polygon'].wkt), axis=1
-                )
-                print('#######################')
-                str_df = df.astype('str').drop(['polygon'], axis=1)
-                gdf = gp.GeoDataFrame(str_df)
-                gdf['geometry'] = gdf.apply(
-                    lambda row: wkt.loads(row['geometry']), axis=1
-                )
+                model_to_download = self.request.GET.get('dl-geojson', None).split('--')[1]
+                gdf = serialize_as_geojson(self, model_name=model_to_download)
+                # conf_items = list(
+                #     BrowsConf.objects.filter(
+                #         model_name=context['entity']
+                #     ).values_list('field_path', 'label')
+                # )
+                # conf_items.append(('polygon', 'polygon'))
+                # qs = self.get_queryset().exclude(polygon=None)
+                # df = pd.DataFrame(
+                #     list(
+                #         qs.distinct().values_list(*[x[0] for x in conf_items])
+                #     ),
+                #     columns=[x[1] for x in conf_items]
+                # )
+                # df_gen = flatten_df(df)
+                # newish = pd.DataFrame(df_gen, columns=[x[1] for x in conf_items])
+                # newish['geometry'] = newish.apply(
+                #         lambda row: wkt.loads(row['polygon'][0].wkt), axis=1
+                #     )
+                # str_df = newish.astype('str').drop(['polygon'], axis=1)
+                # gdf = gp.GeoDataFrame(str_df)
+                # gdf['geometry'] = gdf.apply(
+                #     lambda row: wkt.loads(row['geometry']), axis=1
+                # )
                 response = HttpResponse(gdf.to_json(), content_type='application/json')
                 response['Content-Disposition'] = 'attachment; filename="out.geojson"'
                 return response
