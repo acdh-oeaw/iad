@@ -160,7 +160,7 @@
                                                         <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--researchevent">GeoJSON (related Research Activities)</a></li>
                                                         <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--monumentprotection">GeoJSON (related MPs)</a></li>
                                                     {% else %}
-                                                        <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--{{ self_model_name }}">GeoJSON (Site)</a></li>
+                                                        <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--{{ self_model_name }}">GeoJSON </a></li>
                                                     {% endif %}
                                                 {% endif %}
                                                 <li><a class="dropdown-item" href="{% export_url 'csv' %}">Table Content as csv</a></li>
