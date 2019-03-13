@@ -189,31 +189,10 @@ class GenericListView(ExportMixin, SingleTableView):
             ) and self.get_queryset().exclude(polygon=None) and context['entity']:
                 model_to_download = self.request.GET.get('dl-geojson', None).split('--')[1]
                 gdf = serialize_as_geojson(self, model_name=model_to_download)
-                # conf_items = list(
-                #     BrowsConf.objects.filter(
-                #         model_name=context['entity']
-                #     ).values_list('field_path', 'label')
-                # )
-                # conf_items.append(('polygon', 'polygon'))
-                # qs = self.get_queryset().exclude(polygon=None)
-                # df = pd.DataFrame(
-                #     list(
-                #         qs.distinct().values_list(*[x[0] for x in conf_items])
-                #     ),
-                #     columns=[x[1] for x in conf_items]
-                # )
-                # df_gen = flatten_df(df)
-                # newish = pd.DataFrame(df_gen, columns=[x[1] for x in conf_items])
-                # newish['geometry'] = newish.apply(
-                #         lambda row: wkt.loads(row['polygon'][0].wkt), axis=1
-                #     )
-                # str_df = newish.astype('str').drop(['polygon'], axis=1)
-                # gdf = gp.GeoDataFrame(str_df)
-                # gdf['geometry'] = gdf.apply(
-                #     lambda row: wkt.loads(row['geometry']), axis=1
-                # )
                 response = HttpResponse(gdf.to_json(), content_type='application/json')
-                response['Content-Disposition'] = 'attachment; filename="out.geojson"'
+                response['Content-Disposition'] = 'attachment; filename="{}.geojson"'.format(
+                    model_to_download
+                )
                 return response
             else:
                 response = super(GenericListView, self).render_to_response(context)
