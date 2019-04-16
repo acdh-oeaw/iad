@@ -34,6 +34,9 @@ class AboutView(TemplateView):
     template_name = 'webpage/about.html'
 
 
+class ThesaurusView(TemplateView):
+    template_name = 'webpage/thesaurus.html'
+
 class ImprintView(TemplateView):
     template_name = 'webpage/imprint.html'
 
@@ -50,6 +53,7 @@ class ImprintView(TemplateView):
             acdh@oeaw.ac.at; if you are service provide, make sure that you provided\
             ACDH_IMPRINT_URL and REDMINE_ID
             """
+        return context
 
 
 if 'reversion' in settings.INSTALLED_APPS:

@@ -125,10 +125,10 @@
         map.layerscontrol.addOverlay(SiteShapeLayer, 'Sites (Shapes)');
         map.fitBounds(SiteShapeLayer.getBounds());
 
-        var SitePointLayer = L.geoJson({{points|safe }}, {
-            onEachFeature: onEachFeatureClosure('site')
-        });
-        map.layerscontrol.addOverlay(SitePointLayer, 'Sites (Points)');
+        // var SitePointLayer = L.geoJson({{points|safe }}, {
+        //     onEachFeature: onEachFeatureClosure('site')
+        // });
+        // map.layerscontrol.addOverlay(SitePointLayer, 'Sites (Points)');
 
         // var ArchentShapeLayer = L.geoJson({{shapes_archent|safe }}, {
         //     onEachFeature: onEachFeatureClosure('archent')
