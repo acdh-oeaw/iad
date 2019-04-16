@@ -130,21 +130,21 @@
         });
         map.layerscontrol.addOverlay(SitePointLayer, 'Sites (Points)');
 
-        var ArchentShapeLayer = L.geoJson({{shapes_archent|safe }}, {
-            onEachFeature: onEachFeatureClosure('archent')
-        }).setStyle(ArchEntStyle);
-        ArchentShapeLayer.addTo(map);
-        map.layerscontrol.addOverlay(ArchentShapeLayer, 'Archents (Shapes)');
-
-        var ResearchEventShapeLayer = L.geoJson({{shapes_researchevent|safe }}, {
-            onEachFeature: onEachFeatureClosure('researchevent')
-        }).setStyle(ResearchEventStyle);
-        map.layerscontrol.addOverlay(ResearchEventShapeLayer, 'Research Activities (Shapes)');
-
-        var MonumentProtectionShapeLayer = L.geoJson({{shapes_monumentprotection|safe }}, {
-            onEachFeature: onEachFeatureClosure('monumentprotection')
-        }).setStyle(MonumentProtectionStyle);
-        map.layerscontrol.addOverlay(MonumentProtectionShapeLayer, 'Monument Protection (Shapes)');
+        // var ArchentShapeLayer = L.geoJson({{shapes_archent|safe }}, {
+        //     onEachFeature: onEachFeatureClosure('archent')
+        // }).setStyle(ArchEntStyle);
+        // ArchentShapeLayer.addTo(map);
+        // map.layerscontrol.addOverlay(ArchentShapeLayer, 'Archents (Shapes)');
+        //
+        // var ResearchEventShapeLayer = L.geoJson({{shapes_researchevent|safe }}, {
+        //     onEachFeature: onEachFeatureClosure('researchevent')
+        // }).setStyle(ResearchEventStyle);
+        // map.layerscontrol.addOverlay(ResearchEventShapeLayer, 'Research Activities (Shapes)');
+        //
+        // var MonumentProtectionShapeLayer = L.geoJson({{shapes_monumentprotection|safe }}, {
+        //     onEachFeature: onEachFeatureClosure('monumentprotection')
+        // }).setStyle(MonumentProtectionStyle);
+        // map.layerscontrol.addOverlay(MonumentProtectionShapeLayer, 'Monument Protection (Shapes)');
 
     }
 </script>

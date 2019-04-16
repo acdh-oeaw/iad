@@ -1,5 +1,7 @@
 from copy import deepcopy
 
+import requests
+
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.conf import settings
@@ -14,6 +16,40 @@ from . forms import form_user_login
 from . metadata import PROJECT_METADATA as PM
 
 from archiv.models import Site, ArchEnt, ResearchEvent, MonumentProtection
+
+
+def get_imprint_url():
+    try:
+        base_url = settings.ACDH_IMPRINT_URL
+    except AttributeError:
+        base_url = "https://provide-an-acdh-imprint-url/"
+    try:
+        redmine_id = settings.REDMINE_ID
+    except AttributeError:
+        redmine_id = "go-register-a-redmine-service-issue"
+    return "{}{}".format(base_url, redmine_id)
+
+
+class AboutView(TemplateView):
+    template_name = 'webpage/about.html'
+
+
+class ImprintView(TemplateView):
+    template_name = 'webpage/imprint.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        imprint_url = get_imprint_url()
+        r = requests.get(get_imprint_url())
+
+        if r.status_code == 200:
+            context['imprint_body'] = "{}".format(r.text)
+        else:
+            context['imprint_body'] = """
+            On of our services is currently not available. Please try it later or write an email to
+            acdh@oeaw.ac.at; if you are service provide, make sure that you provided\
+            ACDH_IMPRINT_URL and REDMINE_ID
+            """
 
 
 if 'reversion' in settings.INSTALLED_APPS:
@@ -53,12 +89,12 @@ class GenericWebpageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(GenericWebpageView, self).get_context_data()
-        context['points'] = Site.get_points()
+        # context['points'] = Site.get_points()
         context['shapes'] = Site.get_shapes()
-        context['shapes_archent'] = ArchEnt.get_shapes()
-        context['shapes_archent'] = ArchEnt.get_shapes()
-        context['shapes_researchevent'] = ResearchEvent.get_shapes()
-        context['shapes_monumentprotection'] = MonumentProtection.get_shapes()
+        # context['shapes_archent'] = ArchEnt.get_shapes()
+        # context['shapes_archent'] = ArchEnt.get_shapes()
+        # context['shapes_researchevent'] = ResearchEvent.get_shapes()
+        # context['shapes_monumentprotection'] = MonumentProtection.get_shapes()
         return context
 
     def get_template_names(self):
