@@ -37,6 +37,7 @@ class AboutView(TemplateView):
 class ThesaurusView(TemplateView):
     template_name = 'webpage/thesaurus.html'
 
+
 class ImprintView(TemplateView):
     template_name = 'webpage/imprint.html'
 

@@ -370,11 +370,6 @@ function map_init_basic(map, options) {
             onEachFeature: onEachFeatureClosure('researchevent')
         }).setStyle(ResearchEventStyle);
         map.layerscontrol.addOverlay(ResearchEventShapeLayer, 'Research Activities (Shapes)');
-
-        var MonumentProtectionShapeLayer = L.geoJson({{shapes_monumentprotection|safe }}, {
-            onEachFeature: onEachFeatureClosure('monumentprotection')
-        }).setStyle(MonumentProtectionStyle);
-        map.layerscontrol.addOverlay(MonumentProtectionShapeLayer, 'Monument Protection (Shapes)');
     {% endif %}
 }
 </script>

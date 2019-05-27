@@ -438,10 +438,6 @@ class SiteListView(GenericListView):
             fields=('name', 'pk', 'identifier')
         )
         item_qs = MonumentProtection.objects.filter(site_id__in=qs)
-        context['shapes_monumentprotection'] = serialize(
-            'geojson', item_qs, geometry_field="polygon",
-            fields=('name', 'pk', 'identifier')
-        )
         return context
 
     def get_table(self, **kwargs):
