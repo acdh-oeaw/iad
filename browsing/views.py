@@ -150,10 +150,7 @@ class GenericListView(ExportMixin, SingleTableView):
             context['download'] = None
         model = self.model
         app_label = model._meta.app_label
-        print("App label: {}".format(app_label))
         context['entity'] = model.__name__.lower()
-        print("Model: {}".format(model.__name__.lower()))
-        # print(context['entity'])
         filtered_objs = ChartConfig.objects.filter(
             model_name=model.__name__.lower(),
             app_name=app_label
@@ -175,7 +172,6 @@ class GenericListView(ExportMixin, SingleTableView):
                 app_label=app_label
             )
             context = dict(context, **chartdata)
-            print(chartdata)
         return context
 
     def render_to_response(self, context, **kwargs):

@@ -134,7 +134,7 @@ class SiteFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search options',
-                    # 'public',
+                    'public',
                     'heritage_number',
                     'plot_number',
                     'ownership',
