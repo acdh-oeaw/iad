@@ -90,10 +90,18 @@ def site_extent():
 @register.simple_tag
 def excavation_extent():
     excavation = SkosConcept.objects.filter(pref_label='excavation')
-    u = generous_concept_filter(
+    u_all = generous_concept_filter(
         ResearchEvent.objects.filter(polygon__isvalid=True),
         'research_method', excavation
-    ).aggregate(Union('polygon'))['polygon__union']
+    )
+    invalid_polies = []
+    for x in u_all:
+        try:
+            x.polygon.transform(ct=3035)
+        except Exception as e:
+            print(x.id, e)
+            valid_polies.append(x.id)
+    u = u_all.exclude(id__in=invalid_polies).aggregate(Union('polygon'))['polygon__union']
     try:
         u.transform(ct=3035)
     except Exception as e:
