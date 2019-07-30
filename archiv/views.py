@@ -50,9 +50,14 @@ class ArchEntDetailView(DetailView):
     model = ArchEnt
     template_name = 'archiv/archent_detail.html'
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ArchEntDetailView, self).dispatch(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        context = super(ArchEntDetailView, self).get_context_data()
+        if self.object.public or user.is_authenticated:
+            context['not_logged_in'] = False
+        else:
+            context = {}
+        return context
 
 
 class ArchEntCreate(BaseCreateView):
@@ -168,9 +173,14 @@ class ResearchEventDetailView(DetailView):
     model = ResearchEvent
     template_name = 'archiv/researchevent_detail.html'
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ResearchEventDetailView, self).dispatch(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        context = super(ResearchEventDetailView, self).get_context_data()
+        if self.object.public or user.is_authenticated:
+            context['not_logged_in'] = False
+        else:
+            context = {}
+        return context
 
 
 class ResearchEventCreate(BaseCreateView):
@@ -332,9 +342,14 @@ class MonumentProtectionDetailView(DetailView):
     model = MonumentProtection
     template_name = 'archiv/monumentprotection_detail.html'
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(MonumentProtectionDetailView, self).dispatch(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        context = super(MonumentProtectionDetailView, self).get_context_data()
+        if self.object.public or user.is_authenticated:
+            context['not_logged_in'] = False
+        else:
+            context = {}
+        return context
 
 
 class MonumentProtectionCreate(BaseCreateView):
