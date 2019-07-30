@@ -23,6 +23,19 @@ body {
     /*box-shadow: 2px 2px 24px 0 rgba(0, 0, 0, .1);*/
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.centerfull {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+}
+
 .site-page {
     background-color: #003399;
     color: white;
@@ -203,7 +216,7 @@ footer {
 }
 
 .btn-index:hover {
-   box-shadow: 0px 0px 0px 2px #254aa5; 
+   box-shadow: 0px 0px 0px 2px #254aa5;
 
 }
 

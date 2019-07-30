@@ -5,13 +5,96 @@
 {% block content %}
 <div class="container">
 <div class="card">
-	<div class="card-header">
-    <h1>IRON-AGE-DANUBE</h1>
+	<div class="card-header" style="text-align: center">
+        <h1>Iron-Age-Danube database</h1>
+        <h2>User manual</h2>
     </div>
     <div class="card-body">
-    <p>
-       Over the past few decades, European archaeological heritage gained major attention by connecting prominent archaeological sites to wider transnational networks, which have become a popular tool for their protection, promotion and tourist use. Imposingly attractive, however very fragile, prehistoric landscapes in the Danube programme area remain partly hidden and not well integrated into cultural tourism. The Iron-Age-Danube project focuses on monumental archaeological landscapes of the Early Iron Age, characterized by, e.g., fortified hilltop settlements and large tumulus cemeteries, from the era between roughly the 9th–4th cent. BC (Hallstatt period). At that time, the Danube region was part of a cultural phenomenon called the Eastern-Hallstatt circle.
-    </p>
+        <h3>Project Aims</h3>
+        <p>
+            The Iron-Age-Danube database was created in the framework of the Monumentalized Early Iron Age Landscapes in the Danube river basin (Iron-Age-Danube) project to create an overview over Early Iron Age sites in partner countries (Austria, Croatia, Hungary and Slovenia) with an aim to
+            <ul>
+                <li>
+                    evaluate their research status,
+                </li>
+                <li>
+                    determine touristic potential,
+                </li>
+                <li>
+                    evaluate cultural protection status and possible threats.
+                </li>
+            </ul>
+            The final output of the database and gathered data is the development of strategies for protection and tourism of Early Iron Age Danube landscape.
+        </p>
+        <h3>Concept and data model</h3>
+        <p>
+            The Iron-Age-Danube database comprises of four interlinked datasets resolving around the SITE dataset that represents an archaeological site. The SITE dataset includes administrative and geographic information about an archaeological site as well as information about its touristic potential (e.g. visibility, accessibility, infrastructure etc.). Each site is composed of one or several ARCHAEOLOGICAL ENTITIES. Each entity is defined by its type (e.g. settlement, funerary site, industrial site etc.), period (e.g. Ha C1, Ha C2 etc.) and spatial area (represented by a spatial polygon). RESEARCH ACTIVITY dataset describes research projects (administration, aims, methods etc.). Each SITE is also linked to the MONUMENT PROTECTION dataset that includes information about the heritage and natural protection status and possible threats. SITE, ARCHAEOLOGICAL ENTITY as well as RESEARCH ACTIVITY and MONUMENT PROTECTION when possible are represented by a spatial polygon.
+        </p>
+        <p>
+            <img src="{% static 'webpage/img/img_1.jpg' %}" alt="image_missing" class="center"/>
+        </p>
+        <p>
+            <i>A spatial example of an archaeological site with its entities and researched area. Archaeological features (such as separate grave barrows are added for the purpose of the illustration and are not included in the database structure).</i>
+        </p>
+        <p>
+            <img src="{% static 'webpage/img/img_2.png' %}" alt="image_missing" class="center"/>
+        </p>
+        <h3>Vocabulary</h3>
+        <p>
+            Iron-Age-Danube database entries are based on controlled vocabulary that can be viewed in detail from the “About” section “IAD Thesaurus” in the main panel or directly on the <a href="https://vocabs.dariah.eu/iad_thesaurus/en/">Vocabs website</a>. The thesaurus includes short description of the term and translations from English to German, Croatia, Hungarian, and Slovenian language.
+        </p>
+        <p>
+            Apart from the IAD thesaurus, controlled vocabulary includes also other terminology. For the purpose of statistical analysis one can choose from a predefined scale 1- normally representing the best and 3- the least favourable option. Additionally, 4-information not available was chosen when it was not possible to retrieve topic in question from available sources.
+        </p>
+        <h3>Browsing</h3>
+        <p>
+            It is possible to browse each dataset (SITE, RESEARCH ACTIVITY, ARCH. ENTITY, and MONUMENT PROTECTION) separately, however, the <a href="{% url 'browsing:browse_sites' %}">SITE</a> browsing options take account of all other datasets including some additional options such as search by location and period. Additionally, it is possible to view and browse the pre-set tables used in the database such as the list of researchers, research institutions, research questions, chronology and geographic-administrative data. The bibliographic references are linked with the <a href="https://www.zotero.org/groups/1612108/iad_database_literature/items/">Zotero database</a> and can be therefore viewed there.
+        </p>
+        <p>
+            Browsing options can be reached through the “Explore” button on the front page, which brings you to the SITE browsing options or through “Browse the Data” in the main panel.
+        </p>
+        <p>
+            One can browse the data based on pre-set vocabulary. The results are presented in a list as well as on a map. The results can also be organized based on the field name by clicking on it (for example – click on Name to arrange the results alphabetically).
+        </p>
+        <p>
+            <img src="{% static 'webpage/img/img_3.png' %}" alt="image_missing" class="centerfull"/>
+        </p>
+        <p>
+            To add a field to the result table, you may choose whichever field from the database by clicking and selecting it from the “Select additional columns” in the browsing options. You should do this before clicking “Search”.
+        </p>
+        <p>
+            <img src="{% static 'webpage/img/img_4.png' %}" alt="image_missing" class="center"/>
+        </p>
+        <h3>Visualizing and downloading the data</h3>
+        <p>
+            The “visualize” as well as “download” option both work with data from the search result.
+        </p>
+        <p>
+            The “visualize” option includes pie and bar charts that present the count of sites, archaeological entities, research activities and monument protection for a specified selection. Each dataset offers a visualization of its own selection. The charts can be downloaded as images, vector files, PDF as well as XLS and CVS.
+        </p>
+        <p>
+            <img src="{% static 'webpage/img/img_5.png' %}" alt="image_missing" class="center"/>
+        </p>
+        <p>
+            There are two main “download” options:
+            <ol>
+                <li>
+                    Download all entered data (each dataset separately – SITE, ARCH. ENTITY, RESEARCH ACTIVITY, MONUMENT PROTECTION).
+                </li>
+                <li>
+                    Download selected table fields.
+                </li>
+            </ol>
+        </p>
+        <p>
+            The first option allows for download in GeoJSON file format. When downloading from SITE section it is possible to directly include the GeoJSON tables of all related entries (ARCH. ENTITY, RESEARCH ACTIVITY, MONUMENT PROTECTION) for the selected sites.
+        </p>
+        <p>
+            The second option allows to download a CSV file format spreadsheet of browsing results as presented in the “total results” table. The SITE section will by default include the site “Name” and “ID”. All other options can be added using the “select additional columns” prior to browsing the data (see section “Browsing” in this document). This option allows to add any desired database field.
+        </p>
+        <p>
+            <img src="{% static 'webpage/img/img_6.png' %}" alt="image_missing" class="centerfull"/>
+        </p>
     </div>
   </div>
 </div>
