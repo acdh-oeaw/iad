@@ -100,7 +100,7 @@ def excavation_extent():
             x.polygon.transform(ct=3035)
         except Exception as e:
             print(x.id, e)
-            valid_polies.append(x.id)
+            invalid_polies.append(x.id)
     u = u_all.exclude(id__in=invalid_polies).aggregate(Union('polygon'))['polygon__union']
     try:
         u.transform(ct=3035)
