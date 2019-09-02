@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from . import views
 from . import copy_views
+from . import geojson_views
 
 app_name = 'archiv'
 
@@ -23,6 +24,7 @@ urlpatterns = [
         name='archent_edit'),
     url(r'^archent/delete/(?P<pk>[0-9]+)$', views.ArchEntDelete.as_view(),
         name='archent_delete'),
+    url(r'^site-geojson/$', geojson_views.site_geojson, name='site_geojson'),
     url(r'^site/detail/(?P<pk>[0-9]+)$', views.SiteDetailView.as_view(),
         name='site_detail'),
     url(r'^site/create/$', views.SiteCreate.as_view(),

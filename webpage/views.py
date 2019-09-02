@@ -92,16 +92,6 @@ else:
 class GenericWebpageView(TemplateView):
     template_name = 'webpage/index.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(GenericWebpageView, self).get_context_data()
-        # context['points'] = Site.get_points()
-        context['shapes'] = Site.get_shapes()
-        # context['shapes_archent'] = ArchEnt.get_shapes()
-        # context['shapes_archent'] = ArchEnt.get_shapes()
-        # context['shapes_researchevent'] = ResearchEvent.get_shapes()
-        # context['shapes_monumentprotection'] = MonumentProtection.get_shapes()
-        return context
-
     def get_template_names(self):
         template_name = "webpage/{}.html".format(self.kwargs.get("template", 'index'))
         try:

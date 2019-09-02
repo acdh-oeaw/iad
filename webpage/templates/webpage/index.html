@@ -7,8 +7,38 @@
 {% block scriptHeader %}
     {% leaflet_js %}
     {% leaflet_css %}
-{% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.Spin/1.1.0/leaflet.spin.js"></script>
+{% endblock scriptHeader %}
 {% block content %}
+<script type="text/javascript">
+ function map_init_basic (map, options) {
+
+        map.spin(true);
+        var geojsonPointLayer = new L.GeoJSON.AJAX("{% url 'archiv:site_geojson' %}", {
+            onEachFeature:function(feature, layer) {
+                 layer.bindPopup('<a href="/archiv/site/detail/'+feature.properties.pk+'">'+feature.properties.name.toString()+'</a>');
+             }
+        });
+        geojsonPointLayer.on('data:loaded', function () {
+            console.log()
+            map.spin(false);
+            map.addLayer(geojsonPointLayer);
+
+            var overlayMaps = {
+                "Sites": geojsonPointLayer
+            }
+
+            var ctrOptions = {
+                position: 'topright',
+                collapsed: false
+            }
+
+            L.control.layers(null, overlayMaps, ctrOptions).addTo(map);
+        })
+    };
+</script>
 <div class="jumbotron" style="padding:0;">
 
     {% leaflet_map "yourmap" callback="window.map_init_basic" %}
@@ -91,7 +121,7 @@
                                 <h5 class="card-title">Area of sites vs. area of "excavation" vs area "geophysical survey"</h5>
                                 <p class="card-text">
                                     <p>
-                                        {% site_extent %} km<sup>2</sup> vs {% excavation_extent %} km<sup>2</sup> vs {% geophysical_extent %}km<sup>2</sup>
+                                        1,260 km<sup>2</sup> vs 293 km<sup>2</sup> vs 21 km<sup>2</sup>
                                     </p>
                                 </p>
                             </div>
@@ -104,48 +134,5 @@
             </div>
         </div>
 </div>
-<script>
-    {% archiv_custom_js %}
 
-    {% archiv_colors %}
-
-    function map_init_basic (map, options) {
-
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.light',
-            accessToken: 'pk.eyJ1IjoiY3NhZTgwOTIiLCJhIjoiY2lnM2FoZWpjMDJqZnY1a2gxdWl6a29kaiJ9.FQXlsKIu60WhiXLrfI59VA'
-        }).addTo(map);
-
-        var SiteShapeLayer = L.geoJson({{shapes|safe }}, {
-            onEachFeature: onEachFeatureClosure('site')
-        }).setStyle(SiteStyle);
-        SiteShapeLayer.addTo(map);
-        map.layerscontrol.addOverlay(SiteShapeLayer, 'Sites (Shapes)');
-        map.fitBounds(SiteShapeLayer.getBounds());
-
-        // var SitePointLayer = L.geoJson({{points|safe }}, {
-        //     onEachFeature: onEachFeatureClosure('site')
-        // });
-        // map.layerscontrol.addOverlay(SitePointLayer, 'Sites (Points)');
-
-        // var ArchentShapeLayer = L.geoJson({{shapes_archent|safe }}, {
-        //     onEachFeature: onEachFeatureClosure('archent')
-        // }).setStyle(ArchEntStyle);
-        // ArchentShapeLayer.addTo(map);
-        // map.layerscontrol.addOverlay(ArchentShapeLayer, 'Archents (Shapes)');
-        //
-        // var ResearchEventShapeLayer = L.geoJson({{shapes_researchevent|safe }}, {
-        //     onEachFeature: onEachFeatureClosure('researchevent')
-        // }).setStyle(ResearchEventStyle);
-        // map.layerscontrol.addOverlay(ResearchEventShapeLayer, 'Research Activities (Shapes)');
-        //
-        // var MonumentProtectionShapeLayer = L.geoJson({{shapes_monumentprotection|safe }}, {
-        //     onEachFeature: onEachFeatureClosure('monumentprotection')
-        // }).setStyle(MonumentProtectionStyle);
-        // map.layerscontrol.addOverlay(MonumentProtectionShapeLayer, 'Monument Protection (Shapes)');
-
-    }
-</script>
 {% endblock %}
