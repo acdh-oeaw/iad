@@ -2,7 +2,6 @@
 {% load staticfiles %}
 {% load stats_extras %}
 {% load webpage_extras %}
-{% load archiv_extras %}
 {% load leaflet_tags %}
 {% block scriptHeader %}
     {% leaflet_js %}
@@ -73,12 +72,9 @@
                                 <h5 class="card-title">The number of sites entered per country</h5>
                                 <p class="card-text">
                                     <p>
-                                        {% sites_by_country as result %}
-                                        {% for key, value in result.items %}
-                                            {{ key }}: {{ value }} {% if not forloop.last %}|{% endif %}
-                                        {% endfor %}
+                                        AT: 632 | SI: 165 | HR: 153 | HU: 98 | None: 1
                                         <br />
-                                        <small>(total {% site_count %})</small>
+                                        <small>(total 1046)</small>
                                     </p>
                                 </p>
                             </div>
@@ -90,12 +86,9 @@
                                 <h5 class="card-title">Touristic potential of sites</h5>
                                 <p class="card-text">
                                     <p>
-                                        {% touristic_potential as result %}
-                                        {% for key, value in result.items %}
-                                            {{ key }}: {{ value }} {% if not forloop.last %}|{% endif %}
-                                        {% endfor %}
+                                        High: 158 | Low: 163 | Middle: 725
                                         <br />
-                                        <small>(total {% site_count %})</small>
+                                        <small>(total 1046)</small>
                                     </p>
                                 </p>
                             </div>
@@ -108,8 +101,8 @@
                             <div class="card-body">
                                 <h5 class="card-title">Sites that are <small>(at least partially)</small> protected</h5>
                                 <p class="card-text">
-                                    <p>{% protected_site_count %}<br />
-                                        <small>(out of {% site_count %})</small>
+                                    <p>470<br />
+                                        <small>(total 1046)</small>
                                     </p>
                                 </p>
                             </div>

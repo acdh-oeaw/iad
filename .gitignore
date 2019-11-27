@@ -12,7 +12,7 @@ cover/
 
 # IDE
 .idea
-
+myenv
 # migrations
 vocabs/migrations/*
 bib/migrations/*

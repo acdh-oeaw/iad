@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'vocabs',
     'entities',
     'bib',
-    'sparql',
+    # 'sparql',
     'stats',
     'browsing',
     'arche',
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'charts',
 ]
 
-CRISPY_TEMPLATE_PACK = "bootstrap3"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticatedOrReadOnly',),
@@ -135,11 +135,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
-
-ARCHE_SETTINGS = {
-    'project_name': ROOT_URLCONF.split('.')[0],
-    'base_url': "https://id.acdh.oeaw.ac.at/{}".format(ROOT_URLCONF.split('.')[0])
-}
 
 VOCABS_DEFAULT_PEFIX = os.path.basename(BASE_DIR)
 
