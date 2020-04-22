@@ -240,7 +240,7 @@ class Period(IadBaseClass):
     )
     norm_id = models.CharField(
         blank=True, null=True, max_length=250,
-        verbose_name="Link to some norm data record like 'http://perio.do/'"
+        verbose_name="PeriodO"
     )
     region = models.ManyToManyField(
         Place, blank=True, related_name="has_related_period_region",
