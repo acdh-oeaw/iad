@@ -240,6 +240,7 @@ class PeriodTable(tables.Table):
     start_date_latest = tables.Column()
     end_date = tables.Column()
     end_date_latest = tables.Column()
+    norm_id = tables.TemplateColumn("<a href='{{ record.norm_id }}'>{{ record.norm_id }}</a>")
 
     class Meta:
         model = Period

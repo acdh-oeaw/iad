@@ -264,10 +264,6 @@ class PeriodDetailView(DetailView):
     model = Period
     template_name = 'archiv/period_detail.html'
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(PeriodDetailView, self).dispatch(*args, **kwargs)
-
 
 class PeriodCreate(BaseCreateView):
 

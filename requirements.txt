@@ -34,7 +34,6 @@ odfpy==1.4.0
 openpyxl==3.0.2
 pandas==0.25.3
 pathlib==1.0.1
-psycopg2==2.8.4
 pyparsing==2.4.5
 pyproj==2.4.1
 python-dateutil==2.8.1

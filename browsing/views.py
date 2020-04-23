@@ -607,7 +607,7 @@ class PeriodListView(GenericListView):
     formhelper_class = PeriodFilterFormHelper
     init_columns = [
         'id', 'name', 'start_date', 'start_date_latest',
-        'end_date', 'end_date_latest'
+        'end_date', 'end_date_latest', 'norm_id',
     ]
 
     def get_all_cols(self):
