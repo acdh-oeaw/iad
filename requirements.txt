@@ -19,7 +19,7 @@ djangorestframework==3.10.3
 djangorestframework-gis==0.14
 et-xmlfile==1.0.1
 feedparser==5.2.1
-Fiona==1.8.11
+Fiona>=1.8.11
 future==0.18.2
 geojson==2.5.0
 geopandas==0.6.2
