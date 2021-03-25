@@ -38,7 +38,7 @@ pyparsing==2.4.5
 pyproj==2.4.1
 python-dateutil==2.8.1
 pytz==2019.3
-PyYAML==5.1.2
+PyYAML==5.4
 Pyzotero==1.4.10
 rdflib==4.2.2
 requests==2.22.0
