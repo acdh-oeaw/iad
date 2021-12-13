@@ -26,7 +26,7 @@ geopandas==0.6.2
 idna==2.8
 isodate==0.6.0
 jdcal==1.4.1
-lxml==4.6.2
+lxml==4.6.5
 MarkupPy==1.14
 munch==2.5.0
 numpy==1.17.4
