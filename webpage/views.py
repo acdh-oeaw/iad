@@ -2,10 +2,10 @@ from copy import deepcopy
 
 import requests
 
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.conf import settings
-from django.template import RequestContext, loader
+from django.template import loader
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth import authenticate, login, logout, get_user_model
@@ -15,7 +15,6 @@ from django.utils.decorators import method_decorator
 from . forms import form_user_login
 from . metadata import PROJECT_METADATA as PM
 
-from archiv.models import Site, ArchEnt, ResearchEvent, MonumentProtection
 
 
 def get_imprint_url():
@@ -123,7 +122,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return render_to_response('webpage/user_logout.html')
+    return render(request, 'webpage/user_logout.html')
 
 
 def project_info(request):

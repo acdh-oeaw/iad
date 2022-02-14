@@ -77,8 +77,8 @@ class GenericListView(django_tables2.SingleTableView):
         )
 
     def get_all_cols(self):
-        print('get_table')
-        print(self.get_table().base_columns.keys())
+        # print('get_table')
+        # print(self.get_table().base_columns.keys())
         all_cols = list(self.get_table().base_columns.keys())
         return all_cols
 
@@ -128,7 +128,7 @@ class GenericListView(django_tables2.SingleTableView):
             BrowsConf.objects.filter(model_name=model_name)
             .values_list('field_path', 'label')
         )
-        print(context['conf_items'])
+        # print(context['conf_items'])
         if 'charts' in settings.INSTALLED_APPS:
             context['vis_list'] = ChartConfig.objects.filter(model_name=model_name)
             context['property_name'] = self.request.GET.get('property')
@@ -229,7 +229,6 @@ def model_to_dict(instance):
                 try:
                     data[f.name] = list(f.value_from_object(instance).values_list('pk', flat=True))
                 except Exception as e:
-                    print(e)
                     data[f.name] = []
         else:
             data[f.name] = f.value_from_object(instance)
@@ -244,23 +243,16 @@ def create_brows_config_obj(app_name, exclude_fields=[]):
     try:
         models = [x for x in apps.get_app_config(app_name).get_models()]
     except LookupError:
-        print("The app '{}' does not exist".format(app_name))
         return False
 
     for x in models:
         model_name = "{}".format(x.__name__.lower())
-        print("Model: {}".format(model_name))
         for f in x._meta.get_fields(include_parents=False):
             if f.name not in exclude:
                 field_name = f.name
                 verbose_name = getattr(f, 'verbose_name', f.name)
                 help_text = getattr(f, 'help_text', 'no helptext')
-                print("{}: {} ({})".format(
-                    model_name,
-                    field_name,
-                    help_text
-                    )
-                )
+
                 brc, _ = BrowsConf.objects.get_or_create(
                     model_name=model_name,
                     field_path=field_name,
@@ -268,4 +260,4 @@ def create_brows_config_obj(app_name, exclude_fields=[]):
                 brc.label = verbose_name
                 brc.save()
             else:
-                print("skipped: {}".format(f.name))
+                pass

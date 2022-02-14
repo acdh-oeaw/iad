@@ -13,7 +13,6 @@ from browsing.browsing_utils import GenericListView, BaseCreateView, BaseUpdateV
 from .rdf_utils import *
 import time
 import datetime
-from django.shortcuts import render_to_response
 from django.http import HttpResponse
 
 
