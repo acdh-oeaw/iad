@@ -40,3 +40,20 @@ The application is mainly run server-side although the data is accessible throug
 ### Front end layer
 
 The presentation of GIS-related data on the client side (web-browser) is realized with [Leaflet](http://leafletjs.com/) which processes the data serialized by the backend into [GeoJSON](http://geojson.org/) though data from different sources (e.g. raster images, served following the [WMS protocol ](https://en.wikipedia.org/wiki/Web_Map_Service)) can be integrated as well.
+
+
+### building the image
+
+`docker build -t iad:latest .`
+`docker build -t iad:latest --no-cache .`
+
+### running the image
+
+To run the image you should provide an `env.default` file to pass in needed environment variables; see example `env.default` in this repo:
+
+
+`docker run -it -p 8020:8020 --rm --env-file env.default iad:latest`
+
+### or use published image:
+
+`docker run -it -p 8020:8020 --rm --env-file env.default acdhch/iad:latest`

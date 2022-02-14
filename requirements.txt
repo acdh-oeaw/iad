@@ -7,6 +7,7 @@ django-reversion>=4.0.2,<4.1
 django-tables2>=2.3.3
 Django>=3.1,<4 
 djangorestframework-gis==0.17
+geojson==2.5.0
 geopandas==0.10.2
 requests>=2.25
 tablib==3.0.0
