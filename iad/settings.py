@@ -1,4 +1,5 @@
 import os
+from pickle import TRUE
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__, '../'))))
@@ -8,12 +9,23 @@ os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
 ACDH_IMPRINT_URL = "https://shared.acdh.oeaw.ac.at/acdh-common-assets/api/imprint.php?serviceID="
 REDMINE_ID = 9724
-DEBUG = os.environ.get('DEBUG', True)
+if os.environ.get('DEBUG', False):
+    DEBUG = True
+else:
+    DEBUG = False
+
 ADD_ALLOWED_HOST = os.environ.get('ALLOWED_HOST', '*')
 SECRET_KEY = os.environ.get(
     'SECRET_KEY',
     'TZRHHwasdfsa987465465dfdsafkljlxö7639827249324GV'
 )
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+        'TIMEOUT': None
+    }
+}
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -45,7 +57,6 @@ INSTALLED_APPS = [
     'vocabs',
     'entities',
     'bib',
-    # 'sparql',
     'stats',
     'browsing',
     'arche',
@@ -67,7 +78,9 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
