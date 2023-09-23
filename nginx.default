@@ -2,6 +2,15 @@ server {
     listen 8020;
     client_max_body_size 30M;
 
+    location = /robots.txt {                                                                                        
+       try_files /robots.txt @robots.txt;
+    } 
+
+    location @robots.txt {
+       add_header Content-Type text/plain;                                                                           
+       return 200 "User-agent: *\nDisallow: /\n";
+    }
+
     location /static/ {
         autoindex on;
         alias /opt/staticfiles/;
@@ -17,4 +26,7 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         add_header 'Access-Control-Allow-Origin' '*';
     }
+
+
+
 }
