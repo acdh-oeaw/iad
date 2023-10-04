@@ -3,8 +3,11 @@ server {
     client_max_body_size 30M;
 
     ## Block all http user agents 
-    if ($http_user_agent ~ .*) {
-       return 403;
+   location /browsing {
+      if ($http_user_agent ~*Bot$ ) {
+         return 403;
+      }
+ 
     }
 
     location = /robots.txt {                                                                                        
