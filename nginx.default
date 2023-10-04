@@ -4,9 +4,9 @@ server {
 
     ## Block all http user agents 
    location /browsing {
-      if ($http_user_agent ~ (*Bot) ) {
-         return 403;
-      }
+       if ($http_user_agent ~* (semrushbot|amazonbot|java|spider|crawl|wget|gptbot|bingbot|bot) ) {
+        return 403;
+       }
  
     }
 
