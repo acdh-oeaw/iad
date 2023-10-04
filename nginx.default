@@ -3,13 +3,10 @@ server {
     client_max_body_size 30M;
 
     ## Block all http user agents 
-   location /browsing {
-       if ($http_user_agent ~* (semrushbot|amazonbot|java|spider|crawl|wget|gptbot|bingbot|bot) ) {
+    if ($http_user_agent ~* (semrushbot|amazonbot|java|spider|crawl|wget|gptbot|bingbot|bot) ) {
         return 403;
-       }
- 
     }
-
+ 
     location = /robots.txt {                                                                                        
        try_files /robots.txt @robots.txt;
     } 
