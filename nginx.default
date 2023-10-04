@@ -2,6 +2,11 @@ server {
     listen 8020;
     client_max_body_size 30M;
 
+    ## Block all http user agents 
+    if ($http_user_agent ~ .*) {
+       return 403;
+    }
+
     location = /robots.txt {                                                                                        
        try_files /robots.txt @robots.txt;
     } 
