@@ -4,7 +4,7 @@ server {
 
     ## Block all http user agents 
    location /browsing {
-      if ($http_user_agent ~*Bot$ ) {
+      if ($http_user_agent ~ (*Bot) ) {
          return 403;
       }
  
