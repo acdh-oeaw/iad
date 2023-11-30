@@ -1,6 +1,7 @@
 acdh-django-charts==0.5.3
 django-autocomplete-light>=3.8.1
-django-crispy-forms>=1.10.0
+django-crispy-forms>=1.10.0,<2
+crispy-bootstrap4
 django-filter>=2.4.0
 django-leaflet==0.28.2
 django-reversion>=4.0.2,<4.1
