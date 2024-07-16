@@ -1,233 +1,36 @@
-<!DOCTYPE html>
 {% load static %}
 {% load webpage_extras %}
 {% load browsing_extras %}
-<html lang="en">
+
+<!DOCTYPE html>
+<html lang="en" class="h-100">
 <head>
     <meta charset="utf-8">
     <title>{% block title %} {% projects_metadata 'title' %}{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% block metaDescription %}
         <meta name="description" content="{{ metadata.description }}">
         <meta name="author" content="{{ metadata.author }}">
     {% endblock %}
-    <!-- favicons -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,500" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'webpage/css/fundament.css' %}" rel="stylesheet"/>
-    <!-- <link rel="stylesheet" href="{% static 'webpage/css/fundament_new.css' %}" rel="stylesheet"/> -->
-    <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}" rel="stylesheet"/>
-    <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}" />
-    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
-    <script type="text/javascript">
-        window.cookieconsent_options = {
-            "message":"This website uses cookies to ensure you get the best experience on our website. <br /><h3 style='color:red'>This website DOES NOT WORK properly with Internet Explorer</h3> <br />",
-            "dismiss":"Got it!",
-            "learnMore":"More info",
-            "link":"{% projects_metadata 'imprint' %}",
-            "theme":"dark-bottom"};
-    </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
-    <!-- End Cookie Consent plugin -->
-    <!-- Matomo -->
-      <script type="text/javascript">
-        var _paq = _paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-          var u="{% projects_metadata 'matomo_url' %}";
-          _paq.push(['setTrackerUrl', u+'piwik.php']);
-          _paq.push(['setSiteId', '{% projects_metadata "matomo_id" %}']);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-      </script>
+    {% include "webpage/partials/head.html" %}
+
     <!-- End Matomo Code -->
     {% block scriptHeader %}
     {% endblock %}
 </head>
-<body role="document"  class="contained fixed-nav">
-<header>
-    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white box-shadow">
-        <a href="/" class="navbar-brand custom-logo-link" rel="home" itemprop="url">
-            <img src="{% static 'webpage/img/interreg_logo.png' %}" class="img-fluid" alt="project Logo" itemprop="logo">
-        </a>
-        <!-- <div class="container"> -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                 <ul class="navbar-nav mr-auto">
-                 <li class="nav-item active">
+<body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+    {% include "webpage/partials/navbar.html" %}
 
-
-                    <li class="nav-item dropdown">
-                      <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About
-                      <span class="caret"/>
-                      </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'webpage:about' %}">About the database</a>
-                        <a class="dropdown-item" href="{% url 'webpage:thesaurus' %}">IAD Thesaurus</a>
-                        <a class="dropdown-item" href="{% url 'webpage:imprint' %}">Imprint | Impressum</a>
-                    </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        {% if user.is_authenticated %}
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Curate and Browse the Data <span class="caret"></span>
-                            </a>
-                        {% else %}
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Browse the Data <span class="caret"></span>
-                            </a>
-                        {% endif %}
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'browsing:browse_sites' %}">Site</a>
-                            <a class="dropdown-item" href="{% url 'browsing:browse_researchevents' %}">Research Activity</a>
-                            <a class="dropdown-item" href="{% url 'browsing:browse_archents' %}">Arch. Entity</a>
-                            <a class="dropdown-item" href="{% url 'browsing:browse_monumentprotections' %}">Monument Protection</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'browsing:browse_institutions' %}">Institution</a>
-                            <a class="dropdown-item" href="{% url 'browsing:browse_persons' %}">Researcher</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'browsing:browse_researchquestions' %}">Research Question</a>
-                            <a class="dropdown-item" href="{% url 'bib:browse_references' %}">References</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'browsing:browse_periods' %}">Chronology</a>
-                            <a class="dropdown-item" href="{% url 'shapes:browse_municipality' %}">
-                                Municipalities
-                            </a>
-                        </div>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                           Quality Checks <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'checks:invalid_poly' %}">
-                                Polygon Valid?
-                            </a>
-                            <a class="dropdown-item" href="{% url 'checks:poly_exists' model_name='site' %}">
-                                Polygon for Site?
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'checks:poly_fits_archents' %}">
-                                ArchEnts fit Site Polygon?
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'checks:generic_check' model_name='archent' %}">
-                                Check for Archaelogical Entity?
-                            </a>
-                            <a class="dropdown-item" href="{% url 'checks:generic_check' model_name='researchevent' %}">
-                                Check for Research Activity?
-                            </a>
-                            <a class="dropdown-item" href="{% url 'checks:generic_check' model_name='monumentprotection' %}">
-                                Check for Monument Protection?
-                            </a>
-                        </div>
-                    </li>
-                    {% endif %}
-                    {% if user.is_superuser %}
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Vocabs Curation <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'vocabs:metadata' %}">Metadata</a>
-                            <a class="dropdown-item" href="{% url 'vocabs:browse_schemes' %}">Concept Schemes</a>
-                            <a class="dropdown-item" href="{% url 'vocabs:browse_vocabs' %}">Concepts</a>
-                            <a class="dropdown-item" href="{% url 'vocabs:browse_skoslabels' %}">Labels</a>
-                    </li>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown ml-auto">
-                        <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            {{ user.get_username }}
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="nav-link" href="{% url 'webpage:user_logout' %}">Log-Out</a>
-                            {% if 'reversion' in APPS %}
-                                <a class="nav-link" href="{% url 'webpage:user_detail' pk=user.id %}">My Page</a>
-                            {% endif %}
-                        </div>
-                    </li>
-                    {% else %}
-                    <li class="nav-item dropdown ml-auto">
-                        <a class="nav-link" href="{% url 'webpage:user_login' %}">
-                        <i class="fas fa-sign-in-alt"></i>
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-                <div class="navbar-icons">
-                    <a href="{% projects_metadata 'github' %}" target="_blank" rel="noopener">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-            </div>
-        <!-- </div> -->
-    </nav>
-</header>
-<section class="main-content">
-    {% if DEV_VERSION %}
-    <div class="alert alert-danger" role="alert">
-        This is a DEVELOPEMENT instance. Click <a href="https://iad-dev.acdh.oeaw.ac.at">here</a> for the Production version
-    </div>
-    {% endif %}
+   
     <div id="content" class="container-fluid">{% block content %}{% endblock %}</div>
-</section>
-<!-- <div style="text-align:center">
-    <span class="socialShare">The share buttons will be inserted here</span>
-</div> -->
-<footer class="main-footer">
-    <div class="container">
-      <div class="footer-wrapper">
-        <div class="footer-sep">
-          <i class="far fa-comment"></i> CONTACT
-        </div>
-        {% social_media %}
-        <div class="row">
-            <div class="col-md-3 ml-auto">
-                <img src="{% static 'webpage/img/interreg_logo.png' %}" alt="logo" title="logo"/>
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-imprint-bar">
-        <a href="{% projects_metadata 'imprint' %}">Impressum/Imprint</a>
-    </div>
-    {% if user.is_authenticated %}
-        {% if DB_NAME %}
-            <div class="footer-imprint-bar">
-                <small>{{ DB_NAME }}</small>
-            </div>
-        {% endif %}
-    {% endif %}
-</footer>
+    </main>
+    {% include "webpage/partials/footer.html" %}
 {% block scripts %}
-<script src="https://fundament.acdh.oeaw.ac.at/dist/fundament/vendor/js/fontawesome-all.min.js"></script>
-<script src="https://fundament.acdh.oeaw.ac.at/dist/fundament/js/fundament.min.js"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css" />
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-<script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $.apScrollTop({'onInit': function(evt) {console.log('apScrollTop: init');}});
-    });
-</script>
-<script type="text/javascript">
-    $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 {% endblock %}
 {% block scripts2 %}
 {% endblock scripts2 %}
-<noscript>
-    <img src="//piwik.apollo.arz.oeaw.ac.at/piwik.php?idsite=48" style="border:0;" alt=""/>
-</noscript>
 </body>
 </html>

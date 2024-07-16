@@ -1,5 +1,4 @@
 import os
-from pickle import TRUE
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(
@@ -18,17 +17,27 @@ if os.environ.get("DEBUG", False):
 else:
     DEBUG = False
 
+print(DEBUG)
+
 ADD_ALLOWED_HOST = os.environ.get("ALLOWED_HOST", "*")
 SECRET_KEY = os.environ.get(
     "SECRET_KEY", "TZRHHwasdfsa987465465dfdsafkljlxö7639827249324GV"
 )
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
-        "LOCATION": "my_cache_table",
-        "TIMEOUT": None,
+if DEBUG:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+        }
     }
-}
+
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+            "LOCATION": "my_cache_table",
+            "TIMEOUT": None,
+        }
+    }
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
