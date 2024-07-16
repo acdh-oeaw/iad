@@ -9,9 +9,9 @@ class SiteSerializer(GeoFeatureModelSerializer):
         geo_field = "polygon"
 
         fields = (
-            'id',
-            'identifier',
-            'name',
+            "id",
+            "identifier",
+            "name",
         )
 
 
@@ -22,8 +22,8 @@ class ArchEntSerializer(GeoFeatureModelSerializer):
         geo_field = "polygon"
 
         fields = (
-            'id',
-            'site_id',
-            'identifier',
-            'name',
+            "id",
+            "site_id",
+            "identifier",
+            "name",
         )

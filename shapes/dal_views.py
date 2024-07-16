@@ -8,10 +8,7 @@ class MunicipalityAC(autocomplete.Select2QuerySetView):
         qs = Municipality.objects.all()
 
         if self.q:
-            qs = qs.filter(
-                Q(lau2nam__icontains=self.q) |
-                Q(nuts3nam__icontains=self.q)
-            )
+            qs = qs.filter(Q(lau2nam__icontains=self.q) | Q(nuts3nam__icontains=self.q))
 
         return qs
 
@@ -21,17 +18,14 @@ class MunicipalitySearchAC(autocomplete.Select2QuerySetView):
         qs = Municipality.objects.exclude(has_sites=None)
 
         if self.q:
-            qs = qs.filter(
-                Q(lau2nam__icontains=self.q) |
-                Q(nuts3nam__icontains=self.q)
-            )
+            qs = qs.filter(Q(lau2nam__icontains=self.q) | Q(nuts3nam__icontains=self.q))
 
         return qs
 
 
 class CountriesAC(autocomplete.Select2ListView):
     def get_list(self):
-        values = set(Municipality.objects.values_list('ctnam').distinct())
+        values = set(Municipality.objects.values_list("ctnam").distinct())
         countries = [x[0] for x in values]
         return countries
 
@@ -39,7 +33,9 @@ class CountriesAC(autocomplete.Select2ListView):
 class CountiesAC(autocomplete.Select2ListView):
     def get_list(self):
         values = set(
-            Municipality.objects.exclude(has_sites=None).values_list('nuts2nam').distinct()
+            Municipality.objects.exclude(has_sites=None)
+            .values_list("nuts2nam")
+            .distinct()
         )
         countries = [x[0] for x in values]
         return countries
@@ -48,7 +44,9 @@ class CountiesAC(autocomplete.Select2ListView):
 class RegionsAC(autocomplete.Select2ListView):
     def get_list(self):
         values = set(
-            Municipality.objects.exclude(has_sites=None).values_list('nuts3nam').distinct()
+            Municipality.objects.exclude(has_sites=None)
+            .values_list("nuts3nam")
+            .distinct()
         )
         countries = [x[0] for x in values]
         return countries

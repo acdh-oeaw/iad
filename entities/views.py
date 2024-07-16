@@ -1,6 +1,6 @@
 import requests
 import json
-from django.shortcuts import (render, redirect)
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
@@ -8,12 +8,18 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .models import Place, AlternativeName, Institution, Person
-from .forms import PlaceForm, PlaceFormCreate, AlternativeNameForm, InstitutionForm, PersonForm
+from .forms import (
+    PlaceForm,
+    PlaceFormCreate,
+    AlternativeNameForm,
+    InstitutionForm,
+    PersonForm,
+)
 
 
 class PersonDetailView(DetailView):
     model = Person
-    template_name = 'entities/person_detail.html'
+    template_name = "entities/person_detail.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -24,7 +30,7 @@ class PersonCreate(CreateView):
 
     model = Person
     form_class = PersonForm
-    template_name = 'entities/person_create.html'
+    template_name = "entities/person_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -35,7 +41,7 @@ class PersonUpdate(UpdateView):
 
     model = Person
     form_class = PersonForm
-    template_name = 'entities/person_create.html'
+    template_name = "entities/person_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -44,8 +50,8 @@ class PersonUpdate(UpdateView):
 
 class PersonDelete(DeleteView):
     model = Person
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_persons')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_persons")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -56,7 +62,7 @@ class InstitutionCreate(CreateView):
 
     model = Institution
     form_class = InstitutionForm
-    template_name = 'entities/institution_create.html'
+    template_name = "entities/institution_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -67,7 +73,7 @@ class InstitutionUpdate(UpdateView):
 
     model = Institution
     form_class = InstitutionForm
-    template_name = 'entities/institution_create.html'
+    template_name = "entities/institution_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -76,7 +82,7 @@ class InstitutionUpdate(UpdateView):
 
 class InstitutionDetailView(DetailView):
     model = Institution
-    template_name = 'entities/institution_detail.html'
+    template_name = "entities/institution_detail.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -85,8 +91,8 @@ class InstitutionDetailView(DetailView):
 
 class InstitutionDelete(DeleteView):
     model = Institution
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_institutions')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_institutions")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -94,7 +100,7 @@ class InstitutionDelete(DeleteView):
 
 
 class AlternativeNameListView(generic.ListView):
-    context_object_name = 'object_list'
+    context_object_name = "object_list"
 
     def get_queryset(self):
         return AlternativeName.objects.all()
@@ -108,7 +114,7 @@ class AlternativeNameCreate(CreateView):
 
     model = AlternativeName
     form_class = AlternativeNameForm
-    template_name = 'entities/alternativenames_create.html'
+    template_name = "entities/alternativenames_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -119,7 +125,7 @@ class AlternativeNameUpdate(UpdateView):
 
     model = AlternativeName
     form_class = AlternativeNameForm
-    template_name = 'entities/alternativenames_create.html'
+    template_name = "entities/alternativenames_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -128,7 +134,7 @@ class AlternativeNameUpdate(UpdateView):
 
 class AlternativeNameDetailView(DetailView):
     model = AlternativeName
-    template_name = 'entities/alternativenames_detail.html'
+    template_name = "entities/alternativenames_detail.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -137,8 +143,8 @@ class AlternativeNameDetailView(DetailView):
 
 class AlternativeNameDelete(DeleteView):
     model = AlternativeName
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_altnames')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_altnames")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -147,7 +153,7 @@ class AlternativeNameDelete(DeleteView):
 
 class PlaceDetailView(DetailView):
     model = Place
-    template_name = 'entities/place_detail.html'
+    template_name = "entities/place_detail.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -156,7 +162,7 @@ class PlaceDetailView(DetailView):
 
 class PlaceListView(generic.ListView):
     template_name = "entities/list_places.html"
-    context_object_name = 'object_list'
+    context_object_name = "object_list"
 
     def get_queryset(self):
         return Place.objects.all()
@@ -172,12 +178,12 @@ def create_place(request):
         form = PlaceFormCreate(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('browsing:browse_places')
+            return redirect("browsing:browse_places")
         else:
-            return render(request, 'entities/edit_places.html', {'form': form})
+            return render(request, "entities/edit_places.html", {"form": form})
     else:
         form = PlaceFormCreate()
-        return render(request, 'entities/edit_places.html', {'form': form})
+        return render(request, "entities/edit_places.html", {"form": form})
 
 
 @login_required
@@ -188,17 +194,18 @@ def edit_place(request, pk):
         placeName = instance.name
         root = "http://api.geonames.org/searchJSON?q="
         params = "&fuzzy=0.6&lang=en&maxRows=100"
-        url = root+placeName+params+username
+        url = root + placeName + params + username
         try:
             r = requests.get(url)
             response = r.text
             responseJSON = json.loads(response)
-            responseJSON = responseJSON['geonames']
+            responseJSON = responseJSON["geonames"]
             form = PlaceForm(instance=instance)
             print(url)
             return render(
-                request, 'entities/edit_places.html',
-                {'object': instance, 'form': form, 'responseJSON': responseJSON}
+                request,
+                "entities/edit_places.html",
+                {"object": instance, "form": form, "responseJSON": responseJSON},
             )
         except requests.exceptions.RequestException as e:
             url = e
@@ -206,20 +213,21 @@ def edit_place(request, pk):
 
         responseJSON = "hansi"
         return render(
-            request, 'entities/edit_places.html',
-            {'object': instance, 'form': form, 'responseJSON': responseJSON}
+            request,
+            "entities/edit_places.html",
+            {"object": instance, "form": form, "responseJSON": responseJSON},
         )
     else:
         form = PlaceForm(request.POST, instance=instance)
         if form.is_valid():
             form.save()
-        return redirect('browsing:browse_places')
+        return redirect("browsing:browse_places")
 
 
 class PlaceDelete(DeleteView):
     model = Place
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_places')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_places")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

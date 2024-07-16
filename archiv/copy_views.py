@@ -7,19 +7,18 @@ from .models import Site, ArchEnt, ResearchEvent, MonumentProtection
 
 @login_required
 def copy_site_poly_view(request):
-
     """copies the current's object polygon to a new target_class"""
 
     CLASSES = {
-        'Site': Site,
-        'ResearchEvent': ResearchEvent,
-        'ArchEnt': ArchEnt,
-        'MonumentProtection': MonumentProtection,
+        "Site": Site,
+        "ResearchEvent": ResearchEvent,
+        "ArchEnt": ArchEnt,
+        "MonumentProtection": MonumentProtection,
     }
 
-    current_id = request.GET.get('current-id', '')
-    current_class = request.GET.get('current-class', '')
-    target_class = request.GET.get('target-class', '')
+    current_id = request.GET.get("current-id", "")
+    current_class = request.GET.get("current-class", "")
+    target_class = request.GET.get("target-class", "")
     if current_id and current_class and target_class:
         source_object = CLASSES[current_class].objects.get(id=current_id)
         target_object = CLASSES[target_class].objects.create()

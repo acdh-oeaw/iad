@@ -15,6 +15,7 @@ from shapely import wkt
 from browsing.filters import *
 from browsing.forms import *
 from browsing.tables import *
+
 try:
     from browsing.models import BrowsConf
 except ImportError:
@@ -32,7 +33,7 @@ from charts.views import create_payload
 
 
 def flatten_df(df):
-    grouped = df.groupby('internal id')
+    grouped = df.groupby("internal id")
     for group in grouped:
         new = group[1]
         yield [new[x].unique().tolist() for x in new.keys()]
@@ -40,51 +41,47 @@ def flatten_df(df):
 
 def serialize_as_geojson(self, model_name):
     conf_items = list(
-        BrowsConf.objects.filter(
-            model_name=model_name
-        ).values_list('field_path', 'label')
+        BrowsConf.objects.filter(model_name=model_name).values_list(
+            "field_path", "label"
+        )
     )
-    conf_items.append(('polygon', 'polygon'))
+    conf_items.append(("polygon", "polygon"))
     sites_qs = self.get_queryset().distinct().exclude(polygon=None)
-    if model_name == 'site':
+    if model_name == "site":
         qs = sites_qs
-    elif model_name == 'archent':
-        qs = ArchEnt.objects.filter(
-            site_id__in=[x.id for x in sites_qs]
-        ).exclude(polygon=None)
-    elif model_name == 'monumentprotection':
+    elif model_name == "archent":
+        qs = ArchEnt.objects.filter(site_id__in=[x.id for x in sites_qs]).exclude(
+            polygon=None
+        )
+    elif model_name == "monumentprotection":
         qs = MonumentProtection.objects.filter(
             site_id__in=[x.id for x in sites_qs]
         ).exclude(polygon=None)
     else:
-        qs = ResearchEvent.objects.filter(
-            site_id__in=[x.id for x in sites_qs]
-        ).exclude(polygon=None)
+        qs = ResearchEvent.objects.filter(site_id__in=[x.id for x in sites_qs]).exclude(
+            polygon=None
+        )
     df = pd.DataFrame(
-        list(
-            qs.distinct().values_list(*[x[0] for x in conf_items])
-        ),
-        columns=[x[1] for x in conf_items]
+        list(qs.distinct().values_list(*[x[0] for x in conf_items])),
+        columns=[x[1] for x in conf_items],
     )
     df_gen = flatten_df(df)
     newish = pd.DataFrame(df_gen, columns=[x[1] for x in conf_items])
-    newish['geometry'] = newish.apply(
-            lambda row: wkt.loads(row['polygon'][0].wkt), axis=1
-        )
-    str_df = newish.astype('str').drop(['polygon'], axis=1)
-    gdf = gp.GeoDataFrame(str_df)
-    gdf['geometry'] = gdf.apply(
-        lambda row: wkt.loads(row['geometry']), axis=1
+    newish["geometry"] = newish.apply(
+        lambda row: wkt.loads(row["polygon"][0].wkt), axis=1
     )
+    str_df = newish.astype("str").drop(["polygon"], axis=1)
+    gdf = gp.GeoDataFrame(str_df)
+    gdf["geometry"] = gdf.apply(lambda row: wkt.loads(row["geometry"]), axis=1)
     return gdf
 
 
 class GenericListView(ExportMixin, SingleTableView):
     filter_class = None
     formhelper_class = None
-    context_filter_name = 'filter'
+    context_filter_name = "filter"
     paginate_by = 10
-    template_name = 'browsing/generic_list.html'
+    template_name = "browsing/generic_list.html"
 
     def get_queryset(self, **kwargs):
         qs = super(GenericListView, self).get_queryset()
@@ -94,100 +91,102 @@ class GenericListView(ExportMixin, SingleTableView):
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by}).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         return table
 
     def get_context_data(self, **kwargs):
         context = super(GenericListView, self).get_context_data()
-        ct = ContentType.objects.get(
-            model=self.model.__name__.lower()
-        ).model_class()
+        ct = ContentType.objects.get(model=self.model.__name__.lower()).model_class()
         try:
-            ct._meta.get_field('polygon')
+            ct._meta.get_field("polygon")
             poly = True
         except Exception as e:
             poly = False
         if poly:
             points = serialize(
-                'geojson',
+                "geojson",
                 self.get_queryset(),
-                geometry_field='centroid',
+                geometry_field="centroid",
                 fields=(
-                    'name',
-                    'pk',
-                )
+                    "name",
+                    "pk",
+                ),
             )
-            context['points'] = points
+            context["points"] = points
             shapes = serialize(
-                'geojson',
+                "geojson",
                 self.get_queryset(),
-                geometry_field='polygon',
+                geometry_field="polygon",
                 fields=(
-                    'name',
-                    'pk',
-                )
+                    "name",
+                    "pk",
+                ),
             )
-            context['shapes'] = shapes
-        context['self_model_name'] = self.model.__name__.lower()
+            context["shapes"] = shapes
+        context["self_model_name"] = self.model.__name__.lower()
         context[self.context_filter_name] = self.filter
-        context['docstring'] = "{}".format(self.model.__doc__)
+        context["docstring"] = "{}".format(self.model.__doc__)
         if self.model._meta.verbose_name:
-            context['class_name'] = "{}".format(self.model._meta.verbose_name.title())
+            context["class_name"] = "{}".format(self.model._meta.verbose_name.title())
         else:
-            context['class_name'] = "{}".format(self.model.__name__)
+            context["class_name"] = "{}".format(self.model.__name__)
         try:
-            context['get_arche_dump'] = self.model.get_arche_dump()
+            context["get_arche_dump"] = self.model.get_arche_dump()
         except AttributeError:
-            context['get_arche_dump'] = None
+            context["get_arche_dump"] = None
         try:
-            context['create_view_link'] = self.model.get_createview_url()
+            context["create_view_link"] = self.model.get_createview_url()
         except AttributeError:
-            context['create_view_link'] = None
+            context["create_view_link"] = None
         try:
-            context['download'] = self.model.get_dl_url()
+            context["download"] = self.model.get_dl_url()
         except AttributeError:
-            context['download'] = None
+            context["download"] = None
         model = self.model
         app_label = model._meta.app_label
-        context['entity'] = model.__name__.lower()
+        context["entity"] = model.__name__.lower()
         filtered_objs = ChartConfig.objects.filter(
-            model_name=model.__name__.lower(),
-            app_name=app_label
+            model_name=model.__name__.lower(), app_name=app_label
         )
-        context['vis_list'] = filtered_objs
-        context['property_name'] = self.request.GET.get('property')
-        context['charttype'] = self.request.GET.get('charttype')
-        if context['self_model_name'] == "site":
-            context['enablereldl'] = True
+        context["vis_list"] = filtered_objs
+        context["property_name"] = self.request.GET.get("property")
+        context["charttype"] = self.request.GET.get("charttype")
+        if context["self_model_name"] == "site":
+            context["enablereldl"] = True
         else:
-            context['enablereldl'] = False
-        if context['charttype'] and context['property_name']:
+            context["enablereldl"] = False
+        if context["charttype"] and context["property_name"]:
             qs = self.get_queryset()
             chartdata = create_payload(
-                context['entity'],
-                context['property_name'],
-                context['charttype'],
+                context["entity"],
+                context["property_name"],
+                context["charttype"],
                 qs,
-                app_label=app_label
+                app_label=app_label,
             )
             context = dict(context, **chartdata)
         return context
 
     def render_to_response(self, context, **kwargs):
         try:
-            context['shapes']
+            context["shapes"]
         except KeyError:
-            context['shapes'] = None
-        if context['shapes']:
-            if self.request.GET.get(
-                'dl-geojson', None
-            ) and self.get_queryset().exclude(polygon=None) and context['entity']:
-                model_to_download = self.request.GET.get('dl-geojson', None).split('--')[1]
+            context["shapes"] = None
+        if context["shapes"]:
+            if (
+                self.request.GET.get("dl-geojson", None)
+                and self.get_queryset().exclude(polygon=None)
+                and context["entity"]
+            ):
+                model_to_download = self.request.GET.get("dl-geojson", None).split(
+                    "--"
+                )[1]
                 gdf = serialize_as_geojson(self, model_name=model_to_download)
-                response = HttpResponse(gdf.to_json(), content_type='application/json')
-                response['Content-Disposition'] = 'attachment; filename="{}.geojson"'.format(
-                    model_to_download
+                response = HttpResponse(gdf.to_json(), content_type="application/json")
+                response["Content-Disposition"] = (
+                    'attachment; filename="{}.geojson"'.format(model_to_download)
                 )
                 return response
             else:
@@ -203,7 +202,7 @@ class ReferenceListView(GenericListView):
     table_class = ReferenceTable
     filter_class = ReferenceListFilter
     formhelper_class = ReferenceFormHelper
-    init_columns = ['id', 'zotero_item', 'page']
+    init_columns = ["id", "zotero_item", "page"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -212,15 +211,17 @@ class ReferenceListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(ReferenceListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -234,7 +235,7 @@ class MonumentProtectionListView(GenericListView):
     table_class = MonumentProtectionTable
     filter_class = MonumentProtectionListFilter
     formhelper_class = MonumentProtectionFormHelper
-    init_columns = ['id', 'site_id']
+    init_columns = ["id", "site_id"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -243,15 +244,17 @@ class MonumentProtectionListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(MonumentProtectionListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -263,37 +266,48 @@ class MonumentProtectionListView(GenericListView):
 class MonumentProtectionDl(MonumentProtectionListView):
 
     def render_to_response(self, context, **kwargs):
-        sep = self.request.GET.get('sep', ',')
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+        sep = self.request.GET.get("sep", ",")
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            "%Y-%m-%d-%H-%M-%S"
+        )
         filename = "export_{}".format(timestamp)
-        response = HttpResponse(content_type='text/csv')
+        response = HttpResponse(content_type="text/csv")
         conf_items = list(
-            BrowsConf.objects.filter(model_name='monumentprotection')
-            .values_list('field_path', 'label')
+            BrowsConf.objects.filter(model_name="monumentprotection").values_list(
+                "field_path", "label"
+            )
         )
         if conf_items:
             try:
                 df = pd.DataFrame(
                     list(
-                        self.get_queryset().distinct().values_list(*[x[0] for x in conf_items])
+                        self.get_queryset()
+                        .distinct()
+                        .values_list(*[x[0] for x in conf_items])
                     ),
-                    columns=[x[1] for x in conf_items]
+                    columns=[x[1] for x in conf_items],
                 )
             except AssertionError:
-                response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+                response["Content-Disposition"] = (
+                    'attachment; filename="{}.csv"'.format(filename)
+                )
                 return response
         else:
-            response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
+                filename
+            )
             return response
         if sep == "comma":
-            df.to_csv(response, sep=',', index=False)
+            df.to_csv(response, sep=",", index=False)
         elif sep == "semicolon":
-            df.to_csv(response, sep=';', index=False)
+            df.to_csv(response, sep=";", index=False)
         elif sep == "tab":
-            df.to_csv(response, sep='\t', index=False)
+            df.to_csv(response, sep="\t", index=False)
         else:
-            df.to_csv(response, sep=',', index=False)
-        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            df.to_csv(response, sep=",", index=False)
+        response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
+            filename
+        )
         return response
 
 
@@ -302,7 +316,7 @@ class ResearchQuestionListView(GenericListView):
     table_class = ResearchQuestionTable
     filter_class = ResearchQuestionListFilter
     formhelper_class = ResearchQuestionFormHelper
-    init_columns = ['id', 'question']
+    init_columns = ["id", "question"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -311,15 +325,17 @@ class ResearchQuestionListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(ResearchQuestionListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -333,7 +349,7 @@ class ArchEntListView(GenericListView):
     table_class = ArchEntTable
     filter_class = ArchEntListFilter
     formhelper_class = ArchEntFilterFormHelper
-    init_columns = ['name', 'site_id', 'ent_type']
+    init_columns = ["name", "site_id", "ent_type"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -342,15 +358,17 @@ class ArchEntListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(ArchEntListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -362,36 +380,48 @@ class ArchEntListView(GenericListView):
 class ArchEntDl(ArchEntListView):
 
     def render_to_response(self, context, **kwargs):
-        sep = self.request.GET.get('sep', ',')
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+        sep = self.request.GET.get("sep", ",")
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            "%Y-%m-%d-%H-%M-%S"
+        )
         filename = "export_{}".format(timestamp)
-        response = HttpResponse(content_type='text/csv')
+        response = HttpResponse(content_type="text/csv")
         conf_items = list(
-            BrowsConf.objects.filter(model_name='archent').values_list('field_path', 'label')
+            BrowsConf.objects.filter(model_name="archent").values_list(
+                "field_path", "label"
+            )
         )
         if conf_items:
             try:
                 df = pd.DataFrame(
                     list(
-                        self.get_queryset().distinct().values_list(*[x[0] for x in conf_items])
+                        self.get_queryset()
+                        .distinct()
+                        .values_list(*[x[0] for x in conf_items])
                     ),
-                    columns=[x[1] for x in conf_items]
+                    columns=[x[1] for x in conf_items],
                 )
             except AssertionError:
-                response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+                response["Content-Disposition"] = (
+                    'attachment; filename="{}.csv"'.format(filename)
+                )
                 return response
         else:
-            response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
+                filename
+            )
             return response
         if sep == "comma":
-            df.to_csv(response, sep=',', index=False)
+            df.to_csv(response, sep=",", index=False)
         elif sep == "semicolon":
-            df.to_csv(response, sep=';', index=False)
+            df.to_csv(response, sep=";", index=False)
         elif sep == "tab":
-            df.to_csv(response, sep='\t', index=False)
+            df.to_csv(response, sep="\t", index=False)
         else:
-            df.to_csv(response, sep=',', index=False)
-        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            df.to_csv(response, sep=",", index=False)
+        response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
+            filename
+        )
         return response
 
 
@@ -400,7 +430,10 @@ class SiteListView(GenericListView):
     table_class = SiteTable
     filter_class = SiteListFilter
     formhelper_class = SiteFilterFormHelper
-    init_columns = ['id', 'name', ]
+    init_columns = [
+        "id",
+        "name",
+    ]
 
     def get_queryset(self, **kwargs):
         user = self.request.user
@@ -421,26 +454,32 @@ class SiteListView(GenericListView):
         qs = self.get_queryset()
         context = super(SiteListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         item_qs = ArchEnt.objects.filter(site_id__in=qs)
-        context['shapes_archent'] = serialize(
-            'geojson', item_qs, geometry_field="polygon",
-            fields=('name', 'pk', 'identifier')
+        context["shapes_archent"] = serialize(
+            "geojson",
+            item_qs,
+            geometry_field="polygon",
+            fields=("name", "pk", "identifier"),
         )
         item_qs = ResearchEvent.objects.filter(site_id__in=qs)
-        context['shapes_researchevent'] = serialize(
-            'geojson', item_qs, geometry_field="polygon",
-            fields=('name', 'pk', 'identifier')
+        context["shapes_researchevent"] = serialize(
+            "geojson",
+            item_qs,
+            geometry_field="polygon",
+            fields=("name", "pk", "identifier"),
         )
         item_qs = MonumentProtection.objects.filter(site_id__in=qs)
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -452,49 +491,61 @@ class SiteListView(GenericListView):
 class SiteDl(SiteListView):
 
     def render_to_response(self, context, **kwargs):
-        sep = self.request.GET.get('sep', ',')
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+        sep = self.request.GET.get("sep", ",")
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            "%Y-%m-%d-%H-%M-%S"
+        )
         filename = "export_{}".format(timestamp)
-        response = HttpResponse(content_type='text/csv')
+        response = HttpResponse(content_type="text/csv")
         conf_items = list(
-            BrowsConf.objects.filter(model_name='site').values_list('field_path', 'label')
+            BrowsConf.objects.filter(model_name="site").values_list(
+                "field_path", "label"
+            )
         )
         if conf_items:
             try:
                 df = pd.DataFrame(
                     list(
-                        self.get_queryset().distinct().values_list(*[x[0] for x in conf_items])
+                        self.get_queryset()
+                        .distinct()
+                        .values_list(*[x[0] for x in conf_items])
                     ),
-                    columns=[x[1] for x in conf_items]
+                    columns=[x[1] for x in conf_items],
                 )
             except AssertionError:
-                response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+                response["Content-Disposition"] = (
+                    'attachment; filename="{}.csv"'.format(filename)
+                )
                 return response
         else:
-            response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
+                filename
+            )
             return response
         if sep == "comma":
-            df.to_csv(response, sep=',', index=False)
+            df.to_csv(response, sep=",", index=False)
         elif sep == "semicolon":
-            df.to_csv(response, sep=';', index=False)
+            df.to_csv(response, sep=";", index=False)
         elif sep == "tab":
-            df.to_csv(response, sep='\t', index=False)
+            df.to_csv(response, sep="\t", index=False)
         else:
-            df.to_csv(response, sep=',', index=False)
-        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            df.to_csv(response, sep=",", index=False)
+        response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
+            filename
+        )
         return response
 
 
 class MapView(SiteListView):
     model = Site
-    template_name = 'browsing/map.html'
+    template_name = "browsing/map.html"
     filter_class = SiteListFilter
     formhelper_class = SiteFilterFormHelper
 
     def get_context_data(self, **kwargs):
         context = super(MapView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        context['sites'] = self.get_queryset()
+        context["sites"] = self.get_queryset()
         return context
 
     @method_decorator(login_required)
@@ -507,7 +558,7 @@ class ResearchEventListView(GenericListView):
     table_class = ResearchEventTable
     filter_class = ResearchEventListFilter
     formhelper_class = ResearchEventFilterFormHelper
-    init_columns = ['id', 'start_date', 'site_id', 'research_type', 'research_method']
+    init_columns = ["id", "start_date", "site_id", "research_type", "research_method"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -516,15 +567,17 @@ class ResearchEventListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(ResearchEventListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -536,36 +589,48 @@ class ResearchEventListView(GenericListView):
 class ResearchEventDl(ResearchEventListView):
 
     def render_to_response(self, context, **kwargs):
-        sep = self.request.GET.get('sep', ',')
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+        sep = self.request.GET.get("sep", ",")
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            "%Y-%m-%d-%H-%M-%S"
+        )
         filename = "export_{}".format(timestamp)
-        response = HttpResponse(content_type='text/csv')
+        response = HttpResponse(content_type="text/csv")
         conf_items = list(
-            BrowsConf.objects.filter(model_name='researchevent').values_list('field_path', 'label')
+            BrowsConf.objects.filter(model_name="researchevent").values_list(
+                "field_path", "label"
+            )
         )
         if conf_items:
             try:
                 df = pd.DataFrame(
                     list(
-                        self.get_queryset().distinct().values_list(*[x[0] for x in conf_items])
+                        self.get_queryset()
+                        .distinct()
+                        .values_list(*[x[0] for x in conf_items])
                     ),
-                    columns=[x[1] for x in conf_items]
+                    columns=[x[1] for x in conf_items],
                 )
             except AssertionError:
-                response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+                response["Content-Disposition"] = (
+                    'attachment; filename="{}.csv"'.format(filename)
+                )
                 return response
         else:
-            response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
+                filename
+            )
             return response
         if sep == "comma":
-            df.to_csv(response, sep=',', index=False)
+            df.to_csv(response, sep=",", index=False)
         elif sep == "semicolon":
-            df.to_csv(response, sep=';', index=False)
+            df.to_csv(response, sep=";", index=False)
         elif sep == "tab":
-            df.to_csv(response, sep='\t', index=False)
+            df.to_csv(response, sep="\t", index=False)
         else:
-            df.to_csv(response, sep=',', index=False)
-        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+            df.to_csv(response, sep=",", index=False)
+        response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
+            filename
+        )
         return response
 
 
@@ -574,7 +639,7 @@ class AltNameListView(GenericListView):
     table_class = AltNameTable
     filter_class = AltNameListFilter
     formhelper_class = AltNameFilterFormHelper
-    init_columns = ['label', 'language']
+    init_columns = ["label", "language"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -583,15 +648,17 @@ class AltNameListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(AltNameListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -606,8 +673,13 @@ class PeriodListView(GenericListView):
     filter_class = PeriodListFilter
     formhelper_class = PeriodFilterFormHelper
     init_columns = [
-        'id', 'name', 'start_date', 'start_date_latest',
-        'end_date', 'end_date_latest', 'norm_id',
+        "id",
+        "name",
+        "start_date",
+        "start_date_latest",
+        "end_date",
+        "end_date_latest",
+        "norm_id",
     ]
 
     def get_all_cols(self):
@@ -617,14 +689,16 @@ class PeriodListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(PeriodListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
         RequestConfig(
-            self.request, paginate={'page': 1, 'per_page': self.paginate_by}
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
         ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
@@ -639,7 +713,7 @@ class AlternativeNameListView(GenericListView):
     table_class = AlternativeNameTable
     filter_class = AlternativeNameListFilter
     formhelper_class = AlternativeNameFilterFormHelper
-    init_columns = ['id', 'name', 'part_of']
+    init_columns = ["id", "name", "part_of"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -648,14 +722,16 @@ class AlternativeNameListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(AlternativeNameListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
         RequestConfig(
-            self.request, paginate={'page': 1, 'per_page': self.paginate_by}
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
         ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
@@ -668,17 +744,21 @@ class AlternativeNameListView(GenericListView):
 class PersonRDFView(GenericListView):
     model = Person
     table_class = PersonTable
-    template_name = 'browsing/rdflib_template.txt'
+    template_name = "browsing/rdflib_template.txt"
     filter_class = PersonListFilter
     formhelper_class = GenericFilterFormHelper
 
     def render_to_response(self, context):
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-        response = HttpResponse(content_type='application/xml; charset=utf-8')
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            "%Y-%m-%d-%H-%M-%S"
+        )
+        response = HttpResponse(content_type="application/xml; charset=utf-8")
         filename = "places_{}".format(timestamp)
-        response['Content-Disposition'] = 'attachment; filename="{}.rdf"'.format(filename)
+        response["Content-Disposition"] = 'attachment; filename="{}.rdf"'.format(
+            filename
+        )
         g = person_to_arche(self.get_queryset())
-        get_format = self.request.GET.get('format', default='n3')
+        get_format = self.request.GET.get("format", default="n3")
         result = g.serialize(destination=response, format=get_format)
         return response
 
@@ -686,17 +766,21 @@ class PersonRDFView(GenericListView):
 class PlaceRDFView(GenericListView):
     model = Place
     table_class = PlaceTable
-    template_name = 'browsing/rdflib_template.txt'
+    template_name = "browsing/rdflib_template.txt"
     filter_class = PlaceListFilter
     formhelper_class = GenericFilterFormHelper
 
     def render_to_response(self, context):
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-        response = HttpResponse(content_type='application/xml; charset=utf-8')
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            "%Y-%m-%d-%H-%M-%S"
+        )
+        response = HttpResponse(content_type="application/xml; charset=utf-8")
         filename = "places_{}".format(timestamp)
-        response['Content-Disposition'] = 'attachment; filename="{}.rdf"'.format(filename)
+        response["Content-Disposition"] = 'attachment; filename="{}.rdf"'.format(
+            filename
+        )
         g = place_to_arche(self.get_queryset())
-        get_format = self.request.GET.get('format', default='n3')
+        get_format = self.request.GET.get("format", default="n3")
         result = g.serialize(destination=response, format=get_format)
         return response
 
@@ -704,17 +788,21 @@ class PlaceRDFView(GenericListView):
 class InstitutionRDFView(GenericListView):
     model = Institution
     table_class = InstitutionTable
-    template_name = 'browsing/rdflib_template.txt'
+    template_name = "browsing/rdflib_template.txt"
     filter_class = InstitutionListFilter
     formhelper_class = GenericFilterFormHelper
 
     def render_to_response(self, context):
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-        response = HttpResponse(content_type='application/xml; charset=utf-8')
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            "%Y-%m-%d-%H-%M-%S"
+        )
+        response = HttpResponse(content_type="application/xml; charset=utf-8")
         filename = "institutions_{}".format(timestamp)
-        response['Content-Disposition'] = 'attachment; filename="{}.rdf"'.format(filename)
+        response["Content-Disposition"] = 'attachment; filename="{}.rdf"'.format(
+            filename
+        )
         g = inst_to_arche(self.get_queryset())
-        get_format = self.request.GET.get('format', default='n3')
+        get_format = self.request.GET.get("format", default="n3")
         result = g.serialize(destination=response, format=get_format)
         return response
 
@@ -724,7 +812,7 @@ class InstitutionListView(GenericListView):
     table_class = InstitutionTable
     filter_class = InstitutionListFilter
     formhelper_class = InstitutionFilterFormHelper
-    init_columns = ['id', 'written_name']
+    init_columns = ["id", "written_name"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -733,14 +821,17 @@ class InstitutionListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(InstitutionListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by}).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -754,7 +845,7 @@ class PlaceListView(GenericListView):
     table_class = PlaceTable
     filter_class = PlaceListFilter
     formhelper_class = PlaceFilterFormHelper
-    init_columns = ['id', 'name', 'lat', 'lng']
+    init_columns = ["id", "name", "lat", "lng"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -763,14 +854,17 @@ class PlaceListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(PlaceListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by}).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -784,7 +878,7 @@ class PersonListView(GenericListView):
     table_class = PersonTable
     filter_class = PersonListFilter
     formhelper_class = PersonFilterFormHelper
-    init_columns = ['id', 'written_name', 'name', 'forename']
+    init_columns = ["id", "written_name", "name", "forename"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -793,14 +887,17 @@ class PersonListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(PersonListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by}).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols

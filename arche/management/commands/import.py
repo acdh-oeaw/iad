@@ -11,20 +11,20 @@ class Command(BaseCommand):
     help = "Imports the content of the repo-file-checker output 'fileType.json'"
 
     def add_arguments(self, parser):
-        parser.add_argument('file', type=str, nargs='?', default='fileList.json')
+        parser.add_argument("file", type=str, nargs="?", default="fileList.json")
 
     # A command must define handle()
     def handle(self, *args, **options):
-        path_to_file = os.path.join(settings.BASE_DIR, 'arche', 'data', options['file'])
+        path_to_file = os.path.join(settings.BASE_DIR, "arche", "data", options["file"])
         self.stdout.write("filepath: {}".format(path_to_file))
         data = json.load(open(path_to_file, "r", encoding="utf-8"))
         for x in data:
-            filename = x['filename']
-            directory = x['directory']
-            file_type = x['type']
-            size = x['size']
-            valid = x['valid_file']
-            new_cols = path2cols(directory, '/')
+            filename = x["filename"]
+            directory = x["directory"]
+            file_type = x["type"]
+            size = x["size"]
+            valid = x["valid_file"]
+            new_cols = path2cols(directory, "/")
             res, _ = Resource.objects.get_or_create(
                 has_title=filename, has_filetype=file_type, file_size=size
             )

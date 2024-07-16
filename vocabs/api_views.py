@@ -10,7 +10,7 @@ from rest_framework.settings import api_settings
 
 class LargeResultsSetPagination(pagination.PageNumberPagination):
     page_size = 25
-    page_size_query_param = 'page_size'
+    page_size_query_param = "page_size"
     max_page_size = 10000
 
 
@@ -52,4 +52,7 @@ class SkosConceptViewSet(viewsets.ModelViewSet):
     filter_class = SkosConceptFilter
     pagination_class = LargeResultsSetPagination
 
-    renderer_classes = tuple(api_settings.DEFAULT_RENDERER_CLASSES) + (RDFRenderer, SKOSRenderer, )
+    renderer_classes = tuple(api_settings.DEFAULT_RENDERER_CLASSES) + (
+        RDFRenderer,
+        SKOSRenderer,
+    )

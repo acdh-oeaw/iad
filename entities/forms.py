@@ -10,16 +10,20 @@ class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
         exclude = [
-            'alt_names',
+            "alt_names",
         ]
         widgets = {
-            'belongs_to_institution': autocomplete.ModelSelect2(
-                url='entities-ac:institution-autocomplete'),
-            'place_of_birth': autocomplete.ModelSelect2(url='entities-ac:place-autocomplete'),
-            'alt_names': autocomplete.ModelSelect2Multiple(
-                url='entities-ac:altname-autocomplete'),
-            'date_of_birth': forms.DateInput(
-                attrs={'placeholder': 'YYYY-MM-DD'}, format=('%Y-%m-%d')
+            "belongs_to_institution": autocomplete.ModelSelect2(
+                url="entities-ac:institution-autocomplete"
+            ),
+            "place_of_birth": autocomplete.ModelSelect2(
+                url="entities-ac:place-autocomplete"
+            ),
+            "alt_names": autocomplete.ModelSelect2Multiple(
+                url="entities-ac:altname-autocomplete"
+            ),
+            "date_of_birth": forms.DateInput(
+                attrs={"placeholder": "YYYY-MM-DD"}, format=("%Y-%m-%d")
             ),
         }
 
@@ -27,34 +31,40 @@ class PersonForm(forms.ModelForm):
         super(PersonForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
+        self.helper.form_class = "form-horizontal"
+        self.helper.label_class = "col-md-3"
+        self.helper.field_class = "col-md-9"
+        self.helper.add_input(
+            Submit("submit", "save"),
+        )
 
 
 class InstitutionForm(forms.ModelForm):
     class Meta:
         model = Institution
         exclude = [
-            'alt_names',
+            "alt_names",
         ]
         widgets = {
-            'location': autocomplete.ModelSelect2(url='entities-ac:place-autocomplete'),
-            'parent_institution': autocomplete.ModelSelect2(
-                url='entities-ac:institution-autocomplete'),
-            'alt_names': autocomplete.ModelSelect2Multiple(
-                url='entities-ac:altname-autocomplete'),
+            "location": autocomplete.ModelSelect2(url="entities-ac:place-autocomplete"),
+            "parent_institution": autocomplete.ModelSelect2(
+                url="entities-ac:institution-autocomplete"
+            ),
+            "alt_names": autocomplete.ModelSelect2Multiple(
+                url="entities-ac:altname-autocomplete"
+            ),
         }
 
     def __init__(self, *args, **kwargs):
         super(InstitutionForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
+        self.helper.form_class = "form-horizontal"
+        self.helper.label_class = "col-md-3"
+        self.helper.field_class = "col-md-9"
+        self.helper.add_input(
+            Submit("submit", "save"),
+        )
 
 
 class AlternativeNameForm(forms.ModelForm):
@@ -66,10 +76,12 @@ class AlternativeNameForm(forms.ModelForm):
         super(AlternativeNameForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
+        self.helper.form_class = "form-horizontal"
+        self.helper.label_class = "col-md-3"
+        self.helper.field_class = "col-md-9"
+        self.helper.add_input(
+            Submit("submit", "save"),
+        )
 
 
 class AlternativeNameFormCreate(forms.ModelForm):
@@ -88,9 +100,10 @@ class PlaceForm(forms.ModelForm):
         model = Place
         fields = "__all__"
         widgets = {
-            'part_of': autocomplete.ModelSelect2(url='entities-ac:place-autocomplete'),
-            'alt_names': autocomplete.ModelSelect2Multiple(
-                url='entities-ac:altname-autocomplete'),
+            "part_of": autocomplete.ModelSelect2(url="entities-ac:place-autocomplete"),
+            "alt_names": autocomplete.ModelSelect2Multiple(
+                url="entities-ac:altname-autocomplete"
+            ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -104,15 +117,16 @@ class PlaceFormCreate(forms.ModelForm):
         model = Place
         fields = "__all__"
         widgets = {
-            'part_of': autocomplete.ModelSelect2(url='entities-ac:place-autocomplete'),
-            'alt_names': autocomplete.ModelSelect2Multiple(
-                url='entities-ac:altname-autocomplete'),
+            "part_of": autocomplete.ModelSelect2(url="entities-ac:place-autocomplete"),
+            "alt_names": autocomplete.ModelSelect2Multiple(
+                url="entities-ac:altname-autocomplete"
+            ),
         }
 
     def __init__(self, *args, **kwargs):
         super(PlaceFormCreate, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
+        self.helper.form_class = "form-horizontal"
+        self.helper.label_class = "col-md-3"
+        self.helper.field_class = "col-md-9"

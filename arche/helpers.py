@@ -6,12 +6,12 @@ from rdflib import URIRef, Graph
 from rdflib.namespace import SKOS, RDF
 
 try:
-    base_url = settings.ARCHE_SETTINGS['base_url']
+    base_url = settings.ARCHE_SETTINGS["base_url"]
 except AttributeError:
     base_url = "https://please/provide/ARCHE-SETTINGS"
 
 
-def arche_ids(obj, class_name, base_url=base_url, id_prop='acdh_id'):
+def arche_ids(obj, class_name, base_url=base_url, id_prop="acdh_id"):
     """checks if an object has a valid(!) arche_id and returns this,\
     if not it returns a generic id"""
 
@@ -22,12 +22,12 @@ def arche_ids(obj, class_name, base_url=base_url, id_prop='acdh_id'):
             g = Graph()
             subject = URIRef(str(custom_id))
             g.add((subject, RDF.type, SKOS.Concept))
-            g.serialize(format='nt')
+            g.serialize(format="nt")
             subject = URIRef(str(custom_id))
         except:
-            subject = URIRef('/'.join([base_url, class_name, str(str(obj.id))]))
+            subject = URIRef("/".join([base_url, class_name, str(str(obj.id))]))
     else:
-        subject = URIRef('/'.join([base_url, class_name, str(obj.id)]))
+        subject = URIRef("/".join([base_url, class_name, str(obj.id)]))
     return subject
 
 
@@ -40,10 +40,8 @@ def path2cols(path, separator="_"):
     path_length = len(path_parts)
     prefix = path_length
     for x in reversed(path_parts):
-        col_title = '/'.join(path_parts[0:prefix])
-        col, _ = Collection.objects.get_or_create(
-            has_title=col_title
-        )
+        col_title = "/".join(path_parts[0:prefix])
+        col, _ = Collection.objects.get_or_create(has_title=col_title)
         cols.append(col)
         prefix = prefix - 1
     while counter != len(cols):
@@ -56,7 +54,9 @@ def path2cols(path, separator="_"):
     return cols
 
 
-def create_acdhid(resource, trim=0, base_url='https://id.acdh.oeaw.ac.at', preserve=False):
+def create_acdhid(
+    resource, trim=0, base_url="https://id.acdh.oeaw.ac.at", preserve=False
+):
     """
     Endpoint to process text from the ACDH internal json standard
 
@@ -68,7 +68,7 @@ def create_acdhid(resource, trim=0, base_url='https://id.acdh.oeaw.ac.at', prese
     if preserve:
         return resource
     else:
-        if base_url.endswith('/'):
+        if base_url.endswith("/"):
             base_url = base_url[:-1]
             print(base_url)
         try:

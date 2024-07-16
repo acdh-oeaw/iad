@@ -9,40 +9,55 @@ class RepoObject(models.Model):
     """
     An abstract class providing properties for subclasses.
     """
+
     has_title = models.CharField(
-        max_length=250, blank=True, verbose_name="acdh:hasTitle",
-        help_text="Title or name of Collection."
+        max_length=250,
+        blank=True,
+        verbose_name="acdh:hasTitle",
+        help_text="Title or name of Collection.",
     )
     description = models.TextField(
-        blank=True, null=True, verbose_name="acdh:hasDescription",
+        blank=True,
+        null=True,
+        verbose_name="acdh:hasDescription",
         help_text="A verbose description of certain aspects of an entity. \
-        This is the most generic property, use more specific sub-properties where applicable."
+        This is the most generic property, use more specific sub-properties where applicable.",
     )
     acdh_id = models.CharField(
-        max_length=250, blank=True, verbose_name="acdh:hasIdentifier",
+        max_length=250,
+        blank=True,
+        verbose_name="acdh:hasIdentifier",
         help_text="Unique identifier given by ACDH and used in ACDH systems,\
-        as well as identifiers with a stable URL or URI assigned by other parties"
+        as well as identifiers with a stable URL or URI assigned by other parties",
     )
     checked = models.BooleanField(
-        blank=True, default=False, verbose_name="Checked",
-        help_text="Set to True if the Object passed your internal quality control"
+        blank=True,
+        default=False,
+        verbose_name="Checked",
+        help_text="Set to True if the Object passed your internal quality control",
     )
     has_license = models.CharField(
-        max_length=250, blank=True, verbose_name="acdh:hasLicense",
-        help_text="Denotes the license attached to an object."
+        max_length=250,
+        blank=True,
+        verbose_name="acdh:hasLicense",
+        help_text="Denotes the license attached to an object.",
     )
     has_category = models.CharField(
-        max_length=250, blank=True, verbose_name="acdh:hasCategory",
+        max_length=250,
+        blank=True,
+        verbose_name="acdh:hasCategory",
         help_text="Type of resource, e. g. corpus. Choose from list.\
         Can be refined with description, format, extent, etc.",
-        choices=RES_TYPE
+        choices=RES_TYPE,
     )
     has_lcs = models.CharField(
-        max_length=250, blank=True, verbose_name="acdh:hasLifeCycleStatus",
+        max_length=250,
+        blank=True,
+        verbose_name="acdh:hasLifeCycleStatus",
         help_text="Indication if the Project, Collection or Resource (A) still in\
         the making or completed? A verbose status description can\
         be added with acdh:hasCompleteness",
-        choices=LCS
+        choices=LCS,
     )
 
     def copy_instance(self):
@@ -63,47 +78,58 @@ class Collection(RepoObject):
     A Collection can be optionally related to a Project (acdh:hasRelatedProject),
     in which it was created or curated.
     """
+
     part_of = models.ForeignKey(
-        'Collection', blank=True, null=True, verbose_name="acdh:isPartOf",
+        "Collection",
+        blank=True,
+        null=True,
+        verbose_name="acdh:isPartOf",
         help_text="Indicates A is a part of aggregate B, \
-        e. g. elements of a series, items of a collection.", related_name="has_part",
-        on_delete=models.CASCADE
+        e. g. elements of a series, items of a collection.",
+        related_name="has_part",
+        on_delete=models.CASCADE,
     )
     has_contributor = models.ManyToManyField(
-        Person, blank=True, verbose_name="acdh:hasContributor",
+        Person,
+        blank=True,
+        verbose_name="acdh:hasContributor",
         help_text="Agent (person, group, organisation) (B) who was actively involved in \
         creating/curating/editing a Resource, a Collection or in a Project (A).",
-        related_name="contributes_to_collection"
+        related_name="contributes_to_collection",
     )
     has_creator = models.ManyToManyField(
-        Person, blank=True, verbose_name="acdh:hasCreator",
+        Person,
+        blank=True,
+        verbose_name="acdh:hasCreator",
         help_text="Person (B) responsible for creation of resource (A).\
         Will be included in the citation.",
-        related_name="created_collection"
+        related_name="created_collection",
     )
     has_access_restriction = models.CharField(
-        max_length=250, blank=True, verbose_name="acdh:hasAccessRestriction",
+        max_length=250,
+        blank=True,
+        verbose_name="acdh:hasAccessRestriction",
         help_text="Denotes if restricted access applies to the Resource (A).",
-        choices=ACCESS_RESTRICTIONS
+        choices=ACCESS_RESTRICTIONS,
     )
 
     def __str__(self):
         return "{}".format(self.has_title)
 
     def get_absolute_url(self):
-        return reverse('arche:collection_detail', kwargs={'pk': self.id})
+        return reverse("arche:collection_detail", kwargs={"pk": self.id})
 
     @classmethod
     def get_createview_url(self):
-        return reverse('arche:collection_create')
+        return reverse("arche:collection_create")
 
     @classmethod
     def get_listview_url(self):
-        return reverse('arche:browse_collections')
+        return reverse("arche:browse_collections")
 
     @classmethod
     def get_arche_dump(self):
-        return reverse('arche:rdf_collections')
+        return reverse("arche:rdf_collections")
 
     def get_next(self):
         next = Collection.objects.filter(id__gt=self.id)
@@ -112,7 +138,7 @@ class Collection(RepoObject):
         return False
 
     def get_prev(self):
-        prev = Collection.objects.filter(id__lt=self.id).order_by('-id')
+        prev = Collection.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return prev.first().id
         return False
@@ -129,51 +155,65 @@ class Resource(RepoObject):
     """
 
     has_creator = models.ManyToManyField(
-        Person, blank=True, verbose_name="acdh:hasContributor",
+        Person,
+        blank=True,
+        verbose_name="acdh:hasContributor",
         help_text="Agent (person, group, organisation) (B) who was actively involved in \
         creating/curating/editing a Resource, a Collection or in a Project (A).",
-        related_name="created_resource"
+        related_name="created_resource",
     )
     has_contributor = models.ManyToManyField(
-        Person, blank=True, verbose_name="acdh:hasContributor",
+        Person,
+        blank=True,
+        verbose_name="acdh:hasContributor",
         help_text="Agent (person, group, organisation) (B) who was actively involved in \
         creating/curating/editing a Resource, a Collection or in a Project (A).",
-        related_name="contributes_to_resource"
+        related_name="contributes_to_resource",
     )
     has_filetype = models.CharField(
-        max_length=250, blank=True, verbose_name="acdh:hasFormat",
-        help_text="Format of a resource (A). Indicated as MIME type."
+        max_length=250,
+        blank=True,
+        verbose_name="acdh:hasFormat",
+        help_text="Format of a resource (A). Indicated as MIME type.",
     )
 
     file_size = models.IntegerField(
-        blank=True, null=True, verbose_name="acdh:hasBinarySize",
-        help_text="Indicates size in bytes of a Resource or Collection"
+        blank=True,
+        null=True,
+        verbose_name="acdh:hasBinarySize",
+        help_text="Indicates size in bytes of a Resource or Collection",
     )
     part_of = models.ForeignKey(
-        'Collection', blank=True, null=True, verbose_name="acdh:isPartOf",
+        "Collection",
+        blank=True,
+        null=True,
+        verbose_name="acdh:isPartOf",
         help_text="Indicates A is a part of aggregate B, \
-        e. g. elements of a series, items of a collection.", related_name="has_part_resource",
-        on_delete=models.CASCADE
+        e. g. elements of a series, items of a collection.",
+        related_name="has_part_resource",
+        on_delete=models.CASCADE,
     )
     has_access_restriction = models.CharField(
-        max_length=250, blank=True, verbose_name="acdh:hasAccessRestriction",
+        max_length=250,
+        blank=True,
+        verbose_name="acdh:hasAccessRestriction",
         help_text="Denotes if restricted access applies to the Resource (A).",
-        choices=ACCESS_RESTRICTIONS
+        choices=ACCESS_RESTRICTIONS,
     )
 
     def __str__(self):
         return "{}".format(self.has_title)
 
     def get_absolute_url(self):
-        return reverse('arche:resource_detail', kwargs={'pk': self.id})
+        return reverse("arche:resource_detail", kwargs={"pk": self.id})
 
     @classmethod
     def get_createview_url(self):
-        return reverse('arche:resource_create')
+        return reverse("arche:resource_create")
 
     @classmethod
     def get_listview_url(self):
-        return reverse('arche:browse_resources')
+        return reverse("arche:browse_resources")
 
     def inherit_properties(self):
         """ fetches (some) properties of the part_of collection\
@@ -215,7 +255,7 @@ class Resource(RepoObject):
 
     @classmethod
     def get_arche_dump(self):
-        return reverse('arche:rdf_resources')
+        return reverse("arche:rdf_resources")
 
     def get_next(self):
         next = Resource.objects.filter(id__gt=self.id)
@@ -224,7 +264,7 @@ class Resource(RepoObject):
         return False
 
     def get_prev(self):
-        prev = Resource.objects.filter(id__lt=self.id).order_by('-id')
+        prev = Resource.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return prev.first().id
         return False
@@ -233,7 +273,7 @@ class Resource(RepoObject):
         try:
             return "{}/{}".format(self.part_of.has_title, self.has_title)
         except AttributeError:
-            return "{}/{}".format('no parent', self.has_title)
+            return "{}/{}".format("no parent", self.has_title)
 
 
 class Project(RepoObject):
@@ -242,57 +282,70 @@ class Project(RepoObject):
     Effort or activity with defined goals and (normally) limited time scope, usually\
     in collaborative setup with dedicated funding.
     """
+
     has_principal = models.ManyToManyField(
-        Person, blank=True, verbose_name="acdh:hasPrincipalInvestigator",
+        Person,
+        blank=True,
+        verbose_name="acdh:hasPrincipalInvestigator",
         help_text="Person officially designated as head of project team or subproject \
         team instrumental in the work necessary to development of the resource.",
-        related_name="is_principal"
+        related_name="is_principal",
     )
     has_contributor = models.ManyToManyField(
-        Person, blank=True, verbose_name="acdh:hasContributor",
+        Person,
+        blank=True,
+        verbose_name="acdh:hasContributor",
         help_text="Agent (person, group, organisation) (B) who was actively involved in \
         creating/curating/editing a Resource, a Collection or in a Project (A).",
-        related_name="contributes_to_project"
+        related_name="contributes_to_project",
     )
     has_start_date = models.DateField(
-        blank=True, null=True, verbose_name="acdh:hasStartDate",
-        help_text="Indicates the start date of a Project."
+        blank=True,
+        null=True,
+        verbose_name="acdh:hasStartDate",
+        help_text="Indicates the start date of a Project.",
     )
     has_end_date = models.DateField(
-        blank=True, null=True, verbose_name="acdh:hasEndtDate",
-        help_text="Indicates the end date of a Project."
+        blank=True,
+        null=True,
+        verbose_name="acdh:hasEndtDate",
+        help_text="Indicates the end date of a Project.",
     )
     has_funder = models.ManyToManyField(
-        Institution, blank=True, verbose_name="acdh:hasFunder",
+        Institution,
+        blank=True,
+        verbose_name="acdh:hasFunder",
         help_text="Organisation (B) which provided funding for the project (A).",
-        related_name="is_funding"
+        related_name="is_funding",
     )
     related_collection = models.ManyToManyField(
-        Collection, blank=True, verbose_name="acdh:hasRelatedCollection",
+        Collection,
+        blank=True,
+        verbose_name="acdh:hasRelatedCollection",
         help_text="Indication of a project (B) associated with this resource or collection (A).",
-        related_name="has_related_project"
+        related_name="has_related_project",
     )
 
     def __str__(self):
         return "{}".format(self.has_title)
 
         def get_absolute_url(self):
-            return reverse('arche:project_detail', kwargs={'pk': self.id})
+            return reverse("arche:project_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('arche:project_detail', kwargs={'pk': self.id})
+        return reverse("arche:project_detail", kwargs={"pk": self.id})
 
     @classmethod
     def get_createview_url(self):
-        return reverse('arche:project_create')
+        return reverse("arche:project_create")
 
     @classmethod
     def get_listview_url(self):
-        return reverse('arche:browse_projects')
+        return reverse("arche:browse_projects")
 
     @classmethod
     def get_arche_dump(self):
-        return reverse('arche:rdf_projects')
+        return reverse("arche:rdf_projects")
 
     def get_next(self):
         next = Project.objects.filter(id__gt=self.id)
@@ -301,7 +354,7 @@ class Project(RepoObject):
         return False
 
     def get_prev(self):
-        prev = Project.objects.filter(id__lt=self.id).order_by('-id')
+        prev = Project.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return prev.first().id
         return False

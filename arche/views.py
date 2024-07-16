@@ -24,9 +24,9 @@ def copy_view(request):
     """View looks for get-params with: name of application, of model and id\
     of instance of model which should be copied"""
 
-    class_name = request.GET.get('class-name', '')
-    object_id = request.GET.get('id', '')
-    app_name = request.GET.get('app-name', 'arche')
+    class_name = request.GET.get("class-name", "")
+    object_id = request.GET.get("id", "")
+    app_name = request.GET.get("app-name", "arche")
     if object_id and class_name:
         class_name = class_name.lower()
         app_name = app_name.lower()
@@ -68,7 +68,7 @@ class ProjectListView(GenericListView):
     table_class = ProjectTable
     filter_class = ProjectListFilter
     formhelper_class = ProjectFilterFormHelper
-    init_columns = ['id', 'has_title']
+    init_columns = ["id", "has_title"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -77,14 +77,17 @@ class ProjectListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(ProjectListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by}).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -96,31 +99,35 @@ class ProjectListView(GenericListView):
 class ProjectRDFView(GenericListView):
     model = Project
     table_class = ProjectTable
-    template_name = 'browsing/rdflib_template.txt'
+    template_name = "browsing/rdflib_template.txt"
     filter_class = ProjectListFilter
     formhelper_class = GenericFilterFormHelper
 
     def render_to_response(self, context):
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-        response = HttpResponse(content_type='application/xml; charset=utf-8')
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            "%Y-%m-%d-%H-%M-%S"
+        )
+        response = HttpResponse(content_type="application/xml; charset=utf-8")
         filename = "{}_{}".format(self.model.__name__, timestamp)
-        response['Content-Disposition'] = 'attachment; filename="{}.rdf"'.format(filename)
+        response["Content-Disposition"] = 'attachment; filename="{}.rdf"'.format(
+            filename
+        )
         g = project_to_arche(self.get_queryset())
-        get_format = self.request.GET.get('format', default='n3')
+        get_format = self.request.GET.get("format", default="n3")
         result = g.serialize(destination=response, format=get_format)
         return response
 
 
 class ProjectDetailView(DetailView):
     model = Project
-    template_name = 'arche/project_detail.html'
+    template_name = "arche/project_detail.html"
 
 
 class ProjectCreate(CreateView):
 
     model = Project
     form_class = ProjectForm
-    template_name = 'arche/project_create.html'
+    template_name = "arche/project_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -131,7 +138,7 @@ class ProjectUpdate(UpdateView):
 
     model = Project
     form_class = ProjectForm
-    template_name = 'arche/project_create.html'
+    template_name = "arche/project_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -140,8 +147,8 @@ class ProjectUpdate(UpdateView):
 
 class ProjectDelete(DeleteView):
     model = Project
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('arche:browse_projects')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("arche:browse_projects")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -153,7 +160,7 @@ class CollectionListView(GenericListView):
     table_class = CollectionTable
     filter_class = CollectionListFilter
     formhelper_class = CollectionFilterFormHelper
-    init_columns = ['id', 'has_title']
+    init_columns = ["id", "has_title"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -162,14 +169,17 @@ class CollectionListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(CollectionListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by}).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -181,31 +191,35 @@ class CollectionListView(GenericListView):
 class CollectionRDFView(GenericListView):
     model = Collection
     table_class = CollectionTable
-    template_name = 'browsing/rdflib_template.txt'
+    template_name = "browsing/rdflib_template.txt"
     filter_class = CollectionListFilter
     formhelper_class = GenericFilterFormHelper
 
     def render_to_response(self, context):
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-        response = HttpResponse(content_type='application/xml; charset=utf-8')
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            "%Y-%m-%d-%H-%M-%S"
+        )
+        response = HttpResponse(content_type="application/xml; charset=utf-8")
         filename = "{}_{}".format(self.model.__name__, timestamp)
-        response['Content-Disposition'] = 'attachment; filename="{}.rdf"'.format(filename)
+        response["Content-Disposition"] = 'attachment; filename="{}.rdf"'.format(
+            filename
+        )
         g = collection_to_arche(self.get_queryset())
-        get_format = self.request.GET.get('format', default='n3')
+        get_format = self.request.GET.get("format", default="n3")
         result = g.serialize(destination=response, format=get_format)
         return response
 
 
 class CollectionDetailView(DetailView):
     model = Collection
-    template_name = 'arche/collection_detail.html'
+    template_name = "arche/collection_detail.html"
 
 
 class CollectionCreate(CreateView):
 
     model = Collection
     form_class = CollectionForm
-    template_name = 'arche/collection_create.html'
+    template_name = "arche/collection_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -216,7 +230,7 @@ class CollectionUpdate(UpdateView):
 
     model = Collection
     form_class = CollectionForm
-    template_name = 'arche/collection_create.html'
+    template_name = "arche/collection_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -225,8 +239,8 @@ class CollectionUpdate(UpdateView):
 
 class CollectionDelete(DeleteView):
     model = Collection
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('arche:browse_collections')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("arche:browse_collections")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -238,7 +252,7 @@ class ResourceListView(GenericListView):
     table_class = ResourceTable
     filter_class = ResourceListFilter
     formhelper_class = ResourceFilterFormHelper
-    init_columns = ['id', 'has_title']
+    init_columns = ["id", "has_title"]
 
     def get_all_cols(self):
         all_cols = list(self.table_class.base_columns.keys())
@@ -247,14 +261,17 @@ class ResourceListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(ResourceListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by}).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -265,14 +282,14 @@ class ResourceListView(GenericListView):
 
 class ResourceDetailView(DetailView):
     model = Resource
-    template_name = 'arche/resource_detail.html'
+    template_name = "arche/resource_detail.html"
 
 
 class ResourceCreate(CreateView):
 
     model = Resource
     form_class = ResourceForm
-    template_name = 'arche/resource_create.html'
+    template_name = "arche/resource_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -283,7 +300,7 @@ class ResourceUpdate(UpdateView):
 
     model = Resource
     form_class = ResourceForm
-    template_name = 'arche/resource_create.html'
+    template_name = "arche/resource_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -292,8 +309,8 @@ class ResourceUpdate(UpdateView):
 
 class ResourceDelete(DeleteView):
     model = Resource
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('arche:browse_projects')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("arche:browse_projects")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -301,7 +318,7 @@ class ResourceDelete(DeleteView):
 
 
 class ResourceInheritProperties(ResourceListView):
-    template_name = 'arche/resource_browse.html'
+    template_name = "arche/resource_browse.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -310,13 +327,15 @@ class ResourceInheritProperties(ResourceListView):
     def get_context_data(self, **kwargs):
         context = super(ResourceInheritProperties, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         new_props = []
         for x in self.get_queryset():
             new = x.inherit_properties()
         new_props.append(new)
-        context['updat_report'] = new_props
+        context["updat_report"] = new_props
 
         return context
 
@@ -324,16 +343,20 @@ class ResourceInheritProperties(ResourceListView):
 class ResourceRDFView(GenericListView):
     model = Resource
     table_class = ResourceTable
-    template_name = 'browsing/rdflib_template.txt'
+    template_name = "browsing/rdflib_template.txt"
     filter_class = ResourceListFilter
     formhelper_class = GenericFilterFormHelper
 
     def render_to_response(self, context):
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-        response = HttpResponse(content_type='application/xml; charset=utf-8')
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            "%Y-%m-%d-%H-%M-%S"
+        )
+        response = HttpResponse(content_type="application/xml; charset=utf-8")
         filename = "{}_{}".format(self.model.__name__, timestamp)
-        response['Content-Disposition'] = 'attachment; filename="{}.rdf"'.format(filename)
+        response["Content-Disposition"] = 'attachment; filename="{}.rdf"'.format(
+            filename
+        )
         g = resource_to_arche(self.get_queryset())
-        get_format = self.request.GET.get('format', default='n3')
+        get_format = self.request.GET.get("format", default="n3")
         result = g.serialize(destination=response, format=get_format)
         return response
