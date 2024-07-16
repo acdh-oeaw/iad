@@ -1,0 +1,21 @@
+{% load static %}
+{% load webpage_extras %}
+{% load browsing_extras %}
+<footer class="main-footer">
+    <div class="container">
+      <div class="footer-wrapper">
+        <div class="footer-sep">
+          <i class="far fa-comment"></i> CONTACT
+        </div>
+        {% social_media %}
+        <div class="row">
+            <div class="col-md-3 ml-auto">
+                <img src="{% static 'webpage/img/interreg_logo.png' %}" alt="logo" title="logo" width="200px"/>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a href="{% projects_metadata 'imprint' %}">Impressum/Imprint</a>
+    </div>
+</footer>
