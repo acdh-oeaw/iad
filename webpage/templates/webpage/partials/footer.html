@@ -10,19 +10,12 @@
         {% social_media %}
         <div class="row">
             <div class="col-md-3 ml-auto">
-                <img src="{% static 'webpage/img/interreg_logo.png' %}" alt="logo" title="logo"/>
+                <img src="{% static 'webpage/img/interreg_logo.png' %}" alt="logo" title="logo" width="200px"/>
             </div>
         </div>
       </div>
     </div>
-    <div class="footer-imprint-bar">
+    <div class="d-flex justify-content-center">
         <a href="{% projects_metadata 'imprint' %}">Impressum/Imprint</a>
     </div>
-    {% if user.is_authenticated %}
-        {% if DB_NAME %}
-            <div class="footer-imprint-bar">
-                <small>{{ DB_NAME }}</small>
-            </div>
-        {% endif %}
-    {% endif %}
 </footer>
