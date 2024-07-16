@@ -11,12 +11,9 @@ class GeoJsonSerializer(serializers.BaseSerializer):
                 "type": "Feature",
                 "geometry": {
                     "type": "Point",
-                    "coordinates": [float(obj.lng), float(obj.lat)]
-                    },
-                "properties": {
-                    "name": obj.name,
-                    "placeType": obj.place_type
-                }
+                    "coordinates": [float(obj.lng), float(obj.lat)],
+                },
+                "properties": {"name": obj.name, "placeType": obj.place_type},
             }
             return geojson
         else:

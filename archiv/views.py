@@ -9,52 +9,52 @@ from django.utils.decorators import method_decorator
 
 from reversion.models import Version
 
-from . forms import *
-from . models import *
-from . utils import geojson_to_poly
+from .forms import *
+from .models import *
+from .utils import geojson_to_poly
 
 
 class BaseCreateView(CreateView):
     model = None
     form_class = None
-    template_name = 'archiv/generic_create.html'
+    template_name = "archiv/generic_create.html"
 
     def get_context_data(self, **kwargs):
         context = super(BaseCreateView, self).get_context_data()
-        context['docstring'] = "{}".format(self.model.__doc__)
-        context['self_model_name'] = self.model.__name__.lower()
+        context["docstring"] = "{}".format(self.model.__doc__)
+        context["self_model_name"] = self.model.__name__.lower()
         if self.model._meta.verbose_name:
-            context['class_name'] = "{}".format(self.model._meta.verbose_name.title())
+            context["class_name"] = "{}".format(self.model._meta.verbose_name.title())
         else:
-            context['class_name'] = "{}".format(self.model.__name__)
+            context["class_name"] = "{}".format(self.model.__name__)
         return context
 
 
 class BaseUpdateView(UpdateView):
     model = None
     form_class = None
-    template_name = 'archiv/generic_create.html'
+    template_name = "archiv/generic_create.html"
 
     def get_context_data(self, **kwargs):
         context = super(BaseUpdateView, self).get_context_data()
-        context['self_model_name'] = self.model.__name__.lower()
-        context['docstring'] = "{}".format(self.model.__doc__)
+        context["self_model_name"] = self.model.__name__.lower()
+        context["docstring"] = "{}".format(self.model.__doc__)
         if self.model._meta.verbose_name:
-            context['class_name'] = "{}".format(self.model._meta.verbose_name.title())
+            context["class_name"] = "{}".format(self.model._meta.verbose_name.title())
         else:
-            context['class_name'] = "{}".format(self.model.__name__)
+            context["class_name"] = "{}".format(self.model.__name__)
         return context
 
 
 class ArchEntDetailView(DetailView):
     model = ArchEnt
-    template_name = 'archiv/archent_detail.html'
+    template_name = "archiv/archent_detail.html"
 
     def get_context_data(self, **kwargs):
         user = self.request.user
         context = super(ArchEntDetailView, self).get_context_data()
         if self.object.public or user.is_authenticated:
-            context['not_logged_in'] = False
+            context["not_logged_in"] = False
         else:
             context = {}
         return context
@@ -81,27 +81,27 @@ class ArchEntUpdate(BaseUpdateView):
         instance = self.object
 
         if self.model.objects.filter(id=instance.id).filter(
-            Q(ent_type__pref_label__startswith='funerary')
-            | Q(ent_type__broader_concept__pref_label__startswith='funerary')
+            Q(ent_type__pref_label__startswith="funerary")
+            | Q(ent_type__broader_concept__pref_label__startswith="funerary")
         ):
-            context['no_burial'] = False
+            context["no_burial"] = False
         else:
-            context['no_burial'] = True
+            context["no_burial"] = True
 
         if self.model.objects.filter(id=instance.id).filter(
-            Q(ent_type__pref_label__startswith='settlement')
-            | Q(ent_type__broader_concept__pref_label__startswith='settlement')
+            Q(ent_type__pref_label__startswith="settlement")
+            | Q(ent_type__broader_concept__pref_label__startswith="settlement")
         ):
-            context['no_settlement'] = False
+            context["no_settlement"] = False
         else:
-            context['settlement'] = True
+            context["settlement"] = True
 
         try:
             instance = self.object
             site_poly = instance.site_id.get_geojson()
-            context['site_poly'] = "{}".format(site_poly)
+            context["site_poly"] = "{}".format(site_poly)
         except:
-            context['site_poly'] = None
+            context["site_poly"] = None
         return context
 
     @method_decorator(login_required)
@@ -111,8 +111,8 @@ class ArchEntUpdate(BaseUpdateView):
 
 class ArchEntDelete(DeleteView):
     model = ArchEnt
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_archents')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_archents")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -121,20 +121,24 @@ class ArchEntDelete(DeleteView):
 
 class SiteDetailView(DetailView):
     model = Site
-    template_name = 'archiv/site_detail.html'
+    template_name = "archiv/site_detail.html"
 
     def get_context_data(self, **kwargs):
         user = self.request.user
         context = super(SiteDetailView, self).get_context_data()
-        if (self.object.public and self.object.site_checked_by) or user.is_authenticated:
+        if (
+            self.object.public and self.object.site_checked_by
+        ) or user.is_authenticated:
             try:
-                information_source = self.object.has_research_activity.order_by('start_date')[0]
+                information_source = self.object.has_research_activity.order_by(
+                    "start_date"
+                )[0]
             except IndexError:
                 information_source = None
-            context['information_source'] = information_source
-            context['history'] = Version.objects.get_for_object(self.object)
+            context["information_source"] = information_source
+            context["history"] = Version.objects.get_for_object(self.object)
         else:
-            context['not_logged_in'] = True
+            context["not_logged_in"] = True
             return context
         return context
 
@@ -161,8 +165,8 @@ class SiteUpdate(BaseUpdateView):
 
 class SiteDelete(DeleteView):
     model = Site
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_sites')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_sites")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -171,13 +175,13 @@ class SiteDelete(DeleteView):
 
 class ResearchEventDetailView(DetailView):
     model = ResearchEvent
-    template_name = 'archiv/researchevent_detail.html'
+    template_name = "archiv/researchevent_detail.html"
 
     def get_context_data(self, **kwargs):
         user = self.request.user
         context = super(ResearchEventDetailView, self).get_context_data()
         if self.object.public or user.is_authenticated:
-            context['not_logged_in'] = False
+            context["not_logged_in"] = False
         else:
             context = {}
         return context
@@ -201,9 +205,9 @@ class ResearchEventUpdate(BaseUpdateView):
     def get_context_data(self, **kwargs):
         context = super(ResearchEventUpdate, self).get_context_data()
         if self.object.convex_hulls:
-            context['convex_hulls'] = self.object.convex_hulls
+            context["convex_hulls"] = self.object.convex_hulls
         else:
-            context['convex_hulls'] = None
+            context["convex_hulls"] = None
         return context
 
     @method_decorator(login_required)
@@ -213,8 +217,8 @@ class ResearchEventUpdate(BaseUpdateView):
 
 class ResearchEventDelete(DeleteView):
     model = ResearchEvent
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_researchevents')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_researchevents")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -223,7 +227,7 @@ class ResearchEventDelete(DeleteView):
 
 class AltNameDetailView(DetailView):
     model = AltName
-    template_name = 'archiv/altname_detail.html'
+    template_name = "archiv/altname_detail.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -252,8 +256,8 @@ class AltNameUpdate(BaseUpdateView):
 
 class AltNameDelete(DeleteView):
     model = AltName
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_altnames')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_altnames")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -262,7 +266,7 @@ class AltNameDelete(DeleteView):
 
 class PeriodDetailView(DetailView):
     model = Period
-    template_name = 'archiv/period_detail.html'
+    template_name = "archiv/period_detail.html"
 
 
 class PeriodCreate(BaseCreateView):
@@ -287,8 +291,8 @@ class PeriodUpdate(BaseUpdateView):
 
 class PeriodDelete(DeleteView):
     model = Period
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_periods')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_periods")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -297,7 +301,7 @@ class PeriodDelete(DeleteView):
 
 class ResearchQuestionDetailView(DetailView):
     model = ResearchQuestion
-    template_name = 'archiv/researchquestion_detail.html'
+    template_name = "archiv/researchquestion_detail.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -326,8 +330,8 @@ class ResearchQuestionUpdate(BaseUpdateView):
 
 class ResearchQuestionDelete(DeleteView):
     model = ResearchQuestion
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_researchquestions')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_researchquestions")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -336,13 +340,13 @@ class ResearchQuestionDelete(DeleteView):
 
 class MonumentProtectionDetailView(DetailView):
     model = MonumentProtection
-    template_name = 'archiv/monumentprotection_detail.html'
+    template_name = "archiv/monumentprotection_detail.html"
 
     def get_context_data(self, **kwargs):
         user = self.request.user
         context = super(MonumentProtectionDetailView, self).get_context_data()
         if self.object.public or user.is_authenticated:
-            context['not_logged_in'] = False
+            context["not_logged_in"] = False
         else:
             context = {}
         return context
@@ -368,9 +372,9 @@ class MonumentProtectionUpdate(BaseUpdateView):
         try:
             instance = self.object
             site_poly = instance.site_id.get_geojson()
-            context['site_poly'] = "{}".format(site_poly)
+            context["site_poly"] = "{}".format(site_poly)
         except:
-            context['site_poly'] = None
+            context["site_poly"] = None
         return context
 
     @method_decorator(login_required)
@@ -380,8 +384,8 @@ class MonumentProtectionUpdate(BaseUpdateView):
 
 class MonumentProtectionDelete(DeleteView):
     model = MonumentProtection
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_monumentprotections')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_monumentprotections")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

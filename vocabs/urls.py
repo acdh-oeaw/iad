@@ -1,81 +1,107 @@
-from django.conf.urls import url
+from django.urls import path
 from . import views
-from . import dal_views
-from .models import SkosLabel, SkosConcept, SkosConceptScheme, Metadata
 
-app_name = 'vocabs'
+app_name = "vocabs"
 
 
 urlpatterns = [
-    url(r'^$', views.SkosConceptListView.as_view(), name='skosconcept_list'),
-    url(r'^concepts/browse/$', views.SkosConceptListView.as_view(), name='browse_vocabs'),
-    url(r'^(?P<pk>[0-9]+)$', views.SkosConceptDetailView.as_view(), name='skosconcept_detail'),
-    url(r'^create/$', views.SkosConceptCreate.as_view(), name='skosconcept_create'),
-    url(r'^update/(?P<pk>[0-9]+)$', views.SkosConceptUpdate.as_view(), name='skosconcept_update'),
-    url(r'^delete/(?P<pk>[0-9]+)$', views.SkosConceptDelete.as_view(), name='skosconcept_delete'),
-    url(r'^scheme/$', views.SkosConceptSchemeListView.as_view(), name='browse_schemes'),
-    url(
-        r'^scheme/(?P<pk>[0-9]+)$', views.SkosConceptSchemeDetailView.as_view(),
-        name='skosconceptscheme_detail'),
-    url(
-        r'^scheme/create/$', views.SkosConceptSchemeCreate.as_view(),
-        name='skosconceptscheme_create'),
-    url(
-        r'^scheme/update/(?P<pk>[0-9]+)$', views.SkosConceptSchemeUpdate.as_view(),
-        name='skosconceptscheme_update'),
-    url(
-        r'^scheme/delete/(?P<pk>[0-9]+)$',
+    path("", views.SkosConceptListView.as_view(), name="skosconcept_list"),
+    path("concepts/browse/", views.SkosConceptListView.as_view(), name="browse_vocabs"),
+    path(
+        "<int:pk>",
+        views.SkosConceptDetailView.as_view(),
+        name="skosconcept_detail",
+    ),
+    path("create/", views.SkosConceptCreate.as_view(), name="skosconcept_create"),
+    path(
+        "update/<int:pk>",
+        views.SkosConceptUpdate.as_view(),
+        name="skosconcept_update",
+    ),
+    path(
+        "delete/<int:pk>",
+        views.SkosConceptDelete.as_view(),
+        name="skosconcept_delete",
+    ),
+    path("scheme/", views.SkosConceptSchemeListView.as_view(), name="browse_schemes"),
+    path(
+        "scheme/<int:pk>",
+        views.SkosConceptSchemeDetailView.as_view(),
+        name="skosconceptscheme_detail",
+    ),
+    path(
+        "scheme/create/",
+        views.SkosConceptSchemeCreate.as_view(),
+        name="skosconceptscheme_create",
+    ),
+    path(
+        "scheme/update/<int:pk>",
+        views.SkosConceptSchemeUpdate.as_view(),
+        name="skosconceptscheme_update",
+    ),
+    path(
+        "scheme/delete/<int:pk>",
         views.SkosConceptSchemeDelete.as_view(),
-        name='skosconceptscheme_delete',
+        name="skosconceptscheme_delete",
     ),
-    url(r'^label/$', views.SkosLabelListView.as_view(), name='browse_skoslabels'),
-    url(
-        r'^label/(?P<pk>[0-9]+)$', views.SkosLabelDetailView.as_view(),
-        name='skoslabel_detail'),
-    url(
-        r'^label/create/$', views.SkosLabelCreate.as_view(),
-        name='skoslabel_create'),
-    url(
-        r'^label/update/(?P<pk>[0-9]+)$', views.SkosLabelUpdate.as_view(),
-        name='skoslabel_update'),
-    url(
-        r'^skoslabel/delete/(?P<pk>[0-9]+)$',
+    path("label/", views.SkosLabelListView.as_view(), name="browse_skoslabels"),
+    path(
+        "label/<int:pk>",
+        views.SkosLabelDetailView.as_view(),
+        name="skoslabel_detail",
+    ),
+    path("label/create/", views.SkosLabelCreate.as_view(), name="skoslabel_create"),
+    path(
+        "label/update/<int:pk>",
+        views.SkosLabelUpdate.as_view(),
+        name="skoslabel_update",
+    ),
+    path(
+        "skoslabel/delete/<int:pk>",
         views.SkosLabelDelete.as_view(),
-        name='skoslabel_delete',
+        name="skoslabel_delete",
     ),
-    url(
-        r'^vocabs-download/$', views.SkosConceptDL.as_view(),
-        name='vocabs-download'),
-    url(
-        r'^metadata/$', views.MetadataListView.as_view(),
-        name='metadata'),
-    url(
-        r'^metadata/(?P<pk>[0-9]+)$', views.MetadataDetailView.as_view(),
-        name='metadata_detail'),
-    url(
-        r'^metadata/create/$', views.MetadataCreate.as_view(),
-        name='metadata_create'),
-    url(
-        r'^metadata/update/(?P<pk>[0-9]+)$', views.MetadataUpdate.as_view(),
-        name='metadata_update'),
-    url(
-        r'^metadata/delete/(?P<pk>[0-9]+)$', views.MetadataDelete.as_view(),
-        name='metadata_delete',
+    path("vocabs-download/", views.SkosConceptDL.as_view(), name="vocabs-download"),
+    path("metadata/", views.MetadataListView.as_view(), name="metadata"),
+    path(
+        "metadata/<int:pk>",
+        views.MetadataDetailView.as_view(),
+        name="metadata_detail",
     ),
-    url(
-        r'^collection/$', views.SkosCollectionListView.as_view(),
-        name='browse_skoscollections'),
-    url(
-        r'^collection/(?P<pk>[0-9]+)$', views.SkosCollectionDetailView.as_view(),
-        name='skoscollection_detail'),
-    url(
-        r'^collection/create/$', views.SkosCollectionCreate.as_view(),
-        name='skoscollection_create'),
-    url(
-        r'^collection/update/(?P<pk>[0-9]+)$', views.SkosCollectionUpdate.as_view(),
-        name='skoscollection_update'),
-    url(
-        r'^collection/delete/(?P<pk>[0-9]+)$', views.SkosCollectionDelete.as_view(),
-        name='skoscollection_delete',
+    path("metadata/create/", views.MetadataCreate.as_view(), name="metadata_create"),
+    path(
+        "metadata/update/<int:pk>",
+        views.MetadataUpdate.as_view(),
+        name="metadata_update",
+    ),
+    path(
+        "metadata/delete/<int:pk>",
+        views.MetadataDelete.as_view(),
+        name="metadata_delete",
+    ),
+    path(
+        "collection/",
+        views.SkosCollectionListView.as_view(),
+        name="browse_skoscollections",
+    ),
+    path(
+        "collection/<int:pk>",
+        views.SkosCollectionDetailView.as_view(),
+        name="skoscollection_detail",
+    ),
+    path(
+        "collection/create/",
+        views.SkosCollectionCreate.as_view(),
+        name="skoscollection_create",
+    ),
+    path(
+        "collection/update/<int:pk>",
+        views.SkosCollectionUpdate.as_view(),
+        name="skoscollection_update",
+    ),
+    path(
+        "collection/delete/<int:pk>",
+        views.SkosCollectionDelete.as_view(),
+        name="skoscollection_delete",
     ),
 ]

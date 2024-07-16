@@ -9,8 +9,8 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
-from . models import ZotItem, Reference
-from . forms import ReferenceForm
+from .models import ZotItem, Reference
+from .forms import ReferenceForm
 from django.conf import settings
 
 # library_id = settings.Z_ID
@@ -20,69 +20,69 @@ from django.conf import settings
 
 class ReferenceListView(ListView):
     model = Reference
-    template_naem = 'bib/reference_list.html'
+    template_naem = "bib/reference_list.html"
 
     def get_context_data(self, **kwargs):
         context = super(ReferenceListView, self).get_context_data(**kwargs)
-        context['docstring'] = "{}".format(self.model.__doc__)
+        context["docstring"] = "{}".format(self.model.__doc__)
         if self.model._meta.verbose_name_plural:
-            context['class_name'] = "{}".format(self.model._meta.verbose_name.title())
+            context["class_name"] = "{}".format(self.model._meta.verbose_name.title())
         else:
-            if self.model.__name__.endswith('s'):
-                context['class_name'] = "{}".format(self.model.__name__)
+            if self.model.__name__.endswith("s"):
+                context["class_name"] = "{}".format(self.model.__name__)
             else:
-                context['class_name'] = "{}s".format(self.model.__name__)
+                context["class_name"] = "{}s".format(self.model.__name__)
         try:
-            context['get_arche_dump'] = self.model.get_arche_dump()
+            context["get_arche_dump"] = self.model.get_arche_dump()
         except AttributeError:
-            context['get_arche_dump'] = None
+            context["get_arche_dump"] = None
         try:
-            context['create_view_link'] = self.model.get_createview_url()
+            context["create_view_link"] = self.model.get_createview_url()
         except AttributeError:
-            context['create_view_link'] = None
+            context["create_view_link"] = None
         try:
-            context['download'] = self.model.get_dl_url()
+            context["download"] = self.model.get_dl_url()
         except AttributeError:
-            context['download'] = None
+            context["download"] = None
         model_name = self.model.__name__.lower()
-        context['entity'] = model_name
-        context['count'] = self.get_queryset().count()
+        context["entity"] = model_name
+        context["count"] = self.get_queryset().count()
         return context
 
 
 class BaseCreateView(CreateView):
     model = None
     form_class = None
-    template_name = 'bib/generic_create.html'
+    template_name = "bib/generic_create.html"
 
     def get_context_data(self, **kwargs):
         context = super(BaseCreateView, self).get_context_data()
-        context['docstring'] = "{}".format(self.model.__doc__)
-        if self.model.__name__.endswith('s'):
-            context['class_name'] = "{}".format(self.model.__name__)
+        context["docstring"] = "{}".format(self.model.__doc__)
+        if self.model.__name__.endswith("s"):
+            context["class_name"] = "{}".format(self.model.__name__)
         else:
-            context['class_name'] = "{}s".format(self.model.__name__)
+            context["class_name"] = "{}s".format(self.model.__name__)
         return context
 
 
 class BaseUpdateView(UpdateView):
     model = None
     form_class = None
-    template_name = 'archiv/generic_create.html'
+    template_name = "archiv/generic_create.html"
 
     def get_context_data(self, **kwargs):
         context = super(BaseUpdateView, self).get_context_data()
-        context['docstring'] = "{}".format(self.model.__doc__)
-        if self.model.__name__.endswith('s'):
-            context['class_name'] = "{}".format(self.model.__name__)
+        context["docstring"] = "{}".format(self.model.__doc__)
+        if self.model.__name__.endswith("s"):
+            context["class_name"] = "{}".format(self.model.__name__)
         else:
-            context['class_name'] = "{}s".format(self.model.__name__)
+            context["class_name"] = "{}s".format(self.model.__name__)
         return context
 
 
 class ReferenceDetailView(DetailView):
     model = Reference
-    template_name = 'bib/reference_detail.html'
+    template_name = "bib/reference_detail.html"
 
 
 class ReferenceCreate(BaseCreateView):
@@ -107,8 +107,8 @@ class ReferenceUpdate(BaseUpdateView):
 
 class ReferenceDelete(DeleteView):
     model = Reference
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('browsing:browse_references')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("browsing:browse_references")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

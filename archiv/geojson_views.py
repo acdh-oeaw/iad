@@ -1,7 +1,7 @@
 import json
 
 from django.http import JsonResponse
-from . models import Site
+from .models import Site
 
 
 def site_geojson(request):

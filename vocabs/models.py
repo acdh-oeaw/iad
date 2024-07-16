@@ -9,33 +9,32 @@ from django.core.exceptions import ValidationError
 
 
 try:
-    DEFAULT_NAMESPACE = settings.VOCABS_SETTINGS['default_nsgg']
+    DEFAULT_NAMESPACE = settings.VOCABS_SETTINGS["default_nsgg"]
 except KeyError:
     DEFAULT_NAMESPACE = "http://www.vocabs/provide-some-namespace/"
 
 try:
-    DEFAULT_PREFIX = settings.VOCABS_SETTINGS['default_prefix']
+    DEFAULT_PREFIX = settings.VOCABS_SETTINGS["default_prefix"]
 except KeyError:
     DEFAULT_PREFIX = "provideSome"
 
 try:
-    DEFAULT_LANG = settings.VOCABS_SETTINGS['default_lang']
+    DEFAULT_LANG = settings.VOCABS_SETTINGS["default_lang"]
 except KeyError:
     DEFAULT_LANG = "en"
 
 
 LABEL_TYPES = (
-    ('prefLabel', 'prefLabel'),
-    ('altLabel', 'altLabel'),
-    ('hiddenLabel', 'hiddenLabel'),
+    ("prefLabel", "prefLabel"),
+    ("altLabel", "altLabel"),
+    ("hiddenLabel", "hiddenLabel"),
 )
 
 
 def validate_only_one_instance(obj):
     # limit number of created instances https://stackoverflow.com/a/6436008/7101197
     model = obj.__class__
-    if (model.objects.count() > 0 and
-            obj.id != model.objects.get().id):
+    if model.objects.count() > 0 and obj.id != model.objects.get().id:
         raise ValidationError("Can only create 1 %s instance" % model.__name__)
 
 
@@ -59,14 +58,16 @@ class Metadata(models.Model):
     subject = models.TextField(
         blank=True, help_text="If more than one list all using a semicolon ;"
     )
-    owner = models.CharField(max_length=300, blank=True, help_text="Organisation or Person")
+    owner = models.CharField(
+        max_length=300, blank=True, help_text="Organisation or Person"
+    )
     license = models.CharField(max_length=300, blank=True)
     date_created = models.DateTimeField(editable=False, default=timezone.now)
     date_modified = models.DateTimeField(editable=False, default=timezone.now)
     date_issued = models.DateField(blank=True, null=True, help_text="YYYY-MM-DD")
     relation = models.URLField(
         blank=True,
-        help_text="e.g. in case of relation to a project, add link to a project website"
+        help_text="e.g. in case of relation to a project, add link to a project website",
     )
 
     def save(self, *args, **kwargs):
@@ -77,25 +78,25 @@ class Metadata(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('vocabs:metadata')
+        return reverse("vocabs:metadata")
 
     def __str__(self):
         return "{}".format(self.title)
 
     def get_absolute_url(self):
-        return reverse('vocabs:metadata_detail', kwargs={'pk': self.id})
+        return reverse("vocabs:metadata_detail", kwargs={"pk": self.id})
 
     def subject_as_list(self):
-        return self.subject.split(';')
+        return self.subject.split(";")
 
     def language_as_list(self):
-        return self.language.split(';')
+        return self.language.split(";")
 
     def creator_as_list(self):
-        return self.creator.split(';')
+        return self.creator.split(";")
 
     def contributor_as_list(self):
-        return self.contributor.split(';')
+        return self.contributor.split(";")
 
     def clean(self):
         validate_only_one_instance(self)
@@ -119,7 +120,9 @@ class SkosConceptScheme(models.Model):
         blank=True, help_text="If more than one list all using a semicolon ;"
     )
     dc_description = models.TextField(blank=True)
-    dc_description_lang = models.CharField(max_length=3, blank=True, default=DEFAULT_LANG)
+    dc_description_lang = models.CharField(
+        max_length=3, blank=True, default=DEFAULT_LANG
+    )
     legacy_id = models.CharField(max_length=200, blank=True)
     date_created = models.DateTimeField(editable=False, default=timezone.now)
     date_modified = models.DateTimeField(editable=False, default=timezone.now)
@@ -127,7 +130,8 @@ class SkosConceptScheme(models.Model):
     def save(self, *args, **kwargs):
         if self.namespace is None:
             temp_namespace, _ = SkosNamespace.objects.get_or_create(
-                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PREFIX)
+                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PREFIX
+            )
             temp_namespace.save()
             self.namespace = temp_namespace
         else:
@@ -140,18 +144,18 @@ class SkosConceptScheme(models.Model):
         super(SkosConceptScheme, self).save(*args, **kwargs)
 
     def dc_creator_as_list(self):
-        return self.dc_creator.split(';')
+        return self.dc_creator.split(";")
 
     @classmethod
     def get_listview_url(self):
-        return reverse('vocabs:browse_schemes')
+        return reverse("vocabs:browse_schemes")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('vocabs:skosconceptscheme_create')
+        return reverse("vocabs:skosconceptscheme_create")
 
     def get_absolute_url(self):
-        return reverse('vocabs:skosconceptscheme_detail', kwargs={'pk': self.id})
+        return reverse("vocabs:skosconceptscheme_detail", kwargs={"pk": self.id})
 
     def get_next(self):
         next = SkosConceptScheme.objects.filter(id__gt=self.id)
@@ -160,7 +164,7 @@ class SkosConceptScheme(models.Model):
         return False
 
     def get_prev(self):
-        prev = SkosConceptScheme.objects.filter(id__lt=self.id).order_by('-id')
+        prev = SkosConceptScheme.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return prev.first().id
         return False
@@ -180,7 +184,9 @@ class SkosCollection(models.Model):
     skos_note = models.CharField(max_length=500, blank=True)
     skos_note_lang = models.CharField(max_length=3, blank=True, default=DEFAULT_LANG)
     skos_scopenote = models.TextField(blank=True)
-    skos_scopenote_lang = models.CharField(max_length=3, blank=True, default=DEFAULT_LANG)
+    skos_scopenote_lang = models.CharField(
+        max_length=3, blank=True, default=DEFAULT_LANG
+    )
     skos_changenote = models.CharField(max_length=500, blank=True)
     skos_editorialnote = models.CharField(max_length=500, blank=True)
     skos_example = models.CharField(max_length=500, blank=True)
@@ -196,14 +202,14 @@ class SkosCollection(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('vocabs:browse_skoscollections')
+        return reverse("vocabs:browse_skoscollections")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('vocabs:skoscollection_create')
+        return reverse("vocabs:skoscollection_create")
 
     def get_absolute_url(self):
-        return reverse('vocabs:skoscollection_detail', kwargs={'pk': self.id})
+        return reverse("vocabs:skoscollection_detail", kwargs={"pk": self.id})
 
     def get_next(self):
         next = SkosCollection.objects.filter(id__gt=self.id)
@@ -212,7 +218,7 @@ class SkosCollection(models.Model):
         return False
 
     def get_prev(self):
-        prev = SkosCollection.objects.filter(id__lt=self.id).order_by('-id')
+        prev = SkosCollection.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return prev.first().id
         return False
@@ -221,29 +227,38 @@ class SkosCollection(models.Model):
         return "{}".format(self.name)
 
     def creator_as_list(self):
-        return self.creator.split(';')
+        return self.creator.split(";")
 
 
 class SkosLabel(models.Model):
     name = models.CharField(
-        max_length=100, blank=True, help_text="The entities label or name.",
-        verbose_name="Label"
+        max_length=100,
+        blank=True,
+        help_text="The entities label or name.",
+        verbose_name="Label",
     )
     label_type = models.CharField(
-        max_length=30, blank=True, choices=LABEL_TYPES, help_text="The type of the label.")
+        max_length=30,
+        blank=True,
+        choices=LABEL_TYPES,
+        help_text="The type of the label.",
+    )
     isoCode = models.CharField(
-        max_length=3, blank=True, help_text="The ISO 639-3 code for the label's language.")
+        max_length=3,
+        blank=True,
+        help_text="The ISO 639-3 code for the label's language.",
+    )
 
     @classmethod
     def get_listview_url(self):
-        return reverse('vocabs:browse_skoslabels')
+        return reverse("vocabs:browse_skoslabels")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('vocabs:skoslabel_create')
+        return reverse("vocabs:skoslabel_create")
 
     def get_absolute_url(self):
-        return reverse('vocabs:skoslabel_detail', kwargs={'pk': self.id})
+        return reverse("vocabs:skoslabel_detail", kwargs={"pk": self.id})
 
     def get_next(self):
         next = SkosLabel.objects.filter(id__gt=self.id)
@@ -252,7 +267,7 @@ class SkosLabel(models.Model):
         return False
 
     def get_prev(self):
-        prev = SkosLabel.objects.filter(id__lt=self.id).order_by('-id')
+        prev = SkosLabel.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return prev.first().id
         return False
@@ -281,14 +296,16 @@ class SkosConcept(models.Model):
         SkosNamespace, blank=True, null=True, on_delete=models.SET_NULL
     )
     broader_concept = models.ForeignKey(
-        'SkosConcept',
+        "SkosConcept",
         verbose_name="Broader Term",
-        blank=True, null=True, on_delete=models.SET_NULL,
-        related_name="narrower_concepts"
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="narrower_concepts",
     )
     top_concept = models.BooleanField(
         default=False, help_text="Is this concept a top concept of main concept scheme?"
-        )
+    )
     same_as_external = models.TextField(
         blank=True,
         null=True,
@@ -299,45 +316,47 @@ class SkosConcept(models.Model):
         blank=True,
         null=True,
         verbose_name="Source",
-        help_text="A verbose description of the concept's source"
+        help_text="A verbose description of the concept's source",
     )
     skos_broader = models.ManyToManyField(
-        'SkosConcept', blank=True, related_name="narrower"
+        "SkosConcept", blank=True, related_name="narrower"
     )
     skos_narrower = models.ManyToManyField(
-        'SkosConcept', blank=True, related_name="broader"
+        "SkosConcept", blank=True, related_name="broader"
     )
     skos_related = models.ManyToManyField(
-        'SkosConcept', blank=True, related_name="related"
+        "SkosConcept", blank=True, related_name="related"
     )
     skos_broadmatch = models.ManyToManyField(
-        'SkosConcept', blank=True, related_name="narrowmatch"
+        "SkosConcept", blank=True, related_name="narrowmatch"
     )
     skos_narrowmatch = models.ManyToManyField(
-        'SkosConcept', blank=True, related_name="broadmatch"
+        "SkosConcept", blank=True, related_name="broadmatch"
     )
     skos_exactmatch = models.ManyToManyField(
-        'SkosConcept', blank=True, related_name="exactmatch"
+        "SkosConcept", blank=True, related_name="exactmatch"
     )
     skos_relatedmatch = models.ManyToManyField(
-        'SkosConcept', blank=True, related_name="relatedmatch"
+        "SkosConcept", blank=True, related_name="relatedmatch"
     )
     skos_closematch = models.ManyToManyField(
-        'SkosConcept', blank=True, related_name="closematch"
+        "SkosConcept", blank=True, related_name="closematch"
     )
     legacy_id = models.CharField(max_length=200, blank=True)
     name_reverse = models.CharField(
         max_length=255,
-        verbose_name='Name reverse',
+        verbose_name="Name reverse",
         help_text='Inverse relation like: \
         "is sub-class of" vs. "is super-class of".',
-        blank=True
+        blank=True,
     )
     # documentation properties
     skos_note = models.CharField(max_length=500, blank=True)
     skos_note_lang = models.CharField(max_length=3, blank=True, default=DEFAULT_LANG)
     skos_scopenote = models.TextField(blank=True)
-    skos_scopenote_lang = models.CharField(max_length=3, blank=True, default=DEFAULT_LANG)
+    skos_scopenote_lang = models.CharField(
+        max_length=3, blank=True, default=DEFAULT_LANG
+    )
     skos_changenote = models.CharField(max_length=500, blank=True)
     skos_editorialnote = models.CharField(max_length=500, blank=True)
     skos_example = models.CharField(max_length=500, blank=True)
@@ -351,13 +370,13 @@ class SkosConcept(models.Model):
     def get_broader(self):
         broader = self.skos_broader.all()
         broader_reverse = SkosConcept.objects.filter(skos_narrower=self)
-        all_broader = set(list(broader)+list(broader_reverse))
+        all_broader = set(list(broader) + list(broader_reverse))
         return all_broader
 
     def get_narrower(self):
         narrower = self.skos_narrower.all()
         narrower_reverse = SkosConcept.objects.filter(skos_broader=self)
-        all_narrower = set(list(narrower)+list(narrower_reverse))
+        all_narrower = set(list(narrower) + list(narrower_reverse))
         return all_narrower
 
     def get_vocabs_uri(self):
@@ -365,7 +384,7 @@ class SkosConcept(models.Model):
 
     @property
     def all_schemes(self):
-        return ', '.join([x.dc_title for x in self.scheme.all()])
+        return ", ".join([x.dc_title for x in self.scheme.all()])
 
     def save(self, *args, **kwargs):
         if self.notation == "":
@@ -380,7 +399,8 @@ class SkosConcept(models.Model):
 
         if self.namespace is None:
             temp_namespace, _ = SkosNamespace.objects.get_or_create(
-                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PREFIX)
+                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PREFIX
+            )
             temp_namespace.save()
             self.namespace = temp_namespace
         else:
@@ -393,10 +413,10 @@ class SkosConcept(models.Model):
         super(SkosConcept, self).save(*args, **kwargs)
 
     def dc_creator_as_list(self):
-        return self.dc_creator.split(';')
+        return self.dc_creator.split(";")
 
     def same_as_external_as_list(self):
-        return self.same_as_external.split(';')
+        return self.same_as_external.split(";")
 
     @cached_property
     def label(self):
@@ -404,20 +424,20 @@ class SkosConcept(models.Model):
         d = self
         res = self.pref_label
         while d.broader_concept:
-            res = d.broader_concept.pref_label + ' >> ' + res
+            res = d.broader_concept.pref_label + " >> " + res
             d = d.broader_concept
         return res
 
     @classmethod
     def get_listview_url(self):
-        return reverse('vocabs:browse_vocabs')
+        return reverse("vocabs:browse_vocabs")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('vocabs:skosconcept_create')
+        return reverse("vocabs:skosconcept_create")
 
     def get_absolute_url(self):
-        return reverse('vocabs:skosconcept_detail', kwargs={'pk': self.id})
+        return reverse("vocabs:skosconcept_detail", kwargs={"pk": self.id})
 
     def get_next(self):
         next = SkosConcept.objects.filter(id__gt=self.id)
@@ -426,7 +446,7 @@ class SkosConcept(models.Model):
         return False
 
     def get_prev(self):
-        prev = SkosConcept.objects.filter(id__lt=self.id).order_by('-id')
+        prev = SkosConcept.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return prev.first().id
         return False

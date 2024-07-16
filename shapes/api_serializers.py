@@ -1,5 +1,5 @@
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
-from . models import Municipality
+from .models import Municipality
 
 
 class MunicipalitySerializer(GeoFeatureModelSerializer):
@@ -9,9 +9,9 @@ class MunicipalitySerializer(GeoFeatureModelSerializer):
         geo_field = "geom"
 
         fields = (
-            'id',
-            'lau2nam',
-            'nuts3nam',
-            'nuts2nam',
-            'ctnam',
+            "id",
+            "lau2nam",
+            "nuts3nam",
+            "nuts2nam",
+            "ctnam",
         )
