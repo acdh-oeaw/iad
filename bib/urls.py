@@ -6,14 +6,14 @@ app_name = "bib"
 
 urlpatterns = [
     path(
-        "reference/detail/<int:pk>$",
+        "reference/detail/<int:pk>",
         views.ReferenceDetailView.as_view(),
         name="reference_detail",
     ),
     path(
-        "reference/delete/<int:pk>$",
+        "reference/delete/<int:pk>",
         views.ReferenceDelete.as_view(),
         name="reference_delete",
     ),
-    path("references/$", views.ReferenceListView.as_view(), name="browse_references"),
+    path("references/", views.ReferenceListView.as_view(), name="browse_references"),
 ]
