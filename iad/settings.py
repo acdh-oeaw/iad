@@ -62,7 +62,6 @@ INSTALLED_APPS = [
     "bib",
     "stats",
     "browsing",
-    "arche",
     "archiv",
     "checks",
     "shapes",

@@ -1,25 +1,19 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import url
+from django.urls import path
 from . import views
 
 app_name = "bib"
 
 urlpatterns = [
-    # url(r'^synczotero/$', views.sync_zotero, name="synczotero"),
-    # url(r'^synczotero/update$', views.update_zotitems, name="synczotero_update"),
-    url(
-        r"^reference/detail/(?P<pk>[0-9]+)$",
+    path(
+        "reference/detail/<int:pk>$",
         views.ReferenceDetailView.as_view(),
         name="reference_detail",
     ),
-    # url(r'^reference/create/$', views.ReferenceCreate.as_view(),
-    #     name='reference_create'),
-    # url(r'^reference/edit/(?P<pk>[0-9]+)$', views.ReferenceUpdate.as_view(),
-    #     name='reference_edit'),
-    url(
-        r"^reference/delete/(?P<pk>[0-9]+)$",
+    path(
+        "reference/delete/<int:pk>$",
         views.ReferenceDelete.as_view(),
         name="reference_delete",
     ),
-    url(r"references/$", views.ReferenceListView.as_view(), name="browse_references"),
+    path("references/$", views.ReferenceListView.as_view(), name="browse_references"),
 ]

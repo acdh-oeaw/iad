@@ -1,37 +1,31 @@
-from django.conf.urls import url
-from . import views
+from django.urls import path
 from . import dal_views
 from .models import *
 
 app_name = "shapes"
 
 urlpatterns = [
-    url(
-        r"^municipality-autocomplete/$",
+    path("municipality-autocomplete/",
         dal_views.MunicipalityAC.as_view(
             model=Municipality,
         ),
         name="municipality-autocomplete",
     ),
-    url(
-        r"^municipality-autocomplete-search/$",
+    path("municipality-autocomplete-search/",
         dal_views.MunicipalitySearchAC.as_view(
             model=Municipality,
         ),
         name="municipality-autocomplete-search",
     ),
-    url(
-        r"^countries-ac/$",
+    path("countries-ac/",
         dal_views.CountriesAC.as_view(),
         name="countries-ac",
     ),
-    url(
-        r"^counties-ac/$",
+    path("counties-ac/",
         dal_views.CountiesAC.as_view(),
         name="counties-ac",
     ),
-    url(
-        r"^regions-ac/$",
+    path("regions-ac/",
         dal_views.RegionsAC.as_view(),
         name="regions-ac",
     ),
