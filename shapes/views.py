@@ -1,7 +1,6 @@
-from django.shortcuts import render
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import DeleteView
 from django.views.generic.detail import DetailView
 
 from django.contrib.auth.decorators import login_required

@@ -5,25 +5,71 @@ import geopandas as gp
 from django.http import HttpResponse
 from django.core.serializers import serialize
 from django.contrib.contenttypes.models import ContentType
-import rdflib
-from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef, RDFS, ConjunctiveGraph
 from django_tables2 import SingleTableView, RequestConfig
 from django_tables2.export.views import ExportMixin
 
 from shapely import wkt
 
-from browsing.filters import *
-from browsing.forms import *
-from browsing.tables import *
+from entities.models import Person, Place, Institution
+
+from browsing.filters import (
+    MonumentProtectionListFilter,
+    ReferenceListFilter,
+    ResearchEventListFilter,
+    ResearchQuestionListFilter,
+    ArchEntListFilter,
+    PeriodListFilter,
+    SiteListFilter,
+    AlternativeNameListFilter,
+    AltNameListFilter,
+    InstitutionListFilter,
+    PlaceListFilter,
+    PersonListFilter,
+)
+from browsing.forms import (
+    MonumentProtectionFormHelper,
+    ReferenceFormHelper,
+    ResearchEventFilterFormHelper,
+    ResearchQuestionFormHelper,
+    AlternativeNameFilterFormHelper,
+    AltNameFilterFormHelper,
+    ArchEntFilterFormHelper,
+    PeriodFilterFormHelper,
+    PersonFilterFormHelper,
+    SiteFilterFormHelper,
+    InstitutionFilterFormHelper,
+    PlaceFilterFormHelper,
+)
+from browsing.tables import (
+    MonumentProtectionTable,
+    ReferenceTable,
+    ResearchEventTable,
+    ResearchQuestionTable,
+    AlternativeNameTable,
+    AltNameTable,
+    PeriodTable,
+    PersonTable,
+    SiteTable,
+    InstitutionTable,
+    PlaceTable,
+    ArchEntTable,
+    AlternativeName,
+)
 
 try:
     from browsing.models import BrowsConf
 except ImportError:
     BrowsConf = None
-from archiv.models import *
-from bib.models import *
-from archiv.utils import *
-from entities.models import Place, Institution
+from archiv.models import (
+    MonumentProtection,
+    ResearchEvent,
+    ResearchQuestion,
+    ArchEnt,
+    Period,
+    Site,
+    AltName,
+)
+from bib.models import Reference
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
@@ -101,7 +147,7 @@ class GenericListView(ExportMixin, SingleTableView):
         try:
             ct._meta.get_field("polygon")
             poly = True
-        except Exception as e:
+        except:  # noqa:
             poly = False
         if poly:
             points = serialize(
@@ -738,7 +784,6 @@ class AlternativeNameListView(GenericListView):
         exclude_vals = [x for x in all_cols if x not in selected_cols]
         table.exclude = exclude_vals
         return table
-
 
 
 class InstitutionListView(GenericListView):

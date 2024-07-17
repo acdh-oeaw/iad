@@ -1,8 +1,16 @@
 import django_tables2 as tables
 from django_tables2.utils import A
-from entities.models import *
-from archiv.models import *
-from bib.models import *
+from entities.models import Place, Person, Institution, AlternativeName
+from archiv.models import (
+    MonumentProtection,
+    ResearchEvent,
+    ResearchQuestion,
+    ArchEnt,
+    Period,
+    Site,
+    AltName,
+)
+from bib.models import Reference
 
 
 class ReferenceTable(tables.Table):

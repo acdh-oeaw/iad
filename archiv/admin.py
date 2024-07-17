@@ -1,7 +1,14 @@
 from django.contrib.gis import admin
 from reversion.admin import VersionAdmin
-from leaflet.admin import LeafletGeoAdmin
-from .models import *
+from .models import (
+    MonumentProtection,
+    ResearchEvent,
+    ResearchQuestion,
+    ArchEnt,
+    Period,
+    Site,
+    AltName,
+)
 
 
 @admin.register(AltName)

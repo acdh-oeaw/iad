@@ -92,7 +92,7 @@ class GenericWebpageView(TemplateView):
             template_name = "webpage/{}.html".format(
                 self.kwargs.get("template", "index")
             )
-        except Exception as e:
+        except:  # noqa:
             template_name = "webpage/index.html"
         return [template_name]
 

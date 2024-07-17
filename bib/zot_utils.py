@@ -1,5 +1,4 @@
 from pyzotero import zotero
-from django.conf import settings
 from bib.models import ZotItem
 
 
@@ -13,14 +12,13 @@ def items_to_dict(library_id, library_type, api_key, limit=15, since_version=Non
     zot = zotero.Zotero(library_id, library_type, api_key)
     result = {}
     error = None
-    itmes = None
     bibs = []
     if since_version:
         try:
             items = zot.everything(zot.top(since=since_version))
             bibtexs = zot.everything(zot.top(format="bibtex", since=since_version))
         except Exception as e:
-            error = "{}".format(e)
+            error = f"{e}"
             items = None
             bibtexs = None
     elif limit:

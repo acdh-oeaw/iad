@@ -1,9 +1,14 @@
-import requests, json, sys
+import sys
+import requests
+from django.conf import settings
 from django.core.management.base import NoArgsCommand
 
-import requests, json, sys
 from bib.models import ZotItem
-from orea.settings.server import Z_USER_ID, Z_COLLECTION, Z_API_KEY
+
+
+Z_USER_ID = settings.Z_USER_ID
+Z_COLLECTION = settings.Z_COLLECTION
+Z_API_KEY = settings.Z_API_KEY
 
 
 class Command(NoArgsCommand):
@@ -17,7 +22,7 @@ class Command(NoArgsCommand):
         url = root + params + "&sort=dateModified&limit=100"
         try:
             r = requests.get(url)
-        except:
+        except:  # noqa: E722
             sys.exit("aa! errors! The API didn´t response with a proper json-file")
 
         response = r.json()
@@ -35,6 +40,6 @@ class Command(NoArgsCommand):
             try:
                 NewZotItem.save()
                 saved.append(x["data"])
-            except:
+            except:  # noqa: E722
                 failed.append(x["data"])
         print("saved: {} objects \nfailed: {} objects".format(len(saved), len(failed)))

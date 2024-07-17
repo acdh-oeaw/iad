@@ -1,7 +1,6 @@
-import os
 import datetime
 from django.conf import settings
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from bib.zot_utils import items_to_dict, create_zotitem
 
 library_id = settings.Z_ID

@@ -1,17 +1,30 @@
 from django.db.models import Q
-from django.shortcuts import render
-from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 from reversion.models import Version
 
-from .forms import *
-from .models import *
-from .utils import geojson_to_poly
+from .forms import (
+    MonumentProtectionForm,
+    ResearchEventForm,
+    ResearchQuestionForm,
+    ArchEntForm,
+    PeriodForm,
+    SiteForm,
+    AltNameForm,
+)
+from .models import (
+    MonumentProtection,
+    ResearchEvent,
+    ResearchQuestion,
+    ArchEnt,
+    Period,
+    Site,
+    AltName,
+)
 
 
 class BaseCreateView(CreateView):
@@ -77,7 +90,6 @@ class ArchEntUpdate(BaseUpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(ArchEntUpdate, self).get_context_data()
-        burial = None
         instance = self.object
 
         if self.model.objects.filter(id=instance.id).filter(
@@ -100,7 +112,7 @@ class ArchEntUpdate(BaseUpdateView):
             instance = self.object
             site_poly = instance.site_id.get_geojson()
             context["site_poly"] = "{}".format(site_poly)
-        except:
+        except:  # noqa: E722
             context["site_poly"] = None
         return context
 
@@ -373,7 +385,7 @@ class MonumentProtectionUpdate(BaseUpdateView):
             instance = self.object
             site_poly = instance.site_id.get_geojson()
             context["site_poly"] = "{}".format(site_poly)
-        except:
+        except:  # noqa: E722
             context["site_poly"] = None
         return context
 

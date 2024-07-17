@@ -1,6 +1,6 @@
 [flake8]
 ignore = D203 W504 F405 W503
-max-line-length = 120
+max-line-length = 140
 exclude =
     .git
     .tox
@@ -8,3 +8,4 @@ exclude =
     dist
     env
     venv
+    manage.py

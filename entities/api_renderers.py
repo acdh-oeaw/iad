@@ -1,6 +1,5 @@
 import json
 from rest_framework import renderers
-from django.template.loader import render_to_string
 
 
 class GeoJsonRenderer(renderers.BaseRenderer):
@@ -17,5 +16,5 @@ class GeoJsonRenderer(renderers.BaseRenderer):
                 pass
         geojson_end = "}"
         geolist = json.dumps(geolist)
-        geojson = "{}{}{}".format(geojson_start, geolist, geojson_end)
+        geojson = f"{geojson_start}{geolist}{geojson_end}"
         return geojson

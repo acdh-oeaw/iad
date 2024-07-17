@@ -1,13 +1,28 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import DeleteView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-from django_tables2 import SingleTableView, RequestConfig
+from django_tables2 import RequestConfig
 from .models import SkosConcept, SkosConceptScheme, SkosLabel, SkosCollection, Metadata
-from .forms import *
-from .tables import *
+from .forms import (
+    SkosCollectionForm,
+    SkosCollectionFormHelper,
+    SkosConceptForm,
+    SkosConceptFormHelper,
+    SkosConceptSchemeForm,
+    SkosConceptSchemeFormHelper,
+    SkosLabelForm,
+    SkosLabelFormHelper,
+    MetadataForm
+)
+from .tables import (
+    SkosCollectionTable,
+    SkosConceptSchemeTable,
+    SkosConceptTable,
+    SkosLabelTable,
+)
 from .filters import (
     SkosConceptListFilter,
     SkosConceptSchemeListFilter,
@@ -15,7 +30,7 @@ from .filters import (
     SkosCollectionListFilter,
 )
 from browsing.browsing_utils import GenericListView, BaseCreateView, BaseUpdateView
-from .rdf_utils import *
+from .rdf_utils import graph_construct_qs
 import time
 import datetime
 from django.http import HttpResponse
@@ -384,5 +399,5 @@ class SkosConceptDL(GenericListView):
                 filename
             )
         g = graph_construct_qs(self.get_queryset())
-        result = g.serialize(destination=response, format=get_format)
+        g.serialize(destination=response, format=get_format)
         return response

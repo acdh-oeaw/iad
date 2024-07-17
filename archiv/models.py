@@ -7,8 +7,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Union
 from django.contrib.postgres.fields import IntegerRangeField
-from django.contrib.gis.db.models.functions import Centroid
-from django.contrib.gis import geos
 from django.core.serializers import serialize
 from django.db.models import Max, Min
 
@@ -570,7 +568,7 @@ class Site(IadBaseClass):
                     "name": "Convex hull of all Archaeological Entities"
                 }
                 geojson = json.dumps(geojson)
-            except:
+            except:  # noqa: E722
                 geojson = None
             return geojson
         else:

@@ -23,7 +23,5 @@ urlpatterns = [
 if "reversion" in settings.INSTALLED_APPS:
     urlpatterns.insert(
         1,
-        path(
-            "user/<int:pk>", views.UserDetailView.as_view(), name="user_detail"
-        ),
+        path("user/<int:pk>", views.UserDetailView.as_view(), name="user_detail"),
     )

@@ -153,5 +153,5 @@ class Reference(models.Model):
     def __str__(self):
         try:
             return "{}, {}".format(self.zotero_item, self.page)
-        except:
+        except:  # noqa: E722
             return "{}".format(self.id)

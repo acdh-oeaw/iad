@@ -1,4 +1,3 @@
-import re
 from django.db import models
 from django.urls import reverse
 from idprovider.models import IdProvider
@@ -31,9 +30,6 @@ class AlternativeName(IdProvider):
         if prev:
             return prev.first().id
         return False
-
-    def get_absolute_url(self):
-        return reverse("entities:alternativename_detail", kwargs={"pk": self.id})
 
     def __str__(self):
         return "{}".format(self.name)
@@ -75,11 +71,7 @@ class Place(IdProvider):
             return "http://www.geonames.org/{}".format(self.geonames_id)
 
     def get_geonames_rdf(self):
-        try:
-            number = re.findall(r"\d+", str(self.geonames_id))[0]
-            return None
-        except Exception as e:
-            return None
+        return None
 
     def save(self, *args, **kwargs):
         if self.geonames_id:
