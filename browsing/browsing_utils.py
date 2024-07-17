@@ -10,7 +10,7 @@ from django.db.models.fields.related import ManyToManyField
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML
+from crispy_forms.layout import Submit
 
 from .models import BrowsConf
 
@@ -72,12 +72,6 @@ class GenericListView(django_tables2.SingleTableView):
             return self.table_class
         else:
             return get_entities_table(self.model)
-
-        raise ImproperlyConfigured(
-            "You must either specify {0}.table_class or {0}.model".format(
-                type(self).__name__
-            )
-        )
 
     def get_all_cols(self):
         # print('get_table')
@@ -244,7 +238,7 @@ def model_to_dict(instance):
                     data[f.name] = list(
                         f.value_from_object(instance).values_list("pk", flat=True)
                     )
-                except Exception as e:
+                except:  # noqa:
                     data[f.name] = []
         else:
             data[f.name] = f.value_from_object(instance)
@@ -267,8 +261,6 @@ def create_brows_config_obj(app_name, exclude_fields=[]):
             if f.name not in exclude:
                 field_name = f.name
                 verbose_name = getattr(f, "verbose_name", f.name)
-                help_text = getattr(f, "help_text", "no helptext")
-
                 brc, _ = BrowsConf.objects.get_or_create(
                     model_name=model_name,
                     field_path=field_name,

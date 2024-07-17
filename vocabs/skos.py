@@ -15,7 +15,7 @@ class Csv2SkosReader(object):
         self.data = [x for x in csv.reader(self.csv_file)]
         self.headers = self.data[0]
         try:
-            self.alt_lang = (self.headers[1])[(self.headers[1]).index("@") + 1 :]
+            self.alt_lang = (self.headers[1])[(self.headers[1]).index("@") + 1:]
         except:  # noqa: E722
             self.alt_lang = None
         self.schemes = set([x[0] for x in self.data[1:]])
@@ -146,8 +146,7 @@ class Csv2SkosImporter(Csv2SkosReader):
         """import/updates all SkosConcepts found in csv"""
         report = {}
         report["before"] = len(SkosConcept.objects.all())
-        failed = []
-        success = []
+
         for x in self.get_concepts():
             # print(x['concept'])
             pass

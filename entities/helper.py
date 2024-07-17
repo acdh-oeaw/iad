@@ -1,8 +1,4 @@
-import re
-import requests
-import json
 import rdflib
-from rdflib.namespace import RDF, FOAF
 from rdflib import Namespace
 
 
@@ -25,8 +21,3 @@ def fetch_coords(place):
         return place
     else:
         return place
-
-
-# example usage
-# for x in Place.objects.filter(lat__isnull=True):
-#     fetch_coords(x)

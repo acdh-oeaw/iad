@@ -1,6 +1,6 @@
 from django.urls import path
 from . import dal_views
-from .models import *
+from .models import Place, AlternativeName, Institution, Person
 
 app_name = "vocabs"
 

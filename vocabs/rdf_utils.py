@@ -1,24 +1,17 @@
 import rdflib
 from rdflib import (
-    Graph,
     Literal,
-    BNode,
     Namespace,
     RDF,
     URIRef,
     RDFS,
-    ConjunctiveGraph,
     XSD,
 )
-from rdflib.namespace import DC, FOAF, RDFS, SKOS
+from rdflib.namespace import DC, SKOS
 from .models import Metadata
 from django.utils import timezone
 
-
-SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
-DC = Namespace("http://purl.org/dc/elements/1.1/")
 DCT = Namespace("http://purl.org/dc/terms/")
-RDFS = Namespace("http://www.w3.org/2000/01/rdf-schema#")
 OWL = Namespace("http://www.w3.org/2002/07/owl#")
 VOCABS = Namespace("https://vocabs.acdh.oeaw.ac.at/testthesaurus/")
 
@@ -140,7 +133,7 @@ def graph_construct(results):
                     for y in x["has_members"]:
                         g.add((collection, SKOS.member, URIRef(y[:-12])))
 
-        ############################# ConceptScheme as SkosCollection ###############################
+        #  ConceptScheme as SkosCollection ###############################
         if obj["scheme"]:
             for x in obj["scheme"]:
                 scheme = URIRef(str(x["url"][:-12]))
@@ -212,7 +205,7 @@ def graph_construct(results):
                         (concept, SKOS.altLabel, Literal(x["name"], lang=x["isoCode"]))
                     )
         # top concepts
-        if obj["top_concept"] == True:
+        if obj["top_concept"] is True:
             g.add((mainConceptScheme, SKOS.hasTopConcept, URIRef(concept)))
             g.add((concept, SKOS.topConceptOf, mainConceptScheme))
         # modelling broader/narrower relationships
@@ -432,7 +425,7 @@ def graph_construct_qs(results):
                             )
                         )
 
-        ############################# ConceptScheme as SkosCollection ###############################
+        # ConceptScheme as SkosCollection ###############################
         if obj.scheme.all():
             for x in obj.scheme.all():
                 scheme = URIRef(mainConceptScheme + "#collection" + str(x.id))
@@ -498,7 +491,7 @@ def graph_construct_qs(results):
                 else:
                     g.add((concept, SKOS.altLabel, Literal(x.name, lang=x.isoCode)))
         # top concepts
-        if obj.top_concept == True:
+        if obj.top_concept is True:
             g.add((mainConceptScheme, SKOS.hasTopConcept, concept))
             g.add((concept, SKOS.topConceptOf, mainConceptScheme))
         # modelling broader/narrower relationships

@@ -1,6 +1,6 @@
 from django.urls import path
 from . import dal_views
-from .models import *
+from .models import Municipality
 
 app_name = "shapes"
 

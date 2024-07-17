@@ -1,5 +1,5 @@
 from dal import autocomplete
-from .models import *
+from .models import Person, Place, AlternativeName, Institution
 from django.db.models import Q
 
 
