@@ -4,3 +4,7 @@ db.sqlite3
 .env
 env.default
 env.secret
+.git
+venv
+*.secret
+secret.*
