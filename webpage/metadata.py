@@ -14,23 +14,23 @@ PROJECT_METADATA = {
     "matomo_url": "//matomo.acdh.oeaw.ac.at/",
     "imprint": "/imprint",
     "social_media": [
-        ("fab fa-twitter fa-2x", "https://twitter.com/ironagedanube?lang=en"),
+        ("bi bi-twitter-x", "https://twitter.com/ironagedanube?lang=en"),
         (
-            "fab fa-youtube fa-2x",
+            "bi bi-youtube",
             "https://www.youtube.com/channel/UCx9Vnpkkf5ayEmtj2p-kc7w",
         ),
-        ("fab fa-facebook-f fa-2x", "https://www.facebook.com/IronAgeDanube/"),
-        ("fab fa-instagram fa-2x", "https://www.instagram.com/ironagedanube/?hl=en"),
+        ("bi bi-facebook", "https://www.facebook.com/IronAgeDanube/"),
+        ("bi bi-instagram", "https://www.instagram.com/ironagedanube/?hl=en"),
         (
-            "fab fa-wikipedia-w fa-2x",
+            "bi bi-wikipedia",
             "https://en.wikipedia.org/wiki/Iron-Age-Danube_project",
         ),
         (
-            "fas fa-graduation-cap fa-2x",
+            "bi bi-mortarboard",
             "http://museum-joanneum.academia.edu/IronAgeDanubeMonumentalizedEarlyIronAgeLandscapesintheDanuberiverbasin",
         ),
         (
-            "fas fa-home fa-2x",
+            "bi bi-house",
             "http://www.interreg-danube.eu/approved-projects/iron-age-danube",
         ),
     ],
