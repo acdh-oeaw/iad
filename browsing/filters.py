@@ -15,7 +15,7 @@ from archiv.models import (
     SITE_ACCESSIBILITY,
     SITE_INFRASTRUCTURE,
     SITE_POTENTIALSURROUNDINGS,
-    SITE_VISIBILITY
+    SITE_VISIBILITY,
 )
 from bib.models import Reference, ZotItem
 from entities.models import Place, AlternativeName, Institution, Person

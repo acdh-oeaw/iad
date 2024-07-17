@@ -6,7 +6,15 @@ from leaflet.forms.widgets import LeafletWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, Div
 
-from .models import MonumentProtection, ResearchEvent, ResearchQuestion, ArchEnt, Period, Site, AltName
+from .models import (
+    MonumentProtection,
+    ResearchEvent,
+    ResearchQuestion,
+    ArchEnt,
+    Period,
+    Site,
+    AltName,
+)
 from .utils import geojson_to_poly, copy_shape_str_to_poly
 
 

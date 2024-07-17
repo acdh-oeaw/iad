@@ -1,7 +1,14 @@
 from rest_framework import viewsets
 from rest_framework import pagination
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import SkosLabel, SkosConcept, SkosConceptScheme, SkosCollection, Metadata, SkosNamespace
+from .models import (
+    SkosLabel,
+    SkosConcept,
+    SkosConceptScheme,
+    SkosCollection,
+    Metadata,
+    SkosNamespace,
+)
 from .serializers import (
     SkosCollectionSerializer,
     SkosConceptSchemeSerializer,
