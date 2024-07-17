@@ -22,7 +22,7 @@ def nav_menu(app=None):
                 item = {
                     "name": modelname.title(),
                 }
-            except:
+            except:  # noqa: E722
                 item = {"name": None}
             try:
                 item["link"] = fetched_model.get_listview_url()
@@ -38,7 +38,7 @@ def class_definition(context):
     try:
         values["class_name"] = context["class_name"]
         values["docstring"] = context["docstring"]
-    except:
+    except:  # noqa: E722
         pass
     return values
 
@@ -47,5 +47,5 @@ def class_definition(context):
 def column_selector(context):
     try:
         return {"columns": context["togglable_colums"]}
-    except:
+    except:  # noqa: E722
         return {"columns": None}

@@ -1,10 +1,25 @@
 import django_filters
 from dal import autocomplete
-from django.urls import reverse
-from archiv.models import *
-from bib.models import *
+from archiv.models import (
+    MonumentProtection,
+    ResearchEvent,
+    ResearchQuestion,
+    ArchEnt,
+    Period,
+    Site,
+    AltName,
+    HERITAGE_STATUS_CHOICES,
+    ARCHENT_CERTAINTY,
+    SITE_OWNERSHIP,
+    SITE_LONGTERMMANGEMENT,
+    SITE_ACCESSIBILITY,
+    SITE_INFRASTRUCTURE,
+    SITE_POTENTIALSURROUNDINGS,
+    SITE_VISIBILITY
+)
+from bib.models import Reference, ZotItem
 from entities.models import Place, AlternativeName, Institution, Person
-from vocabs.models import SkosConcept, SkosConceptScheme
+from vocabs.models import SkosConcept
 from vocabs.filters import generous_concept_filter
 from shapes.models import Municipality
 from django import forms

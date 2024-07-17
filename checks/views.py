@@ -81,7 +81,7 @@ class PolyFitsArchEnts(TemplateView):
                 archs = x.has_archent.exclude(polygon=None).aggregate(
                     combined=Union("polygon")
                 )
-            except:
+            except:  # noqa: E722
                 archs = None
             if archs:
                 archs = archs["combined"]
@@ -92,7 +92,7 @@ class PolyFitsArchEnts(TemplateView):
                         pass
                     else:
                         errors.append(x)
-                except:
+                except:  # noqa: E722
                     pass
         context["errors"] = errors
         return context

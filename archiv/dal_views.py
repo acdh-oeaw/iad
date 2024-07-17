@@ -1,6 +1,12 @@
 from django.db.models import Q
 from dal import autocomplete
-from .models import *
+from .models import (
+    ResearchEvent,
+    ResearchQuestion,
+    Period,
+    Site,
+    AltName,
+)
 
 
 class ResearchQuestionAC(autocomplete.Select2QuerySetView):

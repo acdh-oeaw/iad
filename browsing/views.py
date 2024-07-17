@@ -5,8 +5,6 @@ import geopandas as gp
 from django.http import HttpResponse
 from django.core.serializers import serialize
 from django.contrib.contenttypes.models import ContentType
-import rdflib
-from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef, RDFS, ConjunctiveGraph
 from django_tables2 import SingleTableView, RequestConfig
 from django_tables2.export.views import ExportMixin
 
@@ -101,7 +99,7 @@ class GenericListView(ExportMixin, SingleTableView):
         try:
             ct._meta.get_field("polygon")
             poly = True
-        except Exception as e:
+        except:  # noqa:
             poly = False
         if poly:
             points = serialize(
@@ -738,7 +736,6 @@ class AlternativeNameListView(GenericListView):
         exclude_vals = [x for x in all_cols if x not in selected_cols]
         table.exclude = exclude_vals
         return table
-
 
 
 class InstitutionListView(GenericListView):

@@ -1,16 +1,12 @@
-import io
-import pandas as pd
-import geopandas as gp
-from shapely import wkt
 from dal import autocomplete
 from django import forms
 from django.contrib.gis.geos import GEOSGeometry
 
 from leaflet.forms.widgets import LeafletWidget
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML, Field
+from crispy_forms.layout import Submit, Layout, Fieldset, Div
 
-from .models import *
+from .models import MonumentProtection, ResearchEvent, ResearchQuestion, ArchEnt, Period, Site, AltName
 from .utils import geojson_to_poly, copy_shape_str_to_poly
 
 

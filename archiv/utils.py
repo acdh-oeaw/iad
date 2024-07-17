@@ -3,7 +3,6 @@ import geojson
 import pandas as pd
 import geopandas as gp
 from shapely import wkt
-from shapely.geometry.multipolygon import MultiPolygon
 from django.contrib.gis.geos import GEOSGeometry
 
 
