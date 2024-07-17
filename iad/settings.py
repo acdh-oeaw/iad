@@ -31,11 +31,16 @@ if DEBUG:
 else:
     CACHES = {
         "default": {
-            "BACKEND": "django.core.cache.backends.db.DatabaseCache",
-            "LOCATION": "my_cache_table",
-            "TIMEOUT": None,
+            "BACKEND": "django.core.cache.backends.dummy.DummyCache",
         }
     }
+    # CACHES = {
+    #     "default": {
+    #         "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+    #         "LOCATION": "my_cache_table",
+    #         "TIMEOUT": None,
+    #     }
+    # }
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
