@@ -9,3 +9,4 @@ exclude =
     env
     venv
     manage.py
+    */migrations/*.py

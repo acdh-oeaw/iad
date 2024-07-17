@@ -14,14 +14,6 @@ cover/
 .idea
 myenv
 venv
-# migrations
-vocabs/migrations/*
-bib/migrations/*
-webpage/migrations/*
-places/migrations/*
-arche/migrations/*
-archiv/migrations/*
-
 
 # Ipython Notebook checkpoints
 .ipynb_checkpoints

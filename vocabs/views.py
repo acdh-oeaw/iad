@@ -15,7 +15,7 @@ from .forms import (
     SkosConceptSchemeFormHelper,
     SkosLabelForm,
     SkosLabelFormHelper,
-    MetadataForm
+    MetadataForm,
 )
 from .tables import (
     SkosCollectionTable,
