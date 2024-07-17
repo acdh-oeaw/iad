@@ -8,3 +8,4 @@ exclude =
     dist
     env
     venv
+    manage.py

@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
@@ -72,11 +71,10 @@ class PolyFitsArchEnts(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PolyFitsArchEnts, self).get_context_data()
-        sites = Site.objects.exclude(polygon=None)
+        Site.objects.exclude(polygon=None)
         errors = []
         for x in Site.objects.exclude(polygon=None):
             archs = None
-            poly = None
             try:
                 archs = x.has_archent.exclude(polygon=None).aggregate(
                     combined=Union("polygon")
@@ -85,7 +83,6 @@ class PolyFitsArchEnts(TemplateView):
                 archs = None
             if archs:
                 archs = archs["combined"]
-            poly = x.polygon
             if archs:
                 try:
                     if Site.objects.filter(id=x.id).filter(polygon__covers=archs):
