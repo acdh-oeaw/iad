@@ -1,9 +1,14 @@
-import requests, json, sys
+import sys
+import requests
+from django.conf import settings
 from django.core.management.base import NoArgsCommand
 
-import requests, json, sys
 from bib.models import ZotItem
-from orea.settings.server import Z_USER_ID, Z_COLLECTION, Z_API_KEY
+
+
+Z_USER_ID = settings.Z_USER_ID
+Z_COLLECTION = settings.Z_COLLECTION
+Z_API_KEY = settings.Z_API_KEY
 
 
 class Command(NoArgsCommand):
