@@ -1,3 +1,7 @@
+[![Build and publish Docker image](https://github.com/acdh-oeaw/iad/actions/workflows/build.yml/badge.svg)](https://github.com/acdh-oeaw/iad/actions/workflows/build.yml)
+[![flake8 Lint](https://github.com/acdh-oeaw/iad/actions/workflows/lint.yml/badge.svg)](https://github.com/acdh-oeaw/iad/actions/workflows/lint.yml)
+[![Test](https://github.com/acdh-oeaw/iad/actions/workflows/test.yml/badge.svg)](https://acdh-oeaw.github.io/iad/)
+
 # IRON-AGE-DANUBE (IAD)
 
 Code Repo of the IAD's web-app.
