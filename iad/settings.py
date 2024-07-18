@@ -79,7 +79,6 @@ INSTALLED_APPS = [
     "checks",
     "shapes",
     "charts",
-    "fixture_magic",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
