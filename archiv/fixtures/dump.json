@@ -1,0 +1,3097 @@
+True
+[
+{
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+        "app_label": "vocabs",
+        "model": "skosnamespace"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+        "app_label": "vocabs",
+        "model": "skoslabel"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 21,
+    "fields": {
+        "app_label": "sparql",
+        "model": "sparqlconfig"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 20,
+    "fields": {
+        "app_label": "sparql",
+        "model": "query"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 33,
+    "fields": {
+        "app_label": "shapes",
+        "model": "municipality"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "reversion",
+        "model": "version"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "reversion",
+        "model": "revision"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "idprovider",
+        "model": "idprovider"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 17,
+    "fields": {
+        "app_label": "entities",
+        "model": "place"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 16,
+    "fields": {
+        "app_label": "entities",
+        "model": "person"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 15,
+    "fields": {
+        "app_label": "entities",
+        "model": "institution"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 14,
+    "fields": {
+        "app_label": "entities",
+        "model": "alternativename"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 35,
+    "fields": {
+        "app_label": "charts",
+        "model": "charttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 34,
+    "fields": {
+        "app_label": "charts",
+        "model": "chartconfig"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 22,
+    "fields": {
+        "app_label": "browsing",
+        "model": "browsconf"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 19,
+    "fields": {
+        "app_label": "bib",
+        "model": "zotitem"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 18,
+    "fields": {
+        "app_label": "bib",
+        "model": "reference"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 32,
+    "fields": {
+        "app_label": "archiv",
+        "model": "site"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 31,
+    "fields": {
+        "app_label": "archiv",
+        "model": "researchquestion"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 30,
+    "fields": {
+        "app_label": "archiv",
+        "model": "researchevent"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 29,
+    "fields": {
+        "app_label": "archiv",
+        "model": "period"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 28,
+    "fields": {
+        "app_label": "archiv",
+        "model": "monumentprotection"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 27,
+    "fields": {
+        "app_label": "archiv",
+        "model": "archent"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 26,
+    "fields": {
+        "app_label": "archiv",
+        "model": "altname"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 25,
+    "fields": {
+        "app_label": "arche",
+        "model": "resource"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 24,
+    "fields": {
+        "app_label": "arche",
+        "model": "project"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 23,
+    "fields": {
+        "app_label": "arche",
+        "model": "collection"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 97,
+    "fields": {
+        "name": "Modern History",
+        "label_type": "altLabel",
+        "isoCode": "eng"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 96,
+    "fields": {
+        "name": "novi vek",
+        "label_type": "prefLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 95,
+    "fields": {
+        "name": "újkor",
+        "label_type": "prefLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 94,
+    "fields": {
+        "name": "Neuzeit",
+        "label_type": "prefLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 93,
+    "fields": {
+        "name": "novi vijek",
+        "label_type": "prefLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 98,
+    "fields": {
+        "name": "Modern Period",
+        "label_type": "altLabel",
+        "isoCode": "eng"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 75,
+    "fields": {
+        "name": "srednji vek",
+        "label_type": "prefLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 77,
+    "fields": {
+        "name": "Medieval Period",
+        "label_type": "altLabel",
+        "isoCode": "eng"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 76,
+    "fields": {
+        "name": "Middle Ages",
+        "label_type": "altLabel",
+        "isoCode": "eng"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 74,
+    "fields": {
+        "name": "középkor",
+        "label_type": "prefLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 73,
+    "fields": {
+        "name": "Mittelalter",
+        "label_type": "prefLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 72,
+    "fields": {
+        "name": "srednji vijek",
+        "label_type": "prefLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete skos namespace",
+        "content_type": 13,
+        "codename": "delete_skosnamespace"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change skos namespace",
+        "content_type": 13,
+        "codename": "change_skosnamespace"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add skos namespace",
+        "content_type": 13,
+        "codename": "add_skosnamespace"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can delete skos label",
+        "content_type": 12,
+        "codename": "delete_skoslabel"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can change skos label",
+        "content_type": 12,
+        "codename": "change_skoslabel"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can add skos label",
+        "content_type": 12,
+        "codename": "add_skoslabel"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 63,
+    "fields": {
+        "name": "Can delete sparql config",
+        "content_type": 21,
+        "codename": "delete_sparqlconfig"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 62,
+    "fields": {
+        "name": "Can change sparql config",
+        "content_type": 21,
+        "codename": "change_sparqlconfig"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 61,
+    "fields": {
+        "name": "Can add sparql config",
+        "content_type": 21,
+        "codename": "add_sparqlconfig"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 60,
+    "fields": {
+        "name": "Can delete query",
+        "content_type": 20,
+        "codename": "delete_query"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 59,
+    "fields": {
+        "name": "Can change query",
+        "content_type": 20,
+        "codename": "change_query"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 58,
+    "fields": {
+        "name": "Can add query",
+        "content_type": 20,
+        "codename": "add_query"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 99,
+    "fields": {
+        "name": "Can delete municipality",
+        "content_type": 33,
+        "codename": "delete_municipality"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 98,
+    "fields": {
+        "name": "Can change municipality",
+        "content_type": 33,
+        "codename": "change_municipality"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 97,
+    "fields": {
+        "name": "Can add municipality",
+        "content_type": 33,
+        "codename": "add_municipality"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 6,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 6,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 6,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can delete version",
+        "content_type": 8,
+        "codename": "delete_version"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can change version",
+        "content_type": 8,
+        "codename": "change_version"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can add version",
+        "content_type": 8,
+        "codename": "add_version"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can delete revision",
+        "content_type": 7,
+        "codename": "delete_revision"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can change revision",
+        "content_type": 7,
+        "codename": "change_revision"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can add revision",
+        "content_type": 7,
+        "codename": "add_revision"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete id provider",
+        "content_type": 9,
+        "codename": "delete_idprovider"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change id provider",
+        "content_type": 9,
+        "codename": "change_idprovider"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add id provider",
+        "content_type": 9,
+        "codename": "add_idprovider"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+        "name": "Can delete place",
+        "content_type": 17,
+        "codename": "delete_place"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+        "name": "Can change place",
+        "content_type": 17,
+        "codename": "change_place"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+        "name": "Can add place",
+        "content_type": 17,
+        "codename": "add_place"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+        "name": "Can delete person",
+        "content_type": 16,
+        "codename": "delete_person"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+        "name": "Can change person",
+        "content_type": 16,
+        "codename": "change_person"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+        "name": "Can add person",
+        "content_type": 16,
+        "codename": "add_person"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+        "name": "Can delete institution",
+        "content_type": 15,
+        "codename": "delete_institution"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can change institution",
+        "content_type": 15,
+        "codename": "change_institution"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can add institution",
+        "content_type": 15,
+        "codename": "add_institution"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can delete alternative name",
+        "content_type": 14,
+        "codename": "delete_alternativename"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can change alternative name",
+        "content_type": 14,
+        "codename": "change_alternativename"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can add alternative name",
+        "content_type": 14,
+        "codename": "add_alternativename"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 5,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 5,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 5,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 105,
+    "fields": {
+        "name": "Can delete chart type",
+        "content_type": 35,
+        "codename": "delete_charttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 104,
+    "fields": {
+        "name": "Can change chart type",
+        "content_type": 35,
+        "codename": "change_charttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 103,
+    "fields": {
+        "name": "Can add chart type",
+        "content_type": 35,
+        "codename": "add_charttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 102,
+    "fields": {
+        "name": "Can delete chart config",
+        "content_type": 34,
+        "codename": "delete_chartconfig"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 101,
+    "fields": {
+        "name": "Can change chart config",
+        "content_type": 34,
+        "codename": "change_chartconfig"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 100,
+    "fields": {
+        "name": "Can add chart config",
+        "content_type": 34,
+        "codename": "add_chartconfig"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 66,
+    "fields": {
+        "name": "Can delete collection",
+        "content_type": 22,
+        "codename": "delete_collection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 114,
+    "fields": {
+        "name": "Can delete brows conf",
+        "content_type": 22,
+        "codename": "delete_browsconf"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 65,
+    "fields": {
+        "name": "Can change collection",
+        "content_type": 22,
+        "codename": "change_collection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 113,
+    "fields": {
+        "name": "Can change brows conf",
+        "content_type": 22,
+        "codename": "change_browsconf"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 64,
+    "fields": {
+        "name": "Can add collection",
+        "content_type": 22,
+        "codename": "add_collection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 112,
+    "fields": {
+        "name": "Can add brows conf",
+        "content_type": 22,
+        "codename": "add_browsconf"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 111,
+    "fields": {
+        "name": "Can delete zot item",
+        "content_type": 19,
+        "codename": "delete_zotitem"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 57,
+    "fields": {
+        "name": "Can delete reference",
+        "content_type": 19,
+        "codename": "delete_reference"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 110,
+    "fields": {
+        "name": "Can change zot item",
+        "content_type": 19,
+        "codename": "change_zotitem"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 56,
+    "fields": {
+        "name": "Can change reference",
+        "content_type": 19,
+        "codename": "change_reference"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 109,
+    "fields": {
+        "name": "Can add zot item",
+        "content_type": 19,
+        "codename": "add_zotitem"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 55,
+    "fields": {
+        "name": "Can add reference",
+        "content_type": 19,
+        "codename": "add_reference"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 108,
+    "fields": {
+        "name": "Can delete reference",
+        "content_type": 18,
+        "codename": "delete_reference"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 54,
+    "fields": {
+        "name": "Can delete book",
+        "content_type": 18,
+        "codename": "delete_book"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 107,
+    "fields": {
+        "name": "Can change reference",
+        "content_type": 18,
+        "codename": "change_reference"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 53,
+    "fields": {
+        "name": "Can change book",
+        "content_type": 18,
+        "codename": "change_book"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 106,
+    "fields": {
+        "name": "Can add reference",
+        "content_type": 18,
+        "codename": "add_reference"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+        "name": "Can add book",
+        "content_type": 18,
+        "codename": "add_book"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 96,
+    "fields": {
+        "name": "Can delete Site",
+        "content_type": 32,
+        "codename": "delete_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 95,
+    "fields": {
+        "name": "Can change Site",
+        "content_type": 32,
+        "codename": "change_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 94,
+    "fields": {
+        "name": "Can add Site",
+        "content_type": 32,
+        "codename": "add_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 93,
+    "fields": {
+        "name": "Can delete Site",
+        "content_type": 31,
+        "codename": "delete_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 141,
+    "fields": {
+        "name": "Can delete Research Question",
+        "content_type": 31,
+        "codename": "delete_researchquestion"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 92,
+    "fields": {
+        "name": "Can change Site",
+        "content_type": 31,
+        "codename": "change_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 140,
+    "fields": {
+        "name": "Can change Research Question",
+        "content_type": 31,
+        "codename": "change_researchquestion"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 91,
+    "fields": {
+        "name": "Can add Site",
+        "content_type": 31,
+        "codename": "add_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 139,
+    "fields": {
+        "name": "Can add Research Question",
+        "content_type": 31,
+        "codename": "add_researchquestion"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 90,
+    "fields": {
+        "name": "Can delete Research Question",
+        "content_type": 30,
+        "codename": "delete_researchquestion"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 138,
+    "fields": {
+        "name": "Can delete Research Activity",
+        "content_type": 30,
+        "codename": "delete_researchevent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 89,
+    "fields": {
+        "name": "Can change Research Question",
+        "content_type": 30,
+        "codename": "change_researchquestion"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 137,
+    "fields": {
+        "name": "Can change Research Activity",
+        "content_type": 30,
+        "codename": "change_researchevent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 88,
+    "fields": {
+        "name": "Can add Research Question",
+        "content_type": 30,
+        "codename": "add_researchquestion"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 136,
+    "fields": {
+        "name": "Can add Research Activity",
+        "content_type": 30,
+        "codename": "add_researchevent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 87,
+    "fields": {
+        "name": "Can delete Research Activity",
+        "content_type": 29,
+        "codename": "delete_researchevent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 135,
+    "fields": {
+        "name": "Can delete Chronology",
+        "content_type": 29,
+        "codename": "delete_period"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 86,
+    "fields": {
+        "name": "Can change Research Activity",
+        "content_type": 29,
+        "codename": "change_researchevent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 134,
+    "fields": {
+        "name": "Can change Chronology",
+        "content_type": 29,
+        "codename": "change_period"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 85,
+    "fields": {
+        "name": "Can add Research Activity",
+        "content_type": 29,
+        "codename": "add_researchevent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 133,
+    "fields": {
+        "name": "Can add Chronology",
+        "content_type": 29,
+        "codename": "add_period"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 84,
+    "fields": {
+        "name": "Can delete Chronology",
+        "content_type": 28,
+        "codename": "delete_period"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 132,
+    "fields": {
+        "name": "Can delete Monument Protection",
+        "content_type": 28,
+        "codename": "delete_monumentprotection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 83,
+    "fields": {
+        "name": "Can change Chronology",
+        "content_type": 28,
+        "codename": "change_period"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 131,
+    "fields": {
+        "name": "Can change Monument Protection",
+        "content_type": 28,
+        "codename": "change_monumentprotection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 82,
+    "fields": {
+        "name": "Can add Chronology",
+        "content_type": 28,
+        "codename": "add_period"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 130,
+    "fields": {
+        "name": "Can add Monument Protection",
+        "content_type": 28,
+        "codename": "add_monumentprotection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 81,
+    "fields": {
+        "name": "Can delete Monument Protection",
+        "content_type": 27,
+        "codename": "delete_monumentprotection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 129,
+    "fields": {
+        "name": "Can delete Archaeological Entity",
+        "content_type": 27,
+        "codename": "delete_archent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 80,
+    "fields": {
+        "name": "Can change Monument Protection",
+        "content_type": 27,
+        "codename": "change_monumentprotection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 128,
+    "fields": {
+        "name": "Can change Archaeological Entity",
+        "content_type": 27,
+        "codename": "change_archent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 79,
+    "fields": {
+        "name": "Can add Monument Protection",
+        "content_type": 27,
+        "codename": "add_monumentprotection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 127,
+    "fields": {
+        "name": "Can add Archaeological Entity",
+        "content_type": 27,
+        "codename": "add_archent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 78,
+    "fields": {
+        "name": "Can delete Archaeological Entity",
+        "content_type": 26,
+        "codename": "delete_archent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 126,
+    "fields": {
+        "name": "Can delete alt name",
+        "content_type": 26,
+        "codename": "delete_altname"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 77,
+    "fields": {
+        "name": "Can change Archaeological Entity",
+        "content_type": 26,
+        "codename": "change_archent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 125,
+    "fields": {
+        "name": "Can change alt name",
+        "content_type": 26,
+        "codename": "change_altname"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 76,
+    "fields": {
+        "name": "Can add Archaeological Entity",
+        "content_type": 26,
+        "codename": "add_archent"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 124,
+    "fields": {
+        "name": "Can add alt name",
+        "content_type": 26,
+        "codename": "add_altname"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 123,
+    "fields": {
+        "name": "Can delete resource",
+        "content_type": 25,
+        "codename": "delete_resource"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 75,
+    "fields": {
+        "name": "Can delete alt name",
+        "content_type": 25,
+        "codename": "delete_altname"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 122,
+    "fields": {
+        "name": "Can change resource",
+        "content_type": 25,
+        "codename": "change_resource"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 74,
+    "fields": {
+        "name": "Can change alt name",
+        "content_type": 25,
+        "codename": "change_altname"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 121,
+    "fields": {
+        "name": "Can add resource",
+        "content_type": 25,
+        "codename": "add_resource"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 73,
+    "fields": {
+        "name": "Can add alt name",
+        "content_type": 25,
+        "codename": "add_altname"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 72,
+    "fields": {
+        "name": "Can delete resource",
+        "content_type": 24,
+        "codename": "delete_resource"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 120,
+    "fields": {
+        "name": "Can delete project",
+        "content_type": 24,
+        "codename": "delete_project"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 71,
+    "fields": {
+        "name": "Can change resource",
+        "content_type": 24,
+        "codename": "change_resource"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 119,
+    "fields": {
+        "name": "Can change project",
+        "content_type": 24,
+        "codename": "change_project"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 70,
+    "fields": {
+        "name": "Can add resource",
+        "content_type": 24,
+        "codename": "add_resource"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 118,
+    "fields": {
+        "name": "Can add project",
+        "content_type": 24,
+        "codename": "add_project"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 69,
+    "fields": {
+        "name": "Can delete project",
+        "content_type": 23,
+        "codename": "delete_project"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 117,
+    "fields": {
+        "name": "Can delete collection",
+        "content_type": 23,
+        "codename": "delete_collection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 68,
+    "fields": {
+        "name": "Can change project",
+        "content_type": 23,
+        "codename": "change_project"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 116,
+    "fields": {
+        "name": "Can change collection",
+        "content_type": 23,
+        "codename": "change_collection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 67,
+    "fields": {
+        "name": "Can add project",
+        "content_type": 23,
+        "codename": "add_project"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 115,
+    "fields": {
+        "name": "Can add collection",
+        "content_type": 23,
+        "codename": "add_collection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "idprovider.idprovider",
+    "pk": 4799,
+    "fields": {
+        "created_at": "2018-11-28T14:01:51.068Z",
+        "updated_at": "2018-11-28T14:01:51.068Z"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 19,
+    "fields": {
+        "name": "srednje kameno doba",
+        "label_type": "altLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 15,
+    "fields": {
+        "name": "Mesolithikum",
+        "label_type": "prefLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 18,
+    "fields": {
+        "name": "srednja kamena doba",
+        "label_type": "altLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 17,
+    "fields": {
+        "name": "mezolitik",
+        "label_type": "prefLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 16,
+    "fields": {
+        "name": "mezolit",
+        "label_type": "prefLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 14,
+    "fields": {
+        "name": "mezolitik",
+        "label_type": "prefLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 10,
+    "fields": {
+        "name": "paleolit",
+        "label_type": "prefLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 9,
+    "fields": {
+        "name": "Paläolithikum",
+        "label_type": "prefLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 6,
+    "fields": {
+        "name": "paleolitik",
+        "label_type": "prefLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 13,
+    "fields": {
+        "name": "paleolitik",
+        "label_type": "prefLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 12,
+    "fields": {
+        "name": "starije kameno doba",
+        "label_type": "altLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 11,
+    "fields": {
+        "name": "starejša kamena doba",
+        "label_type": "altLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "bib.zotitem",
+    "pk": "ZMFV9T45",
+    "fields": {
+        "zot_creator": "[{'creatorType': 'author', 'firstName': 'Jaroslav', 'lastName': 'Šašel'}]",
+        "zot_date": "1954",
+        "zot_item_type": "journalArticle",
+        "zot_title": "Arheološko-topografske novosti s področja Colatia in Atransa",
+        "zot_pub_title": "Arheološki vestnik. Acta archaeologica",
+        "date_modified": "2018-11-28T13:57:00Z",
+        "zot_pages": "154–165",
+        "zot_version": 2415,
+        "zot_html_link": "https://www.zotero.org/groups/iad_database_literature/items/ZMFV9T45",
+        "zot_api_link": "https://api.zotero.org/groups/1612108/items/ZMFV9T45",
+        "zot_bibtex": ""
+    }
+},
+{
+    "model": "bib.zotitem",
+    "pk": "SZ4T6Y8R",
+    "fields": {
+        "zot_creator": "[{'creatorType': 'author', 'firstName': 'Saša', 'lastName': 'Djura Jelenko'}, {'creatorType': 'editor', 'firstName': 'Jože', 'lastName': 'Potočnik'}]",
+        "zot_date": "2010",
+        "zot_item_type": "bookSection",
+        "zot_title": "Arheološka podoba Mislinje z okolico",
+        "zot_pub_title": "None",
+        "date_modified": "2019-03-20T15:35:48Z",
+        "zot_pages": "65–75",
+        "zot_version": 3773,
+        "zot_html_link": "https://www.zotero.org/groups/iad_database_literature/items/SZ4T6Y8R",
+        "zot_api_link": "https://api.zotero.org/groups/1612108/items/SZ4T6Y8R",
+        "zot_bibtex": "{'pages': '65--75', 'year': '2010', 'editor': 'Potočnik, Jože', 'author': 'Djura Jelenko, Saša', 'booktitle': 'Občina {Mislinja}. {Zbornik}', 'title': 'Arheološka podoba {Mislinje} z okolico', 'address': 'Šmartno pri Slovenj Gradcu', 'ENTRYTYPE': 'incollection', 'ID': 'djura_jelenko_arheoloska_2010'}"
+    }
+},
+{
+    "model": "bib.zotitem",
+    "pk": "XBV29ZXH",
+    "fields": {
+        "zot_creator": "[{'creatorType': 'author', 'firstName': 'Franc', 'lastName': 'Osole'}]",
+        "zot_date": "1975",
+        "zot_item_type": "bookSection",
+        "zot_title": "Špehovka",
+        "zot_pub_title": "None",
+        "date_modified": "2018-11-28T13:57:09Z",
+        "zot_pages": "273–274",
+        "zot_version": 2415,
+        "zot_html_link": "https://www.zotero.org/groups/iad_database_literature/items/XBV29ZXH",
+        "zot_api_link": "https://api.zotero.org/groups/1612108/items/XBV29ZXH",
+        "zot_bibtex": ""
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 114,
+    "fields": {
+        "name": "zeitgenössische Geschichte",
+        "label_type": "altLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 111,
+    "fields": {
+        "name": "jelenkor",
+        "label_type": "prefLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 113,
+    "fields": {
+        "name": "neuest Geschichte",
+        "label_type": "altLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 112,
+    "fields": {
+        "name": "sodobnost",
+        "label_type": "prefLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 110,
+    "fields": {
+        "name": "Zeitgeschichte",
+        "label_type": "prefLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 109,
+    "fields": {
+        "name": "moderno doba",
+        "label_type": "prefLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skosconcept",
+    "pk": 299,
+    "fields": {
+        "pref_label": "Modern Era",
+        "pref_label_lang": "eng",
+        "definition": "",
+        "definition_lang": "eng",
+        "notation": "modern-era",
+        "namespace": 1,
+        "broader_concept": null,
+        "top_concept": false,
+        "same_as_external": null,
+        "source_description": "",
+        "legacy_id": "",
+        "name_reverse": "",
+        "skos_note": "",
+        "skos_note_lang": "eng",
+        "skos_scopenote": "",
+        "skos_scopenote_lang": "eng",
+        "skos_changenote": "",
+        "skos_editorialnote": "",
+        "skos_example": "",
+        "skos_historynote": "",
+        "dc_creator": "",
+        "date_created": "2018-10-30T14:15:07.515Z",
+        "date_modified": "2018-10-30T14:15:07.582Z",
+        "collection": [],
+        "scheme": [
+            12
+        ],
+        "other_label": [
+            96,
+            97,
+            98,
+            93,
+            94,
+            95
+        ],
+        "skos_broader": [],
+        "skos_narrower": [],
+        "skos_related": [],
+        "skos_broadmatch": [],
+        "skos_narrowmatch": [],
+        "skos_exactmatch": [],
+        "skos_relatedmatch": [],
+        "skos_closematch": []
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 82,
+    "fields": {
+        "name": "Early Middle Ages",
+        "label_type": "altLabel",
+        "isoCode": "eng"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 78,
+    "fields": {
+        "name": "rani srednji vijek",
+        "label_type": "prefLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 81,
+    "fields": {
+        "name": "zgodnji srednji vek",
+        "label_type": "prefLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 80,
+    "fields": {
+        "name": "kora középkor",
+        "label_type": "prefLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 79,
+    "fields": {
+        "name": "Frühmittelalter",
+        "label_type": "prefLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skosconcept",
+    "pk": 295,
+    "fields": {
+        "pref_label": "Medieval Age",
+        "pref_label_lang": "eng",
+        "definition": "",
+        "definition_lang": "eng",
+        "notation": "medieval-age",
+        "namespace": 1,
+        "broader_concept": null,
+        "top_concept": false,
+        "same_as_external": null,
+        "source_description": "",
+        "legacy_id": "",
+        "name_reverse": "",
+        "skos_note": "",
+        "skos_note_lang": "eng",
+        "skos_scopenote": "",
+        "skos_scopenote_lang": "eng",
+        "skos_changenote": "",
+        "skos_editorialnote": "",
+        "skos_example": "",
+        "skos_historynote": "",
+        "dc_creator": "",
+        "date_created": "2018-10-30T14:15:07.515Z",
+        "date_modified": "2018-10-30T14:15:07.582Z",
+        "collection": [],
+        "scheme": [
+            12
+        ],
+        "other_label": [
+            72,
+            73,
+            74,
+            75,
+            76,
+            77
+        ],
+        "skos_broader": [],
+        "skos_narrower": [],
+        "skos_related": [],
+        "skos_broadmatch": [],
+        "skos_narrowmatch": [],
+        "skos_exactmatch": [],
+        "skos_relatedmatch": [],
+        "skos_closematch": []
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 65,
+    "fields": {
+        "name": "rimsko obdobje",
+        "label_type": "prefLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 62,
+    "fields": {
+        "name": "Rimsko Carstvo",
+        "label_type": "prefLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 66,
+    "fields": {
+        "name": "antika",
+        "label_type": "altLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 64,
+    "fields": {
+        "name": "római császárkor",
+        "label_type": "prefLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 63,
+    "fields": {
+        "name": "Römische Kaiserzeit",
+        "label_type": "prefLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 55,
+    "fields": {
+        "name": "La-Tène-Zeit",
+        "label_type": "altLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 60,
+    "fields": {
+        "name": "jüngere Eisenzeit",
+        "label_type": "prefLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 57,
+    "fields": {
+        "name": "La Tene kor",
+        "label_type": "altLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 61,
+    "fields": {
+        "name": "La Tène culture",
+        "label_type": "altLabel",
+        "isoCode": "eng"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 59,
+    "fields": {
+        "name": "Latènezeit",
+        "label_type": "altLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 58,
+    "fields": {
+        "name": "mlajša železna doba",
+        "label_type": "prefLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 56,
+    "fields": {
+        "name": "késő vaskor",
+        "label_type": "prefLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 54,
+    "fields": {
+        "name": "mlađe željezno doba",
+        "label_type": "prefLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 53,
+    "fields": {
+        "name": "železna doba",
+        "label_type": "prefLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 52,
+    "fields": {
+        "name": "vaskor",
+        "label_type": "prefLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 51,
+    "fields": {
+        "name": "Eisenzeit",
+        "label_type": "prefLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 50,
+    "fields": {
+        "name": "željezno doba",
+        "label_type": "prefLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 36,
+    "fields": {
+        "name": "bronasta doba",
+        "label_type": "prefLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 35,
+    "fields": {
+        "name": "bronzkor",
+        "label_type": "prefLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 34,
+    "fields": {
+        "name": "Bronzezeit",
+        "label_type": "prefLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 33,
+    "fields": {
+        "name": "brončano doba",
+        "label_type": "prefLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 2,
+    "fields": {
+        "name": "Urgeschichte",
+        "label_type": "prefLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 4,
+    "fields": {
+        "name": "prazgodovina",
+        "label_type": "prefLabel",
+        "isoCode": "slv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 3,
+    "fields": {
+        "name": "őskor",
+        "label_type": "prefLabel",
+        "isoCode": "hun"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 1,
+    "fields": {
+        "name": "prapovijest",
+        "label_type": "prefLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 8,
+    "fields": {
+        "name": "pretpovijest",
+        "label_type": "altLabel",
+        "isoCode": "hrv"
+    }
+},
+{
+    "model": "vocabs.skoslabel",
+    "pk": 7,
+    "fields": {
+        "name": "Vorgeschichte",
+        "label_type": "altLabel",
+        "isoCode": "deu"
+    }
+},
+{
+    "model": "vocabs.skosconceptscheme",
+    "pk": 12,
+    "fields": {
+        "dc_title": "other-present-archaeological-period",
+        "dc_title_lang": "eng",
+        "namespace": 1,
+        "dc_creator": "",
+        "dc_description": "",
+        "dc_description_lang": "eng",
+        "legacy_id": "",
+        "date_created": "2018-10-30T14:15:08.040Z",
+        "date_modified": "2018-10-30T14:15:08.070Z"
+    }
+},
+{
+    "model": "vocabs.skosnamespace",
+    "pk": 1,
+    "fields": {
+        "namespace": "http://www.vocabs/provide-some-namespace/",
+        "prefix": "iad"
+    }
+},
+{
+    "model": "bib.zotitem",
+    "pk": "BBDBFRTD",
+    "fields": {
+        "zot_creator": "[{'creatorType': 'author', 'firstName': 'Oliver', 'lastName': 'Reuß'}, {'creatorType': 'author', 'firstName': 'Karsten', 'lastName': 'Wink'}]",
+        "zot_date": "2010",
+        "zot_item_type": "journalArticle",
+        "zot_title": "Bludenz",
+        "zot_pub_title": "FÖ Fundberichte aus Österreich",
+        "date_modified": "2018-06-07T10:40:52Z",
+        "zot_pages": "390-391",
+        "zot_version": 1042,
+        "zot_html_link": "https://www.zotero.org/groups/iad_database_literature/items/BBDBFRTD",
+        "zot_api_link": "https://api.zotero.org/groups/1612108/items/BBDBFRTD",
+        "zot_bibtex": ""
+    }
+},
+{
+    "model": "bib.zotitem",
+    "pk": "26KPXJWI",
+    "fields": {
+        "zot_creator": "[{'creatorType': 'author', 'firstName': 'Thomas', 'lastName': 'Tischer'}]",
+        "zot_date": "2005",
+        "zot_item_type": "journalArticle",
+        "zot_title": "Bludenz",
+        "zot_pub_title": "FÖ Fundberichte aus Österreich",
+        "date_modified": "2018-06-07T10:40:39Z",
+        "zot_pages": "76-77",
+        "zot_version": 1041,
+        "zot_html_link": "https://www.zotero.org/groups/iad_database_literature/items/26KPXJWI",
+        "zot_api_link": "https://api.zotero.org/groups/1612108/items/26KPXJWI",
+        "zot_bibtex": ""
+    }
+},
+{
+    "model": "bib.zotitem",
+    "pk": "XGRDAA4M",
+    "fields": {
+        "zot_creator": "[{'creatorType': 'author', 'firstName': 'Adolf', 'lastName': 'Hild'}]",
+        "zot_date": "1952",
+        "zot_item_type": "journalArticle",
+        "zot_title": "Bludenz",
+        "zot_pub_title": "FÖ Fundberichte aus Österreich",
+        "date_modified": "2018-06-07T10:40:29Z",
+        "zot_pages": "48",
+        "zot_version": 1040,
+        "zot_html_link": "https://www.zotero.org/groups/iad_database_literature/items/XGRDAA4M",
+        "zot_api_link": "https://api.zotero.org/groups/1612108/items/XGRDAA4M",
+        "zot_bibtex": ""
+    }
+},
+{
+    "model": "bib.zotitem",
+    "pk": "742NJDFU",
+    "fields": {
+        "zot_creator": "[{'creatorType': 'author', 'firstName': 'Adolf', 'lastName': 'Hild'}]",
+        "zot_date": "1948",
+        "zot_item_type": "journalArticle",
+        "zot_title": "Bludenz",
+        "zot_pub_title": "FÖ Fundberichte aus Österreich",
+        "date_modified": "2018-06-07T10:40:17Z",
+        "zot_pages": "76",
+        "zot_version": 1039,
+        "zot_html_link": "https://www.zotero.org/groups/iad_database_literature/items/742NJDFU",
+        "zot_api_link": "https://api.zotero.org/groups/1612108/items/742NJDFU",
+        "zot_bibtex": ""
+    }
+},
+{
+    "model": "bib.zotitem",
+    "pk": "GMQNDJN4",
+    "fields": {
+        "zot_creator": "[{'creatorType': 'author', 'firstName': 'Oliver', 'lastName': 'Reuß'}, {'creatorType': 'author', 'firstName': 'Karsten', 'lastName': 'Wink'}]",
+        "zot_date": "2010",
+        "zot_item_type": "journalArticle",
+        "zot_title": "Bludenz",
+        "zot_pub_title": "FÖ Fundberichte aus Österreich",
+        "date_modified": "2018-06-07T10:39:57Z",
+        "zot_pages": "390-391",
+        "zot_version": 1038,
+        "zot_html_link": "https://www.zotero.org/groups/iad_database_literature/items/GMQNDJN4",
+        "zot_api_link": "https://api.zotero.org/groups/1612108/items/GMQNDJN4",
+        "zot_bibtex": ""
+    }
+},
+{
+    "model": "bib.zotitem",
+    "pk": "GGVGQKZ8",
+    "fields": {
+        "zot_creator": "[{'creatorType': 'author', 'firstName': 'Elmar', 'lastName': 'Vonbank'}]",
+        "zot_date": "1967",
+        "zot_item_type": "journalArticle",
+        "zot_title": "Bludenz",
+        "zot_pub_title": "FÖ Fundberichte aus Österreich",
+        "date_modified": "2018-06-07T10:39:46Z",
+        "zot_pages": "41",
+        "zot_version": 1037,
+        "zot_html_link": "https://www.zotero.org/groups/iad_database_literature/items/GGVGQKZ8",
+        "zot_api_link": "https://api.zotero.org/groups/1612108/items/GGVGQKZ8",
+        "zot_bibtex": ""
+    }
+},
+{
+    "model": "bib.zotitem",
+    "pk": "KE3MD953",
+    "fields": {
+        "zot_creator": "[{'creatorType': 'author', 'firstName': 'Elmar', 'lastName': 'Vonbank'}]",
+        "zot_date": "",
+        "zot_item_type": "journalArticle",
+        "zot_title": "Bludenz",
+        "zot_pub_title": "Montfort",
+        "date_modified": "2018-06-07T10:39:32Z",
+        "zot_pages": "117, 122",
+        "zot_version": 1036,
+        "zot_html_link": "https://www.zotero.org/groups/iad_database_literature/items/KE3MD953",
+        "zot_api_link": "https://api.zotero.org/groups/1612108/items/KE3MD953",
+        "zot_bibtex": ""
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+        "name": "no_superuser",
+        "permissions": [
+            1,
+            2,
+            3,
+            115,
+            67,
+            116,
+            68,
+            117,
+            69,
+            118,
+            70,
+            119,
+            71,
+            120,
+            72,
+            73,
+            121,
+            74,
+            122,
+            75,
+            123,
+            124,
+            76,
+            125,
+            77,
+            126,
+            78,
+            127,
+            79,
+            128,
+            80,
+            129,
+            81,
+            130,
+            82,
+            131,
+            83,
+            132,
+            84,
+            133,
+            85,
+            134,
+            86,
+            135,
+            87,
+            136,
+            88,
+            137,
+            89,
+            138,
+            90,
+            139,
+            91,
+            140,
+            92,
+            141,
+            93,
+            94,
+            95,
+            96,
+            52,
+            106,
+            53,
+            107,
+            54,
+            108,
+            55,
+            109,
+            56,
+            110,
+            57,
+            111,
+            112,
+            64,
+            113,
+            65,
+            114,
+            66,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            13,
+            14,
+            15,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            25,
+            26,
+            27,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            16,
+            17,
+            18,
+            97,
+            98,
+            99,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39
+        ]
+    }
+},
+{
+    "model": "entities.institution",
+    "pk": 4799,
+    "fields": {
+        "legacy_id": "",
+        "written_name": "Koroški pokrajinski muzej Slovenj Gradec",
+        "inst_alt_name": "",
+        "authority_url": "",
+        "adress": "",
+        "contact": "",
+        "homepage": "",
+        "abbreviation": "",
+        "location": null,
+        "parent_institution": null,
+        "comment": "",
+        "alt_names": []
+    }
+},
+{
+    "model": "vocabs.skosconcept",
+    "pk": 284,
+    "fields": {
+        "pref_label": "Mesolithic",
+        "pref_label_lang": "eng",
+        "definition": "",
+        "definition_lang": "eng",
+        "notation": "mesolithic",
+        "namespace": 1,
+        "broader_concept": 282,
+        "top_concept": false,
+        "same_as_external": null,
+        "source_description": "",
+        "legacy_id": "",
+        "name_reverse": "",
+        "skos_note": "",
+        "skos_note_lang": "eng",
+        "skos_scopenote": "",
+        "skos_scopenote_lang": "eng",
+        "skos_changenote": "",
+        "skos_editorialnote": "",
+        "skos_example": "",
+        "skos_historynote": "",
+        "dc_creator": "",
+        "date_created": "2018-10-30T14:15:07.515Z",
+        "date_modified": "2018-10-30T14:15:07.582Z",
+        "collection": [],
+        "scheme": [
+            12
+        ],
+        "other_label": [
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+        ],
+        "skos_broader": [],
+        "skos_narrower": [],
+        "skos_related": [],
+        "skos_broadmatch": [],
+        "skos_narrowmatch": [],
+        "skos_exactmatch": [],
+        "skos_relatedmatch": [],
+        "skos_closematch": []
+    }
+},
+{
+    "model": "vocabs.skosconcept",
+    "pk": 283,
+    "fields": {
+        "pref_label": "Palaeolithic",
+        "pref_label_lang": "eng",
+        "definition": "",
+        "definition_lang": "eng",
+        "notation": "palaeolithic",
+        "namespace": 1,
+        "broader_concept": 282,
+        "top_concept": false,
+        "same_as_external": null,
+        "source_description": "",
+        "legacy_id": "",
+        "name_reverse": "",
+        "skos_note": "",
+        "skos_note_lang": "eng",
+        "skos_scopenote": "",
+        "skos_scopenote_lang": "eng",
+        "skos_changenote": "",
+        "skos_editorialnote": "",
+        "skos_example": "",
+        "skos_historynote": "",
+        "dc_creator": "",
+        "date_created": "2018-10-30T14:15:07.515Z",
+        "date_modified": "2018-10-30T14:15:07.582Z",
+        "collection": [],
+        "scheme": [
+            12
+        ],
+        "other_label": [
+            6,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "skos_broader": [],
+        "skos_narrower": [],
+        "skos_related": [],
+        "skos_broadmatch": [],
+        "skos_narrowmatch": [],
+        "skos_exactmatch": [],
+        "skos_relatedmatch": [],
+        "skos_closematch": []
+    }
+},
+{
+    "model": "shapes.municipality",
+    "pk": 26409,
+    "fields": {
+        "lau2_id": "076",
+        "lau2nam": "Mislinja",
+        "nuts3cod": "SI033",
+        "nuts3nam": "Koroška statistična regija",
+        "nuts2cod": "",
+        "nuts2nam": "",
+        "ctcod": "SI",
+        "ctnam": "Slovenija",
+        "ctalt": "Slovenia",
+        "geom": "SRID=4326;MULTIPOLYGON (((15.2338444989246 46.4868626547877, 15.2347980042245 46.4868148639149, 15.2357907028786 46.4868901164858, 15.2367330035253 46.4869791142947, 15.2371030925337 46.4873705550072, 15.2375657649482 46.4877096362908, 15.2385133230315 46.4877877846786, 15.2394812021957 46.4878595487792, 15.2405555170236 46.4880632173436, 15.2411556786917 46.4882823686365, 15.241990438408 46.4887341016975, 15.2427017859587 46.4891239506099, 15.2435636476443 46.4896007702594, 15.2444794884377 46.4899496829316, 15.245372128521 46.4902931493094, 15.2461353948326 46.4905632409009, 15.2468843889035 46.4908270246475, 15.2472338798397 46.4909650876687, 15.24850357508 46.4914121631408, 15.2494430347683 46.4919460510695, 15.2501415256109 46.4923520401146, 15.2509342447196 46.4930800341164, 15.2516948328503 46.4936370076418, 15.252053587703 46.4940095850744, 15.2524975569167 46.4944935885083, 15.2531536726039 46.495250543378, 15.2536292215114 46.4957136618561, 15.2539442738092 46.4960288409583, 15.2542747099099 46.4961737343304, 15.2546643825552 46.4962736544057, 15.2556250653445 46.4963354639106, 15.2562868188816 46.4963761402467, 15.2571445158068 46.4961844290682, 15.2581880333511 46.4958590075872, 15.2590088544751 46.4956197078833, 15.2608486830203 46.4951323337902, 15.2624397743762 46.4947364549235, 15.2637669156107 46.4943976767114, 15.2643807793495 46.4938222706813, 15.2658145756821 46.4933052603295, 15.2669410907588 46.4929094246303, 15.2677409342967 46.4939620118374, 15.2691481340792 46.4940153398361, 15.2710094699111 46.4937050179723, 15.2714976497967 46.4933934568427, 15.2723689534645 46.4930936255704, 15.2733755484428 46.4924379388599, 15.2742645237888 46.4918356718788, 15.2746608496185 46.4915792904519, 15.2742241055581 46.491329267232, 15.2745077247517 46.4909858611087, 15.2756822042704 46.4903585650958, 15.2765257323767 46.4907713647067, 15.2768433693261 46.491034175387, 15.2777976948078 46.4910786567547, 15.2784965094064 46.4910346331419, 15.2798601028615 46.4906957227295, 15.2801149248639 46.4906149681063, 15.2807193682043 46.4906036330512, 15.2820140169334 46.4908685094742, 15.2825972326762 46.4910001882082, 15.2838259494081 46.491108741775, 15.2849263940379 46.4915161958159, 15.2857935275492 46.4919125468266, 15.2869095070682 46.492268776383, 15.2874674302778 46.4924454787759, 15.2882801979729 46.4928689398498, 15.2891086183681 46.4933256803359, 15.28973201582 46.4937307907435, 15.2900665465339 46.4939413661012, 15.2907210218577 46.4942942276965, 15.2916491123167 46.494350545941, 15.2922637782508 46.4945655234802, 15.2926226671025 46.4944593000567, 15.2931998079248 46.4946602436753, 15.2933225438004 46.4944709912433, 15.2936617761701 46.4943414942646, 15.2941250475329 46.4942638225175, 15.2944293871066 46.4941577339922, 15.2954606675758 46.4933534918702, 15.2962132751226 46.4925876283164, 15.2966787084557 46.4921087384276, 15.2968784721638 46.4913281538713, 15.297124926874 46.4903926619918, 15.2984114079602 46.4900474077617, 15.3002257686044 46.490275714153, 15.3009219149145 46.4903593439087, 15.3013330327932 46.4902809347174, 15.3020745678871 46.4902716519152, 15.3029398649828 46.4903764759936, 15.3038738945646 46.4906303968753, 15.304730804583 46.4908521813831, 15.3054576987139 46.4906081575404, 15.305823908047 46.4901483278831, 15.3063986710618 46.4904328481974, 15.3075541470064 46.4906834775605, 15.3086444562767 46.4909261038566, 15.3094953012672 46.4907223489573, 15.3111554785425 46.4905477204011, 15.3110494241916 46.4902807656449, 15.3110239616866 46.4901702083885, 15.3111009823245 46.4899720643594, 15.3113210302414 46.4897285441371, 15.3114496881526 46.489449285756, 15.311696043038 46.4892506776767, 15.3118770082174 46.4890072626751, 15.3121230996014 46.4887636696077, 15.3122380005833 46.4883584908518, 15.3121975256953 46.4881156837918, 15.3123524339177 46.4878723398367, 15.3124293430398 46.4876562012727, 15.3127799932022 46.4874752981466, 15.3128964949773 46.4873490198414, 15.3129606876856 46.4871868981569, 15.3129333914629 46.4869710455774, 15.3129975832719 46.4868089238928, 15.3132441279142 46.4866462994872, 15.3136461932172 46.4863482911407, 15.3139053949181 46.4861226512395, 15.3143198519796 46.4857166424092, 15.3145655008972 46.4854010694039, 15.3148755925346 46.4849683561048, 15.3152244395563 46.4844815530812, 15.3156253789082 46.4839946043675, 15.3157276381201 46.4836614325291, 15.3157904036043 46.4832563940674, 15.3157759128281 46.4830045191433, 15.3156827007961 46.4826538959606, 15.3154715399796 46.482177642884, 15.3153920354142 46.4819439414598, 15.3153120083425 46.4816202727574, 15.3151937465941 46.4814406610577, 15.3149449860224 46.4812164258974, 15.3146308986971 46.4809563833304, 15.3144864369995 46.4807498522239, 15.3143936539441 46.4804712026839, 15.314300090277 46.4800576008776, 15.3141413059766 46.4796261844009, 15.3135157078837 46.4795469379409, 15.313177771437 46.4796648300679, 15.31284029994 46.4798636935546, 15.3127491347648 46.4798639435662, 15.312553884754 46.4798824749963, 15.3123325867796 46.4799010765734, 15.3118772258534 46.4799832997895, 15.3113954032753 46.4799936177113, 15.3113042893615 46.4800028636413, 15.310979729431 46.4801836921238, 15.3109017420219 46.4802108957163, 15.3104851382785 46.4802390256106, 15.3104069449246 46.4802302419322, 15.310340282678 46.4799605145661, 15.3102737751147 46.4797177776534, 15.3104272264354 46.4792225254992, 15.3103606172488 46.4789617949509, 15.3101756150127 46.4784944568537, 15.3101227501649 46.4783596457811, 15.3103284979618 46.477900238805, 15.3104828189271 46.4775579316533, 15.310598636318 46.4773146965161, 15.3107000384761 46.4768285823732, 15.3108658815553 46.4762253315339, 15.3110074816101 46.4759370403622, 15.3108103897877 46.4756316818567, 15.3102710096994 46.4746794751777, 15.310282592068 46.4744275274085, 15.3103168229631 46.4735817177221, 15.3105989834564 46.4728251999231, 15.3108427410997 46.4721857468748, 15.3111635913267 46.4713661434328, 15.3114842248172 46.4705105509213, 15.3117664059949 46.4697630263427, 15.3120869693382 46.468898436114, 15.3124742318004 46.4683125673712, 15.3130164384579 46.4675013456107, 15.3135329505852 46.4667531717216, 15.3139717442006 46.4660771855138, 15.3147737865811 46.4651752680243, 15.3153430124702 46.4645438998811, 15.3158734802769 46.4639666196638, 15.3166108874825 46.4631548376257, 15.3171669985582 46.4625145005438, 15.3174269673807 46.4624417984503, 15.3184415870097 46.4622860124895, 15.31935162178 46.4620585352733, 15.3198180398707 46.4616703528046, 15.3200105712309 46.4612019669972, 15.3204647549445 46.4609487709691, 15.320762386475 46.4606420338028, 15.3209568738607 46.460506529353, 15.3210990189047 46.460326188303, 15.3213064700177 46.4601816501631, 15.3216953845344 46.4599016426467, 15.3224599161922 46.4592966776996, 15.322965290216 46.458899375206, 15.3232512179693 46.4588175890605, 15.3238227470222 46.4586000349637, 15.3245374751244 46.4583820689773, 15.3251101804905 46.4583624385757, 15.3254738879097 46.458226443096, 15.3264615584541 46.4579357075669, 15.3267718875126 46.4575839323526, 15.3270043748521 46.4572773660577, 15.3270944185726 46.4570971662013, 15.3272885525247 46.4569076709523, 15.327675513714 46.456312753231, 15.3278828227341 46.4561502097644, 15.3282434104051 46.4555013839817, 15.3281498944022 46.4551057848042, 15.3276643873017 46.4544683965992, 15.327244953392 46.4539927622562, 15.3268658243983 46.4537239423062, 15.3262380733285 46.4532399055973, 15.3260415184014 46.4530245404503, 15.3256882206349 46.4527196540888, 15.3251913622916 46.4523521982954, 15.325046559751 46.4520827020551, 15.3247181237424 46.4515798065629, 15.3243386476106 46.4512479998953, 15.3240648121414 46.4511678073485, 15.3238166361289 46.4510245624337, 15.3233187885313 46.4504861572104, 15.3229273280338 46.450325323355, 15.322053672639 46.4500668878766, 15.3214536359766 46.4498526567748, 15.3211402312367 46.4496825985731, 15.3208266682163 46.4494855490189, 15.3206321763339 46.449349109274, 15.3202646315076 46.4490912646502, 15.319493814488 46.4486075939654, 15.3187888836001 46.4482586884877, 15.3183603557458 46.4484308322172, 15.3173444689721 46.4483257086646, 15.3164720240647 46.4482651609084, 15.3153131765619 46.4481964041408, 15.314493165727 46.4481986758282, 15.3135430454752 46.4482102968678, 15.3128140945949 46.4482033082361, 15.3119029707455 46.4482058119487, 15.3103933651617 46.4482549284223, 15.3095212368157 46.448248309412, 15.3086751411449 46.4482416130601, 15.3078291983589 46.4482619008661, 15.3066187540523 46.4482741694175, 15.3053952929585 46.4482864604519, 15.3043670225202 46.4482892186726, 15.3032475887053 46.4482832138992, 15.3023234966321 46.4482946721614, 15.3009046425353 46.4482804430881, 15.3005915597527 46.4481553132171, 15.3003314371461 46.4481919893689, 15.2990177551653 46.4483663966918, 15.2977559325903 46.4485046647585, 15.2964291205076 46.4486610829427, 15.2953492667553 46.4487538641995, 15.2938402628179 46.4489197225672, 15.2934614297012 46.4486687847367, 15.2929911966865 46.4483640989241, 15.2923245643272 46.4478439886093, 15.2914750476354 46.4471983841982, 15.2912142964027 46.4471180801353, 15.2901714434574 46.4468238453442, 15.2892458872879 46.4465562943375, 15.2880596446369 46.4462174207974, 15.287329675724 46.4460123375994, 15.2864953971449 46.4457715243364, 15.2856089704777 46.4455128415445, 15.2846182872042 46.4452274228074, 15.2836539261878 46.4449959112323, 15.282702635918 46.4447733569049, 15.2818948019036 46.4446044201579, 15.28104829884 46.4445075505831, 15.2802017993736 46.4444106738136, 15.2791990274132 46.4442961811239, 15.278196398445 46.4442086707935, 15.277336939748 46.444120802533, 15.2761650745586 46.4440246901874, 15.2748915994678 46.4444236483328, 15.2739941857831 46.4445517747446, 15.2734744378951 46.4447239706348, 15.2729276159168 46.4446892981727, 15.2723818776216 46.4448705484371, 15.2714450907184 46.4449357708691, 15.2710148658435 46.4447928452136, 15.2699458219422 46.4444355103905, 15.2698541333616 46.4443187666978, 15.2694498593235 46.4441577799576, 15.2692284678196 46.4441313138091, 15.2688883352286 46.4437812356156, 15.26852213309 46.4434222199596, 15.2678435793178 46.4430639408482, 15.2674251517494 46.442669057531, 15.2673722059626 46.4424892416852, 15.2676438740656 46.4421557110173, 15.2664074807207 46.4421586185255, 15.2661224379003 46.4424202007317, 15.2660954816213 46.4422313260149, 15.2660397182584 46.4414757057393, 15.2664020928824 46.441060992371, 15.2665698659066 46.4407726931054, 15.2666573861295 46.4400437278358, 15.2666937762968 46.4395038198455, 15.2667836806224 46.4392606890297, 15.2664318613414 46.4391715437318, 15.2661051889034 46.4389023991265, 15.265543610849 46.4384988463447, 15.2651776857017 46.4381848048849, 15.2646277322841 46.4374933152644, 15.2644160084921 46.4367740455858, 15.2643377530849 46.4367382390785, 15.2637901855686 46.4365325803144, 15.2627993422159 46.4361570018442, 15.2624741419681 46.43618474503, 15.2623045343269 46.436095166259, 15.2619917824948 46.4360059184384, 15.2616911337389 46.4357277032709, 15.2617813150557 46.4355385569589, 15.2613876728029 46.4348646859565, 15.2610210605736 46.4343976824072, 15.2601728541939 46.4339047909734, 15.2592471037709 46.433520035821, 15.2593363012293 46.4331239618015, 15.259267972539 46.4324403421482, 15.259472944221 46.4317650942837, 15.259314476482 46.4312796159615, 15.2590896639569 46.4305243760992, 15.2586856093535 46.4303813452229, 15.2586321896239 46.4300935612689, 15.25805676201 46.4294830699878, 15.2579517283897 46.429285373821, 15.2576647888989 46.4291420722489, 15.2567910129948 46.4287211904306, 15.2566729311109 46.4285145253251, 15.2560841053971 46.427814083853, 15.2557445411777 46.4275449374489, 15.2554695698648 46.4271766776616, 15.2555835355518 46.426510638855, 15.2555160243451 46.4259889610218, 15.2557614502308 46.4256105317007, 15.2558899030966 46.4252593563343, 15.2558212884218 46.4245037576424, 15.2559877520332 46.4239365678184, 15.256372285053 46.4227120985846, 15.2566670927122 46.42177573796, 15.2567309077053 46.4215146782598, 15.2559595573877 46.420715680984, 15.2556470303862 46.4206534056302, 15.2555034176487 46.4205457639759, 15.2553602698606 46.4205370891154, 15.2549558762128 46.420304073874, 15.2546414120715 46.4198279350113, 15.254731676126 46.4196567886299, 15.2546661227434 46.4195489707085, 15.2546010765785 46.4195491163987, 15.2545223454299 46.4194053399845, 15.2542230483551 46.4193880163439, 15.2538706625012 46.4191458837756, 15.2536875245596 46.4189303639452, 15.2534657391526 46.4187959027088, 15.2535173134733 46.4186968199024, 15.2533470619174 46.4184542790418, 15.2530864608716 46.4183648900277, 15.2528369511644 46.4180586996493, 15.2532129846915 46.4175998565482, 15.2536789072558 46.4170859830317, 15.2534821382901 46.4167355361162, 15.2534810465131 46.4165016143581, 15.2539858143939 46.4159516645377, 15.2544000196452 46.4155098806765, 15.2546966790086 46.4149693908248, 15.2549149894352 46.4143660959186, 15.2547444069289 46.4140515814154, 15.2543898618027 46.4133416071295, 15.2539303397135 46.4124339303816, 15.2536836152067 46.4125244525415, 15.2535923511062 46.4124796708002, 15.2533714317463 46.4125251495161, 15.2530201421659 46.4125079391901, 15.2528504562836 46.4123823578596, 15.2521454975167 46.4118351042068, 15.2512981382984 46.4114321144006, 15.2510116017041 46.4113517743649, 15.2508552230901 46.411289141081, 15.2501370424906 46.4106879209109, 15.2500453296284 46.4105441696777, 15.2489401329808 46.410636569622, 15.2479655385788 46.4108456359174, 15.2480159239958 46.4104856426983, 15.2479246679891 46.4104408564604, 15.2475721220559 46.4101447223011, 15.2476103639272 46.4099736946303, 15.2474409028755 46.409893090194, 15.2474404109462 46.4097851256831, 15.2473491576376 46.4097403394451, 15.2474400422243 46.409704153424, 15.2473612220428 46.4095333802614, 15.2472830160984 46.4094975620629, 15.2473084974892 46.4093805449762, 15.24716480741 46.4092459011774, 15.2473459605477 46.4090385732716, 15.2473194143596 46.4089216694995, 15.2474360249527 46.4088224472982, 15.2473576562309 46.4087506409293, 15.247435327978 46.4086694977991, 15.247421705947 46.4085345716132, 15.2475772940569 46.4084262671586, 15.2475251450695 46.4083993900199, 15.2476159451198 46.4083452094639, 15.2474987211891 46.4083094767011, 15.247498352467 46.4082285035427, 15.2475889061032 46.4081203411809, 15.247549558965 46.4080484502758, 15.2476402349089 46.4079672783672, 15.247561991193 46.407922463351, 15.2476654276174 46.4077872817577, 15.2474049290943 46.4077068760715, 15.2472360490045 46.4077522288824, 15.2471447165554 46.4076894481096, 15.2469626263242 46.4076898447106, 15.2467925195592 46.407465287593, 15.2465840081455 46.4073757699758, 15.2465964835409 46.4072587807682, 15.2465052751983 46.4072229904487, 15.2465568513177 46.4071239103403, 15.2464528006563 46.4071241360701, 15.2463734561701 46.4068364015788, 15.2462824528729 46.4068455962473, 15.2461514117583 46.4066299505118, 15.2461899405134 46.4065219014646, 15.2461247873291 46.4064950513056, 15.2460982447382 46.4063781475336, 15.2459811080417 46.4063604066075, 15.2459283502132 46.4061985736054, 15.2459921175422 46.4059195256656, 15.2458746957607 46.4058388061161, 15.2458481540691 46.4057219014446, 15.2457045997875 46.4056142471998, 15.2457425997412 46.4053892377232, 15.2456904948205 46.4053713565029, 15.2456114417147 46.4051465997359, 15.2456239998478 46.4050476041637, 15.2455325522855 46.404957831139, 15.2455315765211 46.4047419030165, 15.2452963750278 46.404499490759, 15.2448932782023 46.4045183549382, 15.2443724007657 46.4043755246109, 15.2437858926049 46.4040978760163, 15.2435118862645 46.4039005278871, 15.2433538843743 46.4034690061897, 15.2431447488311 46.4032355304954, 15.2430917607762 46.4030197129894, 15.2422444842956 46.4025896643816, 15.2421267549458 46.4024369648941, 15.2416293534119 46.4017182572918, 15.2412762975631 46.4012871474839, 15.2405320654026 46.400622942395, 15.2401923087281 46.4002547806336, 15.2400357745314 46.4001471470732, 15.2397089492087 46.3997609619988, 15.2390704953071 46.3994833988398, 15.2386005132031 46.3990705218872, 15.2379370104847 46.3990089354141, 15.2369872544582 46.3989119543233, 15.2369195247163 46.3982912962064, 15.2368648387414 46.3976796070283, 15.2366536761264 46.3969692757115, 15.2364703277435 46.3966727539445, 15.2362364932196 46.3967272231829, 15.2352874422617 46.3967831781012, 15.2344293397423 46.3968209433319, 15.233363752835 46.3969940853089, 15.2323111629299 46.3971671904135, 15.2315049144203 46.3971688388709, 15.2312949344138 46.3967194116715, 15.2311512407372 46.3965667544522, 15.2312287272241 46.3964406362265, 15.2314471851396 46.39582838767, 15.2312638691323 46.3955318569097, 15.2310657898543 46.3948214887208, 15.2311428914313 46.3946054014182, 15.2312696301894 46.393831390906, 15.2320488621653 46.393604872367, 15.2331796346325 46.3934855907875, 15.2333592427349 46.3929184036615, 15.2335648529357 46.3923511625761, 15.2337829196461 46.3916579354653, 15.2339754411137 46.3910727259256, 15.2342042187498 46.3904172901259, 15.2339857698274 46.3904519032328, 15.232932226641 46.3903730974406, 15.2318270236982 46.3903753610342, 15.2313065833322 46.3902954499751, 15.2300835215373 46.3901000003149, 15.2295504645823 46.3901100781177, 15.2283022784274 46.3901215939364, 15.2277013415437 46.3900309953342, 15.2273199804328 46.3899751150596, 15.2269735660773 46.3898246836623, 15.2261421032754 46.389696723625, 15.2254765159285 46.3893966450392, 15.2250396513588 46.389380724341, 15.2247949341389 46.3893521753627, 15.2242798186588 46.3892785469675, 15.2236893067162 46.3892463962043, 15.2230197074935 46.3892503873956, 15.2227066948582 46.3892383436747, 15.222117368222 46.3892764776274, 15.2215594980724 46.3892775694044, 15.2213150668369 46.3891430892822, 15.2209213031757 46.3890109429007, 15.2200883376068 46.3891084995576, 15.2192608974725 46.3891875670527, 15.2190134508101 46.3890872512757, 15.2188140009654 46.3890786393678, 15.2181990067788 46.3890195071446, 15.2179176556753 46.3889750626491, 15.2173989501016 46.3889140688292, 15.2168512413917 46.3889159637008, 15.2166600473234 46.3888578477116, 15.2159818613739 46.3889509392345, 15.2152135102953 46.3890522055949, 15.2147388517167 46.3890324483888, 15.2139692694662 46.3890267322979, 15.2133763491393 46.3890016960715, 15.2128625592597 46.3889496684924, 15.2121994369545 46.3889466296833, 15.211609207399 46.3889843508472, 15.211216673111 46.3889779126007, 15.2107679051148 46.388928273621, 15.2101060814305 46.3889448247439, 15.2095571676292 46.3889513295403, 15.2091802599611 46.3889915229405, 15.2089425565537 46.3889886684923, 15.2086158526395 46.388877435845, 15.2084741005993 46.3888903465123, 15.2081113545554 46.3889143521157, 15.2076862980842 46.3889034622251, 15.2070202116135 46.3888695299049, 15.2064921315067 46.3887950066843, 15.2060109294609 46.3887625663395, 15.2055466949241 46.388705765159, 15.2052238886716 46.3886533571667, 15.2047920072454 46.3885560154478, 15.2044453617641 46.3884325088532, 15.2039834546728 46.3883433698507, 15.2034988927597 46.3883045910841, 15.2030567464717 46.3882838805966, 15.2023725143801 46.3882589594834, 15.2016469080784 46.3882755753575, 15.2014831649161 46.3882767031074, 15.2010097716837 46.3882652538384, 15.2002737737157 46.3881367290269, 15.1999886229766 46.3881318888756, 15.1997076378972 46.388072076765, 15.1995094551973 46.3879887797584, 15.1992858495624 46.3879503679152, 15.199024518267 46.3879311512018, 15.1987515128721 46.3879406273581, 15.1984198671832 46.3879142178669, 15.197782363865 46.3878018790536, 15.1972296567234 46.3876813815905, 15.1966945412202 46.3875420199483, 15.196278113744 46.387440111472, 15.1958955610314 46.3873787840037, 15.1954392306361 46.3873660765833, 15.1947928914788 46.3873931911429, 15.1943161581642 46.3873796779298, 15.1936592375838 46.3873744780497, 15.1935226692359 46.3873605862221, 15.1929899288421 46.3873666233711, 15.1924228748158 46.3873829109926, 15.1916180769127 46.3874085947309, 15.1908287842211 46.3874551292509, 15.1904254229949 46.3873682925128, 15.189876501999 46.3872497960413, 15.1892052723055 46.3870409536771, 15.1885254208116 46.3868676336344, 15.1881977537234 46.3868115240326, 15.1879557677446 46.3867444471985, 15.1877004421218 46.3865792696177, 15.1874760127079 46.386768581405, 15.1872037879245 46.3870029564213, 15.1867622900477 46.3871656338869, 15.1865546968418 46.3872919355744, 15.1853982847031 46.3875097666624, 15.1844628009176 46.3877002340786, 15.1838391120854 46.3878182116412, 15.1827998150595 46.3880718141629, 15.1812402206597 46.3882632618401, 15.1804605246335 46.3883904673463, 15.1796422063228 46.3886346908384, 15.1793044218616 46.388716200892, 15.1787201602072 46.388969044386, 15.1777853374234 46.389375387764, 15.1770320625797 46.3896374843825, 15.1764343983289 46.3897733746416, 15.176005673523 46.3898820082482, 15.1756160701256 46.3900265670724, 15.1747320554401 46.390072921728, 15.1733158912155 46.3904169906517, 15.1721594170235 46.3906526813762, 15.1717202411962 46.3915710546605, 15.1715266819109 46.3920391985502, 15.1714233426132 46.3922552858528, 15.1713730678129 46.3928041861643, 15.1712965301108 46.3932721519883, 15.1711417145186 46.3936592615657, 15.1709227898549 46.3943343763305, 15.1708846316205 46.3946043465135, 15.1708336679395 46.3949373169037, 15.1708085696598 46.3952252627357, 15.1707975241865 46.3958460791333, 15.1708118332995 46.3962599246559, 15.1709808267038 46.3962416756129, 15.1712009807407 46.3959534348033, 15.1713953539125 46.3957372099044, 15.1716031854387 46.3956649179017, 15.171772176145 46.3956466670601, 15.1719674315518 46.395709350706, 15.172254057179 46.395879859468, 15.1726192232986 46.3962121958362, 15.1728276007133 46.3963108460687, 15.1731269472509 46.3963913614721, 15.1732571591906 46.3964451454271, 15.1735179859663 46.3966786705842, 15.1735922142094 46.3967440009349, 15.1737527207116 46.3968852430596, 15.1739742507111 46.3970288566964, 15.174169629325 46.397127524016, 15.1745084309194 46.3973429323305, 15.1745865999916 46.3973877977088, 15.1748209938938 46.3974864038745, 15.1750944003863 46.3975849488863, 15.1753416824727 46.3976475461974, 15.1757194166178 46.3978358993074, 15.1759408386988 46.3979435202773, 15.1761885047957 46.3981230771184, 15.176410193076 46.3983116703473, 15.1764586296621 46.3983662439071, 15.176553768042 46.3984733945316, 15.1768013801796 46.3986349559385, 15.1770492576172 46.3988774905039, 15.1771407888164 46.39903029791, 15.1773234699022 46.3992189504943, 15.1774800256827 46.399371656277, 15.1775455206093 46.3995155064355, 15.1775460512093 46.3996774536517, 15.1774167709673 46.3999115813544, 15.1772482398145 46.4000737929713, 15.1770797671176 46.4002539991229, 15.177002208685 46.4003980741119, 15.1770419290418 46.4006139419799, 15.1771338163726 46.400874713897, 15.1772644249133 46.401045454684, 15.1774864531374 46.4013330138076, 15.1779957787822 46.4019800049734, 15.1782960534202 46.402330418614, 15.1786746014517 46.4027526853882, 15.1788312597548 46.4029323798255, 15.179013603595 46.4030130652009, 15.1792738610999 46.4030576391987, 15.1797681275971 46.4030748495247, 15.1799632391122 46.4030835360764, 15.1800674327658 46.4031283564886, 15.1801718656391 46.403245152342, 15.1801984154246 46.4034070572899, 15.1801729727046 46.4035780426926, 15.1801343747017 46.4037040637916, 15.1800047077511 46.4038212319643, 15.179758018318 46.4039475840139, 15.1793294877657 46.4041461992877, 15.1789534218629 46.4044796876875, 15.178862915891 46.4046417778958, 15.178824552611 46.4048397744361, 15.1788642531827 46.4050466454864, 15.1789431803835 46.405316433107, 15.1789957106835 46.4054693007676, 15.1791524373352 46.4056669888405, 15.1795041972609 46.4058463730117, 15.1795823834203 46.4058912347927, 15.1795826819952 46.4059812047689, 15.179465864558 46.4060533672691, 15.1793102971325 46.4062065640818, 15.1792066349783 46.4063236908857, 15.1790774356751 46.4065848108404, 15.1790263622768 46.4068727989406, 15.1790270160839 46.4070707334276, 15.1791579142064 46.4073224446751, 15.1794713809995 46.4077178199215, 15.1796541888897 46.4079334602611, 15.1800841853369 46.4081667012324, 15.1802796745674 46.4082833522949, 15.1803579245786 46.408346206812, 15.1803973337699 46.4084631060875, 15.180332929721 46.4086521480782, 15.1802683745859 46.4087962041815, 15.1801261378111 46.4090483489022, 15.1799060071566 46.4093456027174, 15.1796466147995 46.4095709422453, 15.1791272275396 46.4098416777513, 15.1787118927397 46.4101122468828, 15.1785693780744 46.4102834166464, 15.1784529959091 46.4104905332116, 15.1783549365311 46.4107084443392, 15.1775042651098 46.4107349464606, 15.1773537815518 46.4107143726702, 15.177244002209 46.4106993665825, 15.1770751428036 46.4107716073238, 15.1767107923692 46.4107271916067, 15.1764373463066 46.4106376470099, 15.1760987479589 46.4105122158661, 15.1758642677218 46.4104046155806, 15.1757469691474 46.410332820903, 15.1756425317774 46.4102160205529, 15.175563876172 46.4100272042921, 15.1754984325067 46.4099013468697, 15.1753287870939 46.4097306645386, 15.1751333320377 46.4096230021999, 15.1749250454546 46.4095693423514, 15.1747039264451 46.4095696840937, 15.1744307214007 46.4095521113409, 15.174209487278 46.4095164640137, 15.1739880499086 46.4094178362642, 15.1737536362214 46.4093282260169, 15.1735451499888 46.4092115839475, 15.173323686539 46.4091039584809, 15.1730633471957 46.4090413773577, 15.1728290225414 46.408978755765, 15.1725946700081 46.4089071373546, 15.1720480108071 46.4087910078988, 15.1713191732413 46.4086481604843, 15.1709548695717 46.4086127235984, 15.1706685506132 46.4085591734672, 15.169965478624 46.4083353043309, 15.1693031504201 46.4086601934133, 15.169187017367 46.4089572709614, 15.1685897389253 46.4092910543387, 15.1683688168674 46.4093543639129, 15.1682387757989 46.4093635540848, 15.1676414308074 46.4096793393301, 15.1665504470456 46.4102027825325, 15.1662128136705 46.4103832207092, 15.1658911126847 46.4107249522948, 15.1655234869194 46.410402226082, 15.1649627236509 46.4099261996345, 15.1643497502408 46.4093872674085, 15.1641410112987 46.4091806373766, 15.1639320825995 46.4089110278217, 15.1636714284937 46.4087404615032, 15.1630598643213 46.408660371479, 15.1626431868337 46.4085080209285, 15.1621222968067 46.408301836061, 15.1619263884921 46.4080322040231, 15.1613666189743 46.4078710572036, 15.1606377148587 46.4076921532703, 15.1603772900799 46.4075935551985, 15.1598316803878 46.4078192553545, 15.1591037079698 46.4079552382437, 15.158791601851 46.4079736716476, 15.1582191258121 46.4079114952194, 15.1580759483464 46.4078757066986, 15.1575947301127 46.4078853762092, 15.1572302573705 46.4077869157337, 15.1568654725635 46.4075804898478, 15.156617514187 46.407292927127, 15.1564996751199 46.4070231772778, 15.1563946603853 46.4066904308188, 15.1562240185237 46.4061508411884, 15.1561058458082 46.4057641300107, 15.1559746428155 46.4053684391022, 15.1562069835655 46.4047563155516, 15.1563875566404 46.4042342339228, 15.1565027597946 46.4035952808976, 15.1566052672193 46.4030643103697, 15.1566821268787 46.4026593348605, 15.156746163105 46.4023173559612, 15.1568234904118 46.4020743267688, 15.1560697065518 46.4022553126326, 15.1558747308343 46.4022915705996, 15.1549526190682 46.4027336962031, 15.1545112587876 46.4030222077088, 15.154056016572 46.4030048355048, 15.1533795294418 46.4029337791706, 15.1530412602461 46.4028892519375, 15.1519747146614 46.4028547035818, 15.151558465251 46.4028282716075, 15.1510511037255 46.4027749687898, 15.1506739973072 46.402793466945, 15.1501537556913 46.4027851626052, 15.1497762499741 46.4026597044819, 15.1489436333421 46.4025618375589, 15.1482412214553 46.4025177761744, 15.1477340379955 46.4025274375913, 15.1474095176352 46.4027527897096, 15.1471242319977 46.4030590628256, 15.1469694874519 46.4035451077206, 15.1469059026853 46.4040760188932, 15.1468933616394 46.4042469800142, 15.1470506791456 46.4047056270631, 15.1474032610517 46.4052269982275, 15.1478339850504 46.4057842550394, 15.1477314119751 46.4063242151904, 15.1474725637079 46.4067924022476, 15.1473430640313 46.4069995044237, 15.1471879921321 46.4073685870907, 15.1468123929776 46.4079538865627, 15.1464100407907 46.4082693075826, 15.1460856031681 46.4085396401923, 15.1457734161103 46.4085310462708, 15.1454355552068 46.4086484446701, 15.1448893420695 46.4086761374937, 15.1445379175909 46.4085866171787, 15.144147017371 46.4083262013931, 15.1440423641638 46.4081014086531, 15.143573167168 46.4077421223012, 15.1432120974604 46.4074505270203, 15.1427389623333 46.4070683987876, 15.1420878603665 46.4067723158897, 15.1415813433044 46.4070518629532, 15.1414905342608 46.4071419471432, 15.1413866949401 46.4072230516026, 15.1411400189968 46.4073943050032, 15.1407764464759 46.4076286836169, 15.1402431547979 46.4076203504988, 15.1399961461053 46.4076656421558, 15.1397227755857 46.4075760103246, 15.1392803675949 46.4075045807719, 15.1391372261021 46.4074777656864, 15.1387211790393 46.4075412578229, 15.1383702329999 46.4076316594736, 15.1381233385213 46.4077219334206, 15.1375772000278 46.4077765825233, 15.1372522183153 46.407848955465, 15.1366675807443 46.4081105808387, 15.1362912738233 46.4084619225797, 15.1358497453695 46.4087413644225, 15.1354597894378 46.4088408015618, 15.1347321920371 46.4091565715187, 15.1341341419772 46.4092652491919, 15.1338611078039 46.4093105588353, 15.1328995895445 46.4097165649675, 15.1324576366107 46.4098340470037, 15.1318334279704 46.409888761757, 15.1313784204777 46.4099882600502, 15.1311185406881 46.4100965276327, 15.1307937766115 46.4102678493818, 15.1301702343688 46.4106014636866, 15.1299364942739 46.4107636806993, 15.1297677670689 46.4109168253512, 15.1295212754865 46.4111870212641, 15.129378777009 46.4114301062145, 15.1292751481296 46.4116101666759, 15.1291193819539 46.4117453015045, 15.1290284577971 46.411799388531, 15.128716512657 46.4118987132551, 15.1282094524044 46.411998258313, 15.1280405462343 46.4120794248257, 15.1279496418625 46.4121425068712, 15.1278718523041 46.4122505604151, 15.127820184454 46.4124035692693, 15.1277163145563 46.4124846611383, 15.1273005768602 46.4127010614049, 15.1268969602266 46.4128567430443, 15.1268327207535 46.4128815301585, 15.126611735743 46.4129447587936, 15.1262608616495 46.413089105378, 15.1259231617246 46.4133054130144, 15.1256764093389 46.4134766331402, 15.1253776239782 46.4136479108225, 15.1251697259022 46.4137471096414, 15.1250657453879 46.4137832138243, 15.1246366887323 46.4138736595418, 15.1240903092204 46.4138562684521, 15.1238170987802 46.4138385751902, 15.1235192747948 46.4144327096019, 15.1234556765383 46.4150625740786, 15.1233397341414 46.4155575402484, 15.1231972383619 46.4158186116397, 15.1231899106859 46.4158456290726, 15.1231069392339 46.4161516027144, 15.1230683655127 46.4163495803689, 15.1232244482497 46.41634041268, 15.1232906860164 46.4168621705528, 15.1233048476406 46.4173659905481, 15.1232666237558 46.417716918601, 15.1230206241026 46.4182300204991, 15.1227228702643 46.418869137201, 15.1230651432418 46.4188570943795, 15.1231687028733 46.4193436599819, 15.1232406144628 46.4195010305482, 15.123400213549 46.419778928255, 15.1234451175981 46.4200379671785, 15.1234080637312 46.4203664004891, 15.1234658172937 46.4205552761052, 15.1236300901566 46.4207421983938, 15.1239792357532 46.4210603740371, 15.1246662260655 46.4215474999173, 15.1253437411208 46.4219774019356, 15.1263790415596 46.4229272712766, 15.1268119158374 46.4228764550844, 15.1274666933333 46.4228262324447, 15.1280450428445 46.4227031269478, 15.1286236765415 46.4225693473975, 15.128883963724 46.4224737350748, 15.1290070962005 46.4224106152577, 15.1291999917863 46.4226580295445, 15.129322895835 46.4228789462065, 15.1296401865454 46.4232834495716, 15.1299727144693 46.4236006269674, 15.1303650787854 46.4239438981924, 15.1309429507566 46.4245004166609, 15.1312844781961 46.4248308680501, 15.1318374353495 46.4253322319969, 15.1321516153048 46.425617097651, 15.1325352319155 46.4260313487678, 15.1328441895078 46.4263423739015, 15.133188902346 46.42679982755, 15.1333563839899 46.4271163619306, 15.1334611172368 46.427376523208, 15.1335622531954 46.4278223872934, 15.133626695016 46.428067894118, 15.133752132455 46.4283118720952, 15.134090120163 46.4286783071581, 15.1344671987023 46.4290655687211, 15.1350069214323 46.4296102350244, 15.135174083817 46.4297863231804, 15.1353951281827 46.4302107465287, 15.1356753668247 46.4304020197375, 15.135601516297 46.4306270346101, 15.1357584381015 46.4309354085423, 15.1360233361081 46.4311663499472, 15.1352694901948 46.4315099809009, 15.1344721449736 46.4317008620053, 15.1345546685632 46.4318518869551, 15.1342665734437 46.4321023130713, 15.1342908128708 46.432529643928, 15.1339780277638 46.4328215827499, 15.1337369806772 46.433062117223, 15.133613628766 46.4332964032065, 15.133504181273 46.4337650084485, 15.1333620856918 46.4340614492765, 15.1329814683201 46.4345240416512, 15.1326548111706 46.4349716153478, 15.1325318594578 46.4352453240125, 15.1325246181167 46.4354441128556, 15.1325705851644 46.4356150029301, 15.1327714388508 46.4359296631235, 15.1331303645747 46.4363584257009, 15.1334528515678 46.4366846107063, 15.1335640779199 46.436805308718, 15.1338900695712 46.4371942511138, 15.1340795810078 46.4375214289708, 15.1341319341415 46.4376413598609, 15.133832040816 46.4379014249109, 15.1337438820746 46.4380994646186, 15.1337420879271 46.4383622159436, 15.1336606534165 46.4386483820173, 15.1336019600625 46.439089307026, 15.1335444987796 46.4394079332296, 15.1334002466242 46.4395855880046, 15.1332849769202 46.4397159654195, 15.133137087007 46.4400651982503, 15.1330205294739 46.4402968024555, 15.1328299847161 46.4405442302321, 15.1328287787252 46.4407151751653, 15.1330814108784 46.4412348789865, 15.1332014892574 46.4414425054673, 15.133467269499 46.4420135030208, 15.1336269441282 46.442442508415, 15.1338119292772 46.4429056367858, 15.1339299805841 46.4432743750124, 15.1340236152976 46.4436737855168, 15.1341023014801 46.4439129593157, 15.1341289142181 46.4441468504968, 15.1340731094865 46.4444051582715, 15.1341878063222 46.44489353331, 15.1342603168602 46.4452649883885, 15.1342494107817 46.4454954153812, 15.1341508720652 46.4457419618222, 15.1339171715403 46.4459761623701, 15.133675167575 46.4461428939794, 15.1334703379858 46.4462475921527, 15.1332579639839 46.4463548183203, 15.1345908177121 46.4468220700825, 15.1356670058277 46.4467982884103, 15.1366734533172 46.446856399903, 15.1374579310388 46.4468032913389, 15.1386783677125 46.4465597144593, 15.1392898113758 46.4464429896523, 15.1397306680359 46.4461455424829, 15.1399636482038 46.4457637263149, 15.1409735688752 46.4457571252911, 15.1415819386556 46.4460262743931, 15.1417519617837 46.4460852429396, 15.1418376051215 46.446114934057, 15.1417074570336 46.4456527400819, 15.141570565829 46.4455664501316, 15.1413355190191 46.4452743413379, 15.1412190253378 46.4450540604966, 15.1412351879536 46.4447049913424, 15.141161162058 46.4443938403036, 15.1412594516624 46.4440301832464, 15.1411540798969 46.4435528428894, 15.1409736866864 46.4433126042933, 15.1408415510968 46.4430212023666, 15.1408413496486 46.4428244738704, 15.140976849602 46.4425010416897, 15.1410656756404 46.4420978900057, 15.1412895555686 46.4417052495977, 15.141406192242 46.4415161653388, 15.1415234665348 46.4411039817634, 15.1415728761874 46.4410221092829, 15.1415516989518 46.4408575171607, 15.1412941430103 46.4405051295081, 15.1410544530007 46.4402948356382, 15.1411463070565 46.4396479236128, 15.1415792541793 46.4394259637373, 15.142720868873 46.4386679386744, 15.1432501522727 46.4388903670968, 15.1438360434986 46.4389877438893, 15.1444107408631 46.4397642644094, 15.1450617034349 46.4404625358174, 15.1454091978762 46.4408282954895, 15.146581597263 46.4407808040909, 15.1473284068806 46.4406710310433, 15.148580774883 46.4408646532811, 15.1496608372779 46.4411421355012, 15.1498857595203 46.441260624778, 15.1501737008557 46.4412584160432, 15.1503084561703 46.4411610959079, 15.1508901025962 46.4420545354885, 15.1508386568785 46.4422741948982, 15.1510409278965 46.4429045540021, 15.1508657606464 46.4435292446789, 15.1507002440211 46.4439756555521, 15.1504946185318 46.4443313122403, 15.1506386359643 46.4446351931597, 15.1508903319233 46.4449020957552, 15.151962979408 46.4453658401615, 15.1526023704031 46.4458309884095, 15.1524742718702 46.4462372337614, 15.1522798141622 46.446513371495, 15.1519847501961 46.446598404193, 15.1518769403686 46.4467328744227, 15.1518650072644 46.4471177204065, 15.1518992336627 46.4472867911526, 15.1518485694559 46.447784359061, 15.1522659753945 46.4489624070895, 15.1527674463606 46.4495142104125, 15.152987638169 46.4497036867758, 15.153482186154 46.4501045892554, 15.1538337266452 46.4505609169528, 15.1541002020628 46.4508601276928, 15.1543711632986 46.451019868872, 15.1547356018666 46.4514344383487, 15.1549429486582 46.4515337513816, 15.1552746141322 46.4518655562505, 15.1556662446015 46.4522525192384, 15.1554790606102 46.4523715642963, 15.1548677743284 46.4525541707384, 15.1546770047401 46.4527037279948, 15.1546205569931 46.4527474953007, 15.1545666030663 46.4527893506481, 15.154222032321 46.4529256141258, 15.1538137311188 46.4531089265358, 15.1535486280668 46.453295409056, 15.1534440719864 46.453469525898, 15.1533350903421 46.4537357162303, 15.1532175318636 46.4540256063967, 15.1529862235354 46.4542283522567, 15.1527094949473 46.4543348643626, 15.1523955632047 46.4543776019448, 15.1523112841385 46.4544967189484, 15.1521244481848 46.4546010654869, 15.1520544602452 46.454737941403, 15.1519156372969 46.4549920871152, 15.1520164405063 46.4551050437628, 15.1520287774062 46.4552976173912, 15.1520525401927 46.4555026906966, 15.1521047098646 46.4559668029256, 15.1519838256931 46.4560920874799, 15.1518277546472 46.456144453204, 15.1515105628623 46.4561890182087, 15.1513365845158 46.4563826872113, 15.1512264976048 46.456473650039, 15.1509959258213 46.4566205740803, 15.1507243620397 46.456689403693, 15.150485342025 46.4567903723778, 15.1502705461488 46.4569049469058, 15.1506021225899 46.4572032421359, 15.1507989059448 46.4573046101197, 15.1509345291052 46.4573596162533, 15.1505208652458 46.4575311115716, 15.1495570267355 46.4582437856223, 15.1489399569136 46.4587205962785, 15.148417694521 46.4592071223109, 15.1480811619161 46.4594746589284, 15.1486015950876 46.4598008987925, 15.1488803453517 46.4601502098644, 15.1478010275954 46.4607265988535, 15.1467960226184 46.4612965477975, 15.1462931370187 46.4615896026781, 15.1463545220436 46.4617234883484, 15.1450827682552 46.4622076752441, 15.1446147583645 46.4624671467415, 15.1447111620905 46.4626099851628, 15.1450980297503 46.4625861594238, 15.1456942227102 46.4626375385916, 15.1465957948601 46.4626555708979, 15.1469665169912 46.4626458762063, 15.147566630096 46.4626396052337, 15.1477065547138 46.4626593687349, 15.147920733655 46.4626896156333, 15.1482883477292 46.462766453709, 15.1487582731758 46.4627631630895, 15.1496430639763 46.462893287795, 15.1502552154059 46.4629734479663, 15.1507368824013 46.463061939457, 15.1510560392049 46.4631235025476, 15.1512919673505 46.4632474624005, 15.1517503248176 46.4633286666847, 15.1523380164863 46.4633890192879, 15.153108777748 46.4634384505241, 15.1533782730889 46.4634922830425, 15.1537784444198 46.4635670077112, 15.1540714192606 46.4635765953837, 15.1543226331831 46.4636382421112, 15.1546485969552 46.4638007316185, 15.1552493224983 46.4638628873624, 15.1554459619616 46.463903319083, 15.155681160757 46.4638600077332, 15.1560823788987 46.4637861104407, 15.1567631494998 46.4638113139411, 15.1574140671055 46.4637834178705, 15.1580118644561 46.4638140730611, 15.1583906840829 46.4638242228097, 15.1587465017497 46.4637868982468, 15.1593617423506 46.4637719074476, 15.159674115568 46.463736108135, 15.1602104622431 46.4636273854955, 15.1604956192774 46.463608140903, 15.160801639684 46.463625700166, 15.1609420823113 46.463650665346, 15.1612699202706 46.463479254564, 15.1625078613488 46.463828365087, 15.1630522623521 46.4639652086276, 15.1631582843274 46.4641764854565, 15.1635503293843 46.4646527601168, 15.1633339417081 46.4649436395374, 15.16447952511 46.465280355604, 15.1647475248784 46.4656353476932, 15.1650288813778 46.4660991280724, 15.1654550467131 46.4662829441027, 15.1657507950632 46.4667916779936, 15.1657305009619 46.4669419843851, 15.1660483177757 46.4672447528431, 15.166229955648 46.467531759783, 15.1662961079791 46.4674746483364, 15.1670606846029 46.4672154250519, 15.1671736133716 46.4670218225991, 15.1674272878392 46.4668468523004, 15.1676166634782 46.466738607201, 15.1676834606233 46.4668941206671, 15.1678584929751 46.4670433011075, 15.1679088352246 46.4672708232899, 15.1680770264336 46.4674468511913, 15.1683070613218 46.4676211137235, 15.1685821189696 46.4677474990479, 15.1686905628193 46.467945271657, 15.1687795021724 46.4680181041523, 15.1688764580822 46.4681852494497, 15.1689280980534 46.4684344165152, 15.1690793954978 46.4685403278739, 15.169343021863 46.4687855154392, 15.1693919809552 46.4689555475605, 15.1697445781498 46.4692815832785, 15.1699012769224 46.4694226275523, 15.1700587392195 46.4698056002483, 15.1702991019221 46.4701528284903, 15.1707299572218 46.4705153515023, 15.1708569010252 46.4706378247758, 15.1709812547811 46.4708425248627, 15.1711203646132 46.4709656906142, 15.1712632363093 46.4710921874545, 15.17160026534 46.4713795802035, 15.1720259792157 46.4717819629673, 15.172323275299 46.4719839426049, 15.1727134587592 46.4722184750026, 15.1731218921617 46.4723317796879, 15.1734476571836 46.4724960426583, 15.1737025142597 46.4727844012792, 15.1739637358378 46.4730262883326, 15.1743237551373 46.4732386299589, 15.174707810617 46.4735862485066, 15.1747732776647 46.4736959460112, 15.175057381593 46.4738394589239, 15.1752507897922 46.4739959769328, 15.1753467123809 46.4742123852934, 15.1755593561794 46.4744046450584, 15.1757453737501 46.4746661148493, 15.1759900487018 46.4750679265436, 15.176139851473 46.4754563905001, 15.1762882432079 46.4759105067645, 15.1763333271214 46.4761335350347, 15.176229407761 46.476585372417, 15.1763500041494 46.4768775855322, 15.1763933038079 46.4772040817031, 15.1765445481924 46.4777516717023, 15.1765787691949 46.4778857363378, 15.1765650797147 46.4780567001566, 15.1766503624243 46.4782493727104, 15.1768450323724 46.4784152967286, 15.1770325796899 46.4785174794981, 15.1775049602857 46.4786301915302, 15.1775610689882 46.478833380756, 15.1777665928541 46.4789833346132, 15.1778855668655 46.4792413878798, 15.1781976235216 46.4794576703352, 15.1782619691147 46.4795943501991, 15.1782720163405 46.479923560524, 15.1783546415536 46.480050377523, 15.1786052286485 46.4802577584888, 15.1789368995184 46.4804950248256, 15.1794576789288 46.4808097236898, 15.1796965937229 46.4810567620599, 15.1799541397718 46.4812741066147, 15.1805009428643 46.4816981351609, 15.1809357812613 46.4819853444482, 15.1815221976913 46.4824457074036, 15.1818296183422 46.4827529373982, 15.1820879126271 46.4830404254753, 15.1823730031117 46.4833323678945, 15.1825881119519 46.4836620926315, 15.1826719449543 46.4838719197534, 15.1827715781459 46.4839930026749, 15.183028094471 46.4841140469258, 15.1831420655539 46.4842343321488, 15.1831362973024 46.4844539304046, 15.1832684203015 46.4846453250218, 15.1832009225845 46.4847867137359, 15.1831650630172 46.4848937456499, 15.1832831314114 46.4850501647334, 15.1835137850332 46.4852243858967, 15.1837527402968 46.4853499564354, 15.1839564286463 46.485518741197, 15.1841437817102 46.4857936810336, 15.1843055112904 46.4859527000571, 15.1847554061371 46.4861057520788, 15.1850586755175 46.4862582051521, 15.1854355876822 46.4864663451458, 15.1858272172523 46.4867188235149, 15.1859997503882 46.4869377598698, 15.1861154760485 46.4872119775508, 15.1861901044897 46.4873684649828, 15.1865079401894 46.4877035011157, 15.1868019834248 46.4879827594968, 15.1869313500018 46.4881958007956, 15.1869340119951 46.4884945312976, 15.1869552476865 46.4886312777114, 15.187112200068 46.4888162925379, 15.1874634266958 46.4890326280534, 15.1875733085614 46.4892600423172, 15.1878737351848 46.4894979642597, 15.18814480344 46.4898369421213, 15.1885107591643 46.4901872145683, 15.1888952067485 46.4905867230988, 15.1890548642906 46.4908418805484, 15.1892763241431 46.4911942268321, 15.1894133574405 46.4916162256084, 15.189429759276 46.4918804023587, 15.1895778308523 46.4920837921334, 15.1897096300955 46.492171498516, 15.190163604267 46.4924244778074, 15.1905048376283 46.492682000474, 15.1908054648004 46.4929677141887, 15.1911217419749 46.493301751175, 15.1913756457695 46.4935245636077, 15.1917150499097 46.4938100659818, 15.1922719164158 46.4943687590111, 15.1927594883597 46.4947889609419, 15.1932626077832 46.4952264982044, 15.1936097469923 46.4957600183102, 15.19349020371 46.4959158429418, 15.1935036512725 46.4963711553047, 15.1935336049919 46.4967794753926, 15.1935339089627 46.497205993262, 15.1934520724552 46.4976586436316, 15.1933900624016 46.4980780973264, 15.1934112279459 46.4985314176908, 15.1934156229327 46.4990748878958, 15.1934113475557 46.4992744114849, 15.1934065451759 46.4994977599138, 15.1933657204517 46.5003768580057, 15.1932523788942 46.5008015007887, 15.1932074325771 46.5009699366133, 15.1931006111043 46.5013858137044, 15.1929946988463 46.5015974223833, 15.1929957177782 46.501882650464, 15.1930570389512 46.502296405155, 15.193050528759 46.5026364738942, 15.1929984292342 46.502896627977, 15.1929935342243 46.5034372985925, 15.1931334489496 46.5039633804057, 15.1931850403573 46.5041585530749, 15.1931672679551 46.5043115313521, 15.1930820841709 46.5045167800255, 15.1930844988506 46.5048496622822, 15.1931097742967 46.504972904476, 15.1934184800789 46.5053304290561, 15.1935779388708 46.5055154303928, 15.1941475721528 46.5058501580584, 15.194749504586 46.506218214599, 15.1951206718816 46.5069553250283, 15.1954202108741 46.5075852236792, 15.1969910971615 46.5071146624117, 15.1981417374513 46.5067554417103, 15.1996929600621 46.5065934459308, 15.2004499140323 46.5064788111483, 15.2025613558219 46.5062168080594, 15.2040061958293 46.5058193409898, 15.2041219628583 46.5057871848307, 15.2054608537355 46.5054153601308, 15.2070984085648 46.5049517101534, 15.2086981657878 46.5045160866482, 15.2097060836689 46.5039500821306, 15.2105637230374 46.5034368723139, 15.2111823954513 46.5030656420658, 15.2115736005413 46.5028391523051, 15.2117964660341 46.5026993643842, 15.2123964964012 46.5023229612357, 15.2131893926764 46.5018454724906, 15.2137616384889 46.5015053273091, 15.2142023629487 46.5007046132273, 15.2148403932696 46.4995859492322, 15.2155674708622 46.498953947067, 15.2159453992608 46.4986837151813, 15.216081845301 46.4985861351421, 15.2166877869119 46.4980098037096, 15.217065336696 46.4976383720133, 15.2172867848573 46.4972259231379, 15.2173091644863 46.4963108548621, 15.2177757642402 46.4954112540262, 15.2186062287945 46.4945956480707, 15.2193782383151 46.4938273743339, 15.2199124275166 46.493246872745, 15.2204037856062 46.4929445206731, 15.2210189686506 46.4923640091917, 15.2216576302955 46.4918516186574, 15.2222199520892 46.4913916738867, 15.2226440013197 46.4911849017619, 15.2233696013261 46.4910107066788, 15.2247516650574 46.4909216594071, 15.2259640042354 46.4908391241264, 15.2269067221676 46.4904342052744, 15.2279222384206 46.490015853249, 15.2282667686965 46.489858343288, 15.2289731106206 46.4895896735246, 15.2296819895323 46.4893434967051, 15.2304412250825 46.4886882110921, 15.2310937884477 46.4881278660083, 15.2316237841104 46.487748076013, 15.2323847598488 46.4874361245776, 15.2330967189385 46.4871377645962, 15.2338444989246 46.4868626547877)))"
+    }
+},
+{
+    "model": "bib.reference",
+    "pk": 1183,
+    "fields": {
+        "zotero_item": "ZMFV9T45",
+        "page": null
+    }
+},
+{
+    "model": "bib.reference",
+    "pk": 1184,
+    "fields": {
+        "zotero_item": "SZ4T6Y8R",
+        "page": null
+    }
+},
+{
+    "model": "bib.reference",
+    "pk": 1185,
+    "fields": {
+        "zotero_item": "XBV29ZXH",
+        "page": null
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 12,
+    "fields": {
+        "password": "pbkdf2_sha256$120000$Xk15xuayiECh$9826V3VzMwPjoFfSIdV7rSp400+ChuniJRGFwZhIwts=",
+        "last_login": "2019-10-16T08:38:42.140Z",
+        "is_superuser": false,
+        "username": "ndolinar",
+        "first_name": "Nejc",
+        "last_name": "Dolinar",
+        "email": "nejc.dolinar@zvkds.si",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2018-05-28T08:52:50Z",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "idprovider.idprovider",
+    "pk": 4798,
+    "fields": {
+        "created_at": "2018-11-28T14:00:30.864Z",
+        "updated_at": "2019-07-30T11:45:46.232Z"
+    }
+},
+{
+    "model": "vocabs.skosconcept",
+    "pk": 302,
+    "fields": {
+        "pref_label": "Contemporary",
+        "pref_label_lang": "eng",
+        "definition": "",
+        "definition_lang": "eng",
+        "notation": "contemporary",
+        "namespace": 1,
+        "broader_concept": 299,
+        "top_concept": false,
+        "same_as_external": null,
+        "source_description": "",
+        "legacy_id": "",
+        "name_reverse": "",
+        "skos_note": "",
+        "skos_note_lang": "eng",
+        "skos_scopenote": "",
+        "skos_scopenote_lang": "eng",
+        "skos_changenote": "",
+        "skos_editorialnote": "",
+        "skos_example": "",
+        "skos_historynote": "",
+        "dc_creator": "",
+        "date_created": "2018-10-30T14:15:07.515Z",
+        "date_modified": "2018-10-30T14:15:07.582Z",
+        "collection": [],
+        "scheme": [
+            12
+        ],
+        "other_label": [
+            109,
+            110,
+            111,
+            112,
+            113,
+            114
+        ],
+        "skos_broader": [],
+        "skos_narrower": [],
+        "skos_related": [],
+        "skos_broadmatch": [],
+        "skos_narrowmatch": [],
+        "skos_exactmatch": [],
+        "skos_relatedmatch": [],
+        "skos_closematch": []
+    }
+},
+{
+    "model": "vocabs.skosconcept",
+    "pk": 296,
+    "fields": {
+        "pref_label": "Early Middle Age",
+        "pref_label_lang": "eng",
+        "definition": "",
+        "definition_lang": "eng",
+        "notation": "early-middle-age",
+        "namespace": 1,
+        "broader_concept": 295,
+        "top_concept": false,
+        "same_as_external": null,
+        "source_description": "",
+        "legacy_id": "",
+        "name_reverse": "",
+        "skos_note": "",
+        "skos_note_lang": "eng",
+        "skos_scopenote": "",
+        "skos_scopenote_lang": "eng",
+        "skos_changenote": "",
+        "skos_editorialnote": "",
+        "skos_example": "",
+        "skos_historynote": "",
+        "dc_creator": "",
+        "date_created": "2018-10-30T14:15:07.515Z",
+        "date_modified": "2018-10-30T14:15:07.582Z",
+        "collection": [],
+        "scheme": [
+            12
+        ],
+        "other_label": [
+            78,
+            79,
+            80,
+            81,
+            82
+        ],
+        "skos_broader": [],
+        "skos_narrower": [],
+        "skos_related": [],
+        "skos_broadmatch": [],
+        "skos_narrowmatch": [],
+        "skos_exactmatch": [],
+        "skos_relatedmatch": [],
+        "skos_closematch": []
+    }
+},
+{
+    "model": "vocabs.skosconcept",
+    "pk": 293,
+    "fields": {
+        "pref_label": "Roman Empire",
+        "pref_label_lang": "eng",
+        "definition": "",
+        "definition_lang": "eng",
+        "notation": "roman-empire",
+        "namespace": 1,
+        "broader_concept": null,
+        "top_concept": false,
+        "same_as_external": null,
+        "source_description": "",
+        "legacy_id": "",
+        "name_reverse": "",
+        "skos_note": "",
+        "skos_note_lang": "eng",
+        "skos_scopenote": "",
+        "skos_scopenote_lang": "eng",
+        "skos_changenote": "",
+        "skos_editorialnote": "",
+        "skos_example": "",
+        "skos_historynote": "",
+        "dc_creator": "",
+        "date_created": "2018-10-30T14:15:07.515Z",
+        "date_modified": "2018-10-30T14:15:07.582Z",
+        "collection": [],
+        "scheme": [
+            12
+        ],
+        "other_label": [
+            64,
+            65,
+            66,
+            62,
+            63
+        ],
+        "skos_broader": [],
+        "skos_narrower": [],
+        "skos_related": [],
+        "skos_broadmatch": [],
+        "skos_narrowmatch": [],
+        "skos_exactmatch": [],
+        "skos_relatedmatch": [],
+        "skos_closematch": []
+    }
+},
+{
+    "model": "vocabs.skosconcept",
+    "pk": 292,
+    "fields": {
+        "pref_label": "Late Iron Age",
+        "pref_label_lang": "eng",
+        "definition": "",
+        "definition_lang": "eng",
+        "notation": "late-iron-age",
+        "namespace": 1,
+        "broader_concept": 291,
+        "top_concept": false,
+        "same_as_external": null,
+        "source_description": "",
+        "legacy_id": "",
+        "name_reverse": "",
+        "skos_note": "",
+        "skos_note_lang": "eng",
+        "skos_scopenote": "",
+        "skos_scopenote_lang": "eng",
+        "skos_changenote": "",
+        "skos_editorialnote": "",
+        "skos_example": "",
+        "skos_historynote": "",
+        "dc_creator": "",
+        "date_created": "2018-10-30T14:15:07.515Z",
+        "date_modified": "2018-10-30T14:15:07.582Z",
+        "collection": [],
+        "scheme": [
+            12
+        ],
+        "other_label": [
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61
+        ],
+        "skos_broader": [],
+        "skos_narrower": [],
+        "skos_related": [],
+        "skos_broadmatch": [],
+        "skos_narrowmatch": [],
+        "skos_exactmatch": [],
+        "skos_relatedmatch": [],
+        "skos_closematch": []
+    }
+},
+{
+    "model": "vocabs.skosconcept",
+    "pk": 291,
+    "fields": {
+        "pref_label": "Iron Age",
+        "pref_label_lang": "eng",
+        "definition": "",
+        "definition_lang": "eng",
+        "notation": "iron-age",
+        "namespace": 1,
+        "broader_concept": 282,
+        "top_concept": false,
+        "same_as_external": null,
+        "source_description": "",
+        "legacy_id": "",
+        "name_reverse": "",
+        "skos_note": "",
+        "skos_note_lang": "eng",
+        "skos_scopenote": "",
+        "skos_scopenote_lang": "eng",
+        "skos_changenote": "",
+        "skos_editorialnote": "",
+        "skos_example": "",
+        "skos_historynote": "",
+        "dc_creator": "",
+        "date_created": "2018-10-30T14:15:07.515Z",
+        "date_modified": "2018-10-30T14:15:07.582Z",
+        "collection": [],
+        "scheme": [
+            12
+        ],
+        "other_label": [
+            50,
+            51,
+            52,
+            53
+        ],
+        "skos_broader": [],
+        "skos_narrower": [],
+        "skos_related": [],
+        "skos_broadmatch": [],
+        "skos_narrowmatch": [],
+        "skos_exactmatch": [],
+        "skos_relatedmatch": [],
+        "skos_closematch": []
+    }
+},
+{
+    "model": "vocabs.skosconcept",
+    "pk": 287,
+    "fields": {
+        "pref_label": "Bronze Age",
+        "pref_label_lang": "eng",
+        "definition": "",
+        "definition_lang": "eng",
+        "notation": "bronze-age",
+        "namespace": 1,
+        "broader_concept": 282,
+        "top_concept": false,
+        "same_as_external": null,
+        "source_description": "",
+        "legacy_id": "",
+        "name_reverse": "",
+        "skos_note": "",
+        "skos_note_lang": "eng",
+        "skos_scopenote": "",
+        "skos_scopenote_lang": "eng",
+        "skos_changenote": "",
+        "skos_editorialnote": "",
+        "skos_example": "",
+        "skos_historynote": "",
+        "dc_creator": "",
+        "date_created": "2018-10-30T14:15:07.515Z",
+        "date_modified": "2018-10-30T14:15:07.582Z",
+        "collection": [],
+        "scheme": [
+            12
+        ],
+        "other_label": [
+            33,
+            34,
+            35,
+            36
+        ],
+        "skos_broader": [],
+        "skos_narrower": [],
+        "skos_related": [],
+        "skos_broadmatch": [],
+        "skos_narrowmatch": [],
+        "skos_exactmatch": [],
+        "skos_relatedmatch": [],
+        "skos_closematch": []
+    }
+},
+{
+    "model": "vocabs.skosconcept",
+    "pk": 282,
+    "fields": {
+        "pref_label": "Prehistory",
+        "pref_label_lang": "eng",
+        "definition": "",
+        "definition_lang": "eng",
+        "notation": "prehistory",
+        "namespace": 1,
+        "broader_concept": null,
+        "top_concept": false,
+        "same_as_external": null,
+        "source_description": "",
+        "legacy_id": "",
+        "name_reverse": "",
+        "skos_note": "",
+        "skos_note_lang": "eng",
+        "skos_scopenote": "",
+        "skos_scopenote_lang": "eng",
+        "skos_changenote": "",
+        "skos_editorialnote": "",
+        "skos_example": "",
+        "skos_historynote": "",
+        "dc_creator": "",
+        "date_created": "2018-10-30T14:15:07.515Z",
+        "date_modified": "2018-10-30T14:15:07.582Z",
+        "collection": [],
+        "scheme": [
+            12
+        ],
+        "other_label": [
+            1,
+            2,
+            3,
+            4,
+            8,
+            7
+        ],
+        "skos_broader": [],
+        "skos_narrower": [],
+        "skos_related": [],
+        "skos_broadmatch": [],
+        "skos_narrowmatch": [],
+        "skos_exactmatch": [],
+        "skos_relatedmatch": [],
+        "skos_closematch": []
+    }
+},
+{
+    "model": "shapes.municipality",
+    "pk": 22529,
+    "fields": {
+        "lau2_id": "80103",
+        "lau2nam": "Bludenz",
+        "nuts3cod": "AT341",
+        "nuts3nam": "Bludenz-Bregenzer Wald",
+        "nuts2cod": "AT34",
+        "nuts2nam": "Vorarlberg",
+        "ctcod": "AT",
+        "ctnam": "Österreich",
+        "ctalt": "Austria",
+        "geom": "SRID=4326;MULTIPOLYGON (((9.80235368043834 47.1593828739881, 9.80282105298879 47.1598703478659, 9.80287172220886 47.1599071046169, 9.8029379713756 47.1599552673602, 9.803003435575 47.1600027076183, 9.80308696922956 47.160050051885, 9.80311799516576 47.1600690324065, 9.80314883693154 47.1600879036173, 9.80318285204258 47.1601087153279, 9.80321161005083 47.1601263184552, 9.80354554362378 47.160330642545, 9.80357124706465 47.1603463691116, 9.80361618059185 47.1603738607407, 9.80366174450028 47.160401742118, 9.80368139997863 47.1604143364556, 9.80392916643819 47.1605658626303, 9.80396466213944 47.1605875712315, 9.8040476355483 47.1606383121134, 9.80408220143955 47.1606594495772, 9.80412118549973 47.1606832885299, 9.80432513367707 47.1608079919848, 9.80438687274559 47.1608456993808, 9.80488866162137 47.1611517981255, 9.80490884920759 47.1611641249983, 9.80500626340664 47.1612217065273, 9.80507472912038 47.1612621694594, 9.80510564352524 47.1612804469505, 9.80500528220518 47.1613861274881, 9.80498905046175 47.1614135780708, 9.80494478668504 47.1614880343246, 9.80501561902137 47.1615133695695, 9.80502885332093 47.1615351098278, 9.80506087370986 47.1615643126302, 9.8051818485363 47.16166634088, 9.80542118367875 47.1618681351539, 9.80548462207486 47.1619208713998, 9.80549037794079 47.1619256563272, 9.80560260537417 47.1620189268466, 9.80565683434111 47.1620561484033, 9.80569957241545 47.1620818037789, 9.8057213364457 47.162094857636, 9.80577921195956 47.1621234602973, 9.80583740137285 47.1621471176197, 9.80591693783595 47.1621726725898, 9.8060027094897 47.162194477319, 9.80605045519357 47.1622073818253, 9.80614891887715 47.1622393206656, 9.80622000005596 47.1622662751727, 9.80628857121278 47.162293758027, 9.80633203520726 47.1623128493525, 9.80647579232545 47.162378819947, 9.80653823346851 47.1624126610863, 9.80682292143315 47.1625373916793, 9.8069765317674 47.1626073645977, 9.80706711773374 47.1626492513459, 9.80712184743661 47.1626761299254, 9.80712302530153 47.1626769446808, 9.80712892325271 47.1626807503006, 9.80723453670772 47.1627498720975, 9.80726776979101 47.1627765617722, 9.80730057453704 47.1628066673233, 9.80736126739151 47.1628705443089, 9.80743902282373 47.1629560888719, 9.80745742109857 47.1629759630456, 9.80751458865636 47.1630362258633, 9.80759539006046 47.1631073013445, 9.80769680301269 47.1631745144139, 9.80775923324942 47.1632096146421, 9.80779518735303 47.1632280402969, 9.8078349696669 47.1632462143537, 9.80787148275771 47.1632614046903, 9.8079084072828 47.1632751575535, 9.80798199441547 47.1633023930078, 9.80808343863298 47.1633400106877, 9.80810933398518 47.1633486756921, 9.8083820709509 47.1634424936527, 9.80847171855511 47.1634727709753, 9.80850340535316 47.1634827214317, 9.80854832910621 47.1635010986466, 9.80858718913749 47.1635190880237, 9.80862221938557 47.1635376901519, 9.80867150456198 47.1635684112088, 9.8087181937911 47.163594982231, 9.80873538481946 47.163603786379, 9.80876819089947 47.1636204892319, 9.80881702703748 47.1636433813953, 9.80884949151744 47.1636546853493, 9.80886987032109 47.1636610760303, 9.80891509823767 47.1636754064327, 9.8091801835135 47.1637431905611, 9.80954314262675 47.1638630566313, 9.80963931273985 47.1638740229439, 9.80969938473248 47.1638810455758, 9.80990450677026 47.1639042050705, 9.80992505406123 47.1639069977721, 9.80993921205448 47.1639156987952, 9.80994202339047 47.1639248870366, 9.80993864656606 47.1639328775075, 9.8100275554668 47.1638512475843, 9.8101280814131 47.163861873673, 9.81016515392371 47.1638607841907, 9.81004292564678 47.164004238583, 9.810034892723 47.1640163454211, 9.81003238296609 47.1640300969207, 9.81003462305215 47.1640436000782, 9.81004096383995 47.1640559529567, 9.81005166391187 47.1640675166571, 9.81006648143232 47.1640763101455, 9.81009023495747 47.1640882924717, 9.81011465700613 47.1640993785304, 9.81019072095286 47.1641297724504, 9.81024104538628 47.164148893576, 9.81029310029971 47.1641664027745, 9.81034569994454 47.1641822966561, 9.81039976747716 47.1641963966315, 9.81045437359064 47.1642093305717, 9.81052754725602 47.1642253182438, 9.81072903277687 47.1642695987842, 9.81083668585736 47.1642933003787, 9.81101369312696 47.1643323413329, 9.81119583551599 47.1643722147289, 9.81129243424819 47.1643933461239, 9.81134823671214 47.1644054753558, 9.81140444088295 47.1644168873871, 9.81146132474518 47.1644263225667, 9.81151875548532 47.1644338713615, 9.81154774499348 47.1644365233423, 9.81158557266053 47.1644390345374, 9.81165820076636 47.1644435047088, 9.81165846138795 47.1644437757945, 9.81168798600051 47.1644457101912, 9.81171628832842 47.1644511466933, 9.81177465518855 47.1644573506889, 9.81183154610457 47.1644660661998, 9.8118874891102 47.1644772969604, 9.81194234332435 47.1644918501867, 9.81199533169621 47.1645084633006, 9.8120477703601 47.1645273238595, 9.81207522911924 47.1645381539701, 9.81210137377036 47.1645485281591, 9.81208972495223 47.1645661952414, 9.81229689474218 47.164622824423, 9.81234074701828 47.1646429955312, 9.81259061194791 47.164756763145, 9.81273406527682 47.1648281246507, 9.81280305666594 47.1648535381202, 9.81278392705575 47.1648810032, 9.81277578258167 47.164891104214, 9.81259894176313 47.1651033923595, 9.8125086567147 47.1652140521523, 9.81249628057678 47.1652292158244, 9.812480815372 47.1652461456832, 9.81334934343763 47.1655381592706, 9.81341060254719 47.1655586796839, 9.8134157556453 47.1655604299403, 9.81343557782701 47.1655671596947, 9.81369651150493 47.1656557978113, 9.81388948299624 47.1657213486476, 9.81422010149646 47.1658322454679, 9.81446842212193 47.1659159578846, 9.81471700810743 47.1659997608197, 9.8147739240213 47.1660194515842, 9.81496269829773 47.1660828313353, 9.8152236458995 47.1661705575749, 9.81548735417283 47.1662591043856, 9.81580483184064 47.1663657073253, 9.81612927711958 47.1664746792545, 9.81637536828964 47.1665579271498, 9.81643215909607 47.1665770751423, 9.81647830101864 47.1665926672946, 9.81669284139729 47.1666652456424, 9.81673678520281 47.1666087756712, 9.81675362823563 47.1665858243084, 9.81677148963128 47.1665935519725, 9.81690852258324 47.1666480563579, 9.81695700351833 47.1666673469767, 9.8171844288377 47.1667577041721, 9.81742402290507 47.1668528470366, 9.81745665913474 47.1668658043922, 9.81777416386052 47.1669839145327, 9.81801752458978 47.1670770402084, 9.81842018684577 47.1672300754503, 9.81842857041504 47.1672332619647, 9.8187895293052 47.1673726142003, 9.81890408863408 47.1674057851842, 9.81904289739409 47.1674692277334, 9.81906927854318 47.1674812832124, 9.81907820715483 47.1674853719258, 9.81911130001632 47.167501686287, 9.81912674983361 47.1675093029138, 9.8192407815886 47.1675655167154, 9.81925964489174 47.1675748132745, 9.8193058242025 47.1675975821451, 9.81950566684076 47.1676905073535, 9.81966159315468 47.1677694704136, 9.81979383358423 47.1678372799695, 9.81983062107814 47.167856138356, 9.81983220853383 47.1678569548209, 9.82000803373966 47.1679459464131, 9.82002282596736 47.1679534254637, 9.8200260675733 47.1679550685531, 9.82023725337679 47.1680619848429, 9.82041785575849 47.1681535614022, 9.8204720644278 47.1681807921411, 9.82070254583328 47.1682975095727, 9.82110641520214 47.1685019009522, 9.82129657390214 47.1685875818546, 9.82124916605704 47.1686889227246, 9.82151028682645 47.1687200525564, 9.82160503200873 47.1687292948307, 9.82178153091453 47.1687533596942, 9.82190956371602 47.168772564614, 9.82282591767521 47.1689033526351, 9.82375984928152 47.1690284725791, 9.82474665940976 47.1691606754327, 9.82477024334816 47.1691401640135, 9.82477392686148 47.1691369602945, 9.8247945838544 47.1691189994726, 9.82482697374487 47.1690908369424, 9.82508917901084 47.1692366296022, 9.82530877281594 47.1693587376993, 9.82546628990364 47.1694867026662, 9.82559544469129 47.16959162098, 9.82576359152158 47.1697282144376, 9.82633876707437 47.1700782585918, 9.82667926828097 47.1701964415517, 9.82703381855292 47.1703767521785, 9.827440015634 47.1705249723646, 9.82747131108471 47.1705365356523, 9.82761741849956 47.1705922624826, 9.82838555560036 47.1707806146389, 9.82938293747398 47.1711505119237, 9.83012996759681 47.1712295234507, 9.83080240160283 47.1713006461094, 9.83203342014535 47.1715063139051, 9.83312040902483 47.1715703725777, 9.83405526958111 47.1717352371007, 9.83416670825416 47.1717978659997, 9.83457209322873 47.1720256970643, 9.83463479885622 47.1721730453317, 9.83483381196624 47.1726406827202, 9.83487579654075 47.1731550368439, 9.83491067297474 47.1732335383294, 9.83505919649208 47.1734167049227, 9.83552213939503 47.1736064673192, 9.836343706534 47.1736445641834, 9.83666470977179 47.173659453411, 9.83673666306482 47.1736627907554, 9.83777221270637 47.1737991779359, 9.83835039352868 47.1737692800254, 9.83894290630809 47.1737386412606, 9.83963977600549 47.1739648523582, 9.84038538864597 47.1741307942453, 9.84095415687986 47.1740266047212, 9.84198087798814 47.1743828547298, 9.84288873420463 47.1746275462014, 9.84335545619212 47.1748065604195, 9.84417513312804 47.1748342682641, 9.84463352890844 47.1750286329718, 9.84535612338302 47.1750175518122, 9.84658214056221 47.1751455797209, 9.84675256789116 47.1751633802776, 9.8487046147239 47.1753672919224, 9.85095392750207 47.175602224407, 9.85219345172169 47.1757316837855, 9.85260885507867 47.1757750646192, 9.85385794077574 47.1763801485243, 9.85481142859442 47.1768420176985, 9.85617830217388 47.1775040993898, 9.85961932949366 47.1774242195661, 9.86104926641907 47.1773909901294, 9.86212452746851 47.177365977573, 9.86175048556884 47.1768389187798, 9.86172604992434 47.1766604454382, 9.86169217755764 47.1764129593043, 9.86157292687236 47.1755074373669, 9.86234157478968 47.1747469981945, 9.86307985743604 47.1741970755702, 9.86361912732108 47.1737953893396, 9.86389823151943 47.1730677320343, 9.86428500550817 47.1722716809331, 9.8643592664 47.1719265070562, 9.8645918388939 47.1708454567072, 9.86460115529244 47.1708287916756, 9.8647262907999 47.1706048192837, 9.8647609100465 47.1705668600098, 9.86486820669475 47.1705008300038, 9.86496425821558 47.1704089376124, 9.86509164656067 47.170323201534, 9.8651924954665 47.1702255719776, 9.86524490766163 47.1701608444783, 9.86526411093695 47.1700778991129, 9.86520725646984 47.1700188369673, 9.86531215745465 47.1699996613685, 9.86532316718993 47.1699481650474, 9.8653208895538 47.1698733525864, 9.86532061532015 47.1698641409553, 9.86527737189096 47.1697427995094, 9.86528938397384 47.1696824025032, 9.86550177582823 47.1696194142149, 9.86565029571269 47.1695750513244, 9.86575650546988 47.1695717115904, 9.86588835288316 47.1695778326132, 9.86611341035379 47.1695591507528, 9.86624269134609 47.1695123693765, 9.86632687545855 47.1694493010222, 9.86641965864942 47.169457779084, 9.86652886161128 47.1694889020691, 9.86667729822728 47.1694984173741, 9.86680610886538 47.1694899526403, 9.86696418563605 47.1694981591284, 9.86711047372973 47.1695119830232, 9.86731253781895 47.1695278356204, 9.86744938155692 47.1695507059526, 9.86758122440169 47.16957229603, 9.86773913177572 47.169554954493, 9.86786883770285 47.169564571981, 9.86799389715388 47.1695776783989, 9.86809384396488 47.1695965277728, 9.86819488699035 47.1696406586035, 9.86819554599784 47.1696408408099, 9.86830000666755 47.169671313147, 9.86837580305689 47.1695718691953, 9.86844955843126 47.1694793424554, 9.86852881779261 47.1694059987496, 9.86856338673989 47.1693822939247, 9.86862542431035 47.1693397414857, 9.86874060155008 47.169321593785, 9.86883254689976 47.1692903977925, 9.86894304631942 47.1692042278008, 9.86907300310363 47.1690952010552, 9.86919815454976 47.1690226732339, 9.86934238020471 47.1688807824307, 9.86934266159095 47.1688788049829, 9.86955225544176 47.1688031145319, 9.8697079526784 47.168721446978, 9.86995025437077 47.1686009151735, 9.87004707406981 47.1685549855511, 9.87021590457684 47.1684798474538, 9.87043560557925 47.1684243460058, 9.87066349790704 47.1683370353883, 9.87099715319368 47.1681766655457, 9.87109108333395 47.1681396828121, 9.87117172637299 47.1681079355465, 9.87130432014585 47.1680283303141, 9.87137878428143 47.1679896855549, 9.87149365965669 47.1679300664376, 9.871655835831 47.1678459042103, 9.87168567888559 47.1677061523053, 9.87185901511869 47.1676277021831, 9.87193323690455 47.1675411124041, 9.87196218305933 47.1674601849991, 9.871968253012 47.1674432089728, 9.87196689812504 47.1673716927394, 9.87201247307263 47.1673031561123, 9.87206505017075 47.1672180068742, 9.87208742094208 47.167118073825, 9.8721128620367 47.1670139244454, 9.87215205519922 47.1668755604355, 9.87215959646521 47.1667519994618, 9.87217524536733 47.1666514087413, 9.8721591412893 47.1665168673533, 9.87214580253143 47.1664282119164, 9.87215166382991 47.166345931466, 9.87208997159558 47.1662211888476, 9.87207508169476 47.1660986158058, 9.87208574815535 47.1659950400504, 9.87213657315013 47.1658990927159, 9.87220319132872 47.1657768558353, 9.87227872183433 47.1656461096883, 9.87236224782959 47.165520882927, 9.87237737591441 47.1654046424014, 9.87233301088432 47.1652896892535, 9.87227568168259 47.1651338469599, 9.87234538457989 47.1650961721643, 9.8724371280876 47.1651624773148, 9.87255061973113 47.1652605314547, 9.87261632345314 47.1653334752035, 9.87266879334173 47.1653812705435, 9.87274216699139 47.1654670190377, 9.87278030426399 47.165540121615, 9.87283021414588 47.165609223283, 9.87295463068776 47.1656193530811, 9.87309413678184 47.1656232482578, 9.87323421377697 47.1656525096533, 9.87327891692959 47.165744077188, 9.87336469508208 47.1658140449096, 9.87344436793788 47.1658883949203, 9.87347554324924 47.1660036541297, 9.87357645764495 47.1660772804793, 9.87365597492192 47.1661394883415, 9.87383079935487 47.1661621450451, 9.87391626852224 47.1661768831714, 9.87399540291523 47.1662225391201, 9.87406040262842 47.1662859471376, 9.87415181153066 47.1663305731374, 9.87423575838015 47.1663840743833, 9.87432870981405 47.1664334730598, 9.87435601959556 47.1664629078685, 9.87436296820224 47.1665285099979, 9.87436237945588 47.1665964200643, 9.87440335425699 47.1666319358817, 9.87447555142457 47.166656334981, 9.87455787455822 47.1666689917757, 9.87466181706225 47.1667134879031, 9.87474944595579 47.1667531508987, 9.87479745026677 47.1667538841876, 9.87486362430607 47.1667582000187, 9.87493993649556 47.1667951182712, 9.87505513953062 47.1668188812945, 9.87516222166131 47.1668208428955, 9.87528385155417 47.1668184560796, 9.87539045374315 47.166814929401, 9.87547876389631 47.1668067401244, 9.87559860292129 47.166812981124, 9.87572546233021 47.1667853391152, 9.87581210575719 47.166786767762, 9.87586692207318 47.1667623426254, 9.87593983266097 47.1667503143704, 9.87600041614679 47.1667149383628, 9.87618578345738 47.1667544547034, 9.87627377607573 47.1667982553397, 9.876367547385 47.1668601588353, 9.87646344082667 47.166935834295, 9.87657926921528 47.1669638254627, 9.87668448819293 47.1669678473924, 9.87682783095448 47.1669558322629, 9.87700280302401 47.1669469112238, 9.87711808019033 47.1669622178442, 9.87722277480822 47.1669658765733, 9.87736788789837 47.1669474809853, 9.87748436509997 47.1669307692318, 9.8776138238613 47.1669227445006, 9.87778426681182 47.166919022078, 9.87791732696848 47.1669217156161, 9.87806268115757 47.1669212194805, 9.87821536084296 47.1669124784215, 9.87835203303885 47.1668939575053, 9.87848401708009 47.1668837829325, 9.87858960009268 47.1668762007406, 9.8786038895362 47.1668755207534, 9.87870782756372 47.1668705581013, 9.87907334132487 47.1668672561972, 9.87936810364586 47.1668548551911, 9.87958469442431 47.1668528435192, 9.87963216009354 47.1668548689, 9.87982637232756 47.1668631653789, 9.88006114639427 47.1668786766493, 9.88026546801579 47.1668924466208, 9.88049244833864 47.1669095441935, 9.88060670464836 47.1669271274091, 9.88062443492191 47.1669298607615, 9.88072884503798 47.1669975606101, 9.88085928525077 47.1671369641984, 9.88098450641691 47.1672235471179, 9.88110508603888 47.1672976973449, 9.88124323452544 47.1673379161884, 9.88130992171058 47.1673441190376, 9.88164145297878 47.1674900812441, 9.88166594742789 47.1674992632929, 9.88186627879822 47.1675743600494, 9.88201764616228 47.1676423364888, 9.88202413983399 47.1676464101264, 9.8821544844637 47.1677281537894, 9.88229958303215 47.1678197608082, 9.88243448789428 47.1679157346017, 9.88253739412664 47.1679901736581, 9.88260790779158 47.1680738379231, 9.88265491995807 47.1681291641234, 9.88268978097152 47.1682173639322, 9.88266493584544 47.1683158507257, 9.88260744602131 47.1684220330284, 9.88259530687557 47.1684520464503, 9.88256419491095 47.1685289023099, 9.8825512499066 47.1686240177971, 9.88251659172623 47.1687286727652, 9.88248982146998 47.1688207648117, 9.88250501016689 47.1688958436685, 9.88253153737647 47.1689359148429, 9.88258353640511 47.1690144408416, 9.88266615816071 47.1691321543688, 9.88273298336368 47.1692139151102, 9.88274108987416 47.1692238416362, 9.8828117888953 47.1693166820764, 9.88296678967931 47.1693614630704, 9.88316100354848 47.1694016332499, 9.88329164497028 47.1694382494608, 9.88334167471074 47.1694522733397, 9.88346854165757 47.1695482135041, 9.88359478445697 47.1696243628163, 9.88372519722441 47.1696599610022, 9.88385485293473 47.1697228105021, 9.88398100720122 47.1697940119297, 9.88410179668377 47.1698445933033, 9.88421338998727 47.1698752589511, 9.8843715979387 47.1698687792897, 9.88450664765255 47.1699332687287, 9.88489685429894 47.1698981134012, 9.88510586496292 47.1698269805266, 9.88527931155669 47.1697344774544, 9.8853988503144 47.1696369944382, 9.88552593996506 47.1695978287494, 9.88563505967482 47.1695951558646, 9.88583263231766 47.1695958014081, 9.88597147793224 47.1696015663209, 9.88607856398401 47.1696663040179, 9.8861253653695 47.1697159614619, 9.8861075500692 47.1697792156636, 9.88609369619867 47.1698110040013, 9.88609322440096 47.1698231092517, 9.88609133355145 47.1698718904148, 9.88613680701291 47.16993836292, 9.88616709248788 47.1699912835966, 9.8862838780844 47.1700322219137, 9.88639613341143 47.1700472363103, 9.8864674482746 47.1700837679907, 9.88646997338791 47.17017525725, 9.88646781753664 47.1703054068146, 9.88648163340159 47.170418798794, 9.8864997951058 47.1705173658066, 9.88650945752869 47.1706069944346, 9.88655295767869 47.1706572676373, 9.88666151059009 47.1706424047367, 9.88681154817014 47.1707133369003, 9.88699545195247 47.1707726190789, 9.88716651109245 47.1708377867194, 9.88733812018174 47.1708847860731, 9.8874535037381 47.170951263559, 9.88757046481044 47.1710184669341, 9.88769112570312 47.1710692233001, 9.88776675969257 47.1710785160574, 9.88781033670547 47.1711197950943, 9.88777300351193 47.1712925319237, 9.88774178131209 47.1713816402971, 9.8876753436759 47.1715332146211, 9.88758654232414 47.171692977543, 9.88752956475617 47.1718330755839, 9.88750615589026 47.1719342673051, 9.88746404247237 47.1720197337912, 9.88740563771775 47.1721382388808, 9.88782931123128 47.1723589517188, 9.88855720634238 47.1727381449422, 9.88967358303215 47.1726382050691, 9.89055720078722 47.1730201534125, 9.89066554509952 47.1730130657877, 9.89288164185985 47.1728681295786, 9.8934841236183 47.1724676186768, 9.89411876255183 47.1720457216963, 9.89425363179759 47.1719560600334, 9.89440096943816 47.1719341521854, 9.89459640188647 47.1719262656875, 9.89474083346133 47.171949294329, 9.89478882954576 47.1719736939913, 9.89480489504385 47.1720483792883, 9.89481232459715 47.1720829125004, 9.89481476991548 47.1721505110338, 9.89481645247466 47.1722337213396, 9.89482626445085 47.1723069791054, 9.89483142018359 47.1723848957779, 9.8948013273189 47.172466454441, 9.89480249697831 47.1725478631955, 9.89481874552414 47.1726559564917, 9.89485219061273 47.1727584496694, 9.89493782194874 47.172708138601, 9.89500690783819 47.1726486789122, 9.89511127034881 47.1725983504405, 9.89525913474796 47.1725988328652, 9.89540585227301 47.1725788008573, 9.89549697123696 47.1726141438408, 9.89559754748901 47.1726383691953, 9.89571127223364 47.1726360203021, 9.8958094262798 47.1725865663243, 9.8959474264792 47.1725836810684, 9.89600790826018 47.1725914708603, 9.89607105047447 47.1726601573521, 9.89607471055933 47.1726641381874, 9.8960895652178 47.1727339067871, 9.89610431940207 47.1727998976154, 9.89620392867584 47.1728135048485, 9.89632691642209 47.1728076821959, 9.89640225990893 47.1729002620018, 9.89647950720686 47.1729065866689, 9.89668713098475 47.1729385100322, 9.89669658804717 47.1730389302093, 9.89677174967054 47.1731377153043, 9.89689354034958 47.1731809111192, 9.89699164968358 47.1732005383593, 9.89727156296452 47.1732004464384, 9.89736046770774 47.1731687665904, 9.89811837807783 47.1735523495096, 9.89909499189595 47.1740416116058, 9.89930885161044 47.1739752746819, 9.89945378667138 47.173899551648, 9.89960775702895 47.1739599580153, 9.89983094895008 47.1738642937817, 9.89999423333707 47.1737871082847, 9.90014382020013 47.1737553842589, 9.9003829076487 47.1737479274397, 9.90070873038314 47.1737483552609, 9.90087171892087 47.1737873825089, 9.90102246830922 47.1738709785692, 9.90113497877375 47.1739689118559, 9.90142044794888 47.1740323295428, 9.90168165942116 47.1740618333461, 9.90192440162815 47.1740111214773, 9.90211210776468 47.1739475174864, 9.90243943534504 47.1738607843986, 9.90277630094019 47.1737689591117, 9.90329990856134 47.1736180202223, 9.90354695194591 47.1735261775892, 9.90354849991636 47.1735256081823, 9.90371405010519 47.1734640584725, 9.90410006186115 47.1732814754626, 9.90431103832124 47.1731942087762, 9.90453498652519 47.173101593478, 9.9049542380758 47.1729020408684, 9.9052036020867 47.1727656248191, 9.90552968684178 47.1725701276907, 9.90578962056986 47.1723661065729, 9.90593922708239 47.1722657438038, 9.9059410749 47.1721353229455, 9.90610578920457 47.1720914150739, 9.90626847345027 47.1721026398068, 9.90640947017003 47.1721857421789, 9.90661989713979 47.1722795391403, 9.9068694989837 47.1723902120975, 9.90714584090455 47.1724891125833, 9.90837389931901 47.1720998968028, 9.90928412922262 47.1718113989877, 9.9094920131934 47.1718117228125, 9.9096129098147 47.171786626106, 9.90974112682439 47.1717205403347, 9.91000776564546 47.1715985692134, 9.91025704407021 47.1714865176505, 9.91049998810669 47.171391082412, 9.91056885639798 47.1714225507096, 9.91067304723428 47.1714408372884, 9.91074364710039 47.1714206808504, 9.91088757656878 47.1714017849566, 9.91106939773077 47.1713949931353, 9.91128855219917 47.1713051356138, 9.91145636847805 47.1712847083554, 9.91162072395397 47.171235124876, 9.91175407474101 47.1712854503319, 9.91190268778803 47.1713406900948, 9.91204658082263 47.1713429312143, 9.91224283076114 47.1713628158915, 9.9125449822666 47.1714020736829, 9.91256984626776 47.1713938992923, 9.91273238513779 47.1713404313326, 9.91292733209693 47.1714415369065, 9.91307204657062 47.1714400026161, 9.91318072653594 47.171375190426, 9.91342821025174 47.1715214646192, 9.91365369369501 47.1715645732673, 9.91386148734135 47.171609595029, 9.91410226880395 47.171520263574, 9.91433544621423 47.1713916857147, 9.91448332656721 47.171340239249, 9.91465402171575 47.1713893505675, 9.91484012881345 47.1714411276778, 9.91498298551049 47.1713243589106, 9.91504216051587 47.1712307589546, 9.91525653792313 47.1712438711586, 9.91536125794843 47.1711456717495, 9.91555292480756 47.1710614642292, 9.91573027277232 47.1709696481049, 9.91582383246583 47.1708312898212, 9.91588544618218 47.1707126032045, 9.91610978179239 47.1707172048642, 9.91627812177874 47.1706468522658, 9.91634787992425 47.1706344074102, 9.91647480612421 47.1706117747529, 9.91663563548561 47.1705234046603, 9.91682172254516 47.1704772239585, 9.91686018120497 47.1703841769439, 9.91691179160218 47.1703125866964, 9.91711953700112 47.1702965281876, 9.91737546665125 47.1702921584508, 9.91749790762648 47.1701369953169, 9.91768298818382 47.1700508718991, 9.91787963714518 47.1699861987662, 9.91819715876169 47.1699994128856, 9.91828593290455 47.1698982746257, 9.918503407332 47.1698187455103, 9.91867869614486 47.1698033746144, 9.91892970975796 47.1698199420006, 9.91924118190267 47.1698645231996, 9.91955929190705 47.1699203715956, 9.91995431992387 47.1699740706831, 9.92021110767227 47.1699609726814, 9.92039731594244 47.1699998779989, 9.9206003955995 47.170124834843, 9.92071697303457 47.1701787771284, 9.92082353300165 47.1701812424803, 9.92092481822193 47.1701835801239, 9.92100937306847 47.1701322572728, 9.92113992173034 47.170103227802, 9.92129895785854 47.1700913920945, 9.92142815799716 47.1700660451354, 9.92158628575813 47.170052317488, 9.92169660864488 47.1700797012245, 9.92177731380213 47.170048512471, 9.9220163964667 47.1700561245909, 9.92212733384578 47.1699876263635, 9.92241398550639 47.169899615086, 9.92261699421184 47.1698137300376, 9.922682813974 47.1697627884421, 9.9212074096453 47.1684683961412, 9.92084064074555 47.1679892584638, 9.92057890510664 47.1676474022738, 9.92041420917197 47.1674322758442, 9.9198899809162 47.1670325945245, 9.91947830917588 47.166718718445, 9.91984459899383 47.1644573907486, 9.91985526867028 47.1643916761494, 9.92037371463293 47.1631492073854, 9.92053025212216 47.1627740590589, 9.92029775953282 47.1623457561414, 9.92011360944174 47.1620065175396, 9.92010133660721 47.1619839130347, 9.91987437467072 47.1614377068259, 9.91981867450048 47.1613036781546, 9.91976645496078 47.1611780093154, 9.91971209376009 47.1610127547168, 9.91948620973454 47.1602170519616, 9.91909437773541 47.159394390413, 9.91902110362739 47.1593443459689, 9.91886946499496 47.1592407844019, 9.91865717103155 47.1590957869944, 9.9184868500423 47.1589866873164, 9.91837989293621 47.158644492176, 9.91837235514507 47.1586203581783, 9.9181915974105 47.1585140099138, 9.91814696555948 47.1582693661587, 9.91801486719633 47.1579620685371, 9.91804095384702 47.1577803775449, 9.9182313359818 47.1574886611496, 9.91807880094468 47.1572935241699, 9.91806251726673 47.1570547095706, 9.91805789349069 47.1569835686695, 9.91793035285231 47.1567796626163, 9.91781799887559 47.1566000448132, 9.91776269012581 47.156321716296, 9.91774106749249 47.1561500569868, 9.91773343388394 47.1560895102765, 9.91773054198594 47.1560664997304, 9.91734783453565 47.1556668926693, 9.91721208258457 47.1554733633042, 9.91714765324604 47.1554110615241, 9.91702692441534 47.1552943143996, 9.91686566462261 47.1551383805984, 9.91682876782793 47.1550681743915, 9.91687476186275 47.1548708112205, 9.9168818470989 47.1546574753293, 9.91684171991817 47.154595712212, 9.9166099480863 47.1545224544027, 9.91600518121579 47.1541854545885, 9.9159200278023 47.1541379993196, 9.91587971974 47.1541159038169, 9.9156882822141 47.1537781573861, 9.91563273909114 47.1536064907072, 9.91552004325811 47.1532581669158, 9.91517900011262 47.1529054606263, 9.91444825637735 47.1527196557745, 9.91429369637701 47.1526803547049, 9.91404086871497 47.1524971030787, 9.91367157976639 47.1522294457442, 9.91321120996282 47.1518367336375, 9.91309499715236 47.1517246047119, 9.9127699014475 47.151410925655, 9.91272913968554 47.1513715927205, 9.91271971831762 47.1513624999919, 9.91249372190063 47.1507482928033, 9.91246890067981 47.1506595466175, 9.91232782906362 47.1501209045293, 9.91217397288538 47.1498538127378, 9.91214827340464 47.149819176476, 9.91203811507381 47.149678087155, 9.91196599909255 47.1496259183789, 9.91193101032734 47.1496006028793, 9.91189910084306 47.1495842038354, 9.91177769443465 47.149547504711, 9.9116503448654 47.1495123127281, 9.91161861769504 47.1495045312769, 9.91125727698461 47.1494158695161, 9.91100436137932 47.1493101667954, 9.91093751183343 47.1492822324481, 9.91091415989203 47.1492724763273, 9.91059427782798 47.1490911271898, 9.90976367627294 47.1486748910503, 9.90932985737828 47.1482929477037, 9.90929797739303 47.1482648724878, 9.90925839478933 47.1482437671481, 9.9084770501236 47.1478271734872, 9.90814940014441 47.1477303334347, 9.90793293358054 47.147661612743, 9.90726978690911 47.1473130054544, 9.90692181079172 47.1473013590896, 9.90658972271369 47.1472976874975, 9.90633590891089 47.1472386465549, 9.90620808777528 47.1472089154828, 9.90618374391855 47.1472030670863, 9.90584543508076 47.1471862371013, 9.90546636901066 47.1471225687133, 9.90517327991924 47.1470734341579, 9.90495265837997 47.1469651140264, 9.90474211053232 47.1468014211461, 9.90452708392912 47.1465724075714, 9.90445532109359 47.1464959495904, 9.90426525272541 47.1462623513465, 9.90406148461649 47.1460272624862, 9.90357025150194 47.1452794510155, 9.90341684557485 47.1451103045456, 9.90339687855821 47.1450963769671, 9.90310706481674 47.1448941534951, 9.90302078149346 47.1447881350883, 9.90246553511013 47.1442142213204, 9.90220721043806 47.143999296344, 9.90206799872226 47.1438834707603, 9.9020657465199 47.1438815996663, 9.90202934059344 47.1438661166934, 9.9020235596884 47.1438636572816, 9.90201940793979 47.1438618873983, 9.90194549286966 47.1438304485966, 9.90178472246066 47.1437620708994, 9.90168458405867 47.1437000752646, 9.90142320868124 47.1435382536945, 9.90091540980069 47.1430501445752, 9.90079215187517 47.1429363388866, 9.90081587417877 47.1427001909833, 9.90082607757214 47.1425987029053, 9.90084826461893 47.1423777777973, 9.90105469015631 47.1423210738106, 9.90151168414259 47.1421955352663, 9.90260729465517 47.1421043340609, 9.90316613226723 47.1420879153465, 9.90400997876148 47.1420404556298, 9.90415231313469 47.1420313317336, 9.90456409303695 47.1420049429233, 9.90495685275834 47.141979768028, 9.9054482208056 47.1419482698247, 9.90541768913579 47.141868215658, 9.90534778497053 47.1416849664527, 9.90534320217642 47.1416729763796, 9.90533258970508 47.1416451869122, 9.90518796282933 47.1412666352672, 9.90458919449935 47.1406033260735, 9.90457555376629 47.1405882164446, 9.90444058151592 47.1404386926338, 9.90430220786305 47.139959443729, 9.90428873028281 47.1399307880475, 9.9041540731953 47.1396445912575, 9.9040315381546 47.1395143181066, 9.90364250268043 47.139100695589, 9.90353732930964 47.1384295204703, 9.90357856135908 47.1378934134801, 9.90358429289058 47.1378188639866, 9.90364309703423 47.1370542356307, 9.90365532377813 47.1368951917653, 9.90372666075167 47.1365172993908, 9.9037319575553 47.1364752041001, 9.90375701862447 47.1362758371069, 9.90377879759838 47.1361026344079, 9.90388394225139 47.135266399309, 9.90391458047223 47.1350227254625, 9.90387924982998 47.1335499927881, 9.90387839067223 47.133514439945, 9.90399632051777 47.1329172669606, 9.90404084840981 47.1326917167245, 9.90425374872518 47.1316136257484, 9.90425509561698 47.1316067859289, 9.90428573938709 47.1314520909274, 9.90422983219022 47.1312508052682, 9.90411155285532 47.1308249032579, 9.90409541032695 47.1307919727466, 9.90384820292613 47.1302877792493, 9.90355296936369 47.12956051646, 9.9034098661622 47.1292080198796, 9.90301115080861 47.1287381156668, 9.90233815922431 47.1283017095103, 9.90224383073745 47.1281230706153, 9.901990130082 47.1276426240478, 9.90170329463554 47.1270993966974, 9.90118890501335 47.1261251240839, 9.90071093084802 47.1254733103312, 9.90029498374189 47.1249060730703, 9.9002338331675 47.124922120447, 9.90007078918529 47.1249727705756, 9.90001542430986 47.1250227538001, 9.89990221730233 47.1250384221934, 9.89986153992834 47.125048881333, 9.89976514604926 47.125104014095, 9.89971171137409 47.1251274672871, 9.89964278064381 47.1251281946307, 9.89956615193138 47.1251194472876, 9.89942732747882 47.1251258445589, 9.8992718921555 47.1251167071394, 9.89913065878998 47.125127592444, 9.8989854386904 47.1251425111747, 9.89888853606542 47.1251634604878, 9.89871944052728 47.1251648837964, 9.89863413594471 47.1251534039932, 9.89854839112681 47.1251635114845, 9.89847778524886 47.1251757453209, 9.89839567770284 47.1251601394448, 9.89832605357896 47.1251489890875, 9.89822614664214 47.1251665081276, 9.89813072938555 47.1251668638544, 9.8980337267551 47.1251838534942, 9.89795409114567 47.1251882266173, 9.89785211744385 47.1251684073182, 9.89773966213411 47.1251733746247, 9.89758477723777 47.1251614476692, 9.8974287661658 47.1251584214257, 9.89727878914285 47.1251586568421, 9.89714960687994 47.1251462884107, 9.8970430307604 47.1251575746032, 9.89695182418224 47.1251586636888, 9.89688558193843 47.1251530135032, 9.89678344946594 47.1251525319227, 9.89668729128321 47.1251468554777, 9.89657913129677 47.125174416718, 9.89654171181883 47.1251893854927, 9.89649045820318 47.12520394053, 9.89646272734827 47.1252107698312, 9.89642575100109 47.1252198839043, 9.89637064771659 47.125205909951, 9.89630343799293 47.125205652384, 9.89625487832486 47.1252291237062, 9.89622219519554 47.1252291776798, 9.89613911711055 47.1252034017323, 9.89605750723476 47.1252074066792, 9.89596219768124 47.1252426622852, 9.89587353999197 47.1252863981466, 9.8957925948357 47.1252897753852, 9.89574527950597 47.1253061451534, 9.89567654894139 47.1253145167348, 9.89559867181322 47.1252812939896, 9.89553891871254 47.1253198347108, 9.89543677789123 47.1253204306717, 9.89535879684846 47.1252998918535, 9.89528293140175 47.1253103946371, 9.89516895157318 47.1252925048984, 9.89507990079425 47.1252719229454, 9.8950066336738 47.1252711013106, 9.894940079659 47.1252871266349, 9.89483527505671 47.1252911307919, 9.89477923453271 47.1252948723688, 9.89464233453129 47.1253074781567, 9.89458093761683 47.1253213642731, 9.89443379707033 47.1253451745261, 9.89432136948525 47.1253945750147, 9.89420551540585 47.1253800061358, 9.89413996441706 47.1253864094493, 9.89403093192441 47.1253757342126, 9.89385540977475 47.1253414143851, 9.89372272074561 47.1253230022333, 9.89362882812815 47.1253286035908, 9.89348361044974 47.1253444770914, 9.89320337620423 47.1253667821978, 9.89313092771842 47.125410218951, 9.89300875752324 47.1254580504945, 9.8929136761329 47.1255290154425, 9.89270290311965 47.1255977326548, 9.89249598285665 47.1257418449518, 9.89226287524755 47.1258335922814, 9.89215794554437 47.1258842791787, 9.89211681711734 47.1259488846128, 9.8920202495038 47.1260080585911, 9.89190441776319 47.126070036775, 9.8917928896329 47.1261215061448, 9.89173646978874 47.1261705807825, 9.89174798448749 47.1262914309602, 9.89168297592951 47.1263431709639, 9.89159144040046 47.1263834742235, 9.89159556444884 47.1264263971793, 9.89174854194916 47.1264935555625, 9.89175139434397 47.1265467286136, 9.89175326014564 47.1265757900354, 9.8917778088617 47.1266032306268, 9.89175122637589 47.1266460345541, 9.89173823156134 47.1266871818665, 9.89171451566913 47.1267496968075, 9.89175948117214 47.1267943075414, 9.89181881922516 47.126790399973, 9.89182290953666 47.1268374605943, 9.89179414969986 47.1269041839891, 9.89175800878309 47.1269393948124, 9.89171089807272 47.1269466772384, 9.89163579557239 47.1269603284575, 9.89154827009818 47.1270095518184, 9.89154886690464 47.1270485940854, 9.89153568261099 47.1270603262794, 9.89147729986898 47.1271122711641, 9.89137620700924 47.1270657338246, 9.8912672949442 47.1270877083727, 9.89117278747913 47.1270733087322, 9.89104661881925 47.1270784850453, 9.89096014242989 47.1271125098942, 9.89085827791762 47.1271900123475, 9.89073420111842 47.127260321876, 9.89068453608697 47.1273209354947, 9.89061388901702 47.1273847063928, 9.89055173902452 47.1273620658658, 9.89048395080454 47.1273045032906, 9.89043836361071 47.1272871452244, 9.89038044172345 47.1272633519087, 9.89030021891557 47.127242890244, 9.89023748441538 47.1272430057596, 9.8901688411604 47.1272719723189, 9.89008376272965 47.127343601919, 9.890061683301 47.1273833649456, 9.88991286307625 47.1273706407178, 9.88981186082697 47.1274079371583, 9.88983001690407 47.1274588301741, 9.88978622727319 47.1275260332502, 9.8898186303345 47.1275911942295, 9.88981593020943 47.1276304030927, 9.88972963015371 47.1277059853472, 9.88962961136121 47.127735998664, 9.88946846636966 47.1277153102805, 9.88935027584957 47.1277590153148, 9.88923161774097 47.1277483874797, 9.88912830326152 47.1277625555729, 9.8890464845835 47.1278066724229, 9.8890188202764 47.1279151350171, 9.88881040338069 47.127952460232, 9.88868204904563 47.1279977433857, 9.88863953436075 47.128053976285, 9.88852505545345 47.1280949060977, 9.88838057264164 47.128146152544, 9.88822376474081 47.1281896143806, 9.8882009884021 47.128186835349, 9.88813397192449 47.1281786487962, 9.8880361514822 47.1281349089279, 9.88788247580221 47.1281037238063, 9.88769012988754 47.1280947840071, 9.88757693675851 47.1280611482031, 9.88735990027716 47.1280887215, 9.88725222026859 47.1280890191122, 9.88711468537857 47.1280503364333, 9.88702981884486 47.1280022371173, 9.88693792126272 47.127990629886, 9.8867963868543 47.1280043728422, 9.88668459060573 47.1279925073978, 9.88654609726953 47.1279583178635, 9.88643492187621 47.1279198287418, 9.886312947493 47.1278803073834, 9.88630563446123 47.1277941051402, 9.88623170412225 47.1276995436721, 9.88610271023777 47.1276174469708, 9.88599733126884 47.1275480370114, 9.88587800066406 47.1276013551035, 9.8857868738097 47.1276391331972, 9.88562456510668 47.1276471253381, 9.88542596599297 47.1276449887921, 9.8853169027377 47.1276061463326, 9.88516591406389 47.1276002407218, 9.88509814269747 47.1276346923943, 9.88499293249255 47.1276857274094, 9.88474031667626 47.1276968676391, 9.88456166546205 47.1277047034253, 9.88440655743761 47.1276981142187, 9.88428617770975 47.1276929938187, 9.88403243268714 47.1277128538374, 9.88398566534118 47.1275550724195, 9.88395903580065 47.1273850479265, 9.8817184640014 47.1289203104895, 9.8802598553575 47.1299197022137, 9.8799481357724 47.1299976121678, 9.8765289278362 47.1308526283051, 9.87560674566478 47.1314946800947, 9.871673581717 47.1342328321998, 9.87162093191813 47.1342694975059, 9.87115305462541 47.1345951982236, 9.8704740627357 47.1359714910706, 9.86825939032171 47.1404600187657, 9.86759807363281 47.1418000077704, 9.86758193588301 47.1418511241499, 9.86748059113122 47.1421881799359, 9.86747629906127 47.1422024377955, 9.86745359128922 47.1422779583947, 9.86733544956592 47.1427435140661, 9.86729754274548 47.1428859323123, 9.8672891632849 47.1429242179969, 9.86725011980112 47.1430909180585, 9.86696221660413 47.1431328172027, 9.86668395840476 47.1431424619357, 9.86596392187249 47.1431667387384, 9.86566879375369 47.143235320473, 9.86512282352912 47.1432842417582, 9.86495457024748 47.1432460786608, 9.86475192449065 47.1432001258799, 9.86440999440747 47.1430457860614, 9.86395180855289 47.1427870664174, 9.86387423053656 47.1427669624826, 9.86336069474755 47.1426338721369, 9.8632800929986 47.1426129817843, 9.86275222370477 47.1424479843664, 9.86236995310051 47.142275819679, 9.86150215883889 47.1422587186065, 9.86073023405884 47.1421753645297, 9.8606268464873 47.1421642000857, 9.86008058623369 47.1421140531359, 9.85973211441297 47.1420082808002, 9.85940954352552 47.1419103694808, 9.85917848883696 47.1418759353161, 9.85838690399742 47.1418247491882, 9.85803706061666 47.1418279355664, 9.85766493517147 47.1418313324354, 9.85737772651489 47.1418109602747, 9.85655203128491 47.1416687642156, 9.85621929490422 47.141593838736, 9.85585948268525 47.1415128237921, 9.85574730073093 47.141480163478, 9.85535695027737 47.141366499766, 9.85530370036239 47.1413509823663, 9.85529475878834 47.1413484251662, 9.85513316553692 47.1413013245373, 9.85422777453346 47.1410376980809, 9.85376350329 47.1408448492106, 9.85329630115539 47.1407283553569, 9.85291160901545 47.1406137397531, 9.85249893941808 47.1405361351737, 9.85172533546965 47.1403906408373, 9.85114246652469 47.1402810200301, 9.85057578180051 47.140088260665, 9.84960937306498 47.1397110082648, 9.84905068210429 47.1395103700406, 9.84837807922528 47.1393116695182, 9.84832028524906 47.1392960134639, 9.84771269595728 47.1391314357525, 9.84731070126025 47.13903733135, 9.84691589475942 47.1388929286713, 9.84642949005105 47.1387150106477, 9.84548123519153 47.1382604240735, 9.84424131656785 47.1378584308576, 9.84348440721187 47.1377132499262, 9.84322563969017 47.1376636088711, 9.84252413436171 47.1374236256472, 9.84180199161621 47.1371765670229, 9.84149751216352 47.1370419245017, 9.84114233294954 47.1368848605479, 9.83987714610405 47.1360607576057, 9.83963605163918 47.1359192881552, 9.83950152965898 47.1358403508754, 9.83948082949668 47.1358282072828, 9.83938738052867 47.1357848015603, 9.83907068015103 47.1356376025648, 9.83897011036375 47.1356228602032, 9.83895206160855 47.1356202629516, 9.83888625725254 47.1356106199814, 9.83882411602572 47.1356024317665, 9.83870768320934 47.135592513609, 9.83834455458332 47.1355615635712, 9.83824274283264 47.1355528424337, 9.837897324608 47.13553099917, 9.83779812632965 47.1355247179726, 9.83743275771089 47.1355079131507, 9.83691148048669 47.135444916476, 9.83670833220219 47.1354241055434, 9.83665191528583 47.1354183278747, 9.83647310393507 47.1353830948553, 9.8364065276476 47.1353699410198, 9.83630008301821 47.135348966548, 9.83625534742171 47.1353401360169, 9.83616907423481 47.1353231182235, 9.83601943356482 47.1352935890807, 9.83576403274761 47.1352868960191, 9.83537734926853 47.1356131126227, 9.83498840288184 47.1358206149399, 9.83462035953145 47.1360169628919, 9.83391043012861 47.1363064034071, 9.833095336098 47.1365974096827, 9.83216453445655 47.137126659524, 9.83196454142458 47.1372134908912, 9.83154162891775 47.1374721998078, 9.83134152909907 47.1376104724257, 9.83121261061487 47.1377211748975, 9.83110344065019 47.1378330881968, 9.83044131606158 47.1385118451936, 9.8298486517186 47.139119383436, 9.82935937752644 47.1396109596284, 9.82881359039916 47.1400901652583, 9.82858599294365 47.1402899888111, 9.82829903501091 47.1405419261295, 9.82768798249208 47.1411510194604, 9.827122020306 47.141715131295, 9.82616551126921 47.1426400518152, 9.82553400051298 47.1432171398614, 9.82505072410083 47.1436921739721, 9.82501225967677 47.1437298614948, 9.82408030844561 47.144642557404, 9.82394845370116 47.1447668189529, 9.82376643621553 47.1449384391984, 9.82344600931198 47.1453119197146, 9.8233393002882 47.1454260387922, 9.82282829414431 47.145955538059, 9.82252241352321 47.1462553225211, 9.82212355060304 47.1466395310144, 9.82085666263713 47.1478598583281, 9.8199613992431 47.148728990707, 9.81944678419127 47.1492441652191, 9.81903522405758 47.149656179631, 9.81822718857502 47.1504732547435, 9.81754256960414 47.1511662968336, 9.81690404248639 47.1518364229523, 9.8166517391795 47.1520855246082, 9.81651424642685 47.1522439345139, 9.81627527943579 47.1523827245153, 9.81621233005033 47.1524150909378, 9.81574401183825 47.1526526838289, 9.81498652786974 47.152956510146, 9.81463051057288 47.1531035775365, 9.81390821916005 47.1533808401043, 9.81381671207229 47.1534070482542, 9.8134401096691 47.15351470795, 9.81259532570573 47.1537106253295, 9.81207537130296 47.1538312087006, 9.81126314939387 47.1540514704715, 9.81094576766553 47.1541298035509, 9.81085767345878 47.1541438823799, 9.81046758711266 47.1542667661515, 9.81011882044509 47.1543849808673, 9.80986547231619 47.1545083098743, 9.80964979660639 47.1546092342689, 9.80936269622016 47.154718554481, 9.80919279360243 47.1547776811568, 9.80908734003702 47.1548402516442, 9.80856637934735 47.1558345082169, 9.80843964788061 47.1562345649984, 9.80829732198852 47.1569708749441, 9.8081073694011 47.1574426002023, 9.80807483729423 47.1575449940538, 9.80798380843546 47.1576417219617, 9.80751363976945 47.1579380168938, 9.80745485405729 47.1579748966741, 9.80740183352308 47.158007458555, 9.80736356699091 47.158030966655, 9.80732883058279 47.1580522692233, 9.80727957935723 47.1580824825195, 9.8072838341195 47.1581055304271, 9.80719105756204 47.1581787746952, 9.80718423448381 47.1581833308935, 9.8071721534627 47.1581913883795, 9.80708811824108 47.1582302749961, 9.80707615124497 47.1582362642771, 9.80700027059812 47.1582547142155, 9.80684322314795 47.1582929399287, 9.80655580964331 47.158311941889, 9.80645855309857 47.1583449551264, 9.80632795168719 47.1583892387901, 9.80626221350215 47.1584115138277, 9.80620935107109 47.1584294221431, 9.80614984658223 47.1584495844593, 9.80608010292656 47.1584874920768, 9.80605868934354 47.1584990964034, 9.80590961638988 47.1585798953944, 9.80590746849533 47.1585810547208, 9.8058472710986 47.1586137266761, 9.80584481872061 47.1586150558102, 9.80568971070889 47.1586992542035, 9.80568614426639 47.1587011901254, 9.80560396284611 47.1587457953204, 9.80557910240801 47.1587592815427, 9.80557568133977 47.1587611363979, 9.8055216227267 47.1587904811106, 9.80518204879093 47.1589747528624, 9.80499509058214 47.1590761641401, 9.80470019950969 47.1592361749956, 9.80469927112896 47.1592367100721, 9.80459768593207 47.159267003286, 9.80427818572027 47.1593951449837, 9.80414993282048 47.1593887029341, 9.80392700004094 47.1593774589472, 9.80392510109747 47.159377359502, 9.80376069366812 47.1593690585597, 9.80369056983299 47.1593655219313, 9.80352052284626 47.1593579851575, 9.80349202349421 47.1593566027941, 9.80249606507804 47.1593082455788, 9.8024494036335 47.1593059587908, 9.80230286870177 47.1593077953539, 9.80228189777764 47.1593080578319, 9.80235368043834 47.1593828739881)))"
+    }
+},
+{
+    "model": "bib.reference",
+    "pk": 68,
+    "fields": {
+        "zotero_item": "BBDBFRTD",
+        "page": "390-391"
+    }
+},
+{
+    "model": "bib.reference",
+    "pk": 69,
+    "fields": {
+        "zotero_item": "26KPXJWI",
+        "page": "76-77"
+    }
+},
+{
+    "model": "bib.reference",
+    "pk": 70,
+    "fields": {
+        "zotero_item": "XGRDAA4M",
+        "page": "48"
+    }
+},
+{
+    "model": "bib.reference",
+    "pk": 71,
+    "fields": {
+        "zotero_item": "742NJDFU",
+        "page": "76"
+    }
+},
+{
+    "model": "bib.reference",
+    "pk": 72,
+    "fields": {
+        "zotero_item": "GMQNDJN4",
+        "page": "390-391"
+    }
+},
+{
+    "model": "bib.reference",
+    "pk": 73,
+    "fields": {
+        "zotero_item": "GGVGQKZ8",
+        "page": "41"
+    }
+},
+{
+    "model": "bib.reference",
+    "pk": 74,
+    "fields": {
+        "zotero_item": "KE3MD953",
+        "page": "117, 122"
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 9,
+    "fields": {
+        "password": "pbkdf2_sha256$120000$rDQ7FVTuvt8a$ZRSdccyHeRazCW1uilxvKJLb0KshSilxXx9vGqyRq/E=",
+        "last_login": "2019-04-09T11:51:51.109Z",
+        "is_superuser": false,
+        "username": "rkloeckl",
+        "first_name": "Regina",
+        "last_name": "Kloeckl",
+        "email": "regina.kloeckl@uni-graz.at",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2018-05-28T08:48:43Z",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "idprovider.idprovider",
+    "pk": 5,
+    "fields": {
+        "created_at": "2018-07-10T10:26:47.871Z",
+        "updated_at": "2019-07-30T11:45:13.401Z"
+    }
+},
+{
+    "model": "archiv.site",
+    "pk": 4798,
+    "fields": {
+        "identifier": null,
+        "name": "Završe",
+        "alt_id": "SI_00047",
+        "description": "Village Završe is located in a hilly Velenjsko and Konjiško hribovje. There are at least 4 caves that were archaeologically excavated in the surroundings of the village. Three of the caves are situated on the hill Tisnik. Tisnik is an area with karstic features that lies east from the village Završe and is rising above river Paka which flows at its eastern base. All of the caves have the entrances on the eastern slope of Tisnik and are facing river Paka. Layers with prehistoric pottery fragments are mentioned in all of the caves, in cave known as Špehovka a bronze artifact belonging to Early Iron Age was also discovered (ŠAŠEL 1954, 155; OSOLE 1975, 273–274).",
+        "comment": "",
+        "public": true,
+        "polygon": "SRID=4326;MULTIPOLYGON (((15.163934 46.417528, 15.164329 46.417818, 15.164829 46.418017, 15.165749 46.418089, 15.166563 46.418051, 15.168533 46.417721, 15.170766 46.417791, 15.172868 46.418006, 15.174147 46.417816, 15.174243 46.417535, 15.174222 46.417247, 15.174437 46.416936, 15.174469 46.416788, 15.174415 46.416485, 15.174404 46.41627, 15.174319 46.416056, 15.174351 46.415841, 15.174571 46.41566, 15.174667 46.415483, 15.174683 46.415205, 15.174657 46.414909, 15.174571 46.414643, 15.174544 46.414244, 15.174115 46.413985, 15.173138 46.414103, 15.172098 46.414236, 15.170735 46.414532, 15.170113 46.414503, 15.168825 46.414203, 15.16771 46.414166, 15.166631 46.41417, 15.164727 46.414066, 15.164397 46.414221, 15.164094 46.41448, 15.163821 46.41473, 15.162983 46.415458, 15.162853 46.416076, 15.163144 46.41673, 15.163934 46.417528)))",
+        "polygon_proxy": false,
+        "centroid": "SRID=4326;POINT (15.1695393182933 46.415533456479466)",
+        "sm_adm": "Šentvid nad Valdekom",
+        "cadastral_number": null,
+        "heritage_number": "Šentvid nad Valdekom:",
+        "plot_number": "Šentvid nad Valdekom: 861/1",
+        "ownership": "4 – information not available",
+        "accessibility": "3 – inaccessible",
+        "visibility": "2 – visible, but not interpreted",
+        "infrastructure": "3 – no infrastructure",
+        "long_term_management": "3 – no care foreseen or possible",
+        "potential_surrounding": null,
+        "iad_app": false,
+        "app_description": "",
+        "tourism_comment": "",
+        "site_checked_by": 12,
+        "site_start_date": 800,
+        "site_end_date": 320,
+        "temp_extent": "{\"bounds\": \"[)\", \"lower\": \"-800\", \"upper\": \"-320\"}",
+        "alt_name": [],
+        "literature": [
+            1185,
+            1184,
+            1183
+        ],
+        "cadastral_community": [
+            26409
+        ],
+        "other_period": [
+            283,
+            284,
+            292,
+            293
+        ],
+        "museum": [
+            4799
+        ]
+    }
+},
+{
+    "model": "archiv.site",
+    "pk": 5,
+    "fields": {
+        "identifier": "OE_06005",
+        "name": "Bludenz",
+        "alt_id": null,
+        "description": "The city center of Bludenz is located at about 570 meters altitude at the southwestern foot of the Lechquellengebirge, terraced above the valley floor of the Ill and on a portion of the debris fan of the \"Galgentobelbach\" created. The official altitude for Bludenz is 588 m. This refers to the location of the somewhat raised above the city center \"Laurentius\" church. The highest point of the municipality is formed by the summit of the \"Weißes Rössle\", 2214 m, northwest of \"Ausserbraz\".\r\nParts of the mountain forests in the north of Bludenz belong to the European nature reserve \"Natura 2000\" which extends from Galgentobel to Klösterle.\r\n\r\nThe city lies at the intersection of the valleys Walgau, Brandnertal (Rätikon), Montafon (Silvretta) and Klostertal (Arlberg).\r\n\r\nIn Bludenz three archaeological sites dating in the Bronze and Iron Age could be determined. One of those is the well-known Bronze Age hilltop settlement \"Montikel\". A second settlement area and a funerary site from the Late Bronze Age and Early Hallstatt period could be first determined in 1937 at the so-called Kleiner Exerzierplatz. \r\nFurther historic sights are e.g. the City Museum \"Bludenz\" in the Upper Gate (\"Oberes Tor\") or Castle Gayenhofen - today it houses the district headquarters Bludenz.",
+        "comment": "",
+        "public": true,
+        "polygon": "SRID=4326;MULTIPOLYGON (((9.821027365400818 47.15876540406228, 9.821013808686986 47.15877491334557, 9.82172906464257 47.15919803769993, 9.821993709483651 47.1590618599661, 9.822522998510978 47.1587019605301, 9.822694659887931 47.15852200967532, 9.822725165362693 47.15837335185324, 9.822993278939975 47.158896500851895, 9.825139046151891 47.15985946664734, 9.827141761779787 47.16000536899949, 9.828171730041506 47.15985946664734, 9.829444886127023 47.15857550844923, 9.82675552368164 47.1572428831863, 9.825725555419924 47.15732070135923, 9.825196267047433 47.15744715642642, 9.823865890721208 47.15753470186037, 9.823493957519533 47.157845973049376, 9.823130050829551 47.158025160059815, 9.823295474707267 47.157880018405926, 9.823266864259496 47.15780220082949, 9.823095202882543 47.1576708832856, 9.822358489909677 47.157627110698826, 9.82224404877343 47.157880018405926, 9.822029472052238 47.157933518048864, 9.821671844401862 47.15807942568974, 9.821757675090339 47.15820587872865, 9.821693302073983 47.15829828639985, 9.821567150300332 47.1583867748763, 9.821559190968403 47.15838218276638, 9.821418489966543 47.158491051860004, 9.821345495572697 47.15854225338111, 9.821280241230852 47.158537816329115, 9.821001291493305 47.1587518114831, 9.821027365400818 47.15876540406228), (9.822759138260073 47.15820779675292, 9.822780490576408 47.15810374366516, 9.823018571041759 47.15808005251013, 9.822759138260073 47.15820779675292)))",
+        "polygon_proxy": false,
+        "centroid": "SRID=4326;POINT (9.86385329615967 47.157191812162246)",
+        "sm_adm": "Bludenz",
+        "cadastral_number": null,
+        "heritage_number": null,
+        "plot_number": null,
+        "ownership": "4 – information not available",
+        "accessibility": "2 – accessible for individual tourist groups",
+        "visibility": "3 - invisible archaeological heritage",
+        "infrastructure": "3 – no infrastructure",
+        "long_term_management": "4 – information not available",
+        "potential_surrounding": "1 – touristic region with excellent infrastructure",
+        "iad_app": false,
+        "app_description": "",
+        "tourism_comment": "",
+        "site_checked_by": 9,
+        "site_start_date": 2700,
+        "site_end_date": 15,
+        "temp_extent": "{\"bounds\": \"[)\", \"lower\": \"-2700\", \"upper\": \"-15\"}",
+        "alt_name": [],
+        "literature": [
+            74,
+            73,
+            72,
+            71,
+            70,
+            69,
+            68
+        ],
+        "cadastral_community": [
+            22529
+        ],
+        "other_period": [
+            282,
+            287,
+            291,
+            292,
+            293,
+            296,
+            302
+        ],
+        "museum": []
+    }
+}
+]

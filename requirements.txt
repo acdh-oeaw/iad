@@ -4,6 +4,7 @@ crispy-bootstrap4>=2024.1,<2025
 django-autocomplete-light>=3.8.1
 django-crispy-forms>=2.2,<3
 django-filter>=23.5,<24
+django-fixture-magic>=0.1.5,>2
 django-reversion>=4.0.2,<5
 django-super-deduper>=0.1.4,<1
 django-tables2>=2.7.0,<3
