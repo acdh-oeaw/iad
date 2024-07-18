@@ -29,9 +29,6 @@ $("#goto option").each(function() {
             <div class="card">
             <div class="card-body">
              <h3 style="margin-bottom:15px;">Browse {% class_definition %} {% block list_title %}{% endblock %}</h3>
-        {% if get_arche_dump %}
-            <a class ="btn btn-outline-secondary"  href="{{ get_arche_dump}}{% querystring %}">Dump as RDF</a>
-        {% endif %}
         {% if dl_csv_link %}
             <a class ="btn btn-outline-secondary"  href="{{ dl_csv_link}}{% querystring %}">Dump as CSV</a>
         {% endif %}

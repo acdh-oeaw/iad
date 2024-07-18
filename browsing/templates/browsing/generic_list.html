@@ -40,11 +40,6 @@
 <style>
 </style>
 <div class="container-fluid">
-<!--     <div class="card">
-        <div class="card-header {{self_model_name}}-page">
-            <h1>Browse </h1>
-        </div>
-        <div class="card-body"> -->
             <div class="row">
                 <div class="col-md-4">
                     <div class="card">
@@ -52,9 +47,6 @@
                             <h4>Browse {% class_definition %} {% block list_title %}{% endblock %}</h4>
                         </div>
                         <div class="card-body">
-                            {% if get_arche_dump %}
-                            <a class ="btn btn-outline-secondary"  href="{{ get_arche_dump}}{% querystring %}">Dump as RDF</a>
-                            {% endif %}
                             {% if user.is_authenticated %}
                             {% if create_view_link %}
                             <a class ="btn btn-outline-secondary"  href="{{ create_view_link }}">Create new {{class_name}}</a>

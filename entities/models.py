@@ -87,10 +87,6 @@ class Place(IdProvider):
     def get_createview_url(self):
         return reverse("entities:place_create")
 
-    @classmethod
-    def get_arche_dump(self):
-        return reverse("browsing:rdf_places")
-
     def get_next(self):
         next = Place.objects.filter(id__gt=self.id)
         if next:
@@ -164,10 +160,6 @@ class Institution(IdProvider):
         verbose_name="Parent institution",
     )
     comment = models.TextField(blank=True, verbose_name="Comment")
-
-    @classmethod
-    def get_arche_dump(self):
-        return reverse("browsing:rdf_institutions")
 
     @classmethod
     def get_listview_url(self):
@@ -266,10 +258,6 @@ class Person(IdProvider):
     @classmethod
     def get_listview_url(self):
         return reverse("browsing:browse_persons")
-
-    @classmethod
-    def get_arche_dump(self):
-        return reverse("browsing:rdf_persons")
 
     def get_absolute_url(self):
         return reverse("entities:person_detail", kwargs={"pk": self.id})

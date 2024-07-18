@@ -110,10 +110,6 @@ class GenericListView(django_tables2.SingleTableView):
             else:
                 context["class_name"] = "{}s".format(self.model.__name__)
         try:
-            context["get_arche_dump"] = self.model.get_arche_dump()
-        except AttributeError:
-            context["get_arche_dump"] = None
-        try:
             context["create_view_link"] = self.model.get_createview_url()
         except AttributeError:
             context["create_view_link"] = None
