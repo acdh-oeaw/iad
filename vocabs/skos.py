@@ -16,7 +16,7 @@ class Csv2SkosReader(object):
         self.headers = self.data[0]
         try:
             self.alt_lang = (self.headers[1])[
-                (self.headers[1]).index("@") + 1 :
+                (self.headers[1]).index("@") + 1 : # noqa
             ]  # noqa
         except:  # noqa: E722
             self.alt_lang = None
