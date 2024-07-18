@@ -15,8 +15,6 @@ if os.environ.get("DEBUG", False):
 else:
     DEBUG = False
 
-print(DEBUG)
-
 ADD_ALLOWED_HOST = os.environ.get("ALLOWED_HOST", "*")
 SECRET_KEY = os.environ.get(
     "SECRET_KEY", "TZRHHwasdfsa987465465dfdsafkljlxö7639827249324GV"
