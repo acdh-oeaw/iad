@@ -611,7 +611,7 @@ class Site(IadBaseClass):
         return reverse("archiv:site_detail", kwargs={"pk": self.id})
 
     def get_from_to(self):
-        archents = ArchEnt.objects.filter(site_id__in=[self])
+        archents = ArchEnt.objects.filter(site_id__in=[self.id])
         periods = Period.objects.filter(has_archents__in=archents)
         from_to = periods.aggregate(Max("start_date"), Min("end_date_latest"))
         return from_to
