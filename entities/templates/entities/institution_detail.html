@@ -2,187 +2,159 @@
 {% load static %}
 {% load webpage_extras %}
 {% load leaflet_tags %}
-{% block Title %}Institution{% endblock %}
+{% block title %}{{ object }}{% endblock %}
 
-{% block scriptHeader %}
-<!-- In case you are using any autocomplete-functions, don´t forget to
-include 'autocomplete_light/static.html
--->
-<!--leafletjs -->
-    {% leaflet_js %}
-    {% leaflet_css %}
-{% endblock %}
 {% block content %}
 <style>
-#map { height: 800px; }
+    #map {
+        height: 800px;
+    }
 </style>
 <!-- <div class="container"> -->
-<div class="row">
-<div class="col-md-6">
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col-md-2">
-                    {% if object.get_prev %}
-                    <h2>
-                        <a href="{% url 'entities:institution_detail' pk=object.get_prev %}">
-                            <i class="bi bi-chevron-left" title="previous"></i>
-                        </a>
-                    </h2>
-                    {% endif %}
-                </div>
-                <div class="col-md-8">
-                    <h1 style="text-align: center;">
-                        <small><a href="{{ object.get_listview_url }}">Institution</a></small> {{ object }}
-                        {% if user.is_authenticated %}
-                        <small>
-                        <a href="{% url 'entities:institution_edit' pk=object.id %}">
-                            <i class="bi bi-pencil-square" title="edit"></i>
-                        </a>
-                        </small>
-                        |
-                        <small>
-                            <a href="{% url 'entities:institution_delete' pk=object.id %}">
-                            <i class="bi bi-trash3" title="delete"></i>
-                            </a>
-                        </small>
-                    {% endif %}
-                </h1>
-            </div>
-            <div class="col-md-2">
-                <h2>
-                    {% if object.get_next %}
-                    <a href="{% url 'entities:institution_detail' pk=object.get_next %}" style="float:right">
-                        <i class="bi bi-chevron-right" title="next"></i>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            {% if object.get_prev %}
+            <h2>
+                <a href="{% url 'entities:institution_detail' pk=object.get_prev %}">
+                    <i class="bi bi-chevron-left" title="previous"></i>
+                </a>
+            </h2>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h1 style="text-align: center;">
+                <small><a href="{{ object.get_listview_url }}">Institution</a></small> {{ object }}
+                {% if user.is_authenticated %}
+                <small>
+                    <a href="{% url 'entities:institution_edit' pk=object.id %}">
+                        <i class="  bi bi-pencil-square" title="edit"></i>
                     </a>
-                </h2>
+                </small>
+                |
+                <small>
+                    <a href="{% url 'entities:institution_delete' pk=object.id %}">
+                        <i class="bi bi-trash3" title="delete"></i>
+                    </a>
+                </small>
                 {% endif %}
-            </div>
+            </h1>
+        </div>
+        <div class="col-md-2">
+            <h2>
+                {% if object.get_next %}
+                <a href="{% url 'entities:institution_detail' pk=object.get_next %}" style="float:right">
+                    <i class="bi bi-chevron-right" title="next"></i>
+                </a>
+            </h2>
+            {% endif %}
         </div>
     </div>
-    <div class="card-body">
+</div>
 
-                <table class="table table-bordered table-hover">
-                    <tr>
-                        <th class="w-25">
-                            {% get_verbose_name institution "written_name" %}
-                        </th>
-                        <td>
-                            {{ object.written_name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="w-25">
-                            {% get_verbose_name institution "authority_url" %}
-                        </th>
-                        <td>
-                            <a href="{{ object.authority_url }}">{{ object.authority_url }}</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="w-25">
-                            {% get_verbose_name institution "inst_alt_name" %}
-                        </th>
-                        <td>
-                            {{ object.inst_alt_name }}
-                        </td>
-                    </tr>
-                    {% if object.parent_institution %}
-                        <tr>
-                            <th class="w-25">
-                                {% get_verbose_name institution "parent_institution" %}
-                            </th>
-                            <td>
-                                <a href="{{ object.parent_institution.get_absolute_url }}">{{ object.parent_institution }}</a>
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if object.children_institutions.all %}
-                        <tr>
-                            <th class="w-25">
-                                Children institutions
-                            </th>
-                            <td>
-                                <ul>
-                                    {% for x in object.children_institutions.all %}
-                                        <li>
-                                            <a href="{{ x.get_absolute_url }}">{{ x }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+</div>
+<div class="container">
 
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if object.location %}
-                        <tr>
-                            <th class="w-25">
-                                {% get_verbose_name institution "location" %}
-                            </th>
-                            <td>
-                                <a href="{{ object.location.get_absolute_url }}">{{ object.location }}</a>
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if object.comment %}
-                        <tr>
-                            <th class="w-25">
-                                {% get_verbose_name institution "comment" %}
-                            </th>
-                            <td>
-                                {{ object.comment }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                </table>
-
-                {% if object.has_research.all %}
-                <legend>related Research Activity</legend>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name institution "written_name" %}
+            </th>
+            <td>
+                {{ object.written_name }}
+            </td>
+        </tr>
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name institution "authority_url" %}
+            </th>
+            <td>
+                <a href="{{ object.authority_url }}">{{ object.authority_url }}</a>
+            </td>
+        </tr>
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name institution "inst_alt_name" %}
+            </th>
+            <td>
+                {{ object.inst_alt_name }}
+            </td>
+        </tr>
+        {% if object.parent_institution %}
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name institution "parent_institution" %}
+            </th>
+            <td>
+                <a href="{{ object.parent_institution.get_absolute_url }}">{{ object.parent_institution }}</a>
+            </td>
+        </tr>
+        {% endif %}
+        {% if object.children_institutions.all %}
+        <tr>
+            <th class="w-25">
+                Children institutions
+            </th>
+            <td>
                 <ul>
-                   {% for x in object.has_research.all %}
-                        <li>
-                            <a href="{{ x.get_absolute_url }}">{{ x }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-
-                {% if object.has_member.all %}
-                <legend>related Persons</legend>
-                <ul>
-                    {% for x in object.has_member.all %}
+                    {% for x in object.children_institutions.all %}
                     <li>
                         <a href="{{ x.get_absolute_url }}">{{ x }}</a>
                     </li>
                     {% endfor %}
                 </ul>
-                {% endif %}
-        </div>
-    </div>
+
+            </td>
+        </tr>
+        {% endif %}
+        {% if object.location %}
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name institution "location" %}
+            </th>
+            <td>
+                <a href="{{ object.location.get_absolute_url }}">{{ object.location }}</a>
+            </td>
+        </tr>
+        {% endif %}
+        {% if object.comment %}
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name institution "comment" %}
+            </th>
+            <td>
+                {{ object.comment }}
+            </td>
+        </tr>
+        {% endif %}
+    </table>
+
+    {% if object.has_research.all %}
+    <legend>related Research Activity</legend>
+    <ul>
+        {% for x in object.has_research.all %}
+        <li>
+            <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if object.has_member.all %}
+    <h2>related Persons</legend>
+    <ul>
+        {% for x in object.has_member.all %}
+        <li>
+            <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 </div>
-            <div class="col-md-6">
-                <div id="map"></div>
-            </div>
-</div><!--main row-->
-<!-- </div> -->
+</div>
+</div>
 
-<script type="text/javascript">
-$( document ).ready(function() {
-    var placeName = "{{ object.location.name }}"
-    var lat = "{{ object.location.lat }}"
-    var lng = "{{ object.location.lng }}"
-    var map = L.map('map').setView([lat, lng], 10);
+</div>
 
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.light',
-        accessToken: 'pk.eyJ1IjoiY3NhZTgwOTIiLCJhIjoiY2lnM2FoZWpjMDJqZnY1a2gxdWl6a29kaiJ9.FQXlsKIu60WhiXLrfI59VA'
-    }).addTo(map);
-
-    L.marker([lat, lng]).addTo(map)
-    .bindPopup(placeName)
-    .openPopup();
-});
-</script>
 {% endblock %}

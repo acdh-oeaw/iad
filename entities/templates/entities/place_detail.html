@@ -2,89 +2,89 @@
 {% load static %}
 {% load webpage_extras %}
 {% load leaflet_tags %}
-{% block Title %}Place{% endblock %}
+{% block title %}{{ object }}{% endblock %}
 {% block scriptHeader %}
 <!-- In case you are using any autocomplete-functions, don´t forget to
 include 'autocomplete_light/static.html
 -->
-    {% leaflet_js %}
-    {% leaflet_css %}
+{% leaflet_js %}
+{% leaflet_css %}
 {% endblock %}
 
 {% block content %}
 <style>
-    #map { height: 800px; }
+    #map {
+        height: 800px;
+    }
 </style>
 
-<div class="row">
-<!-- <div class="container"> -->
-<div class="col-md-6">
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col-md-2">
-                    {% if object.get_prev %}
-                    <h2>
-                        <a href="{% url 'entities:place_detail' pk=object.get_prev %}">
-                            <i class="bi bi-chevron-left" title="previous"></i>
-                        </a>
-                    </h2>
-                    {% endif %}
-                </div>
-                <div class="col-md-8">
-                    <h1 style="text-align: center;">
-                    <small>Place:</small> {{ object.name }}
-                        {% if user.is_authenticated %}
-                    <small>
-                        <a href="{% url 'entities:place_edit' pk=object.id %}">
-                            <i class="bi bi-pencil-square" title="edit"></i>
-                        </a>
-                    </small>
-                    |
-                    <small>
-                        <a href="{% url 'entities:place_delete' pk=object.id %}">
-                        <i class="bi bi-trash3" title="delete"></i>
-                        </a>
-                    </small>
-                    {% endif %}
-                </h1>
-            </div>
-            <div class="col-md-2">
-                <h2>
-                    {% if object.get_next %}
-                    <a href="{% url 'entities:place_detail' pk=object.get_next %}" style="float:right">
-                        <i class="bi bi-chevron-right" title="next"></i>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            {% if object.get_prev %}
+            <h2>
+                <a href="{% url 'entities:place_detail' pk=object.get_prev %}">
+                    <i class="bi bi-chevron-left" title="previous"></i>
+                </a>
+            </h2>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h1 style="text-align: center;">
+                <small>Place:</small> {{ object.name }}
+                {% if user.is_authenticated %}
+                <small>
+                    <a href="{% url 'entities:place_edit' pk=object.id %}">
+                        <i class="bi bi-pencil-square" title="edit"></i>
                     </a>
-                </h2>
+                </small>
+                |
+                <small>
+                    <a href="{% url 'entities:place_delete' pk=object.id %}">
+                        <i class="bi bi-trash3" title="delete"></i>
+                    </a>
+                </small>
                 {% endif %}
-            </div>
+            </h1>
+        </div>
+        <div class="col-md-2">
+            <h2>
+                {% if object.get_next %}
+                <a href="{% url 'entities:place_detail' pk=object.get_next %}" style="float:right">
+                    <i class="bi bi-chevron-right" title="next"></i>
+                </a>
+            </h2>
+            {% endif %}
         </div>
     </div>
-    <div class="card-body">
-                <table class="table table-bordered table-hover">
-                    <tr>
-                        <th class="w-25">
-                            Name
-                        </th>
-                        <td>
-                            {{ object.name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            geonames_id
-                        </th>
-                        <td>
-                            {{ object.geonames_id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Coordinates
-                        </th>
-                        <td>
-                            <abbr title="lat">{{ object.lat|truncatechars:8  }}</abbr>
-                        <br/>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th class="w-25">
+                        Name
+                    </th>
+                    <td>
+                        {{ object.name }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        geonames_id
+                    </th>
+                    <td>
+                        {{ object.geonames_id }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Coordinates
+                    </th>
+                    <td>
+                        <abbr title="lat">{{ object.lat|truncatechars:8 }}</abbr>
+                        <br />
                         <abbr title="lng">{{ object.lng }}</abbr>
                     </td>
                 </tr>
@@ -109,71 +109,68 @@ include 'autocomplete_light/static.html
                     <td>
                         {% if object.part_of %}
 
-                            <a href="{% url 'entities:place_detail' pk=object.part_of.id %}">{{ object.part_of }}</a>
+                        <a href="{% url 'entities:place_detail' pk=object.part_of.id %}">{{ object.part_of }}</a>
                         {% else %}
-                            No entry
+                        No entry
                         {% endif %}
                     </td>
                 </tr>
                 {% if object.has_sites.all %}
-                    <tr>
-                        <th>related sites</th>
-                        <td>
-                            <ul>
-                                {% for x in object.has_sites.all %}
-                                    {% if x.id %}
-                                        <li><a href="{{ x.get_absolute_url }}">{{ x }}</a></li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </td>
-                    </tr>
+                <tr>
+                    <th>related sites</th>
+                    <td>
+                        <ul>
+                            {% for x in object.has_sites.all %}
+                            {% if x.id %}
+                            <li><a href="{{ x.get_absolute_url }}">{{ x }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
                 {% endif %}
                 {% if object.has_child.all %}
-                    <tr>
-                        <th>has children</th>
-                        <td>
-                            <ul>
-                                {% for x in object.has_child.all %}
-                                    {% if x.id %}
-                                        <li><a href="{% url 'entities:place_detail' pk=x.id %}">{{ x }}</a></li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </td>
-                    </tr>
+                <tr>
+                    <th>has children</th>
+                    <td>
+                        <ul>
+                            {% for x in object.has_child.all %}
+                            {% if x.id %}
+                            <li><a href="{% url 'entities:place_detail' pk=x.id %}">{{ x }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
                 {% endif %}
-        </table>
+            </table>
+        </div>
+        <div class="col-md-6">
+            {% if object.lat and object.lng %}
+            <div id="map"></div>
+            {% else %}
+            <p>No coordinates provided</p>
+            {% endif %}
+        </div>
+    </div>
 </div>
-</div>
-</div><!--col-6-md-div-->
-<div class="col-md-6">
-{% if object.lat and object.lng %}
-<div id="map"></div>
-{% else %}
-<p>No coordinates provided</p>
-{% endif %}
-</div>
-<!-- </div> -->
-</div><!--main row -->
+
 
 <script type="text/javascript">
-$( document ).ready(function() {
-    var placeName = "{{ object.name }}"
-    var lat = "{{ object.lat }}"
-    var lng = "{{ object.lng }}"
-    var map = L.map('map').setView([lat, lng], 10);
+    $(document).ready(function () {
+        var placeName = "{{ object.name }}"
+        var lat = "{{ object.lat }}"
+        var lng = "{{ object.lng }}"
+        var map = L.map('map').setView([lat, lng], 10);
 
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.light',
-        accessToken: 'pk.eyJ1IjoiY3NhZTgwOTIiLCJhIjoiY2lnM2FoZWpjMDJqZnY1a2gxdWl6a29kaiJ9.FQXlsKIu60WhiXLrfI59VA'
-    }).addTo(map);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
 
-    L.marker([lat, lng]).addTo(map)
-    .bindPopup(placeName)
-    .openPopup();
-});
+        L.marker([lat, lng]).addTo(map)
+            .bindPopup(placeName)
+            .openPopup();
+    });
 </script>
 {% endblock %}
