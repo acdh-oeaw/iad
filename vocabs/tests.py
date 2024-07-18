@@ -12,7 +12,7 @@ class VocabsTest(TestCase):
 
     def test_vocabs(self):
         rv = self.client.get("/vocabs/scheme/")
-        self.assertContains(rv, "Concept Schemes")
+        self.assertContains(rv, "Skos Concept Scheme")
         rv = self.client.get("/vocabs/scheme/create/", follow=True)
         self.assertContains(rv, "Namespace")
 
