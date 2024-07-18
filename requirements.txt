@@ -19,3 +19,4 @@ psycopg2-binary>=2.9.9,<3
 pyzotero>=1.5.20,<2
 rdflib>=7.0.0,<8
 requests>=2.32,<3
+tablib>=3.6.1,<4
