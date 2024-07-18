@@ -2,196 +2,166 @@
 {% load static %}
 {% load webpage_extras %}
 {% load leaflet_tags %}
-{% block Title %}Person{% endblock %}
+{% block title %}{{ object }}{% endblock %}
 
 {% block scriptHeader %}
-<!-- In case you are using any autocomplete-functions, don´t forget to
-include 'autocomplete_light/static.html
--->
-<!--leafletjs -->
-    {% leaflet_js %}
-    {% leaflet_css %}
+{% leaflet_js %}
+{% leaflet_css %}
 {% endblock %}
 {% block content %}
-<style>
-#map { height: 800px; }
-</style>
-<div class="row">
-<div class="col-md-6">
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col-md-2">
-                    {% if object.get_prev %}
-                    <h2>
-                        <a href="{% url 'entities:person_detail' pk=object.get_prev %}">
-                            <i class="bi bi-chevron-left" title="previous"></i>
-                        </a>
-                    </h2>
-                    {% endif %}
-                </div>
-                <div class="col-md-8">
-                    <h1 style="text-align: center;">
-                        <small><a href="{{ object.get_listview_url }}">Person</a></small> {{ object }}
-                        {% if user.is_authenticated %}
-                        <small>
-                            <a href="{% url 'entities:person_edit' pk=object.id %}">
-                                <i class="bi bi-pencil-square" title="edit"></i>
-                            </a>
-                        </small>
-                        |
-                        <small>
-                            <a href="{% url 'entities:person_delete' pk=object.id %}">
-                            <i class="bi bi-trash3" title="delete"></i>
-                            </a>
-                        </small>
-                    {% endif %}
-                </h1>
-            </div>
-            <div class="col-md-2">
-                <h2>
-                    {% if object.get_next %}
-                    <a href="{% url 'entities:person_detail' pk=object.get_next %}" style="float:right">
-                        <i class="bi bi-chevron-right" title="next"></i>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            {% if object.get_prev %}
+            <h2>
+                <a href="{% url 'entities:person_detail' pk=object.get_prev %}">
+                    <i class="bi bi-chevron-left" title="previous"></i>
+                </a>
+            </h2>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h1 style="text-align: center;">
+                <small><a href="{{ object.get_listview_url }}">Person</a></small> {{ object }}
+                {% if user.is_authenticated %}
+                <small>
+                    <a href="{% url 'entities:person_edit' pk=object.id %}">
+                        <i class="bi bi-pencil-square" title="edit"></i>
                     </a>
-                </h2>
+                </small>
+                |
+                <small>
+                    <a href="{% url 'entities:person_delete' pk=object.id %}">
+                        <i class="bi bi-trash3" title="delete"></i>
+                    </a>
+                </small>
                 {% endif %}
-            </div>
+            </h1>
+        </div>
+        <div class="col-md-2">
+            <h2>
+                {% if object.get_next %}
+                <a href="{% url 'entities:person_detail' pk=object.get_next %}" style="float:right">
+                    <i class="bi bi-chevron-right" title="next"></i>
+                </a>
+            </h2>
+            {% endif %}
         </div>
     </div>
-    <div class="card-body">
-                <table class="table table-bordered table-hover">
-                    <tr>
-                        <th class="w-25">
-                            {% get_verbose_name person "written_name" %}
-                        </th>
-                        <td>
-                            {{ object.written_name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="w-25">
-                            {% get_verbose_name person "forename" %}
-                        </th>
-                        <td>
-                            {{ object.forename }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="w-25">
-                            {% get_verbose_name person "name" %}
-                        </th>
-                        <td>
-                            {{ object.name }}
-                        </td>
-                    </tr>
-                    {% if object.acad_title %}
-                    <tr>
-                        <th class="w-25">
-                            {% get_verbose_name person "acad_title" %}
-                        </th>
-                        <td>
-                            {{ object.acad_title }}
-                        </td>
-                    </tr>
-                    {% endif %}
-                    {% if object.pers_alt_name %}
-                    <tr>
-                        <th class="w-25">
-                            {% get_verbose_name person "pers_alt_name" %}
-                        </th>
-                        <td>
-                            {{ object.pers_alt_name }}
-                        </td>
-                    </tr>
-                    {% endif %}
-                    {% if object.place_of_birth %}
-                    <tr>
-                        <th class="w-25">
-                            {% get_verbose_name person "place_of_birth" %}
-                        </th>
-                        <td>
-                            {{ object.place_of_birth }}
-                        </td>
-                    </tr>
-                    {% endif %}
-                    {% if object.date_of_birth %}
-                    <tr>
-                        <th class="w-25">
-                            {% get_verbose_name person "date_of_birth" %}
-                        </th>
-                        <td>
-                            {{ object.date_of_birth }}
-                        </td>
-                    </tr>
-                    {% endif %}
-                    {% if object.public %}
-                    <tr>
-                        <th class="w-25">
-                            {% get_verbose_name person "public" %}
-                        </th>
-                        <td>
-                            {{ object.public }}
-                        </td>
-                    </tr>
-                    {% endif %}
-                    {% if object.authority_url %}
-                        <tr>
-                            <th class="w-25">
-                                {% get_verbose_name person "authority_url" %}
-                            </th>
-                            <td>
-                                <a href="{{ object.authority_url }}">{{ object.authority_url }}</a>
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if object.belongs_to_institution %}
-                        <tr>
-                            <th class="w-25">
-                                {% get_verbose_name person "belongs_to_institution" %}
-                            </th>
-                            <td>
-                                <a href="{{ object.belongs_to_institution.get_absolute_url }}">{{ object.belongs_to_institution }}</a>
-                            </td>
-                        </tr>
-                    {% endif %}
-                </table>
-                {% if object.has_research.all %}
-                <legend>related Research Activity</legend>
-                    <ul>
-                       {% for x in object.has_research.all %}
-                            <li>
-                                <a href="{{ x.get_absolute_url }}">{{ x }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-    </div>
 </div>
 
-    <div class="col-md-6">
-        <div id="map"></div>
-    </div>
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name person "written_name" %}
+            </th>
+            <td>
+                {{ object.written_name }}
+            </td>
+        </tr>
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name person "forename" %}
+            </th>
+            <td>
+                {{ object.forename }}
+            </td>
+        </tr>
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name person "name" %}
+            </th>
+            <td>
+                {{ object.name }}
+            </td>
+        </tr>
+        {% if object.acad_title %}
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name person "acad_title" %}
+            </th>
+            <td>
+                {{ object.acad_title }}
+            </td>
+        </tr>
+        {% endif %}
+        {% if object.pers_alt_name %}
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name person "pers_alt_name" %}
+            </th>
+            <td>
+                {{ object.pers_alt_name }}
+            </td>
+        </tr>
+        {% endif %}
+        {% if object.place_of_birth %}
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name person "place_of_birth" %}
+            </th>
+            <td>
+                {{ object.place_of_birth }}
+            </td>
+        </tr>
+        {% endif %}
+        {% if object.date_of_birth %}
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name person "date_of_birth" %}
+            </th>
+            <td>
+                {{ object.date_of_birth }}
+            </td>
+        </tr>
+        {% endif %}
+        {% if object.public %}
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name person "public" %}
+            </th>
+            <td>
+                {{ object.public }}
+            </td>
+        </tr>
+        {% endif %}
+        {% if object.authority_url %}
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name person "authority_url" %}
+            </th>
+            <td>
+                <a href="{{ object.authority_url }}">{{ object.authority_url }}</a>
+            </td>
+        </tr>
+        {% endif %}
+        {% if object.belongs_to_institution %}
+        <tr>
+            <th class="w-25">
+                {% get_verbose_name person "belongs_to_institution" %}
+            </th>
+            <td>
+                <a href="{{ object.belongs_to_institution.get_absolute_url }}">{{ object.belongs_to_institution }}</a>
+            </td>
+        </tr>
+        {% endif %}
+    </table>
+    {% if object.has_research.all %}
+    <h2>related Research Activity</h2>
+    <ul>
+        {% for x in object.has_research.all %}
+        <li>
+            <a href="{{ x.get_absolute_url }}">{{ x }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
 </div>
 
-<script type="text/javascript">
-$( document ).ready(function() {
-    var placeName = "{{ object.belongs_to_institution.written_name }}"
-    var lat = "{{ object.belongs_to_institution.location.lat }}"
-    var lng = "{{ object.belongs_to_institution.location.lng }}"
-    var map = L.map('map').setView([lat, lng], 10);
 
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.light',
-        accessToken: 'pk.eyJ1IjoiY3NhZTgwOTIiLCJhIjoiY2lnM2FoZWpjMDJqZnY1a2gxdWl6a29kaiJ9.FQXlsKIu60WhiXLrfI59VA'
-    }).addTo(map);
+</div>
 
-    L.marker([lat, lng]).addTo(map)
-    .bindPopup(placeName)
-    .openPopup();
-});
-</script>
+
 {% endblock %}
