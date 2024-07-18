@@ -11,8 +11,6 @@ USER = {"username": "testuser", "password": "somepassword"}
 
 
 class ArchivTestCase(TestCase):
-    fixtures = ["dump.json"]
-
     def setUp(self):
         # Create two users
         User.objects.create_user(**USER)
