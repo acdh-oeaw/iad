@@ -100,6 +100,11 @@ class Metadata(models.Model):
     def clean(self):
         validate_only_one_instance(self)
 
+    class Meta:
+        ordering = [
+            "id",
+        ]
+
 
 class SkosNamespace(models.Model):
     namespace = models.URLField(blank=True, default=DEFAULT_NAMESPACE)
@@ -107,6 +112,11 @@ class SkosNamespace(models.Model):
 
     def __str__(self):
         return "{}".format(self.prefix)
+
+    class Meta:
+        ordering = [
+            "id",
+        ]
 
 
 class SkosConceptScheme(models.Model):
@@ -171,6 +181,11 @@ class SkosConceptScheme(models.Model):
     def __str__(self):
         return "{}:{}".format(self.namespace, self.dc_title)
 
+    class Meta:
+        ordering = [
+            "id",
+        ]
+
 
 class SkosCollection(models.Model):
     name = models.CharField(max_length=300, blank=True, verbose_name="Label")
@@ -228,6 +243,11 @@ class SkosCollection(models.Model):
     def creator_as_list(self):
         return self.creator.split(";")
 
+    class Meta:
+        ordering = [
+            "id",
+        ]
+
 
 class SkosLabel(models.Model):
     name = models.CharField(
@@ -276,6 +296,11 @@ class SkosLabel(models.Model):
             return "{} @{} ({})".format(self.name, self.isoCode, self.label_type)
         else:
             return "{} @{}".format(self.name, self.isoCode)
+
+    class Meta:
+        ordering = [
+            "id",
+        ]
 
 
 class SkosConcept(models.Model):
@@ -452,6 +477,11 @@ class SkosConcept(models.Model):
 
     def __str__(self):
         return self.pref_label
+
+    class Meta:
+        ordering = [
+            "id",
+        ]
 
 
 def get_all_children(self, include_self=True):
