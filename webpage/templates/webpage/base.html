@@ -13,7 +13,6 @@
         <meta name="author" content="{{ metadata.author }}">
     {% endblock %}
     {% include "webpage/partials/head.html" %}
-
     <!-- End Matomo Code -->
     {% block scriptHeader %}
     {% endblock %}
@@ -21,8 +20,6 @@
 <body class="d-flex flex-column h-100">
     <main class="flex-shrink-0">
     {% include "webpage/partials/navbar.html" %}
-
-   
     <div id="content" class="container-fluid">{% block content %}{% endblock %}</div>
     </main>
     {% include "webpage/partials/footer.html" %}
