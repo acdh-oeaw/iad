@@ -41,6 +41,11 @@ PROJECT_METADATA = {
             "http://www.interreg-danube.eu/approved-projects/iron-age-danube",
             "Interreg",
         ),
+        (
+            "bi bi-github",
+            "https://github.com/acdh-oeaw/iad",
+            "GitHub",
+        ),
     ],
     "app_type": "database",
 }
