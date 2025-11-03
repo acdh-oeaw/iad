@@ -4,148 +4,62 @@
 {% load webpage_extras %}
 {% load leaflet_tags %}
 {% block scriptHeader %}
-    {% leaflet_js %}
-    {% leaflet_css %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.Spin/1.1.0/leaflet.spin.js"></script>
+{% leaflet_js %}
+{% leaflet_css %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.Spin/1.1.0/leaflet.spin.js"></script>
 {% endblock scriptHeader %}
 {% block content %}
-<script type="text/javascript">
- function map_init_basic (map, options) {
 
-        map.spin(true);
-        var geojsonPointLayer = new L.GeoJSON.AJAX("{% url 'archiv:site_geojson' %}", {
-            onEachFeature:function(feature, layer) {
-                 layer.bindPopup('<a href="/archiv/site/detail/'+feature.properties.pk+'">'+feature.properties.name.toString()+'</a>');
-             }
-        });
-        geojsonPointLayer.on('data:loaded', function () {
-            console.log()
-            map.spin(false);
-            map.addLayer(geojsonPointLayer);
-
-            var overlayMaps = {
-                "Sites": geojsonPointLayer
-            }
-
-            var ctrOptions = {
-                position: 'topright',
-                collapsed: false
-            }
-
-            L.control.layers(null, overlayMaps, ctrOptions).addTo(map);
-        })
-    };
-</script>
-<div class="jumbotron" style="padding:0;">
-
-    {% leaflet_map "yourmap" callback="window.map_init_basic" %}
-
-</div>
-<div class="container">
-
-        <div class="card card-index">
-            <div class="card-body">
-                <h1 class="text-center title-index">
-                IRON-AGE-DANUBE
-                </h1>
-                <p class="text-center text-muted paragraph-index">
-                    {% projects_metadata 'subtitle' %}
-                </p>
-                <hr class="hr-index"/>
-                <p class="text-justify">
-                        {% projects_metadata 'description' %}
-                </p>
-                <div class="text-right">
-                    <a href="{% url 'browsing:browse_sites' %}" class="btn btn-lg btn-index pulse" class="pull-right">
-                    <b><i class="fa fa-angle-right"></i></b>&nbsp;&nbsp;explore
-                    </a>
-                </div>
-                <h2 class="h2-index">Iron Age Danube route</h2>
-                <h3>Experience the Iron Age heritage along the Iron Age Danube route!</h3>
-                <a href="https://www.ironagedanuberoute.com/">
-                    <img src="{% static 'webpage/img/logo_iron-age-danube_route.jpg' %}" class="img-fluid" alt="route" itemprop="logo"/>
-                </a>
-                <br>
-                <h2 class="h2-index">Statistics</h2>
-                <!--cards with statistics-->
-                <div class="row" style="padding:10px; text-align:center;">
-                    <div class="col-md-6">
-                        <div class="card site-page">
-                            <div class="card-body">
-                                <h5 class="card-title">The number of sites entered per country</h5>
-                                <p class="card-text">
-                                    <p>
-                                        AT: 632 | SI: 165 | HR: 153 | HU: 98 | None: 1
-                                        <br />
-                                        <small>(total 1046)</small>
-                                    </p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card archent-page">
-                            <div class="card-body">
-                                <h5 class="card-title">Touristic potential of sites</h5>
-                                <p class="card-text">
-                                    <p>
-                                        High: 158 | Low: 163 | Middle: 725
-                                        <br />
-                                        <small>(total 1046)</small>
-                                    </p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="padding:10px; text-align:center;">
-                    <div class="col-md-6">
-                        <div class="card researchevent-page">
-                            <div class="card-body">
-                                <h5 class="card-title">Sites that are <small>(at least partially)</small> protected</h5>
-                                <p class="card-text">
-                                    <p>470<br />
-                                        <small>(total 1046)</small>
-                                    </p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card monumentprotection-page">
-                            <div class="card-body">
-                                <h5 class="card-title">Area of sites vs. area of "excavation" vs area "geophysical survey"</h5>
-                                <p class="card-text">
-                                    <p>
-                                        1,260 km<sup>2</sup> vs 293 km<sup>2</sup> vs 21 km<sup>2</sup>
-                                    </p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr />
-                <h2 class="h2-index">Papers and Publications</h2>
-                <ul>
-                  <li>
-                      Early Iron Age Landscapes of the Danube region <br />
-                      <a href="https://doi.org/10.5281/zenodo.3685240"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3685240.svg" alt="DOI"></a>
-                    </li>
-                  <li>
-                    Strategies for monumentalized (pre)historic landscapes in the Danube Region <br />
-                    <a href="https://doi.org/10.5281/zenodo.3601139"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3601139.svg" alt="DOI"></a>
-                  </li>
-                  <li>
-                    Evaluation of data in the Iron-Age-Danube database <br />
-                    <a href="https://doi.org/10.5281/zenodo.3601142"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3601142.svg" alt="DOI"></a>
-                  </li>
-                <hr />
-                <h2 class="h2-index">Funding</h2>
-                <img src="{% static 'webpage/img/project_details.png' %}" class="img-fluid" alt="funding" itemprop="logo"/>
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <a href="https://www.ironagedanuberoute.com/">
+                <figure class="figure"><img src="{% static 'webpage/img/logo_iron-age-danube_route.jpg' %}"
+                        class="d-block mx-lg-auto img-fluid" alt="Iron Age Danube route logo" height="800"
+                        loading="lazy">
+                    <figcaption class="pt-3 figure-caption text-center">Experience the Iron Age heritage along the Iron Age Danube
+                        route!</figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">IRON-AGE-DANUBE</h1>
+            <h2 class="display-6">Monumentalized Early Iron Age Landscapes in the Danube River Basin</h2>
+            <p class="lead">Over the past few decades, European archaeological heritage gained major attention by
+                connecting prominent archaeological sites to wider transnational networks, which have become a popular
+                tool for their protection, promotion and tourist use. Imposingly attractive, however very fragile,
+                prehistoric landscapes in the Danube programme area remain partly hidden and not well integrated into
+                cultural tourism. The Iron-Age-Danube project focuses on monumental archaeological landscapes of the
+                Early Iron Age, characterized by, e.g., fortified hilltop settlements and large tumulus cemeteries, from
+                the era between roughly the 9th–4th cent. BC (Hallstatt period). At that time, the Danube region was
+                part of a cultural phenomenon called the Eastern-Hallstatt circle.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{% url 'browsing:browse_sites' %}" type="button"
+                    class="btn btn-primary btn-lg px-4 me-md-2">Browse Sites</a>
+                <a href="{% url 'webpage:about' %}" type="button" class="btn btn-outline-secondary btn-lg px-4">Learn
+                    more</a>
             </div>
         </div>
+    </div>
+    <hr class="p-2">
+    <div>
+        <h2 class="text-start display-6 pt-3 pb-2">Papers and Publications</h2>
+        <ul class="lead">
+            <li>
+               <a href="https://doi.org/10.5281/zenodo.3685240">Early Iron Age Landscapes of the Danube region</a>
+            </li>
+            <li>
+                <a href="https://doi.org/10.5281/zenodo.3601139">Strategies for monumentalized (pre)historic landscapes in the Danube Region</a>
+            </li>
+            <li>
+                <a href="https://doi.org/10.5281/zenodo.3601142">Evaluation of data in the Iron-Age-Danube database</a>
+            </li>
+        </ul>
+        <hr class="p-2">
+        <h2 class="text-start display-6 pt-3 pb-2">Funding</h2>
+        <img src="{% static 'webpage/img/project_details.png' %}" class="img-fluid" alt="funding" itemprop="logo" />
+    </div>
 </div>
-
 {% endblock %}
