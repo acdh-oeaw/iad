@@ -9,7 +9,7 @@ jobs:
       POSTGRES_DB: github_actions
     services:
       postgres:
-        image: postgres:16
+        image: postgis/postgis:16-master
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
