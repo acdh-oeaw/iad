@@ -1,80 +1,79 @@
-import time
 import datetime
-import pandas as pd
-import geopandas as gp
-from django.http import HttpResponse
-from django.core.serializers import serialize
-from django.contrib.contenttypes.models import ContentType
-from django_tables2 import SingleTableView, RequestConfig
-from django_tables2.export.views import ExportMixin
+import time
 
+import geopandas as gp
+import pandas as pd
+from django.contrib.contenttypes.models import ContentType
+from django.core.serializers import serialize
+from django.http import HttpResponse
+from django_tables2 import RequestConfig, SingleTableView
+from django_tables2.export.views import ExportMixin
 from shapely import wkt
 
-from entities.models import Person, Place, Institution
-
 from browsing.filters import (
+    AlternativeNameListFilter,
+    AltNameListFilter,
+    ArchEntListFilter,
+    InstitutionListFilter,
     MonumentProtectionListFilter,
+    PeriodListFilter,
+    PersonListFilter,
+    PlaceListFilter,
     ReferenceListFilter,
     ResearchEventListFilter,
     ResearchQuestionListFilter,
-    ArchEntListFilter,
-    PeriodListFilter,
     SiteListFilter,
-    AlternativeNameListFilter,
-    AltNameListFilter,
-    InstitutionListFilter,
-    PlaceListFilter,
-    PersonListFilter,
 )
 from browsing.forms import (
-    MonumentProtectionFormHelper,
-    ReferenceFormHelper,
-    ResearchEventFilterFormHelper,
-    ResearchQuestionFormHelper,
     AlternativeNameFilterFormHelper,
     AltNameFilterFormHelper,
     ArchEntFilterFormHelper,
+    InstitutionFilterFormHelper,
+    MonumentProtectionFormHelper,
     PeriodFilterFormHelper,
     PersonFilterFormHelper,
-    SiteFilterFormHelper,
-    InstitutionFilterFormHelper,
     PlaceFilterFormHelper,
+    ReferenceFormHelper,
+    ResearchEventFilterFormHelper,
+    ResearchQuestionFormHelper,
+    SiteFilterFormHelper,
 )
 from browsing.tables import (
+    AlternativeName,
+    AlternativeNameTable,
+    AltNameTable,
+    ArchEntTable,
+    InstitutionTable,
     MonumentProtectionTable,
+    PeriodTable,
+    PersonTable,
+    PlaceTable,
     ReferenceTable,
     ResearchEventTable,
     ResearchQuestionTable,
-    AlternativeNameTable,
-    AltNameTable,
-    PeriodTable,
-    PersonTable,
     SiteTable,
-    InstitutionTable,
-    PlaceTable,
-    ArchEntTable,
-    AlternativeName,
 )
+from entities.models import Institution, Person, Place
 
 try:
     from browsing.models import BrowsConf
 except ImportError:
     BrowsConf = None
-from archiv.models import (
-    MonumentProtection,
-    ResearchEvent,
-    ResearchQuestion,
-    ArchEnt,
-    Period,
-    Site,
-    AltName,
-)
-from bib.models import Reference
+from charts.models import ChartConfig
+from charts.views import create_payload
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-from charts.models import ChartConfig
-from charts.views import create_payload
+from archiv.models import (
+    AltName,
+    ArchEnt,
+    MonumentProtection,
+    Period,
+    ResearchEvent,
+    ResearchQuestion,
+    Site,
+)
+from bib.models import Reference
 
 
 def flatten_df(df):
@@ -147,7 +146,7 @@ class GenericListView(ExportMixin, SingleTableView):
         try:
             ct._meta.get_field("polygon")
             poly = True
-        except:  # noqa:
+        except:  # noqa
             poly = False
         if poly:
             points = serialize(
@@ -305,7 +304,6 @@ class MonumentProtectionListView(GenericListView):
 
 
 class MonumentProtectionDl(MonumentProtectionListView):
-
     def render_to_response(self, context, **kwargs):
         sep = self.request.GET.get("sep", ",")
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
@@ -419,7 +417,6 @@ class ArchEntListView(GenericListView):
 
 
 class ArchEntDl(ArchEntListView):
-
     def render_to_response(self, context, **kwargs):
         sep = self.request.GET.get("sep", ",")
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
@@ -530,7 +527,6 @@ class SiteListView(GenericListView):
 
 
 class SiteDl(SiteListView):
-
     def render_to_response(self, context, **kwargs):
         sep = self.request.GET.get("sep", ",")
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
@@ -628,7 +624,6 @@ class ResearchEventListView(GenericListView):
 
 
 class ResearchEventDl(ResearchEventListView):
-
     def render_to_response(self, context, **kwargs):
         sep = self.request.GET.get("sep", ",")
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(

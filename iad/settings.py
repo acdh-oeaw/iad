@@ -19,26 +19,6 @@ ADD_ALLOWED_HOST = os.environ.get("ALLOWED_HOST", "*")
 SECRET_KEY = os.environ.get(
     "SECRET_KEY", "TZRHHwasdfsa987465465dfdsafkljlxö7639827249324GV"
 )
-if DEBUG:
-    CACHES = {
-        "default": {
-            "BACKEND": "django.core.cache.backends.dummy.DummyCache",
-        }
-    }
-
-else:
-    CACHES = {
-        "default": {
-            "BACKEND": "django.core.cache.backends.dummy.DummyCache",
-        }
-    }
-    # CACHES = {
-    #     "default": {
-    #         "BACKEND": "django.core.cache.backends.db.DatabaseCache",
-    #         "LOCATION": "my_cache_table",
-    #         "TIMEOUT": None,
-    #     }
-    # }
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -59,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.gis",
     "crispy_forms",
-    "crispy_bootstrap4",
+    "crispy_bootstrap5",
     "django_filters",
     "django_tables2",
     "rest_framework",
@@ -79,8 +59,8 @@ INSTALLED_APPS = [
     "charts",
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
 REST_FRAMEWORK = {
@@ -95,9 +75,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",

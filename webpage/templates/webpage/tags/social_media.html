@@ -1,7 +1,7 @@
 <div class="row">
     {% for x in sm_items %}
         <div class="col-sm display-4">
-            <a href="{{ x.1 }}"><i class="{{x.0}}"></i></a>
+            <a href="{{ x.1 }}"><i class="{{ x.0 }}"></i><span class="visually-hidden">{{ x.2 }}</span></a>
         </div>
     {% endfor %}
 </div>

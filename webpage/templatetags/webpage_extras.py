@@ -1,4 +1,5 @@
 from django import template
+
 from webpage.metadata import PROJECT_METADATA as PM
 
 register = template.Library()
