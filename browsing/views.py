@@ -114,9 +114,15 @@ def serialize_as_geojson(self, model_name):
     newish["geometry"] = newish.apply(
         lambda row: wkt.loads(row["polygon"][0].wkt), axis=1
     )
-    str_df = newish.astype("str").drop(["polygon"], axis=1)
-    gdf = gp.GeoDataFrame(str_df)
-    gdf["geometry"] = gdf.apply(lambda row: wkt.loads(row["geometry"]), axis=1)
+    # Convert non-geometry columns to string, keep geometry as-is
+    non_geom_cols = [
+        col for col in newish.columns if col not in ["polygon", "geometry"]
+    ]
+    for col in non_geom_cols:
+        newish[col] = newish[col].astype("str")
+    newish = newish.drop(["polygon"], axis=1)
+    # Create GeoDataFrame with explicit geometry column
+    gdf = gp.GeoDataFrame(newish, geometry="geometry")
     return gdf
 
 
