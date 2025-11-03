@@ -1,10 +1,10 @@
+from crispy_bootstrap5.bootstrap5 import BS5Accordion
+from crispy_forms.bootstrap import AccordionGroup
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset
-from crispy_forms.bootstrap import Accordion, AccordionGroup
+from crispy_forms.layout import Fieldset, Layout, Submit
 
 
 class GenericFilterFormHelper(FormHelper):
-
     def __init__(self, *args, **kwargs):
         super(GenericFilterFormHelper, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -47,7 +47,7 @@ class MonumentProtectionFormHelper(FormHelper):
                 "site_id",
                 css_id="basic_search_fields",
             ),
-            Accordion(
+            BS5Accordion(
                 AccordionGroup(
                     "Advanced search options",
                     "heritage_status",
@@ -89,7 +89,7 @@ class ArchEntFilterFormHelper(FormHelper):
                 "ent_type",
                 css_id="basic_search_fields",
             ),
-            Accordion(
+            BS5Accordion(
                 AccordionGroup(
                     "Advanced search options",
                     "site_id",
@@ -116,7 +116,7 @@ class SiteFilterFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
+        self.form_tag = False
         self.add_input(Submit("Filter", "Search"))
         self.layout = Layout(
             Fieldset(
@@ -126,7 +126,7 @@ class SiteFilterFormHelper(FormHelper):
                 "identifier",
                 css_id="basic_search_fields",
             ),
-            Accordion(
+            BS5Accordion(
                 AccordionGroup(
                     "Advanced search options",
                     "public",
@@ -143,8 +143,6 @@ class SiteFilterFormHelper(FormHelper):
                     css_id="more",
                     css_class="test",
                 ),
-            ),
-            Accordion(
                 AccordionGroup(
                     "Location search options",
                     "cadastral_community__ctnam",
@@ -154,8 +152,6 @@ class SiteFilterFormHelper(FormHelper):
                     css_id="location",
                     css_class="location",
                 ),
-            ),
-            Accordion(
                 AccordionGroup(
                     "Research Activity search options",
                     "has_research_activity__start_date",
@@ -168,8 +164,6 @@ class SiteFilterFormHelper(FormHelper):
                     "has_research_activity__generation_data_set",
                     css_id="research_activity_options",
                 ),
-            ),
-            Accordion(
                 AccordionGroup(
                     "Arch. Entity search options",
                     "has_archent__ent_type",
@@ -182,8 +176,6 @@ class SiteFilterFormHelper(FormHelper):
                     "has_archent__location_certainty",
                     css_id="arch_entity_options",
                 ),
-            ),
-            Accordion(
                 AccordionGroup(
                     "Periods",
                     "has_archent__period",
@@ -191,8 +183,6 @@ class SiteFilterFormHelper(FormHelper):
                     "temp_extent_intersects",
                     css_id="period_options",
                 ),
-            ),
-            Accordion(
                 AccordionGroup(
                     "Monument protection search options",
                     "has_monument_protection__current_land_use",
@@ -215,7 +205,7 @@ class ResearchEventFilterFormHelper(FormHelper):
         self.add_input(Submit("Filter", "Search"))
         self.layout = Layout(
             Fieldset("Basic search options", "name", css_id="basic_search_fields"),
-            Accordion(
+            BS5Accordion(
                 AccordionGroup(
                     "Advanced search options",
                     "start_date",
@@ -243,7 +233,7 @@ class AltNameFilterFormHelper(FormHelper):
         self.add_input(Submit("Filter", "Search"))
         self.layout = Layout(
             Fieldset("Basic search options", "label", css_id="basic_search_fields"),
-            Accordion(
+            BS5Accordion(
                 AccordionGroup("Advanced search options", "language", css_id="more"),
             ),
         )
@@ -259,7 +249,7 @@ class PeriodFilterFormHelper(FormHelper):
         self.add_input(Submit("Filter", "Search"))
         self.layout = Layout(
             Fieldset("Basic search options", "name", css_id="basic_search_fields"),
-            Accordion(
+            BS5Accordion(
                 AccordionGroup(
                     "Advanced search options",
                     # 'public',
@@ -290,7 +280,7 @@ class PersonFilterFormHelper(FormHelper):
                 "pers_alt_name",
                 css_id="basic_search_fields",
             ),
-            Accordion(
+            BS5Accordion(
                 AccordionGroup(
                     "Advanced search options",
                     "acad_title",
@@ -330,7 +320,7 @@ class InstitutionFilterFormHelper(FormHelper):
                 "alt_names",
                 css_id="basic_search_fields",
             ),
-            Accordion(
+            BS5Accordion(
                 AccordionGroup(
                     "Advanced search options",
                     "authority_url",
@@ -356,9 +346,9 @@ class PlaceFilterFormHelper(FormHelper):
                 "alternative_name",
                 css_id="basic_search_fields",
             ),
-            Accordion(
+            BS5Accordion(
                 AccordionGroup(
-                    "Advanced search options" "geonames_id", "part_of", css_id="more"
+                    "Advanced search optionsgeonames_id", "part_of", css_id="more"
                 ),
             ),
         )
