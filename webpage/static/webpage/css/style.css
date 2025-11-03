@@ -1,41 +1,9 @@
-html {
-    height: 100%;
-}
-
 body {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
     font-family: 'Libre Franklin', sans-serif;
+}
+main {
     padding-top: 100px;
 }
-
-/*remove round corners everywhere*/
-/** {
-  border-radius: 0 !important;
-}*/
-.card {
-    overflow: visible;
-    border: 0 solid rgba(0,0,0,.125);
-    /*box-shadow: 16px 19px 9px 0px #866161;*/
-    /*box-shadow: 16px 19px 9px 0px #bfbfbf;*/
-    box-shadow: 4px 4px 9px 0 rgba(0, 0, 0, .1);
-    /*box-shadow: 2px 2px 24px 0 rgba(0, 0, 0, .1);*/
-}
-
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-.centerfull {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 95%;
-}
-
 .site-page {
     background-color: #003399;
     color: white;
@@ -57,13 +25,6 @@ a {
     color: #254aa5;
 }
 
-header {
-    flex: 0 0 auto;
-}
-
-.main-content{
-    flex: 1 0 auto;
-}
 
 footer {
     flex: 0 0 auto;
@@ -105,50 +66,7 @@ footer {
     }
 }
 
-/*Button's text is all in caps and bold. When adding html markup text should be all in lowercase. */
-.btn {
-   /* font-weight: bold;
-    font-variant: small-caps;*/
-    white-space: normal;
-    margin-bottom: 10px;
-}
-.separate-panel legend, .legend-blue {
-    /*change color of border when the pallete is chosen*/
-    border: 2px solid #caebf2;
-    background-color: #caebf2;
-    /*color: #ffffff;*/
-    padding: 5px;
-}
-.select2-container {
- /*   width: 100%;*/
-}
 
-/* css for checkbox widget in filters */
-.chbx-select-multi {
-  /* 1.5-sized Checkboxes */
-  -ms-transform: scale(1.5); /* IE */
-  -moz-transform: scale(1.5); /* FF */
-  -webkit-transform: scale(1.8); /* Safari and Chrome */
-  -o-transform: scale(1.5); /* Opera */
-  padding: 10px;
-  margin: 5px 10px 5px 10px;
-  border: 1px solid #aaa;
-
-}
-/*overriding css for field labels, helptext in filters*/
-.control-label {
-    font-weight: 600;
-}
-.help-block {
-    font-size: 0.8rem;
-}
-.card-index {
-    padding: 80px;
-    z-index: 1;
-    /*margin-top: -900px;*/
-    margin-top: -80px;
-
-}
 .title-index {
     font-weight: 900;
     color: #254aa5;

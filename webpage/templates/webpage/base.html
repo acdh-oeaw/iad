@@ -16,10 +16,11 @@
     <!-- End Matomo Code -->
     {% block scriptHeader %}
     {% endblock %}
+    <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}" />
 </head>
 <body class="d-flex flex-column h-100">
-    <main class="flex-shrink-0">
     {% include "webpage/partials/navbar.html" %}
+    <main class="flex-shrink-0 flex-grow-1">
     <div id="content" class="container-fluid">{% block content %}{% endblock %}</div>
     </main>
     {% include "webpage/partials/footer.html" %}
