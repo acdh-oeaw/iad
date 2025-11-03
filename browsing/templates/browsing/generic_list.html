@@ -136,35 +136,32 @@
                                             {% endwith %}
                                         </h4>
                                     </div>
-                                    <div class="col-md-0">
-                                        {% if download %}
-                                        <div class="dropdown">
-                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding:5px; color:white; border-color:white; margin-bottom: 0px;">
-                                                      <i class="fas fa-download"></i>
-                                                      Download
-                                                      <span class="caret"></span>
-                                                  </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                {% if shapes %}
-                                                    {% if self_model_name == 'site' %}
-                                                        <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--site">GeoJSON (Site)</a></li>
-                                                        <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--archent">GeoJSON (related ArchEnt)</a></li>
-                                                        <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--researchevent">GeoJSON (related Research Activities)</a></li>
-                                                        <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--monumentprotection">GeoJSON (related MPs)</a></li>
-                                                    {% else %}
-                                                        <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--{{ self_model_name }}">GeoJSON </a></li>
-                                                    {% endif %}
-                                                {% endif %}
-                                                <li><a class="dropdown-item" href="{% export_url 'csv' %}">Table Content as csv</a></li>
-                                            </ul>
-                                        </div>
-                                        {% endif %}
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="card-body">
-                            {% if shapes %}
-                            <a class="btn btn-outline-secondary" href="#map-results">Map</a>
+                            {% if download %}
+                                <div class="text-end">
+                                    <div class="dropdown">
+                                        <button class="btn btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-cloud-arrow-down"></i>
+                                            Download
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            {% if shapes %}
+                                                {% if self_model_name == 'site' %}
+                                                    <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--site">GeoJSON (Site)</a></li>
+                                                    <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--archent">GeoJSON (related ArchEnt)</a></li>
+                                                    <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--researchevent">GeoJSON (related Research Activities)</a></li>
+                                                    <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--monumentprotection">GeoJSON (related MPs)</a></li>
+                                                {% else %}
+                                                    <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--{{ self_model_name }}">GeoJSON </a></li>
+                                                {% endif %}
+                                            {% endif %}
+                                            <li><a class="dropdown-item" href="{% export_url 'csv' %}">Table Content as csv</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             {% endif %}
                             {% block table %}
                                 <table class="table" {% if table.attrs %} {{ table.attrs.as_html }} {% endif %}>
