@@ -1,133 +1,170 @@
 {% load static %}
 {% load webpage_extras %}
 {% load browsing_extras %}
-
-<nav class="navbar navbar-expand-md navbar-light fixed-top bg-white box-shadow">
-    <a href="/" class="navbar-brand custom-logo-link" rel="home" itemprop="url">
-        <img src="{% static 'webpage/img/interreg_logo.png' %}" class="img-fluid" alt="project Logo" itemprop="logo"
-            width="250px">
-    </a>
-    <!-- <div class="container"> -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-
-
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">About
-                    <span class="caret" />
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'webpage:about' %}">About the database</a>
-                    <a class="dropdown-item" href="{% url 'webpage:thesaurus' %}">IAD Thesaurus</a>
-                    <a class="dropdown-item" href="{% url 'webpage:imprint' %}">Imprint | Impressum</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
+<header>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white box-shadow">
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand custom-logo-link">
+                <img src="{% static 'webpage/img/interreg_logo.png' %}" class="img-fluid" alt="Iron Age Danube Logo"
+                    itemprop="logo" width="250px">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'webpage:about' %}">About the database</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'webpage:thesaurus' %}">IAD Thesaurus</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'webpage:imprint' %}">Imprint | Impressum</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Curate and Browse the Data
+                        </a>
+                        {% else %}
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Browse the Data
+                        </a>
+                        {% endif %}
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'browsing:browse_sites' %}">Site</a></li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'browsing:browse_researchevents' %}">Research
+                                    Activity</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'browsing:browse_archents' %}">Arch. Entity</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'browsing:browse_monumentprotections' %}">Monument
+                                    Protection</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'browsing:browse_institutions' %}">Institution</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'browsing:browse_persons' %}">Researcher</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'browsing:browse_researchquestions' %}">Research
+                                    Question</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'bib:browse_references' %}">References</a>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'browsing:browse_periods' %}">Chronology</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'shapes:browse_municipality' %}">
+                                    Municipalities
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Quality Checks
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'checks:invalid_poly' %}">
+                                    Polygon Valid?
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'checks:poly_exists' model_name='site' %}">
+                                    Polygon for Site?
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <a class="dropdown-item" href="{% url 'checks:poly_fits_archents' %}">
+                                ArchEnts fit Site Polygon?
+                            </a>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <a class="dropdown-item" href="{% url 'checks:generic_check' model_name='archent' %}">
+                                Check for Archaelogical Entity?
+                            </a>
+                            <a class="dropdown-item" href="{% url 'checks:generic_check' model_name='researchevent' %}">
+                                Check for Research Activity?
+                            </a>
+                            <a class="dropdown-item"
+                                href="{% url 'checks:generic_check' model_name='monumentprotection' %}">
+                                Check for Monument Protection?
+                            </a>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% if user.is_superuser %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Vocabs Curation
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'vocabs:metadata' %}">Metadata</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vocabs:browse_schemes' %}">Concept Schemes</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'vocabs:browse_vocabs' %}">Concepts</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vocabs:browse_skoslabels' %}">Labels</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
                 {% if user.is_authenticated %}
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                    aria-expanded="false">
-                    Curate and Browse the Data <span class="caret"></span>
-                </a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown pe-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.get_username }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="nav-link" href="{% url 'webpage:user_logout' %}">Log-Out</a>
+                            </li>
+                            {% if 'reversion' in APPS %}
+                            <li>
+                                <a class="nav-link" href="{% url 'webpage:user_detail' pk=user.id %}">My Page</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
                 {% else %}
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                    aria-expanded="false">
-                    Browse the Data <span class="caret"></span>
+                <a class="nav-link pe-3" href="{% url 'webpage:user_login' %}">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    <span class="visually-hidden">Log In</span>
                 </a>
                 {% endif %}
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'browsing:browse_sites' %}">Site</a>
-                    <a class="dropdown-item" href="{% url 'browsing:browse_researchevents' %}">Research Activity</a>
-                    <a class="dropdown-item" href="{% url 'browsing:browse_archents' %}">Arch. Entity</a>
-                    <a class="dropdown-item" href="{% url 'browsing:browse_monumentprotections' %}">Monument
-                        Protection</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'browsing:browse_institutions' %}">Institution</a>
-                    <a class="dropdown-item" href="{% url 'browsing:browse_persons' %}">Researcher</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'browsing:browse_researchquestions' %}">Research Question</a>
-                    <a class="dropdown-item" href="{% url 'bib:browse_references' %}">References</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'browsing:browse_periods' %}">Chronology</a>
-                    <a class="dropdown-item" href="{% url 'shapes:browse_municipality' %}">
-                        Municipalities
-                    </a>
-                </div>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                    aria-expanded="false">
-                    Quality Checks <span class="caret"></span>
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'checks:invalid_poly' %}">
-                        Polygon Valid?
-                    </a>
-                    <a class="dropdown-item" href="{% url 'checks:poly_exists' model_name='site' %}">
-                        Polygon for Site?
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'checks:poly_fits_archents' %}">
-                        ArchEnts fit Site Polygon?
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'checks:generic_check' model_name='archent' %}">
-                        Check for Archaelogical Entity?
-                    </a>
-                    <a class="dropdown-item" href="{% url 'checks:generic_check' model_name='researchevent' %}">
-                        Check for Research Activity?
-                    </a>
-                    <a class="dropdown-item" href="{% url 'checks:generic_check' model_name='monumentprotection' %}">
-                        Check for Monument Protection?
-                    </a>
-                </div>
-            </li>
-            {% endif %}
-            {% if user.is_superuser %}
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                    aria-expanded="false">
-                    Vocabs Curation <span class="caret"></span>
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'vocabs:metadata' %}">Metadata</a>
-                    <a class="dropdown-item" href="{% url 'vocabs:browse_schemes' %}">Concept Schemes</a>
-                    <a class="dropdown-item" href="{% url 'vocabs:browse_vocabs' %}">Concepts</a>
-                    <a class="dropdown-item" href="{% url 'vocabs:browse_skoslabels' %}">Labels</a>
-            </li>
-            {% endif %}
-            {% if user.is_authenticated %}
-            <li class="nav-item dropdown ml-auto">
-                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                    aria-expanded="false">
-                    {{ user.get_username }}
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="nav-link" href="{% url 'webpage:user_logout' %}">Log-Out</a>
-                    {% if 'reversion' in APPS %}
-                    <a class="nav-link" href="{% url 'webpage:user_detail' pk=user.id %}">My Page</a>
-                    {% endif %}
-                </div>
-            </li>
-            {% else %}
-            <li class="nav-item dropdown ml-auto">
-                <a class="nav-link" href="{% url 'webpage:user_login' %}">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                </a>
-            </li>
-            {% endif %}
-        </ul>
-        <div class="navbar-icons">
-            <a href="{% projects_metadata 'github' %}" target="_blank" rel="noopener">
-                <i class="bi bi-github"></i>
-            </a>
+            </div>
         </div>
-    </div>
-    <!-- </div> -->
-</nav>
+    </nav>
+</header>
