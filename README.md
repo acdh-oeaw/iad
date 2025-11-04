@@ -46,8 +46,8 @@ docker build -t iad:latest --no-cache .
 
 To run the image you should provide an `env.default` file to pass in needed environment variables; see example `env.default` in this repo:
 
-```bash
-docker run -it -p 8020:8020 --rm --env-file env.default iad:latest
+```shell
+docker run -it -p 8020:8020 --network="host" --rm --env-file default.env --name iad iad:latest
 ```
 
 ### or use published image:

@@ -11,7 +11,7 @@ COPY nginx.default /etc/nginx/sites-available/default
 RUN mkdir -p /opt/app
 COPY . /opt/app
 WORKDIR /opt/app
-RUN uv sync --no-install-project
+RUN uv add gunicorn && uv sync --no-install-project
 RUN chown -R www-data:www-data /opt/app
 
 # start server
