@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     "archiv",
     "checks",
     "shapes",
-    "charts",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

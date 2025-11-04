@@ -59,8 +59,6 @@ try:
     from browsing.models import BrowsConf
 except ImportError:
     BrowsConf = None
-from charts.models import ChartConfig
-from charts.views import create_payload
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
@@ -156,16 +154,6 @@ class GenericListView(ExportMixin, SingleTableView):
         except:  # noqa
             poly = False
         if poly:
-            points = serialize(
-                "geojson",
-                self.get_queryset(),
-                geometry_field="centroid",
-                fields=(
-                    "name",
-                    "pk",
-                ),
-            )
-            context["points"] = points
             shapes = serialize(
                 "geojson",
                 self.get_queryset(),
@@ -192,28 +180,12 @@ class GenericListView(ExportMixin, SingleTableView):
         except AttributeError:
             context["download"] = None
         model = self.model
-        app_label = model._meta.app_label
         context["entity"] = model.__name__.lower()
-        filtered_objs = ChartConfig.objects.filter(
-            model_name=model.__name__.lower(), app_name=app_label
-        )
-        context["vis_list"] = filtered_objs
-        context["property_name"] = self.request.GET.get("property")
-        context["charttype"] = self.request.GET.get("charttype")
+
         if context["self_model_name"] == "site":
             context["enablereldl"] = True
         else:
             context["enablereldl"] = False
-        if context["charttype"] and context["property_name"]:
-            qs = self.get_queryset()
-            chartdata = create_payload(
-                context["entity"],
-                context["property_name"],
-                context["charttype"],
-                qs,
-                app_label=app_label,
-            )
-            context = dict(context, **chartdata)
         return context
 
     def render_to_response(self, context, **kwargs):
