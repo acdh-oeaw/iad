@@ -14,7 +14,6 @@ PROJECT_METADATA = {
     "matomo_url": "//matomo.acdh.oeaw.ac.at/",
     "imprint": "/imprint",
     "social_media": [
-        ("bi bi-twitter-x", "https://twitter.com/ironagedanube?lang=en", "X"),
         (
             "bi bi-youtube",
             "https://www.youtube.com/channel/UCx9Vnpkkf5ayEmtj2p-kc7w",
