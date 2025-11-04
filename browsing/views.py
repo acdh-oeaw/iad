@@ -83,28 +83,31 @@ def flatten_df(df):
         yield [new[x].unique().tolist() for x in new.keys()]
 
 
-def serialize_as_geojson(self, model_name):
+def serialize_as_geojson(self, model_name, current_model="site"):
     conf_items = list(
         BrowsConf.objects.filter(model_name=model_name).values_list(
             "field_path", "label"
         )
     )
     conf_items.append(("polygon", "polygon"))
-    sites_qs = self.get_queryset().distinct().exclude(polygon=None)
-    if model_name == "site":
-        qs = sites_qs
-    elif model_name == "archent":
-        qs = ArchEnt.objects.filter(site_id__in=[x.id for x in sites_qs]).exclude(
-            polygon=None
-        )
-    elif model_name == "monumentprotection":
-        qs = MonumentProtection.objects.filter(
-            site_id__in=[x.id for x in sites_qs]
-        ).exclude(polygon=None)
+    if current_model == "site":
+        sites_qs = self.get_queryset().distinct().exclude(polygon=None)
+        if model_name == "site":
+            qs = sites_qs
+        elif model_name == "archent":
+            qs = ArchEnt.objects.filter(site_id__in=[x.id for x in sites_qs]).exclude(
+                polygon=None
+            )
+        elif model_name == "monumentprotection":
+            qs = MonumentProtection.objects.filter(
+                site_id__in=[x.id for x in sites_qs]
+            ).exclude(polygon=None)
+        else:
+            qs = ResearchEvent.objects.filter(
+                site_id__in=[x.id for x in sites_qs]
+            ).exclude(polygon=None)
     else:
-        qs = ResearchEvent.objects.filter(site_id__in=[x.id for x in sites_qs]).exclude(
-            polygon=None
-        )
+        qs = self.get_queryset().distinct().exclude(polygon=None)
     df = pd.DataFrame(
         list(qs.distinct().values_list(*[x[0] for x in conf_items])),
         columns=[x[1] for x in conf_items],
@@ -114,14 +117,12 @@ def serialize_as_geojson(self, model_name):
     newish["geometry"] = newish.apply(
         lambda row: wkt.loads(row["polygon"][0].wkt), axis=1
     )
-    # Convert non-geometry columns to string, keep geometry as-is
     non_geom_cols = [
         col for col in newish.columns if col not in ["polygon", "geometry"]
     ]
     for col in non_geom_cols:
         newish[col] = newish[col].astype("str")
     newish = newish.drop(["polygon"], axis=1)
-    # Create GeoDataFrame with explicit geometry column
     gdf = gp.GeoDataFrame(newish, geometry="geometry")
     return gdf
 
@@ -229,7 +230,11 @@ class GenericListView(ExportMixin, SingleTableView):
                 model_to_download = self.request.GET.get("dl-geojson", None).split(
                     "--"
                 )[1]
-                gdf = serialize_as_geojson(self, model_name=model_to_download)
+                gdf = serialize_as_geojson(
+                    self,
+                    model_name=model_to_download,
+                    current_model=context["self_model_name"],
+                )
                 response = HttpResponse(gdf.to_json(), content_type="application/json")
                 response["Content-Disposition"] = (
                     'attachment; filename="{}.geojson"'.format(model_to_download)
