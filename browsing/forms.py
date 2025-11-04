@@ -1,7 +1,7 @@
 from crispy_bootstrap5.bootstrap5 import BS5Accordion
 from crispy_forms.bootstrap import AccordionGroup
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Fieldset, Layout, Submit
+from crispy_forms.layout import Fieldset, Layout
 
 
 class GenericFilterFormHelper(FormHelper):
@@ -10,8 +10,7 @@ class GenericFilterFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
 
 
 class ReferenceFormHelper(FormHelper):
@@ -20,8 +19,7 @@ class ReferenceFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
         self.layout = Layout(
             Fieldset(
                 "Basic search options",
@@ -38,8 +36,7 @@ class MonumentProtectionFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
         self.layout = Layout(
             Fieldset(
                 "Basic search options",
@@ -66,8 +63,7 @@ class ResearchQuestionFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
         self.layout = Layout(
             Fieldset("Basic search options", "question", css_id="basic_search_fields"),
         )
@@ -79,8 +75,7 @@ class ArchEntFilterFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
         self.layout = Layout(
             Fieldset(
                 "Basic search options",
@@ -117,7 +112,6 @@ class SiteFilterFormHelper(FormHelper):
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
         self.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
         self.layout = Layout(
             Fieldset(
                 "Basic search options",
@@ -201,8 +195,7 @@ class ResearchEventFilterFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
         self.layout = Layout(
             Fieldset("Basic search options", "name", css_id="basic_search_fields"),
             BS5Accordion(
@@ -229,8 +222,7 @@ class AltNameFilterFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
         self.layout = Layout(
             Fieldset("Basic search options", "label", css_id="basic_search_fields"),
             BS5Accordion(
@@ -245,8 +237,7 @@ class PeriodFilterFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
         self.layout = Layout(
             Fieldset("Basic search options", "name", css_id="basic_search_fields"),
             BS5Accordion(
@@ -270,8 +261,7 @@ class PersonFilterFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
         self.layout = Layout(
             Fieldset(
                 "Basic search options",
@@ -298,8 +288,7 @@ class AlternativeNameFilterFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
         self.layout = Layout(
             Fieldset("Basic search options", "name", css_id="basic_search_fields"),
         )
@@ -311,8 +300,7 @@ class InstitutionFilterFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
         self.layout = Layout(
             Fieldset(
                 "Basic search options",
@@ -337,8 +325,7 @@ class PlaceFilterFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
-        self.add_input(Submit("Filter", "Search"))
+        self.form_tag = False
         self.layout = Layout(
             Fieldset(
                 "Basic search options",

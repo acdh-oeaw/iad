@@ -56,18 +56,17 @@
                     <!--Search mask-->
                     {% load django_tables2 crispy_forms_tags %}
                     <form action="." class="uniForm" method="get">
-                        {% if togglable_colums %}
-                        <legend>Select additional columns</legend>
-                        {% column_selector %}
-                        {% endif %}
-                        <br/>
                         {% crispy filter.form filter.form.helper %}
+                        {% if togglable_colums %}
+                            {% column_selector %}
+                        {% endif %}
+                        <div class="d-grid gap-2 pt-2" aria-label="Search or reset search">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a class="btn btn-primary" href=".">Reset</a>
+                        </div>
                     </form>
-                    {% block reset_button %}
-                    <a class ="btn btn-outline-secondary"  href=".">Reset search</a>
                 </div>
             </div>
-            {% endblock %}
         </div>
 
         <div class="col-md-8" id="results">

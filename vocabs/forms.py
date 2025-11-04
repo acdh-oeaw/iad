@@ -1,9 +1,11 @@
+from crispy_bootstrap5.bootstrap5 import BS5Accordion
+from crispy_forms.bootstrap import AccordionGroup
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Fieldset, Layout, Submit
 from dal import autocomplete
 from django import forms
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset
-from crispy_forms.bootstrap import Accordion, AccordionGroup
-from .models import SkosConcept, SkosConceptScheme, SkosLabel, SkosCollection, Metadata
+
+from .models import Metadata, SkosCollection, SkosConcept, SkosConceptScheme, SkosLabel
 
 
 class GenericFilterFormHelper(FormHelper):
@@ -36,10 +38,10 @@ class SkosConceptFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
+        self.form_tag = False
         self.add_input(Submit("Filter", "Search"))
         self.layout = Layout(
-            Accordion(
+            BS5Accordion(
                 AccordionGroup(
                     "Basic search options", "pref_label", css_id="basic_search_fields"
                 ),
@@ -162,10 +164,10 @@ class SkosConceptSchemeFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
+        self.form_tag = False
         self.add_input(Submit("Filter", "Search"))
         self.layout = Layout(
-            Accordion(
+            BS5Accordion(
                 AccordionGroup(
                     "Basic search options", "dc_title", css_id="basic_search_fields"
                 ),
@@ -197,18 +199,17 @@ class SkosLabelFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
+        self.form_tag = False
         self.add_input(Submit("Filter", "Search"))
 
 
 class SkosCollectionFormHelper(FormHelper):
-
     def __init__(self, *args, **kwargs):
         super(SkosCollectionFormHelper, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
-        self.helper.form_tag = False
+        self.form_tag = False
         self.add_input(Submit("Filter", "Search"))
         self.layout = Layout(
             Fieldset(
