@@ -14,7 +14,7 @@ djangorestframework==3.15.2
 djangorestframework-gis>=1.0,<2
 geojson>=3.1.0,<4
 geopandas>=1.0.1,<2
-lxml>=5.2.2,<6
+lxml>=6.1.0,<7
 psycopg2-binary>=2.9.9,<3
 pyzotero>=1.5.20,<2
 rdflib>=7.0.0,<8
