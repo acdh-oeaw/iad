@@ -105,11 +105,13 @@ TEMPLATES = [
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "OPTIONS": {"options": "-c search_path=public,iad"},
         "NAME": os.environ.get("POSTGRES_DB", "iad"),
         "USER": os.environ.get("POSTGRES_USER", "postgres"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres"),
         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
         "PORT": os.environ.get("POSTEGRES_PORT", "5432"),
+        "DISABLE_SERVER_SIDE_CURSORS": True,
     }
 }
 
