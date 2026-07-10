@@ -21,3 +21,9 @@ dependencies = [
     "requests>=2.32.5",
     "tablib>=3.9.0",
 ]
+
+[dependency-groups]
+dev = [
+    "coverage>=7.15.0",
+    "ruff>=0.15.21",
+]
