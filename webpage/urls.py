@@ -7,7 +7,7 @@ app_name = "webpage"
 
 favicon_view = RedirectView.as_view(url="/static/favicon.ico", permanent=True)
 
-path("user/<int:pk>", views.UserDetailView.as_view(), name="user_detail"),
+(path("user/<int:pk>", views.UserDetailView.as_view(), name="user_detail"),)
 
 urlpatterns = [
     path("imprint", views.ImprintView.as_view(), name="imprint"),

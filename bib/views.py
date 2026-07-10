@@ -73,7 +73,6 @@ class ReferenceDetailView(DetailView):
 
 
 class ReferenceCreate(BaseCreateView):
-
     model = Reference
     form_class = ReferenceForm
 
@@ -83,7 +82,6 @@ class ReferenceCreate(BaseCreateView):
 
 
 class ReferenceUpdate(BaseUpdateView):
-
     model = Reference
     form_class = ReferenceForm
 

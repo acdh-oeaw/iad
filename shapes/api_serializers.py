@@ -3,7 +3,6 @@ from .models import Municipality
 
 
 class MunicipalitySerializer(GeoFeatureModelSerializer):
-
     class Meta:
         model = Municipality
         geo_field = "geom"

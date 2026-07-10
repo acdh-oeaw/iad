@@ -16,5 +16,5 @@ def get_db_name(request):
     try:
         db_name = settings.DATABASES["default"]["NAME"]
         return {"DB_NAME": db_name}
-    except:  # noqa:
+    except:  # noqa
         return {}

@@ -4,34 +4,33 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('vocabs', '0001_initial'),
+        ("vocabs", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='metadata',
-            options={'ordering': ['id']},
+            name="metadata",
+            options={"ordering": ["id"]},
         ),
         migrations.AlterModelOptions(
-            name='skoscollection',
-            options={'ordering': ['id']},
+            name="skoscollection",
+            options={"ordering": ["id"]},
         ),
         migrations.AlterModelOptions(
-            name='skosconcept',
-            options={'ordering': ['id']},
+            name="skosconcept",
+            options={"ordering": ["id"]},
         ),
         migrations.AlterModelOptions(
-            name='skosconceptscheme',
-            options={'ordering': ['id']},
+            name="skosconceptscheme",
+            options={"ordering": ["id"]},
         ),
         migrations.AlterModelOptions(
-            name='skoslabel',
-            options={'ordering': ['id']},
+            name="skoslabel",
+            options={"ordering": ["id"]},
         ),
         migrations.AlterModelOptions(
-            name='skosnamespace',
-            options={'ordering': ['id']},
+            name="skosnamespace",
+            options={"ordering": ["id"]},
         ),
     ]

@@ -3,7 +3,6 @@ from .models import Site, ArchEnt
 
 
 class SiteSerializer(GeoFeatureModelSerializer):
-
     class Meta:
         model = Site
         geo_field = "polygon"
@@ -16,7 +15,6 @@ class SiteSerializer(GeoFeatureModelSerializer):
 
 
 class ArchEntSerializer(GeoFeatureModelSerializer):
-
     class Meta:
         model = ArchEnt
         geo_field = "polygon"

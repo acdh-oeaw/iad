@@ -61,7 +61,6 @@ class MunicipalityDetailView(DetailView):
 
 
 class MunicipalityCreate(BaseCreateView):
-
     model = Municipality
     form_class = MunicipalityForm
 
@@ -71,7 +70,6 @@ class MunicipalityCreate(BaseCreateView):
 
 
 class MunicipalityUpdate(BaseUpdateView):
-
     model = Municipality
     form_class = MunicipalityForm
 

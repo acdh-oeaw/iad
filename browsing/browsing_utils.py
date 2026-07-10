@@ -1,16 +1,16 @@
 import datetime
-import django_tables2
 import time
-import pandas as pd
-import django_filters
 
+import django_filters
+import django_tables2
+import pandas as pd
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from django.apps import apps
 from django.conf import settings
 from django.db.models.fields.related import ManyToManyField
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 
 from .models import BrowsConf
 
@@ -32,7 +32,6 @@ def get_entities_table(model_class):
 
 
 class GenericFilterFormHelper(FormHelper):
-
     def __init__(self, *args, **kwargs):
         super(GenericFilterFormHelper, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -234,7 +233,7 @@ def model_to_dict(instance):
                     data[f.name] = list(
                         f.value_from_object(instance).values_list("pk", flat=True)
                     )
-                except:  # noqa:
+                except:  # noqa
                     data[f.name] = []
         else:
             data[f.name] = f.value_from_object(instance)

@@ -18,7 +18,6 @@ class AlternativNameViewSet(viewsets.ModelViewSet):
 
 
 class GeoJsonViewSet(viewsets.ViewSet):
-
     def list(self, request):
         queryset = Place.objects.all()
         serializer = GeoJsonSerializer(queryset, many=True)

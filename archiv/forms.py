@@ -102,7 +102,6 @@ class ArchivBaseForm(forms.ModelForm):
 
 
 class MonumentProtectionForm(ArchivBaseForm):
-
     class Meta:
         model = MonumentProtection
         fields = [
@@ -293,7 +292,6 @@ class ArchEntForm(ArchivBaseForm):
 
 
 class ResearchEventForm(ArchivBaseForm):
-
     class Meta:
         model = ResearchEvent
         fields = [
@@ -441,7 +439,6 @@ class PeriodForm(ArchivBaseForm):
 
 
 class SiteForm(ArchivBaseForm):
-
     class Meta:
         model = Site
         fields = [

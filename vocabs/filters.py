@@ -41,7 +41,6 @@ def generous_concept_filter(queryset, name, value):
 
 
 class SkosConceptListFilter(django_filters.FilterSet):
-
     pref_label = django_filters.ModelMultipleChoiceFilter(
         widget=autocomplete.Select2Multiple(url="vocabs-ac:skosconcept-autocomplete"),
         queryset=SkosConcept.objects.all(),
@@ -63,7 +62,6 @@ class SkosConceptListFilter(django_filters.FilterSet):
 
 
 class SkosConceptFilter(django_filters.FilterSet):
-
     pref_label = django_filters.ModelMultipleChoiceFilter(
         widget=autocomplete.Select2Multiple(url="vocabs-ac:skosconcept-autocomplete"),
         queryset=SkosConcept.objects.all(),
@@ -85,7 +83,6 @@ class SkosConceptFilter(django_filters.FilterSet):
 
 
 class SkosConceptSchemeListFilter(django_filters.FilterSet):
-
     dc_title = django_filters.CharFilter(
         lookup_expr="icontains",
         help_text=SkosConceptScheme._meta.get_field("dc_title").help_text,
@@ -103,7 +100,6 @@ class SkosConceptSchemeListFilter(django_filters.FilterSet):
 
 
 class SkosCollectionListFilter(django_filters.FilterSet):
-
     name = django_filters.CharFilter(
         lookup_expr="icontains",
         label=SkosCollection._meta.get_field("name").verbose_name,
@@ -119,7 +115,6 @@ class SkosCollectionListFilter(django_filters.FilterSet):
 
 
 class SkosLabelListFilter(django_filters.FilterSet):
-
     name = django_filters.CharFilter(
         lookup_expr="icontains",
         help_text=SkosLabel._meta.get_field("name").help_text,

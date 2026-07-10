@@ -10,7 +10,6 @@ from .models import (
 
 
 class MetadataSerializer(serializers.HyperlinkedModelSerializer):
-
     class Meta:
         model = Metadata
         fields = "__all__"

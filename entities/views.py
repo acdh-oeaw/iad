@@ -27,7 +27,6 @@ class PersonDetailView(DetailView):
 
 
 class PersonCreate(CreateView):
-
     model = Person
     form_class = PersonForm
     template_name = "entities/person_create.html"
@@ -38,7 +37,6 @@ class PersonCreate(CreateView):
 
 
 class PersonUpdate(UpdateView):
-
     model = Person
     form_class = PersonForm
     template_name = "entities/person_create.html"
@@ -59,7 +57,6 @@ class PersonDelete(DeleteView):
 
 
 class InstitutionCreate(CreateView):
-
     model = Institution
     form_class = InstitutionForm
     template_name = "entities/institution_create.html"
@@ -70,7 +67,6 @@ class InstitutionCreate(CreateView):
 
 
 class InstitutionUpdate(UpdateView):
-
     model = Institution
     form_class = InstitutionForm
     template_name = "entities/institution_create.html"
@@ -111,7 +107,6 @@ class AlternativeNameListView(generic.ListView):
 
 
 class AlternativeNameCreate(CreateView):
-
     model = AlternativeName
     form_class = AlternativeNameForm
     template_name = "entities/alternativenames_create.html"
@@ -122,7 +117,6 @@ class AlternativeNameCreate(CreateView):
 
 
 class AlternativeNameUpdate(UpdateView):
-
     model = AlternativeName
     form_class = AlternativeNameForm
     template_name = "entities/alternativenames_create.html"

@@ -3,7 +3,6 @@ from .models import Place, AlternativeName
 
 
 class GeoJsonSerializer(serializers.BaseSerializer):
-
     def to_representation(self, obj):
         if obj.lng:
             geojson = {
@@ -20,14 +19,12 @@ class GeoJsonSerializer(serializers.BaseSerializer):
 
 
 class AlternativeNameSerializer(serializers.HyperlinkedModelSerializer):
-
     class Meta:
         model = AlternativeName
         fields = "__all__"
 
 
 class PlaceHelperSerializer(serializers.HyperlinkedModelSerializer):
-
     class Meta:
         model = Place
         fields = "__all__"

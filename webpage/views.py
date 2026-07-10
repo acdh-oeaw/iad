@@ -1,16 +1,15 @@
 from copy import deepcopy
 
 import requests
-
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.conf import settings
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.shortcuts import render
 from django.template import loader
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
-from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 
 from .forms import form_user_login
 from .metadata import PROJECT_METADATA as PM
@@ -30,9 +29,7 @@ class ImprintView(TemplateView):
         if r.status_code == 200:
             context["imprint_body"] = f"{r.text}"
         else:
-            context[
-                "imprint_body"
-            ] = """
+            context["imprint_body"] = """
             On of our services is currently not available.\
             Please try it later or write an email to\
             acdh-ch-helpdesk@oeaw.ac.at; if you are service provide,\
@@ -92,7 +89,7 @@ class GenericWebpageView(TemplateView):
             template_name = "webpage/{}.html".format(
                 self.kwargs.get("template", "index")
             )
-        except:  # noqa:
+        except:  # noqa
             template_name = "webpage/index.html"
         return [template_name]
 

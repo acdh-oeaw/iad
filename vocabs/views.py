@@ -42,19 +42,16 @@ from django.http import HttpResponse
 
 
 class MetadataListView(ListView):
-
     model = Metadata
     template_name = "vocabs/metadata_list.html"
 
 
 class MetadataDetailView(DetailView):
-
     model = Metadata
     template_name = "vocabs/metadata_detail.html"
 
 
 class MetadataCreate(BaseCreateView):
-
     model = Metadata
     form_class = MetadataForm
 
@@ -64,7 +61,6 @@ class MetadataCreate(BaseCreateView):
 
 
 class MetadataUpdate(BaseUpdateView):
-
     model = Metadata
     form_class = MetadataForm
 
@@ -125,13 +121,11 @@ class SkosCollectionListView(GenericListView):
 
 
 class SkosCollectionDetailView(DetailView):
-
     model = SkosCollection
     template_name = "vocabs/skoscollection_detail.html"
 
 
 class SkosCollectionCreate(BaseCreateView):
-
     model = SkosCollection
     form_class = SkosCollectionForm
 
@@ -141,7 +135,6 @@ class SkosCollectionCreate(BaseCreateView):
 
 
 class SkosCollectionUpdate(BaseUpdateView):
-
     model = SkosCollection
     form_class = SkosCollectionForm
 
@@ -178,13 +171,11 @@ class SkosConceptListView(GenericListView):
 
 
 class SkosConceptDetailView(DetailView):
-
     model = SkosConcept
     template_name = "vocabs/skosconcept_detail.html"
 
 
 class SkosConceptCreate(BaseCreateView):
-
     model = SkosConcept
     form_class = SkosConceptForm
 
@@ -194,7 +185,6 @@ class SkosConceptCreate(BaseCreateView):
 
 
 class SkosConceptUpdate(BaseUpdateView):
-
     model = SkosConcept
     form_class = SkosConceptForm
 
@@ -255,7 +245,6 @@ class SkosConceptSchemeListView(GenericListView):
 
 
 class SkosConceptSchemeDetailView(DetailView):
-
     model = SkosConceptScheme
     template_name = "vocabs/skosconceptscheme_detail.html"
 
@@ -266,7 +255,6 @@ class SkosConceptSchemeDetailView(DetailView):
 
 
 class SkosConceptSchemeCreate(BaseCreateView):
-
     model = SkosConceptScheme
     form_class = SkosConceptSchemeForm
 
@@ -276,7 +264,6 @@ class SkosConceptSchemeCreate(BaseCreateView):
 
 
 class SkosConceptSchemeUpdate(BaseUpdateView):
-
     model = SkosConceptScheme
     form_class = SkosConceptSchemeForm
 
@@ -337,13 +324,11 @@ class SkosLabelListView(GenericListView):
 
 
 class SkosLabelDetailView(DetailView):
-
     model = SkosLabel
     template_name = "vocabs/skoslabel_detail.html"
 
 
 class SkosLabelCreate(BaseCreateView):
-
     model = SkosLabel
     form_class = SkosLabelForm
 
@@ -353,7 +338,6 @@ class SkosLabelCreate(BaseCreateView):
 
 
 class SkosLabelUpdate(BaseUpdateView):
-
     model = SkosLabel
     form_class = SkosLabelForm
 

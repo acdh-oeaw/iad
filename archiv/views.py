@@ -74,7 +74,6 @@ class ArchEntDetailView(DetailView):
 
 
 class ArchEntCreate(BaseCreateView):
-
     model = ArchEnt
     form_class = ArchEntForm
 
@@ -84,7 +83,6 @@ class ArchEntCreate(BaseCreateView):
 
 
 class ArchEntUpdate(BaseUpdateView):
-
     model = ArchEnt
     form_class = ArchEntForm
 
@@ -156,7 +154,6 @@ class SiteDetailView(DetailView):
 
 
 class SiteCreate(BaseCreateView):
-
     model = Site
     form_class = SiteForm
 
@@ -166,7 +163,6 @@ class SiteCreate(BaseCreateView):
 
 
 class SiteUpdate(BaseUpdateView):
-
     model = Site
     form_class = SiteForm
 
@@ -200,7 +196,6 @@ class ResearchEventDetailView(DetailView):
 
 
 class ResearchEventCreate(BaseCreateView):
-
     model = ResearchEvent
     form_class = ResearchEventForm
 
@@ -210,7 +205,6 @@ class ResearchEventCreate(BaseCreateView):
 
 
 class ResearchEventUpdate(BaseUpdateView):
-
     model = ResearchEvent
     form_class = ResearchEventForm
 
@@ -247,7 +241,6 @@ class AltNameDetailView(DetailView):
 
 
 class AltNameCreate(BaseCreateView):
-
     model = AltName
     form_class = AltNameForm
 
@@ -257,7 +250,6 @@ class AltNameCreate(BaseCreateView):
 
 
 class AltNameUpdate(BaseUpdateView):
-
     model = AltName
     form_class = AltNameForm
 
@@ -282,7 +274,6 @@ class PeriodDetailView(DetailView):
 
 
 class PeriodCreate(BaseCreateView):
-
     model = Period
     form_class = PeriodForm
 
@@ -292,7 +283,6 @@ class PeriodCreate(BaseCreateView):
 
 
 class PeriodUpdate(BaseUpdateView):
-
     model = Period
     form_class = PeriodForm
 
@@ -321,7 +311,6 @@ class ResearchQuestionDetailView(DetailView):
 
 
 class ResearchQuestionCreate(BaseCreateView):
-
     model = ResearchQuestion
     form_class = ResearchQuestionForm
 
@@ -331,7 +320,6 @@ class ResearchQuestionCreate(BaseCreateView):
 
 
 class ResearchQuestionUpdate(BaseUpdateView):
-
     model = ResearchQuestion
     form_class = ResearchQuestionForm
 
@@ -365,7 +353,6 @@ class MonumentProtectionDetailView(DetailView):
 
 
 class MonumentProtectionCreate(BaseCreateView):
-
     model = MonumentProtection
     form_class = MonumentProtectionForm
 
@@ -375,7 +362,6 @@ class MonumentProtectionCreate(BaseCreateView):
 
 
 class MonumentProtectionUpdate(BaseUpdateView):
-
     model = MonumentProtection
     form_class = MonumentProtectionForm
 
