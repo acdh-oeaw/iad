@@ -1,4 +1,4 @@
-FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim
+FROM ghcr.io/astral-sh/uv:python3.14-bookworm-slim
 
 # install nginx postgres and gdal
 RUN apt-get update -y && apt-get upgrade -y && apt-get install nginx vim \

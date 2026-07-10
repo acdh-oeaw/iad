@@ -3,7 +3,7 @@ name = "iad"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 dependencies = [
     "acdh-django-browsing>=3.2",
     "crispy-bootstrap5>=2025.6",
