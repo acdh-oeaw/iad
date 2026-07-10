@@ -94,12 +94,12 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                     {% if shapes %}
                                         {% if self_model_name == 'site' %}
-                                            <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--site">GeoJSON (Site)</a></li>
-                                            <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--archent">GeoJSON (related ArchEnt)</a></li>
-                                            <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--researchevent">GeoJSON (related Research Activities)</a></li>
-                                            <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--monumentprotection">GeoJSON (related MPs)</a></li>
+                                            <li><a class="dropdown-item" href="{% querystring_replace %}&dl-geojson=true--site">GeoJSON (Site)</a></li>
+                                            <li><a class="dropdown-item" href="{% querystring_replace %}&dl-geojson=true--archent">GeoJSON (related ArchEnt)</a></li>
+                                            <li><a class="dropdown-item" href="{% querystring_replace %}&dl-geojson=true--researchevent">GeoJSON (related Research Activities)</a></li>
+                                            <li><a class="dropdown-item" href="{% querystring_replace %}&dl-geojson=true--monumentprotection">GeoJSON (related MPs)</a></li>
                                         {% else %}
-                                            <li><a class="dropdown-item" href="{% querystring %}&dl-geojson=true--{{ self_model_name }}">GeoJSON </a></li>
+                                            <li><a class="dropdown-item" href="{% querystring_replace %}&dl-geojson=true--{{ self_model_name }}">GeoJSON </a></li>
                                         {% endif %}
                                     {% endif %}
                                     <li><a class="dropdown-item" href="{% export_url 'csv' %}">Table Content as csv</a></li>
@@ -115,7 +115,7 @@
                                 <tr>
                                     {% for column in table.columns %}
                                     {% if column.orderable %}
-                                    <th {{ column.attrs.th.as_html }}><a href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}">{{ column.header }}</a></th>
+                                    <th {{ column.attrs.th.as_html }}><a href="{% querystring_replace table.prefixed_order_by_field=column.order_by_alias.next %}">{{ column.header }}</a></th>
                                     {% else %}
                                     <th {{ column.attrs.th.as_html }}>{{ column.header }}</th>
                                     {% endif %}
@@ -180,7 +180,7 @@
                             {% if table.page.has_previous %}
                             {% block pagination.previous.goto %}
                             <li class="previous">
-                                <a style="margin-right: 10px;"  href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}">
+                                <a style="margin-right: 10px;"  href="{% querystring_replace table.prefixed_page_field=table.page.previous_page_number %}">
                                 {% trans "Previous" %}
                                 </a>
                             </li>
@@ -202,7 +202,7 @@
                             {% if table.page.has_next %}
                             {% block pagination.next.goto %}
                             <li class="next">
-                                <a style="margin-left: 10px;" href="{% querystring table.prefixed_page_field=table.page.next_page_number %}" style="border-radius: 0px;">{% trans "Next" %}
+                                <a style="margin-left: 10px;" href="{% querystring_replace table.prefixed_page_field=table.page.next_page_number %}" style="border-radius: 0px;">{% trans "Next" %}
                                 </a>
                             </li>
                             {% endblock pagination.next.goto %}
@@ -214,7 +214,7 @@
                             <label for="goto">Go to page</label>
                             <select class="form-control" id="goto" onchange="javascript:location.href = this.value;">
                                 {% for p in table.paginator.page_range %}
-                                    <option value="{% querystring table.prefixed_page_field=p %}">{{ p }}</option>
+                                    <option value="{% querystring_replace table.prefixed_page_field=p %}">{{ p }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -226,18 +226,18 @@
                         {% if table.page.has_previous %}
                         {% block pagination.previous %}
                         <li class="previous">
-                            <a style="margin-right: 10px;"  href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}">{% trans "Previous" %}</a>
+                            <a style="margin-right: 10px;"  href="{% querystring_replace table.prefixed_page_field=table.page.previous_page_number %}">{% trans "Previous" %}</a>
                         </li>
                         {% endblock pagination.previous %}
                         {% endif %}
 
                         {% for p in table.paginator.page_range %}
                         {% if p == table.page.number %}
-                        <li><a href="{% querystring table.prefixed_page_field=p %}" style="background-color:#007bff; border-color: #2e6da4; color: #ffffff; padding: 5px 10px 5px 10px;">{{ p }}</a>
+                        <li><a href="{% querystring_replace table.prefixed_page_field=p %}" style="background-color:#007bff; border-color: #2e6da4; color: #ffffff; padding: 5px 10px 5px 10px;">{{ p }}</a>
                         </li>
                         {% else %}
                         <li>
-                            <a href="{% querystring table.prefixed_page_field=p %}" style="padding: 5px 10px 5px 10px;"> {{ p }}</a>
+                            <a href="{% querystring_replace table.prefixed_page_field=p %}" style="padding: 5px 10px 5px 10px;"> {{ p }}</a>
                         </li>
                         {% endif %}
                         {% endfor %}
@@ -246,7 +246,7 @@
                         {% if table.page.has_next %}
                         {% block pagination.next %}
                         <li class="next">
-                            <a style="margin-left: 10px;"  href="{% querystring table.prefixed_page_field=table.page.next_page_number %}">{% trans "Next" %}</a>
+                            <a style="margin-left: 10px;"  href="{% querystring_replace table.prefixed_page_field=table.page.next_page_number %}">{% trans "Next" %}</a>
                         </li>
                         {% endblock pagination.next %}
                         {% endif %}
