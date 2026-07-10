@@ -25,8 +25,6 @@ jobs:
       uses: astral-sh/setup-uv@v8.3.2
     - name: GDAL
       run: sudo apt-get install postgresql-common libpq-dev python3-gdal
-    - name: add coverage
-      run: uv add coverage
     - name: install dependencies
       run: uv sync --locked
     - name: Run migrations
