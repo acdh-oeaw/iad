@@ -56,3 +56,4 @@ skoslabel_dump.csv
 /chartsasdf
 env.secret
 secret.env
+iad_dump.sql

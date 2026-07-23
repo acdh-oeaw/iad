@@ -1,4 +1,4 @@
-rm dump.sql
-pg_dump -d iad -h 127.0.0.1 -p 5433 -U iad -c -f dump.sql
-psql --username=postgres --dbname=iad  --port=5432
-\ir dump.sql
+#!/bin/bash
+
+pg_dump -d iad -h localhost -p 5433 -U  iad -c -f iad_dump.sql
+psql -U postgres -d iad < iad_dump.sql
