@@ -27,3 +27,5 @@ dependencies = [
 dev = [
     "coverage>=7.15.0",
 ]
+[tool.ruff.lint]
+ignore = ["RUF012"]
