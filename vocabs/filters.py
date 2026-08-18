@@ -29,7 +29,7 @@ django_filters.filters.LOOKUP_TYPES = [
 def generous_concept_filter(queryset, name, value):
     """call this function through "method=generous_concept_filter" """
     if value:
-        lookup = "__".join([name, "in"])
+        lookup = f"{name}__in"
         print(f"name: {name}")
         print(f"value: {value}")
         starter = value[0]

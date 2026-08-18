@@ -22,7 +22,7 @@ class ImprintView(TemplateView):
         context = super().get_context_data(**kwargs)
         try:
             imprint_url = f"{settings.ACDH_IMPRINT_URL}{settings.REDMINE_ID}"
-        except Exception as e:
+        except AttributeError as e:
             context["imprint_body"] = e
             return context
         r = requests.get(imprint_url)
@@ -57,7 +57,7 @@ if "reversion" in settings.INSTALLED_APPS:
             context = super().get_context_data()
             current_user = self.kwargs["pk"]
             versions = Version.objects.filter(revision__user__id=current_user)
-            versions = list(set([x.object for x in versions]))
+            versions = {x.object for x in versions}
             rows = []
             for x in versions:
                 row = []

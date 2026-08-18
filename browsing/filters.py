@@ -55,11 +55,6 @@ class ReferenceListFilter(django_filters.FilterSet):
 
 
 class MonumentProtectionListFilter(django_filters.FilterSet):
-    current_land_use = django_filters.ModelMultipleChoiceFilter(
-        queryset=SkosConcept.objects.all(),
-        help_text=MonumentProtection._meta.get_field("current_land_use").help_text,
-        label=MonumentProtection._meta.get_field("current_land_use").verbose_name,
-    )
     site_id = django_filters.ModelMultipleChoiceFilter(
         queryset=Site.objects.all(),
         help_text=MonumentProtection._meta.get_field("site_id").help_text,

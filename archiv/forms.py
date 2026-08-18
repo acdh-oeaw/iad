@@ -66,7 +66,7 @@ class ArchivBaseForm(forms.ModelForm):
         elif paste_wkt:
             try:
                 GEOSGeometry(paste_wkt, srid=4326)
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 self._errors["paste_wkt"] = self.error_class([f"{e}"])
         elif shape_string_epsg and shape_string:
             data = copy_shape_str_to_poly(shape_string, shape_string_epsg)

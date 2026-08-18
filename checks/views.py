@@ -89,7 +89,7 @@ class PolyFitsArchEnts(TemplateView):
                         pass
                     else:
                         errors.append(x)
-                except:  # noqa: E722
-                    pass
+                except Exception as e:  # noqa: BLE001
+                    print(e)
         context["errors"] = errors
         return context

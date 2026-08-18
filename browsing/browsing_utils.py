@@ -1,5 +1,5 @@
 import datetime
-import time
+from zoneinfo import ZoneInfo
 
 import django_filters
 import django_tables2
@@ -143,7 +143,7 @@ class GenericListView(django_tables2.SingleTableView):
         download = self.request.GET.get("sep", None)
         if download:
             sep = self.request.GET.get("sep", ",")
-            timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            timestamp = datetime.datetime.now(ZoneInfo("Europe/Vienna")).strftime(
                 "%Y-%m-%d-%H-%M-%S"
             )
             filename = f"export_{timestamp}"
@@ -238,11 +238,11 @@ def model_to_dict(instance):
     return data
 
 
-def create_brows_config_obj(app_name, exclude_fields=[]):
+def create_brows_config_obj(app_name, exclude_fields=None):
     """
     Creates BrowsConf objects for all models defined in chosen app
     """
-    exclude = exclude_fields
+    exclude = exclude_fields or []
     try:
         models = [x for x in apps.get_app_config(app_name).get_models()]
     except LookupError:

@@ -18,7 +18,7 @@ def items_to_dict(library_id, library_type, api_key, limit=15, since_version=Non
         try:
             items = zot.everything(zot.top(since=since_version))
             bibtexs = zot.everything(zot.top(format="bibtex", since=since_version))
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             error = f"{e}"
             items = None
             bibtexs = None
@@ -26,7 +26,7 @@ def items_to_dict(library_id, library_type, api_key, limit=15, since_version=Non
         try:
             items = zot.top(limit=limit)
             bibtexs = zot.everything(zot.top(format="bibtex", limit=limit))
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             error = f"{e}"
             items = None
             bibtexs = None
@@ -34,7 +34,7 @@ def items_to_dict(library_id, library_type, api_key, limit=15, since_version=Non
         try:
             items = zot.everything(zot.top())
             bibtexs = zot.everything(zot.top(format="bibtex"))
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             error = f"{e}"
             items = None
             bibtexs = None
@@ -45,8 +45,7 @@ def items_to_dict(library_id, library_type, api_key, limit=15, since_version=Non
 
     if items:
         bibs = []
-        c = 0
-        for x in items:
+        for c, x in enumerate(items):
             bib = {}
             bib["key"] = "{}".format(x["data"].get("key"))
             bib["creators"] = "{}".format(x["data"].get("creators"))
@@ -68,7 +67,6 @@ def items_to_dict(library_id, library_type, api_key, limit=15, since_version=Non
             else:
                 bib["zot_bibtex"] = ""
             bibs.append(bib)
-            c += 1
 
     result["bibs"] = bibs
     return result

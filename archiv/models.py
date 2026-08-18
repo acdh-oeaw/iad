@@ -188,8 +188,6 @@ class IadBaseClass(IdProvider):
             }
             geojson = json.dumps(geojson)
             return geojson
-        else:
-            None
 
     def copy_instance(self):
         """Saves a copy of the current object and returns it"""
