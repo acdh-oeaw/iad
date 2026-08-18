@@ -93,7 +93,7 @@ class SkosConceptAC(autocomplete.Select2QuerySetView):
 class SkosConceptPrefLabalAC(autocomplete.Select2ListView):
     def get_list(self):
         concepts = SkosConcept.objects.filter(pref_label__icontains=self.q)
-        pref_labels = set([x.pref_label for x in concepts])
+        pref_labels = {x.pref_label for x in concepts}
         return pref_labels
 
 

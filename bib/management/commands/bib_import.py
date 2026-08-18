@@ -1,4 +1,5 @@
 import datetime
+from zoneinfo import ZoneInfo
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
@@ -26,6 +27,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        tz = ZoneInfo("Europe/Vienna")
         if options["limit"]:
             limit = int(options["limit"])
         else:
@@ -37,7 +39,7 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS(f"{limit}, {since}"))
         self.stdout.write(
-            self.style.SUCCESS(f"started: {datetime.datetime.now()}")
+            self.style.SUCCESS(f"started: {datetime.datetime.now(tz=tz)}")
         )
         items = items_to_dict(
             library_id, library_type, api_key, limit=limit, since_version=since
@@ -45,11 +47,9 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS("fetched {} items".format(len(items["items"])))
         )
-        self.stdout.write(self.style.SUCCESS(f"{datetime.datetime.now()}"))
+        self.stdout.write(self.style.SUCCESS(f"{datetime.datetime.now(tz=tz)}"))
         self.stdout.write(self.style.SUCCESS("starting creating/updating models now"))
         for x in items["bibs"]:
             temp_item = create_zotitem(x)
             self.stdout.write(self.style.SUCCESS(f"created: {temp_item}"))
-        self.stdout.write(
-            self.style.SUCCESS(f"ended: {datetime.datetime.now()}")
-        )
+        self.stdout.write(self.style.SUCCESS(f"ended: {datetime.datetime.now(tz=tz)}"))

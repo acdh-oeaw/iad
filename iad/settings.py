@@ -10,7 +10,7 @@ os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 REDMINE_ID = 9724
 ACDH_IMPRINT_URL = "https://imprint.acdh.oeaw.ac.at/"
 
-if os.environ.get("DEBUG", False):
+if os.environ.get("DEBUG", None):
     DEBUG = True
 else:
     DEBUG = False

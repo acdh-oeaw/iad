@@ -1,5 +1,5 @@
 import datetime
-import time
+from zoneinfo import ZoneInfo
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -370,7 +370,7 @@ class SkosConceptDL(GenericListView):
     formhelper_class = SkosConceptFormHelper
 
     def render_to_response(self, context):
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+        timestamp = datetime.datetime.now(ZoneInfo("Europe/Vienna")).strftime(
             "%Y-%m-%d-%H-%M-%S"
         )
         response = HttpResponse(content_type="application/xml; charset=utf-8")

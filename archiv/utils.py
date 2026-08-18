@@ -12,7 +12,7 @@ def copy_shape_str_to_poly(shape_string, shape_string_epsg):
     try:
         df = pd.read_table(io.StringIO(shape_string), sep="\t")
         worked = True
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         gdf = None
         worked = False
         errors.append(e)
@@ -20,7 +20,7 @@ def copy_shape_str_to_poly(shape_string, shape_string_epsg):
         try:
             df["geometry"] = df["wkt_geom"].apply(wkt.loads)
             gdf = gp.GeoDataFrame(df, geometry="geometry")
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             gdf = None
             worked = False
             errors.append(e)
@@ -31,13 +31,13 @@ def copy_shape_str_to_poly(shape_string, shape_string_epsg):
                 gdf = gdf.to_crs(
                     {"proj": "longlat", "ellps": "WGS84", "datum": "WGS84"}
                 )
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 gdf = None
                 errors.append(e)
     if worked:
         try:
             geom = GEOSGeometry(gdf["geometry"].values[0].wkt)
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             geom = None
             errors.append(e)
     else:
@@ -52,13 +52,13 @@ def geojson_to_poly(geo_json_str):
     result["mpoly"] = None
     try:
         geo_json = geojson.loads(geo_json_str)
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         geo_json = None
         errors.append(f"Failed to read JSON because of: {e}")
     if geo_json:
         try:
             coords = geo_json["features"][0]["geometry"]
-        except Exception as e:
+        except (KeyError, IndexError) as e:
             coords = None
             errors.append(
                 f"Failed extract coordinates from Featurecollection because of: {e}"
@@ -66,7 +66,7 @@ def geojson_to_poly(geo_json_str):
         if coords:
             try:
                 result["mpoly"] = GEOSGeometry(geo_input=str(coords))
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 errors.append(
                     f"Failed to transform coordinates to GEOSGeomentry because of: {e}"
                 )

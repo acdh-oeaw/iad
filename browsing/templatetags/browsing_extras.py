@@ -38,8 +38,8 @@ def class_definition(context):
     try:
         values["class_name"] = context["class_name"]
         values["docstring"] = context["docstring"]
-    except:  # noqa: E722
-        pass
+    except KeyError as e:
+        print(e)
     return values
 
 

@@ -33,7 +33,7 @@ def validate_only_one_instance(obj):
     # limit number of created instances https://stackoverflow.com/a/6436008/7101197
     model = obj.__class__
     if model.objects.count() > 0 and obj.id != model.objects.get().id:
-        raise ValidationError("Can only create 1 %s instance" % model.__name__)
+        raise ValidationError(f"Can only create 1 {model.__name__} instance")
 
 
 class Metadata(models.Model):

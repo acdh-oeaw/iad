@@ -1,5 +1,5 @@
 import datetime
-import time
+from zoneinfo import ZoneInfo
 
 import geopandas as gp
 import pandas as pd
@@ -78,7 +78,7 @@ def flatten_df(df):
     grouped = df.groupby("internal id")
     for group in grouped:
         new = group[1]
-        yield [new[x].unique().tolist() for x in new.keys()]
+        yield [new[x].unique().tolist() for x in new.keys()]  # noqa: SIM118
 
 
 def serialize_as_geojson(self, model_name, current_model="site"):
@@ -289,7 +289,7 @@ class MonumentProtectionListView(GenericListView):
 class MonumentProtectionDl(MonumentProtectionListView):
     def render_to_response(self, context, **kwargs):
         sep = self.request.GET.get("sep", ",")
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+        timestamp = datetime.datetime.now(ZoneInfo("Europe/Vienna")).strftime(
             "%Y-%m-%d-%H-%M-%S"
         )
         filename = f"export_{timestamp}"
@@ -398,7 +398,7 @@ class ArchEntListView(GenericListView):
 class ArchEntDl(ArchEntListView):
     def render_to_response(self, context, **kwargs):
         sep = self.request.GET.get("sep", ",")
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+        timestamp = datetime.datetime.now(ZoneInfo("Europe/Vienna")).strftime(
             "%Y-%m-%d-%H-%M-%S"
         )
         filename = f"export_{timestamp}"
@@ -504,7 +504,7 @@ class SiteListView(GenericListView):
 class SiteDl(SiteListView):
     def render_to_response(self, context, **kwargs):
         sep = self.request.GET.get("sep", ",")
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+        timestamp = datetime.datetime.now(ZoneInfo("Europe/Vienna")).strftime(
             "%Y-%m-%d-%H-%M-%S"
         )
         filename = f"export_{timestamp}"
@@ -597,7 +597,7 @@ class ResearchEventListView(GenericListView):
 class ResearchEventDl(ResearchEventListView):
     def render_to_response(self, context, **kwargs):
         sep = self.request.GET.get("sep", ",")
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+        timestamp = datetime.datetime.now(ZoneInfo("Europe/Vienna")).strftime(
             "%Y-%m-%d-%H-%M-%S"
         )
         filename = f"export_{timestamp}"
