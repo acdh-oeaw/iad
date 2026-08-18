@@ -19,11 +19,11 @@ dependencies = [
     "psycopg2-binary>=2.9.11",
     "rdflib>=7.4.0",
     "requests>=2.32.5",
+    "ruff>=0.16.3",
     "tablib>=3.10.0",
 ]
 
 [dependency-groups]
 dev = [
     "coverage>=7.15.0",
-    "ruff>=0.15.21",
 ]
