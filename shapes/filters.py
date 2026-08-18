@@ -1,4 +1,5 @@
 import django_filters
+
 from .models import Municipality
 
 django_filters.filters.LOOKUP_TYPES = [

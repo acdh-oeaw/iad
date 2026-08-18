@@ -1,7 +1,7 @@
-from dal import autocomplete
-from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from dal import autocomplete
+from django import forms
 
 from .models import Reference
 
@@ -15,7 +15,7 @@ class ReferenceForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(ReferenceForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"

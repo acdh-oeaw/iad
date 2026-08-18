@@ -1,6 +1,7 @@
 from rest_framework import viewsets
-from .models import Municipality
+
 from .api_serializers import MunicipalitySerializer
+from .models import Municipality
 
 
 class MunicipalityViewSet(viewsets.ModelViewSet):

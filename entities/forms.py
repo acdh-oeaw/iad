@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
-from django import forms
-from dal import autocomplete
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from .models import Place, AlternativeName, Institution, Person
+from dal import autocomplete
+from django import forms
+
+from .models import AlternativeName, Institution, Person, Place
 
 
 class PersonForm(forms.ModelForm):
@@ -28,7 +28,7 @@ class PersonForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(PersonForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"
@@ -56,7 +56,7 @@ class InstitutionForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(InstitutionForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"
@@ -73,7 +73,7 @@ class AlternativeNameForm(forms.ModelForm):
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
-        super(AlternativeNameForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"
@@ -90,7 +90,7 @@ class AlternativeNameFormCreate(forms.ModelForm):
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
-        super(AlternativeNameFormCreate, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
 
@@ -107,7 +107,7 @@ class PlaceForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(PlaceForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
 
@@ -124,7 +124,7 @@ class PlaceFormCreate(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(PlaceFormCreate, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.form_class = "form-horizontal"

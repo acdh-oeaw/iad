@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+
 from idprovider.models import IdProvider
 
 BOOLEAN_CHOICES = ((True, "Yes"), (False, "No"))
@@ -32,7 +33,7 @@ class AlternativeName(IdProvider):
         return False
 
     def __str__(self):
-        return "{}".format(self.name)
+        return f"{self.name}"
 
 
 class Place(IdProvider):
@@ -63,12 +64,10 @@ class Place(IdProvider):
     )
 
     def get_geonames_url(self):
-        if self.geonames_id.startswith("ht") and self.geonames_id.endswith(".html"):
-            return self.geonames_id
-        elif self.geonames_id.startswith("ht"):
+        if self.geonames_id.startswith("ht") and self.geonames_id.endswith(".html") or self.geonames_id.startswith("ht"):
             return self.geonames_id
         else:
-            return "http://www.geonames.org/{}".format(self.geonames_id)
+            return f"http://www.geonames.org/{self.geonames_id}"
 
     def get_geonames_rdf(self):
         return None
@@ -77,7 +76,7 @@ class Place(IdProvider):
         if self.geonames_id:
             new_id = self.get_geonames_url()
             self.geonames_id = new_id
-        super(Place, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     @classmethod
     def get_listview_url(self):
@@ -103,7 +102,7 @@ class Place(IdProvider):
         return reverse("entities:place_detail", kwargs={"pk": self.id})
 
     def __str__(self):
-        return "{}".format(self.name)
+        return f"{self.name}"
 
 
 class Institution(IdProvider):
@@ -185,7 +184,7 @@ class Institution(IdProvider):
         return False
 
     def __str__(self):
-        return "{}".format(self.written_name)
+        return f"{self.written_name}"
 
 
 class Person(IdProvider):
@@ -276,10 +275,10 @@ class Person(IdProvider):
 
     def __str__(self):
         if self.written_name:
-            return "{}".format(self.written_name)
+            return f"{self.written_name}"
         elif self.name and self.forename:
-            return "{}, {}".format(self.name, self.forename)
+            return f"{self.name}, {self.forename}"
         elif self.name:
-            return "{}".format(self.name)
+            return f"{self.name}"
         else:
             return "No name provided"

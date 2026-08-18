@@ -1,29 +1,29 @@
 import django_filters
 from dal import autocomplete
-from archiv.models import (
-    MonumentProtection,
-    ResearchEvent,
-    ResearchQuestion,
-    ArchEnt,
-    Period,
-    Site,
-    AltName,
-    HERITAGE_STATUS_CHOICES,
-    ARCHENT_CERTAINTY,
-    SITE_OWNERSHIP,
-    SITE_LONGTERMMANGEMENT,
-    SITE_ACCESSIBILITY,
-    SITE_INFRASTRUCTURE,
-    SITE_POTENTIALSURROUNDINGS,
-    SITE_VISIBILITY,
-)
-from bib.models import Reference, ZotItem
-from entities.models import Place, AlternativeName, Institution, Person
-from vocabs.models import SkosConcept
-from vocabs.filters import generous_concept_filter
-from shapes.models import Municipality
 from django import forms
 
+from archiv.models import (
+    ARCHENT_CERTAINTY,
+    HERITAGE_STATUS_CHOICES,
+    SITE_ACCESSIBILITY,
+    SITE_INFRASTRUCTURE,
+    SITE_LONGTERMMANGEMENT,
+    SITE_OWNERSHIP,
+    SITE_POTENTIALSURROUNDINGS,
+    SITE_VISIBILITY,
+    AltName,
+    ArchEnt,
+    MonumentProtection,
+    Period,
+    ResearchEvent,
+    ResearchQuestion,
+    Site,
+)
+from bib.models import Reference, ZotItem
+from entities.models import AlternativeName, Institution, Person, Place
+from shapes.models import Municipality
+from vocabs.filters import generous_concept_filter
+from vocabs.models import SkosConcept
 
 django_filters.filters.LOOKUP_TYPES = [
     ("", "---------"),

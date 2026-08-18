@@ -1,11 +1,13 @@
+from collections import Counter
+
 import pandas as pd
 from django import template
-from collections import Counter
-from django.db.models import Q
 from django.contrib.gis.db.models import Union
-from vocabs.models import SkosConcept
+from django.db.models import Q
+
+from archiv.models import MonumentProtection, ResearchEvent, Site
 from vocabs.filters import generous_concept_filter
-from archiv.models import Site, MonumentProtection, ResearchEvent
+from vocabs.models import SkosConcept
 
 register = template.Library()
 
@@ -79,9 +81,9 @@ def site_extent():
         u = None
     if u:
         try:
-            sq_m = "{:,.0f}".format(u.area / 1000000)
+            sq_m = f"{u.area / 1000000:,.0f}"
         except Exception as e:
-            sq_m = "{}".format(e)
+            sq_m = f"{e}"
         return sq_m
     else:
         return "{} there is currently something going wrong"
@@ -112,9 +114,9 @@ def excavation_extent():
         u = None
     if u:
         try:
-            sq_m = "{:,.0f}".format(u.area / 1000000)
+            sq_m = f"{u.area / 1000000:,.0f}"
         except Exception as e:
-            sq_m = "{}".format(e)
+            sq_m = f"{e}"
         return sq_m
     else:
         return "{} there is currently something going wrong"
@@ -135,9 +137,9 @@ def geophysical_extent():
         u = None
     if u:
         try:
-            sq_m = "{:,.0f}".format(u.area / 1000000)
+            sq_m = f"{u.area / 1000000:,.0f}"
         except Exception as e:
-            sq_m = "{}".format(e)
+            sq_m = f"{e}"
         return sq_m
     else:
         return "there is currently something going wrong"
@@ -154,7 +156,7 @@ def touristic_potential():
     df = (
         pd.DataFrame(list(Site.objects.all().values_list(*potential)))
         .fillna(4)
-        .applymap(lambda x: int((str(x)[0])))
+        .applymap(lambda x: int(str(x)[0]))
     )
     df["sum"] = df.sum(axis=1)
     df["status"] = df.apply(lambda x: calculate_potential(x["sum"]), axis=1)

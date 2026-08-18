@@ -1,5 +1,7 @@
 import os
+
 from django.contrib.gis.utils import LayerMapping
+
 from .models import Municipality, municipality_mapping
 
 cc_shps = os.path.abspath(

@@ -1,4 +1,5 @@
 from pyzotero import zotero
+
 from bib.models import ZotItem
 
 
@@ -26,7 +27,7 @@ def items_to_dict(library_id, library_type, api_key, limit=15, since_version=Non
             items = zot.top(limit=limit)
             bibtexs = zot.everything(zot.top(format="bibtex", limit=limit))
         except Exception as e:
-            error = "{}".format(e)
+            error = f"{e}"
             items = None
             bibtexs = None
     else:
@@ -34,7 +35,7 @@ def items_to_dict(library_id, library_type, api_key, limit=15, since_version=Non
             items = zot.everything(zot.top())
             bibtexs = zot.everything(zot.top(format="bibtex"))
         except Exception as e:
-            error = "{}".format(e)
+            error = f"{e}"
             items = None
             bibtexs = None
 
@@ -61,7 +62,7 @@ def items_to_dict(library_id, library_type, api_key, limit=15, since_version=Non
             bib["zot_api_link"] = "{}".format(x["links"]["self"]["href"])
             if len(bibtexs.entries) == len(items):
                 try:
-                    bib["zot_bibtex"] = "{}".format(bibtexs.entries[c])
+                    bib["zot_bibtex"] = f"{bibtexs.entries[c]}"
                 except IndexError:
                     bib["zot_bibtex"] = ""
             else:

@@ -1,17 +1,17 @@
-from django.views.generic import TemplateView
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db.models import Union
 from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
 
-from archiv.models import Site, ArchEnt, MonumentProtection, ResearchEvent
+from archiv.models import ArchEnt, MonumentProtection, ResearchEvent, Site
 
 
 class GenericCheck(TemplateView):
     template_name = "checks/generic_check.html"
 
     def get_context_data(self, **kwargs):
-        context = super(GenericCheck, self).get_context_data()
+        context = super().get_context_data()
         model_name = self.kwargs["model_name"]
         context["entity"] = model_name
         if model_name in ["archent", "researchevent", "monumentprotection"]:
@@ -29,7 +29,7 @@ class InValidPoly(TemplateView):
     template_name = "checks/poly_invalid.html"
 
     def get_context_data(self, **kwargs):
-        context = super(InValidPoly, self).get_context_data()
+        context = super().get_context_data()
         classes = [Site, ArchEnt, MonumentProtection, ResearchEvent]
         invalid = []
         all = []
@@ -49,7 +49,7 @@ class PolygonExists(TemplateView):
     template_name = "checks/poly_exists.html"
 
     def get_context_data(self, **kwargs):
-        context = super(PolygonExists, self).get_context_data()
+        context = super().get_context_data()
         model_name = self.kwargs["model_name"]
         entity_model = ContentType.objects.get(
             app_label="archiv", model=model_name
@@ -63,14 +63,14 @@ class PolygonExists(TemplateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(PolygonExists, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class PolyFitsArchEnts(TemplateView):
     template_name = "checks/polyfitsarchents.html"
 
     def get_context_data(self, **kwargs):
-        context = super(PolyFitsArchEnts, self).get_context_data()
+        context = super().get_context_data()
         Site.objects.exclude(polygon=None)
         errors = []
         for x in Site.objects.exclude(polygon=None):

@@ -1,11 +1,12 @@
 from django.urls import path
+
 from . import dal_views
 from .models import (
+    AltName,
+    Period,
     ResearchEvent,
     ResearchQuestion,
-    Period,
     Site,
-    AltName,
 )
 
 app_name = "archiv"

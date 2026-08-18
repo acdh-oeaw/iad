@@ -133,20 +133,20 @@ class GenericListView(ExportMixin, SingleTableView):
     template_name = "browsing/generic_list.html"
 
     def get_queryset(self, **kwargs):
-        qs = super(GenericListView, self).get_queryset()
+        qs = super().get_queryset()
         self.filter = self.filter_class(self.request.GET, queryset=qs)
         self.filter.form.helper = self.formhelper_class()
         return self.filter.qs.distinct()
 
     def get_table(self, **kwargs):
-        table = super(GenericListView, self).get_table()
+        table = super().get_table()
         RequestConfig(
             self.request, paginate={"page": 1, "per_page": self.paginate_by}
         ).configure(table)
         return table
 
     def get_context_data(self, **kwargs):
-        context = super(GenericListView, self).get_context_data()
+        context = super().get_context_data()
         ct = ContentType.objects.get(model=self.model.__name__.lower()).model_class()
         try:
             ct._meta.get_field("polygon")
@@ -166,11 +166,11 @@ class GenericListView(ExportMixin, SingleTableView):
             context["shapes"] = shapes
         context["self_model_name"] = self.model.__name__.lower()
         context[self.context_filter_name] = self.filter
-        context["docstring"] = "{}".format(self.model.__doc__)
+        context["docstring"] = f"{self.model.__doc__}"
         if self.model._meta.verbose_name:
-            context["class_name"] = "{}".format(self.model._meta.verbose_name.title())
+            context["class_name"] = f"{self.model._meta.verbose_name.title()}"
         else:
-            context["class_name"] = "{}".format(self.model.__name__)
+            context["class_name"] = f"{self.model.__name__}"
         try:
             context["create_view_link"] = self.model.get_createview_url()
         except AttributeError:
@@ -209,14 +209,14 @@ class GenericListView(ExportMixin, SingleTableView):
                 )
                 response = HttpResponse(gdf.to_json(), content_type="application/json")
                 response["Content-Disposition"] = (
-                    'attachment; filename="{}.geojson"'.format(model_to_download)
+                    f'attachment; filename="{model_to_download}.geojson"'
                 )
                 return response
             else:
-                response = super(GenericListView, self).render_to_response(context)
+                response = super().render_to_response(context)
                 return response
         else:
-            response = super(GenericListView, self).render_to_response(context)
+            response = super().render_to_response(context)
             return response
 
 
@@ -232,7 +232,7 @@ class ReferenceListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(ReferenceListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -265,7 +265,7 @@ class MonumentProtectionListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(MonumentProtectionListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -292,7 +292,7 @@ class MonumentProtectionDl(MonumentProtectionListView):
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
             "%Y-%m-%d-%H-%M-%S"
         )
-        filename = "export_{}".format(timestamp)
+        filename = f"export_{timestamp}"
         response = HttpResponse(content_type="text/csv")
         conf_items = list(
             BrowsConf.objects.filter(model_name="monumentprotection").values_list(
@@ -311,13 +311,11 @@ class MonumentProtectionDl(MonumentProtectionListView):
                 )
             except AssertionError:
                 response["Content-Disposition"] = (
-                    'attachment; filename="{}.csv"'.format(filename)
+                    f'attachment; filename="{filename}.csv"'
                 )
                 return response
         else:
-            response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
-                filename
-            )
+            response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
             return response
         if sep == "comma":
             df.to_csv(response, sep=",", index=False)
@@ -327,9 +325,7 @@ class MonumentProtectionDl(MonumentProtectionListView):
             df.to_csv(response, sep="\t", index=False)
         else:
             df.to_csv(response, sep=",", index=False)
-        response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
-            filename
-        )
+        response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
         return response
 
 
@@ -345,7 +341,7 @@ class ResearchQuestionListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(ResearchQuestionListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -378,7 +374,7 @@ class ArchEntListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(ArchEntListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -405,7 +401,7 @@ class ArchEntDl(ArchEntListView):
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
             "%Y-%m-%d-%H-%M-%S"
         )
-        filename = "export_{}".format(timestamp)
+        filename = f"export_{timestamp}"
         response = HttpResponse(content_type="text/csv")
         conf_items = list(
             BrowsConf.objects.filter(model_name="archent").values_list(
@@ -424,13 +420,11 @@ class ArchEntDl(ArchEntListView):
                 )
             except AssertionError:
                 response["Content-Disposition"] = (
-                    'attachment; filename="{}.csv"'.format(filename)
+                    f'attachment; filename="{filename}.csv"'
                 )
                 return response
         else:
-            response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
-                filename
-            )
+            response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
             return response
         if sep == "comma":
             df.to_csv(response, sep=",", index=False)
@@ -440,9 +434,7 @@ class ArchEntDl(ArchEntListView):
             df.to_csv(response, sep="\t", index=False)
         else:
             df.to_csv(response, sep=",", index=False)
-        response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
-            filename
-        )
+        response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
         return response
 
 
@@ -458,7 +450,7 @@ class SiteListView(GenericListView):
 
     def get_queryset(self, **kwargs):
         user = self.request.user
-        qs = super(SiteListView, self).get_queryset()
+        qs = super().get_queryset()
         if user.is_authenticated:
             pass
         else:
@@ -473,7 +465,7 @@ class SiteListView(GenericListView):
 
     def get_context_data(self, **kwargs):
         qs = self.get_queryset()
-        context = super(SiteListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -515,7 +507,7 @@ class SiteDl(SiteListView):
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
             "%Y-%m-%d-%H-%M-%S"
         )
-        filename = "export_{}".format(timestamp)
+        filename = f"export_{timestamp}"
         response = HttpResponse(content_type="text/csv")
         conf_items = list(
             BrowsConf.objects.filter(model_name="site").values_list(
@@ -534,13 +526,11 @@ class SiteDl(SiteListView):
                 )
             except AssertionError:
                 response["Content-Disposition"] = (
-                    'attachment; filename="{}.csv"'.format(filename)
+                    f'attachment; filename="{filename}.csv"'
                 )
                 return response
         else:
-            response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
-                filename
-            )
+            response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
             return response
         if sep == "comma":
             df.to_csv(response, sep=",", index=False)
@@ -550,9 +540,7 @@ class SiteDl(SiteListView):
             df.to_csv(response, sep="\t", index=False)
         else:
             df.to_csv(response, sep=",", index=False)
-        response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
-            filename
-        )
+        response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
         return response
 
 
@@ -563,14 +551,14 @@ class MapView(SiteListView):
     formhelper_class = SiteFilterFormHelper
 
     def get_context_data(self, **kwargs):
-        context = super(MapView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         context["sites"] = self.get_queryset()
         return context
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MapView, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ResearchEventListView(GenericListView):
@@ -585,7 +573,7 @@ class ResearchEventListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(ResearchEventListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -612,7 +600,7 @@ class ResearchEventDl(ResearchEventListView):
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
             "%Y-%m-%d-%H-%M-%S"
         )
-        filename = "export_{}".format(timestamp)
+        filename = f"export_{timestamp}"
         response = HttpResponse(content_type="text/csv")
         conf_items = list(
             BrowsConf.objects.filter(model_name="researchevent").values_list(
@@ -631,13 +619,11 @@ class ResearchEventDl(ResearchEventListView):
                 )
             except AssertionError:
                 response["Content-Disposition"] = (
-                    'attachment; filename="{}.csv"'.format(filename)
+                    f'attachment; filename="{filename}.csv"'
                 )
                 return response
         else:
-            response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
-                filename
-            )
+            response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
             return response
         if sep == "comma":
             df.to_csv(response, sep=",", index=False)
@@ -647,9 +633,7 @@ class ResearchEventDl(ResearchEventListView):
             df.to_csv(response, sep="\t", index=False)
         else:
             df.to_csv(response, sep=",", index=False)
-        response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
-            filename
-        )
+        response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
         return response
 
 
@@ -665,7 +649,7 @@ class AltNameListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(AltNameListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -706,7 +690,7 @@ class PeriodListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(PeriodListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -739,7 +723,7 @@ class AlternativeNameListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(AlternativeNameListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -772,7 +756,7 @@ class InstitutionListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(InstitutionListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -805,7 +789,7 @@ class PlaceListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(PlaceListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -838,7 +822,7 @@ class PersonListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(PersonListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns

@@ -1,4 +1,5 @@
 import os
+
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
@@ -18,9 +19,9 @@ class Command(BaseCommand):
                 if "migrations" in os.path.join(root, file) and "00" in os.path.join(
                     root, file
                 ):
-                    deleted_files.append((os.path.join(root, file)))
+                    deleted_files.append(os.path.join(root, file))
                     os.remove(os.path.join(root, file))
                     counter = +1
-        self.stdout.write("Following {} files have been deleted".format(counter))
+        self.stdout.write(f"Following {counter} files have been deleted")
         for x in deleted_files:
-            self.stdout.write("Deleted: {}".format(x))
+            self.stdout.write(f"Deleted: {x}")

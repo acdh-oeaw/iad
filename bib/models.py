@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-from django.urls import reverse
 from django.db import models
+from django.urls import reverse
 
 
 class ZotItem(models.Model):
@@ -77,24 +76,18 @@ class ZotItem(models.Model):
 
     def __str__(self):
         if self.zot_bibtex:
-            return "{}".format(self.zot_bibtex)
+            return f"{self.zot_bibtex}"
         elif (
             self.zot_title and self.zot_creator and self.zot_pub_title and self.zot_date
         ):
-            return "title: {}; pub-title: {}; creator(s): {}; year: {}".format(
-                self.zot_title, self.zot_pub_title, self.zot_creator, self.zot_date
-            )
+            return f"title: {self.zot_title}; pub-title: {self.zot_pub_title}; creator(s): {self.zot_creator}; year: {self.zot_date}"
         elif self.zot_title and self.zot_creator and self.zot_pub_title:
-            return "title: {}; pub-title: {}; creator(s): {}; year: no date provided".format(
-                self.zot_title, self.zot_pub_title, self.zot_creator
-            )
+            return f"title: {self.zot_title}; pub-title: {self.zot_pub_title}; creator(s): {self.zot_creator}; year: no date provided"
         elif self.zot_creator and self.zot_pub_title:
-            return "title: no title provided;\
-            pub-title: {}; creator(s): {}; year: no date provided".format(
-                self.zot_pub_title, self.zot_creator
-            )
+            return f"title: no title provided;\
+            pub-title: {self.zot_pub_title}; creator(s): {self.zot_creator}; year: no date provided"
         else:
-            return "{}".format(self.zot_key)
+            return f"{self.zot_key}"
 
     def get_zotero_url(self):
         "Returns the objects URL pointing to its Zotero entry"
@@ -152,6 +145,6 @@ class Reference(models.Model):
 
     def __str__(self):
         try:
-            return "{}, {}".format(self.zotero_item, self.page)
+            return f"{self.zotero_item}, {self.page}"
         except:  # noqa: E722
-            return "{}".format(self.id)
+            return f"{self.id}"

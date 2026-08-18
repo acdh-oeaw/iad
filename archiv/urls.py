@@ -1,7 +1,6 @@
 from django.urls import path
-from . import views
-from . import copy_views
-from . import geojson_views
+
+from . import copy_views, geojson_views, views
 
 app_name = "archiv"
 

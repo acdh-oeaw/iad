@@ -1,13 +1,13 @@
 import django_filters
 from dal import autocomplete
+
 from .models import (
+    SkosCollection,
     SkosConcept,
     SkosConceptScheme,
-    get_all_children,
     SkosLabel,
-    SkosCollection,
+    get_all_children,
 )
-
 
 django_filters.filters.LOOKUP_TYPES = [
     ("", "---------"),
@@ -30,11 +30,11 @@ def generous_concept_filter(queryset, name, value):
     """call this function through "method=generous_concept_filter" """
     if value:
         lookup = "__".join([name, "in"])
-        print("name: {}".format(name))
-        print("value: {}".format(value))
+        print(f"name: {name}")
+        print(f"value: {value}")
         starter = value[0]
         all = get_all_children(starter, include_self=True)
-        print("all :{}".format(all))
+        print(f"all :{all}")
         qs = queryset.filter(**{lookup: all})
         return qs
     return queryset

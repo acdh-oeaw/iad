@@ -1,20 +1,22 @@
-import requests
 import json
-from django.shortcuts import render, redirect
-from django.views import generic
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.views.generic.detail import DetailView
-from django.urls import reverse_lazy
+
+import requests
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from .models import Place, AlternativeName, Institution, Person
+from django.views import generic
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
 from .forms import (
-    PlaceForm,
-    PlaceFormCreate,
     AlternativeNameForm,
     InstitutionForm,
     PersonForm,
+    PlaceForm,
+    PlaceFormCreate,
 )
+from .models import AlternativeName, Institution, Person, Place
 
 
 class PersonDetailView(DetailView):
@@ -23,7 +25,7 @@ class PersonDetailView(DetailView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(PersonDetailView, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class PersonCreate(CreateView):
@@ -33,7 +35,7 @@ class PersonCreate(CreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(PersonCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class PersonUpdate(UpdateView):
@@ -43,7 +45,7 @@ class PersonUpdate(UpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(PersonUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class PersonDelete(DeleteView):
@@ -53,7 +55,7 @@ class PersonDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(PersonDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class InstitutionCreate(CreateView):
@@ -63,7 +65,7 @@ class InstitutionCreate(CreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(InstitutionCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class InstitutionUpdate(UpdateView):
@@ -73,7 +75,7 @@ class InstitutionUpdate(UpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(InstitutionUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class InstitutionDetailView(DetailView):
@@ -82,7 +84,7 @@ class InstitutionDetailView(DetailView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(InstitutionDetailView, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class InstitutionDelete(DeleteView):
@@ -92,7 +94,7 @@ class InstitutionDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(InstitutionDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class AlternativeNameListView(generic.ListView):
@@ -103,7 +105,7 @@ class AlternativeNameListView(generic.ListView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(AlternativeNameListView, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class AlternativeNameCreate(CreateView):
@@ -113,7 +115,7 @@ class AlternativeNameCreate(CreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(AlternativeNameCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class AlternativeNameUpdate(UpdateView):
@@ -123,7 +125,7 @@ class AlternativeNameUpdate(UpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(AlternativeNameUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class AlternativeNameDetailView(DetailView):
@@ -132,7 +134,7 @@ class AlternativeNameDetailView(DetailView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(AlternativeNameDetailView, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class AlternativeNameDelete(DeleteView):
@@ -142,7 +144,7 @@ class AlternativeNameDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(AlternativeNameDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class PlaceDetailView(DetailView):
@@ -151,7 +153,7 @@ class PlaceDetailView(DetailView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(PlaceDetailView, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class PlaceListView(generic.ListView):
@@ -163,7 +165,7 @@ class PlaceListView(generic.ListView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(PlaceListView, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 @login_required
@@ -225,4 +227,4 @@ class PlaceDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(PlaceDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)

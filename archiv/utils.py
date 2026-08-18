@@ -1,9 +1,10 @@
 import io
+
 import geojson
-import pandas as pd
 import geopandas as gp
-from shapely import wkt
+import pandas as pd
 from django.contrib.gis.geos import GEOSGeometry
+from shapely import wkt
 
 
 def copy_shape_str_to_poly(shape_string, shape_string_epsg):
@@ -25,7 +26,7 @@ def copy_shape_str_to_poly(shape_string, shape_string_epsg):
             errors.append(e)
         if worked:
             try:
-                epsg = "epsg:{}".format(shape_string_epsg)
+                epsg = f"epsg:{shape_string_epsg}"
                 gdf.crs = {"init": epsg}
                 gdf = gdf.to_crs(
                     {"proj": "longlat", "ellps": "WGS84", "datum": "WGS84"}
@@ -53,25 +54,21 @@ def geojson_to_poly(geo_json_str):
         geo_json = geojson.loads(geo_json_str)
     except Exception as e:
         geo_json = None
-        errors.append("Failed to read JSON because of: {}".format(e))
+        errors.append(f"Failed to read JSON because of: {e}")
     if geo_json:
         try:
             coords = geo_json["features"][0]["geometry"]
         except Exception as e:
             coords = None
             errors.append(
-                "Failed extract coordinates from Featurecollection because of: {}".format(
-                    e
-                )
+                f"Failed extract coordinates from Featurecollection because of: {e}"
             )
         if coords:
             try:
                 result["mpoly"] = GEOSGeometry(geo_input=str(coords))
             except Exception as e:
                 errors.append(
-                    "Failed to transform coordinates to GEOSGeomentry because of: {}".format(
-                        e
-                    )
+                    f"Failed to transform coordinates to GEOSGeomentry because of: {e}"
                 )
     result["errors"] = errors
 

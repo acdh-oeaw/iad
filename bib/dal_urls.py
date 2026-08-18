@@ -1,6 +1,7 @@
 from django.urls import path
+
 from . import dal_views
-from .models import ZotItem, Reference
+from .models import Reference, ZotItem
 
 app_name = "bib"
 

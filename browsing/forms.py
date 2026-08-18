@@ -6,7 +6,7 @@ from crispy_forms.layout import Fieldset, Layout
 
 class GenericFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(GenericFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -15,7 +15,7 @@ class GenericFilterFormHelper(FormHelper):
 
 class ReferenceFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(ReferenceFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -32,7 +32,7 @@ class ReferenceFormHelper(FormHelper):
 
 class MonumentProtectionFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(MonumentProtectionFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -59,7 +59,7 @@ class MonumentProtectionFormHelper(FormHelper):
 
 class ResearchQuestionFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(ResearchQuestionFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -71,7 +71,7 @@ class ResearchQuestionFormHelper(FormHelper):
 
 class ArchEntFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(ArchEntFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -107,7 +107,7 @@ class ArchEntFilterFormHelper(FormHelper):
 
 class SiteFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(SiteFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -191,7 +191,7 @@ class SiteFilterFormHelper(FormHelper):
 
 class ResearchEventFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(ResearchEventFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -218,7 +218,7 @@ class ResearchEventFilterFormHelper(FormHelper):
 
 class AltNameFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(AltNameFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -233,7 +233,7 @@ class AltNameFilterFormHelper(FormHelper):
 
 class PeriodFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(PeriodFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -257,7 +257,7 @@ class PeriodFilterFormHelper(FormHelper):
 
 class PersonFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(PersonFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -284,7 +284,7 @@ class PersonFilterFormHelper(FormHelper):
 
 class AlternativeNameFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(AlternativeNameFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -296,7 +296,7 @@ class AlternativeNameFilterFormHelper(FormHelper):
 
 class InstitutionFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(InstitutionFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -321,7 +321,7 @@ class InstitutionFilterFormHelper(FormHelper):
 
 class PlaceFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(PlaceFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"

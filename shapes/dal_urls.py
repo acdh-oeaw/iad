@@ -1,4 +1,5 @@
 from django.urls import path
+
 from . import dal_views
 from .models import Municipality
 

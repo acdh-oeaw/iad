@@ -1,10 +1,10 @@
 import sys
+
 import requests
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
 
 from bib.models import ZotItem
-
 
 Z_USER_ID = settings.Z_USER_ID
 Z_COLLECTION = settings.Z_COLLECTION
@@ -16,9 +16,7 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
         root = "https://api.zotero.org/users/"
-        params = "{}/collections/{}/items/top?v=3&key={}".format(
-            Z_USER_ID, Z_COLLECTION, Z_API_KEY
-        )
+        params = f"{Z_USER_ID}/collections/{Z_COLLECTION}/items/top?v=3&key={Z_API_KEY}"
         url = root + params + "&sort=dateModified&limit=100"
         try:
             r = requests.get(url)
@@ -42,4 +40,4 @@ class Command(NoArgsCommand):
                 saved.append(x["data"])
             except:  # noqa: E722
                 failed.append(x["data"])
-        print("saved: {} objects \nfailed: {} objects".format(len(saved), len(failed)))
+        print(f"saved: {len(saved)} objects \nfailed: {len(failed)} objects")

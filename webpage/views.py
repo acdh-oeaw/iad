@@ -54,7 +54,7 @@ if "reversion" in settings.INSTALLED_APPS:
         template_name = "webpage/user_detail.html"
 
         def get_context_data(self, **kwargs):
-            context = super(UserDetailView, self).get_context_data()
+            context = super().get_context_data()
             current_user = self.kwargs["pk"]
             versions = Version.objects.filter(revision__user__id=current_user)
             versions = list(set([x.object for x in versions]))
@@ -73,7 +73,7 @@ if "reversion" in settings.INSTALLED_APPS:
 
         @method_decorator(login_required)
         def dispatch(self, *args, **kwargs):
-            return super(UserDetailView, self).dispatch(*args, **kwargs)
+            return super().dispatch(*args, **kwargs)
 
 else:
     pass

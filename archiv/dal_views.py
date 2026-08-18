@@ -1,11 +1,12 @@
-from django.db.models import Q
 from dal import autocomplete
+from django.db.models import Q
+
 from .models import (
+    AltName,
+    Period,
     ResearchEvent,
     ResearchQuestion,
-    Period,
     Site,
-    AltName,
 )
 
 

@@ -1,9 +1,10 @@
-from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets
 
-from .models import Site, ArchEnt
-from .api_serializers import SiteSerializer, ArchEntSerializer
 from browsing.filters import ArchEntListFilter
+
+from .api_serializers import ArchEntSerializer, SiteSerializer
+from .models import ArchEnt, Site
 
 
 class SiteViewSet(viewsets.ModelViewSet):

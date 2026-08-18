@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Metadata, SkosLabel, SkosConcept, SkosConceptScheme, SkosNamespace
+
+from .models import Metadata, SkosConcept, SkosConceptScheme, SkosLabel, SkosNamespace
 
 admin.site.register(Metadata)
 admin.site.register(SkosLabel)

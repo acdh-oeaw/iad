@@ -1,6 +1,7 @@
+from django.conf import settings
 from django.urls import path
 from django.views.generic.base import RedirectView
-from django.conf import settings
+
 from . import views
 
 app_name = "webpage"

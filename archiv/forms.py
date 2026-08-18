@@ -1,21 +1,20 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Div, Fieldset, Layout, Submit
 from dal import autocomplete
 from django import forms
 from django.contrib.gis.geos import GEOSGeometry
-
 from leaflet.forms.widgets import LeafletWidget
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset, Div
 
 from .models import (
+    AltName,
+    ArchEnt,
     MonumentProtection,
+    Period,
     ResearchEvent,
     ResearchQuestion,
-    ArchEnt,
-    Period,
     Site,
-    AltName,
 )
-from .utils import geojson_to_poly, copy_shape_str_to_poly
+from .utils import copy_shape_str_to_poly, geojson_to_poly
 
 
 class ArchivBaseForm(forms.ModelForm):
@@ -52,7 +51,7 @@ class ArchivBaseForm(forms.ModelForm):
     )
 
     def clean(self):
-        cleaned_data = super(ArchivBaseForm, self).clean()
+        cleaned_data = super().clean()
         print("HALLO FROM OVERRIDEN CLEAN METHOD")
         geo_json_str = cleaned_data["paste_geojson"]
         paste_wkt = self.cleaned_data["paste_wkt"]
@@ -68,7 +67,7 @@ class ArchivBaseForm(forms.ModelForm):
             try:
                 GEOSGeometry(paste_wkt, srid=4326)
             except Exception as e:
-                self._errors["paste_wkt"] = self.error_class(["{}".format(e)])
+                self._errors["paste_wkt"] = self.error_class([f"{e}"])
         elif shape_string_epsg and shape_string:
             data = copy_shape_str_to_poly(shape_string, shape_string_epsg)
             if data["errors"]:
@@ -76,7 +75,7 @@ class ArchivBaseForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, commit=True):
-        instance = super(ArchivBaseForm, self).save(commit=True)
+        instance = super().save(commit=True)
         print("HI from SAVE METHOD")
         geo_json_str = self.cleaned_data["paste_geojson"]
         paste_wkt = self.cleaned_data["paste_wkt"]
@@ -132,7 +131,7 @@ class MonumentProtectionForm(ArchivBaseForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(MonumentProtectionForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["site_id"].required = True
         self.helper = FormHelper()
         self.helper.form_tag = True
@@ -173,7 +172,7 @@ class ResearchQuestionForm(ArchivBaseForm):
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
-        super(ResearchQuestionForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"
@@ -238,7 +237,7 @@ class ArchEntForm(ArchivBaseForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(ArchEntForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["site_id"].required = True
         self.fields["ent_type"].required = True
         self.helper = FormHelper()
@@ -348,7 +347,7 @@ class ResearchEventForm(ArchivBaseForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(ResearchEventForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.fields["start_date"].required = True
         self.helper.form_tag = True
@@ -410,7 +409,7 @@ class PeriodForm(ArchivBaseForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(PeriodForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"
@@ -490,7 +489,7 @@ class SiteForm(ArchivBaseForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(SiteForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.fields["name"].required = True
         self.fields["public"].required = False
@@ -564,7 +563,7 @@ class AltNameForm(forms.ModelForm):
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
-        super(AltNameForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"

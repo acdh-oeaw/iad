@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Place, AlternativeName
+
+from .models import AlternativeName, Place
 
 
 class GeoJsonSerializer(serializers.BaseSerializer):

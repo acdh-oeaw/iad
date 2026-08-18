@@ -33,7 +33,7 @@ def get_entities_table(model_class):
 
 class GenericFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(GenericFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -79,13 +79,13 @@ class GenericListView(django_tables2.SingleTableView):
         return all_cols
 
     def get_queryset(self, **kwargs):
-        qs = super(GenericListView, self).get_queryset()
+        qs = super().get_queryset()
         self.filter = self.filter_class(self.request.GET, queryset=qs)
         self.filter.form.helper = self.formhelper_class()
         return self.filter.qs
 
     def get_table(self, **kwargs):
-        table = super(GenericListView, self).get_table()
+        table = super().get_table()
         default_cols = self.init_columns
         all_cols = table.base_columns.keys()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -94,20 +94,20 @@ class GenericListView(django_tables2.SingleTableView):
         return table
 
     def get_context_data(self, **kwargs):
-        context = super(GenericListView, self).get_context_data()
+        context = super().get_context_data()
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
         ]
         context["togglable_colums"] = togglable_colums
         context[self.context_filter_name] = self.filter
-        context["docstring"] = "{}".format(self.model.__doc__)
+        context["docstring"] = f"{self.model.__doc__}"
         if self.model._meta.verbose_name_plural:
-            context["class_name"] = "{}".format(self.model._meta.verbose_name.title())
+            context["class_name"] = f"{self.model._meta.verbose_name.title()}"
         else:
             if self.model.__name__.endswith("s"):
-                context["class_name"] = "{}".format(self.model.__name__)
+                context["class_name"] = f"{self.model.__name__}"
             else:
-                context["class_name"] = "{}s".format(self.model.__name__)
+                context["class_name"] = f"{self.model.__name__}s"
         try:
             context["create_view_link"] = self.model.get_createview_url()
         except AttributeError:
@@ -146,7 +146,7 @@ class GenericListView(django_tables2.SingleTableView):
             timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
                 "%Y-%m-%d-%H-%M-%S"
             )
-            filename = "export_{}".format(timestamp)
+            filename = f"export_{timestamp}"
             response = HttpResponse(content_type="text/csv")
             if context["conf_items"]:
                 conf_items = context["conf_items"]
@@ -161,12 +161,12 @@ class GenericListView(django_tables2.SingleTableView):
                     )
                 except AssertionError:
                     response["Content-Disposition"] = (
-                        'attachment; filename="{}.csv"'.format(filename)
+                        f'attachment; filename="{filename}.csv"'
                     )
                     return response
             else:
                 response["Content-Disposition"] = (
-                    'attachment; filename="{}.csv"'.format(filename)
+                    f'attachment; filename="{filename}.csv"'
                 )
                 return response
             if sep == "comma":
@@ -177,12 +177,10 @@ class GenericListView(django_tables2.SingleTableView):
                 df.to_csv(response, sep="\t", index=False)
             else:
                 df.to_csv(response, sep=",", index=False)
-            response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(
-                filename
-            )
+            response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
             return response
         else:
-            response = super(GenericListView, self).render_to_response(context)
+            response = super().render_to_response(context)
             return response
 
 
@@ -192,12 +190,12 @@ class BaseCreateView(CreateView):
     template_name = "browsing/generic_create.html"
 
     def get_context_data(self, **kwargs):
-        context = super(BaseCreateView, self).get_context_data()
-        context["docstring"] = "{}".format(self.model.__doc__)
+        context = super().get_context_data()
+        context["docstring"] = f"{self.model.__doc__}"
         if self.model.__name__.endswith("s"):
-            context["class_name"] = "{}".format(self.model.__name__)
+            context["class_name"] = f"{self.model.__name__}"
         else:
-            context["class_name"] = "{}s".format(self.model.__name__)
+            context["class_name"] = f"{self.model.__name__}s"
         return context
 
 
@@ -207,12 +205,12 @@ class BaseUpdateView(UpdateView):
     template_name = "browsing/generic_create.html"
 
     def get_context_data(self, **kwargs):
-        context = super(BaseUpdateView, self).get_context_data()
-        context["docstring"] = "{}".format(self.model.__doc__)
+        context = super().get_context_data()
+        context["docstring"] = f"{self.model.__doc__}"
         if self.model.__name__.endswith("s"):
-            context["class_name"] = "{}".format(self.model.__name__)
+            context["class_name"] = f"{self.model.__name__}"
         else:
-            context["class_name"] = "{}s".format(self.model.__name__)
+            context["class_name"] = f"{self.model.__name__}s"
         return context
 
 
@@ -251,7 +249,7 @@ def create_brows_config_obj(app_name, exclude_fields=[]):
         return False
 
     for x in models:
-        model_name = "{}".format(x.__name__.lower())
+        model_name = f"{x.__name__.lower()}"
         for f in x._meta.get_fields(include_parents=False):
             if f.name not in exclude:
                 field_name = f.name

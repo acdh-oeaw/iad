@@ -1,12 +1,12 @@
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.list import ListView
 
-from .models import Reference
 from .forms import ReferenceForm
+from .models import Reference
 
 
 class ReferenceListView(ListView):
@@ -14,15 +14,15 @@ class ReferenceListView(ListView):
     template_naem = "bib/reference_list.html"
 
     def get_context_data(self, **kwargs):
-        context = super(ReferenceListView, self).get_context_data(**kwargs)
-        context["docstring"] = "{}".format(self.model.__doc__)
+        context = super().get_context_data(**kwargs)
+        context["docstring"] = f"{self.model.__doc__}"
         if self.model._meta.verbose_name_plural:
-            context["class_name"] = "{}".format(self.model._meta.verbose_name.title())
+            context["class_name"] = f"{self.model._meta.verbose_name.title()}"
         else:
             if self.model.__name__.endswith("s"):
-                context["class_name"] = "{}".format(self.model.__name__)
+                context["class_name"] = f"{self.model.__name__}"
             else:
-                context["class_name"] = "{}s".format(self.model.__name__)
+                context["class_name"] = f"{self.model.__name__}s"
         try:
             context["create_view_link"] = self.model.get_createview_url()
         except AttributeError:
@@ -43,12 +43,12 @@ class BaseCreateView(CreateView):
     template_name = "bib/generic_create.html"
 
     def get_context_data(self, **kwargs):
-        context = super(BaseCreateView, self).get_context_data()
-        context["docstring"] = "{}".format(self.model.__doc__)
+        context = super().get_context_data()
+        context["docstring"] = f"{self.model.__doc__}"
         if self.model.__name__.endswith("s"):
-            context["class_name"] = "{}".format(self.model.__name__)
+            context["class_name"] = f"{self.model.__name__}"
         else:
-            context["class_name"] = "{}s".format(self.model.__name__)
+            context["class_name"] = f"{self.model.__name__}s"
         return context
 
 
@@ -58,12 +58,12 @@ class BaseUpdateView(UpdateView):
     template_name = "archiv/generic_create.html"
 
     def get_context_data(self, **kwargs):
-        context = super(BaseUpdateView, self).get_context_data()
-        context["docstring"] = "{}".format(self.model.__doc__)
+        context = super().get_context_data()
+        context["docstring"] = f"{self.model.__doc__}"
         if self.model.__name__.endswith("s"):
-            context["class_name"] = "{}".format(self.model.__name__)
+            context["class_name"] = f"{self.model.__name__}"
         else:
-            context["class_name"] = "{}s".format(self.model.__name__)
+            context["class_name"] = f"{self.model.__name__}s"
         return context
 
 
@@ -78,7 +78,7 @@ class ReferenceCreate(BaseCreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ReferenceCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ReferenceUpdate(BaseUpdateView):
@@ -87,7 +87,7 @@ class ReferenceUpdate(BaseUpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ReferenceUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ReferenceDelete(DeleteView):
@@ -97,4 +97,4 @@ class ReferenceDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ReferenceDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)

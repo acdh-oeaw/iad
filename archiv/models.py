@@ -1,7 +1,6 @@
-import reversion
 import json
 
-from django.urls import reverse
+import reversion
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
@@ -9,14 +8,14 @@ from django.contrib.gis.db.models import Union
 from django.contrib.postgres.fields import IntegerRangeField
 from django.core.serializers import serialize
 from django.db.models import Max, Min
-
+from django.urls import reverse
 from psycopg2.extras import NumericRange
 
-from idprovider.models import IdProvider
-from entities.models import Place, Person, Institution
-from vocabs.models import SkosConcept
 from bib.models import Reference
+from entities.models import Institution, Person, Place
+from idprovider.models import IdProvider
 from shapes.models import Municipality
+from vocabs.models import SkosConcept
 
 
 def modify_fields(**kwargs):
@@ -49,9 +48,9 @@ class AltName(IdProvider):
 
     def __str__(self):
         if self.language:
-            return "{} ({})".format(self.label, self.language)
+            return f"{self.label} ({self.language})"
         else:
-            return "{}".format(self.label)
+            return f"{self.label}"
 
     @classmethod
     def get_listview_url(self):
@@ -185,7 +184,7 @@ class IadBaseClass(IdProvider):
                 .convex_hull.geojson
             )
             geojson["properties"] = {
-                "name": "Convex hull of all {} objects".format(self.__name__)
+                "name": f"Convex hull of all {self.__name__} objects"
             }
             geojson = json.dumps(geojson)
             return geojson
@@ -197,9 +196,9 @@ class IadBaseClass(IdProvider):
         obj = self
         obj.id = None
         obj.pk = None
-        old_name = "{}".format(self.name)
+        old_name = f"{self.name}"
         if old_name:
-            obj.name = "COPY OF {}".format(old_name)
+            obj.name = f"COPY OF {old_name}"
         else:
             obj.name = "COPY of some other Object"
         obj.save()
@@ -306,7 +305,7 @@ class Period(IadBaseClass):
         return reverse("archiv:period_detail", kwargs={"pk": self.id})
 
     def __str__(self):
-        return "{}".format(self.name)
+        return f"{self.name}"
 
 
 SITE_OWNERSHIP = (
@@ -628,15 +627,15 @@ class Site(IadBaseClass):
             neg_end = 0 - self.site_end_date
         else:
             neg_end = None
-        print("{} - {}".format(neg_start, neg_end))
+        print(f"{neg_start} - {neg_end}")
         self.temp_extent = NumericRange(lower=neg_start, upper=neg_end)
         super().save(*args, **kwargs)
 
     def __str__(self):
         if self.name:
-            return "{}".format(self.name)
+            return f"{self.name}"
         else:
-            return "{}".format(self.id)
+            return f"{self.id}"
 
 
 @reversion.register()
@@ -801,13 +800,11 @@ class ResearchEvent(IadBaseClass):
                 [x.name for x in self.responsible_researcher.all()]
             )
             methods = " | ".join([x.pref_label for x in self.research_method.all()])
-            return "{}; {}; {} (id:{})".format(
-                self.start_date, researchers, methods, self.id
-            )
+            return f"{self.start_date}; {researchers}; {methods} (id:{self.id})"
         elif self.start_date and self.research_method:
             methods = " | ".join([x.pref_label for x in self.research_method.all()])
-            return "{}; {} (id:{})".format(self.start_date, methods, self.id)
-        return "{}".format(self.id)
+            return f"{self.start_date}; {methods} (id:{self.id})"
+        return f"{self.id}"
 
     @classmethod
     def get_listview_url(self):
@@ -1038,9 +1035,9 @@ class ArchEnt(IadBaseClass):
 
     def __str__(self):
         if self.name:
-            return "{}".format(self.name)
+            return f"{self.name}"
         else:
-            return "{}".format(self.identifier)
+            return f"{self.identifier}"
 
 
 HERITAGE_STATUS_CHOICES = (
@@ -1162,4 +1159,4 @@ class MonumentProtection(IadBaseClass):
         return reverse("archiv:monumentprotection_detail", kwargs={"pk": self.id})
 
     def __str__(self):
-        return "MonumentProtection {} for Site {}".format(self.id, self.site_id)
+        return f"MonumentProtection {self.id} for Site {self.site_id}"

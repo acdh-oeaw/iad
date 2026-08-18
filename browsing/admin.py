@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from browsing.models import BrowsConf
 
 

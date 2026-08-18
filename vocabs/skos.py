@@ -1,9 +1,11 @@
-import lxml.etree as ET
 import csv
+
+import lxml.etree as ET
+
 from .models import SkosConcept, SkosConceptScheme, SkosLabel
 
 
-class Csv2SkosReader(object):
+class Csv2SkosReader:
     """
     extract SKOS-like objects from special structured CSV sheets
     and returns a list of dictionaries containing data needed to
@@ -16,8 +18,8 @@ class Csv2SkosReader(object):
         self.headers = self.data[0]
         try:
             self.alt_lang = (self.headers[1])[
-                (self.headers[1]).index("@") + 1 :  # noqa
-            ]  # noqa
+                (self.headers[1]).index("@") + 1 :
+            ]
         except:  # noqa: E722
             self.alt_lang = None
         self.schemes = set([x[0] for x in self.data[1:]])
@@ -156,7 +158,7 @@ class Csv2SkosImporter(Csv2SkosReader):
         return report
 
 
-class SkosReader(object):
+class SkosReader:
     """
     reads a skos file (RDF/XML) and returns a list of dictionaries
     containing rdf:Description properties
@@ -358,9 +360,7 @@ class SkosImporter(SkosReader):
                 num_description_type_concept += 1
         concepts_after = len(SkosConcept.objects.all())
         summary = (
-            "#descr. type 'concept': {} |  #descr. type 'conceptSchemes': {}".format(
-                num_description_type_concept, num_description_type_concept_scheme
-            )
+            f"#descr. type 'concept': {num_description_type_concept} |  #descr. type 'conceptSchemes': {num_description_type_concept_scheme}"
         )
 
         report = {

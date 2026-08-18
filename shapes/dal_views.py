@@ -1,6 +1,7 @@
 from dal import autocomplete
-from .models import Municipality
 from django.db.models import Q
+
+from .models import Municipality
 
 
 class MunicipalityAC(autocomplete.Select2QuerySetView):

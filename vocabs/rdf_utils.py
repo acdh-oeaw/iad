@@ -1,15 +1,16 @@
 import rdflib
+from django.utils import timezone
 from rdflib import (
-    Literal,
-    Namespace,
     RDF,
-    URIRef,
     RDFS,
     XSD,
+    Literal,
+    Namespace,
+    URIRef,
 )
 from rdflib.namespace import DC, SKOS
+
 from .models import Metadata
-from django.utils import timezone
 
 DCT = Namespace("http://purl.org/dc/terms/")
 OWL = Namespace("http://www.w3.org/2002/07/owl#")

@@ -1,11 +1,11 @@
-from django.urls import path, include
 from django.contrib import admin
+from django.urls import include, path
 from rest_framework import routers
-from bib.api_views import ZotItemViewSet
 
-from vocabs import api_views
 from archiv import api_views as archiv_api_views
+from bib.api_views import ZotItemViewSet
 from shapes import api_views as shapes_api_vies
+from vocabs import api_views
 
 router = routers.DefaultRouter()
 router.register(r"skoslabels", api_views.SkosLabelViewSet)

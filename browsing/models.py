@@ -19,4 +19,4 @@ class BrowsConf(models.Model):
     )
 
     def __str__(self):
-        return "{}.{} ({})".format(self.model_name, self.field_path, self.label)
+        return f"{self.model_name}.{self.field_path} ({self.label})"

@@ -1,9 +1,10 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
-from .serializers import PlaceSerializer, AlternativeNameSerializer, GeoJsonSerializer
-from .models import Place, AlternativeName
-from .api_renderers import GeoJsonRenderer
 from rest_framework.settings import api_settings
+
+from .api_renderers import GeoJsonRenderer
+from .models import AlternativeName, Place
+from .serializers import AlternativeNameSerializer, GeoJsonSerializer, PlaceSerializer
 
 
 class PlaceViewSet(viewsets.ModelViewSet):

@@ -1,6 +1,7 @@
 from dal import autocomplete
-from .models import Person, Place, AlternativeName, Institution
 from django.db.models import Q
+
+from .models import AlternativeName, Institution, Person, Place
 
 
 class AlternativeNameAC(autocomplete.Select2QuerySetView):

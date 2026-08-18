@@ -1,19 +1,16 @@
-from django.urls import reverse_lazy
-
-from django.views.generic.edit import DeleteView
-from django.views.generic.detail import DetailView
-
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import DeleteView
 from django_tables2 import RequestConfig
 
-from .models import Municipality
-from .tables import MunicipalityTable
+from webpage.utils import BaseCreateView, BaseUpdateView, GenericListView
+
 from .filters import MunicipalityListFilter
 from .forms import MunicipalityFilterFormHelper, MunicipalityForm
-
-from webpage.utils import GenericListView, BaseCreateView, BaseUpdateView
+from .models import Municipality
+from .tables import MunicipalityTable
 
 
 class MunicipalityListView(GenericListView):
@@ -34,7 +31,7 @@ class MunicipalityListView(GenericListView):
         return all_cols
 
     def get_context_data(self, **kwargs):
-        context = super(MunicipalityListView, self).get_context_data()
+        context = super().get_context_data()
         context[self.context_filter_name] = self.filter
         togglable_colums = [
             x for x in self.get_all_cols() if x not in self.init_columns
@@ -66,7 +63,7 @@ class MunicipalityCreate(BaseCreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MunicipalityCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class MunicipalityUpdate(BaseUpdateView):
@@ -75,7 +72,7 @@ class MunicipalityUpdate(BaseUpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MunicipalityUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class MunicipalityDelete(DeleteView):
@@ -85,4 +82,4 @@ class MunicipalityDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MunicipalityDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)

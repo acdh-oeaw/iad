@@ -1,13 +1,14 @@
 from django.contrib.gis import admin
 from reversion.admin import VersionAdmin
+
 from .models import (
+    AltName,
+    ArchEnt,
     MonumentProtection,
+    Period,
     ResearchEvent,
     ResearchQuestion,
-    ArchEnt,
-    Period,
     Site,
-    AltName,
 )
 
 

@@ -1,13 +1,14 @@
-from django import forms
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset
 from crispy_forms.bootstrap import Accordion, AccordionGroup
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Fieldset, Layout, Submit
+from django import forms
+
 from .models import Municipality
 
 
 class MunicipalityFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(MunicipalityFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -31,7 +32,7 @@ class MunicipalityForm(forms.ModelForm):
         ]
 
     def __init__(self, *args, **kwargs):
-        super(MunicipalityForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"

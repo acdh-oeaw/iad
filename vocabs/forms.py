@@ -10,7 +10,7 @@ from .models import Metadata, SkosCollection, SkosConcept, SkosConceptScheme, Sk
 
 class GenericFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(GenericFilterFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -21,7 +21,7 @@ class UploadFileForm(forms.Form):
     file = forms.FileField()
 
     def __init__(self, *args, **kwargs):
-        super(UploadFileForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"
@@ -34,7 +34,7 @@ class UploadFileForm(forms.Form):
 
 class SkosConceptFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(SkosConceptFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -60,7 +60,7 @@ class MetadataForm(forms.ModelForm):
         )
 
     def __init__(self, *args, **kwargs):
-        super(MetadataForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"
@@ -77,7 +77,7 @@ class SkosCollectionForm(forms.ModelForm):
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
-        super(SkosCollectionForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"
@@ -130,7 +130,7 @@ class SkosConceptForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(SkosConceptForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"
@@ -147,7 +147,7 @@ class SkosConceptSchemeForm(forms.ModelForm):
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
-        super(SkosConceptSchemeForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"
@@ -160,7 +160,7 @@ class SkosConceptSchemeForm(forms.ModelForm):
 
 class SkosConceptSchemeFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(SkosConceptSchemeFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -182,7 +182,7 @@ class SkosLabelForm(forms.ModelForm):
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
-        super(SkosLabelForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = "form-horizontal"
@@ -195,7 +195,7 @@ class SkosLabelForm(forms.ModelForm):
 
 class SkosLabelFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(SkosLabelFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"
@@ -205,7 +205,7 @@ class SkosLabelFormHelper(FormHelper):
 
 class SkosCollectionFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(SkosCollectionFormHelper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_class = "genericFilterForm"
         self.form_method = "GET"

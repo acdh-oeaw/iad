@@ -1,6 +1,7 @@
 from rest_framework import viewsets
-from bib.serializers import ZotItemSerializer
+
 from bib.models import ZotItem
+from bib.serializers import ZotItemSerializer
 
 
 class ZotItemViewSet(viewsets.ModelViewSet):

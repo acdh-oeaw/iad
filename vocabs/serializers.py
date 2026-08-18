@@ -1,10 +1,11 @@
 from rest_framework import serializers
+
 from .models import (
+    Metadata,
+    SkosCollection,
     SkosConcept,
     SkosConceptScheme,
     SkosLabel,
-    SkosCollection,
-    Metadata,
     SkosNamespace,
 )
 

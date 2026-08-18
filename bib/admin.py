@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import ZotItem, Reference
+
+from .models import Reference, ZotItem
 
 
 class ZotItemAdmin(admin.ModelAdmin):

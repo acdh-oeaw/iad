@@ -163,7 +163,7 @@ VOCABS_DEFAULT_PEFIX = os.path.basename(BASE_DIR)
 
 VOCABS_SETTINGS = {
     "default_prefix": VOCABS_DEFAULT_PEFIX,
-    "default_ns": "http://www.vocabs/{}/".format(VOCABS_DEFAULT_PEFIX),
+    "default_ns": f"http://www.vocabs/{VOCABS_DEFAULT_PEFIX}/",
     "default_lang": "eng",
 }
 

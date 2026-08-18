@@ -1,6 +1,6 @@
-from django.urls import reverse
-from django.core.serializers import serialize
 from django.contrib.gis.db import models
+from django.core.serializers import serialize
+from django.urls import reverse
 
 
 class Municipality(models.Model):
@@ -19,8 +19,8 @@ class Municipality(models.Model):
         ordering = ["id"]
 
     def __str__(self):
-        name = "{}".format(self.lau2nam)
-        return "{}, {}".format(name, self.nuts3nam)
+        name = f"{self.lau2nam}"
+        return f"{name}, {self.nuts3nam}"
 
     def get_absolute_url(self):
         return reverse("shapes:municipality_detail", kwargs={"pk": self.id})

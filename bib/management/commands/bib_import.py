@@ -1,7 +1,9 @@
 import datetime
+
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from bib.zot_utils import items_to_dict, create_zotitem
+
+from bib.zot_utils import create_zotitem, items_to_dict
 
 library_id = settings.Z_ID
 library_type = settings.Z_LIBRARY_TYPE
@@ -33,9 +35,9 @@ class Command(BaseCommand):
         else:
             since = None
 
-        self.stdout.write(self.style.SUCCESS("{}, {}".format(limit, since)))
+        self.stdout.write(self.style.SUCCESS(f"{limit}, {since}"))
         self.stdout.write(
-            self.style.SUCCESS("started: {}".format(datetime.datetime.now()))
+            self.style.SUCCESS(f"started: {datetime.datetime.now()}")
         )
         items = items_to_dict(
             library_id, library_type, api_key, limit=limit, since_version=since
@@ -43,11 +45,11 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS("fetched {} items".format(len(items["items"])))
         )
-        self.stdout.write(self.style.SUCCESS("{}".format(datetime.datetime.now())))
+        self.stdout.write(self.style.SUCCESS(f"{datetime.datetime.now()}"))
         self.stdout.write(self.style.SUCCESS("starting creating/updating models now"))
         for x in items["bibs"]:
             temp_item = create_zotitem(x)
-            self.stdout.write(self.style.SUCCESS("created: {}".format(temp_item)))
+            self.stdout.write(self.style.SUCCESS(f"created: {temp_item}"))
         self.stdout.write(
-            self.style.SUCCESS("ended: {}".format(datetime.datetime.now()))
+            self.style.SUCCESS(f"ended: {datetime.datetime.now()}")
         )

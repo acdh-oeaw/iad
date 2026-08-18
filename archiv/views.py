@@ -1,29 +1,28 @@
-from django.db.models import Q
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.views.generic.detail import DetailView
-from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from reversion.models import Version
 
 from .forms import (
+    AltNameForm,
+    ArchEntForm,
     MonumentProtectionForm,
+    PeriodForm,
     ResearchEventForm,
     ResearchQuestionForm,
-    ArchEntForm,
-    PeriodForm,
     SiteForm,
-    AltNameForm,
 )
 from .models import (
+    AltName,
+    ArchEnt,
     MonumentProtection,
+    Period,
     ResearchEvent,
     ResearchQuestion,
-    ArchEnt,
-    Period,
     Site,
-    AltName,
 )
 
 
@@ -33,13 +32,13 @@ class BaseCreateView(CreateView):
     template_name = "archiv/generic_create.html"
 
     def get_context_data(self, **kwargs):
-        context = super(BaseCreateView, self).get_context_data()
-        context["docstring"] = "{}".format(self.model.__doc__)
+        context = super().get_context_data()
+        context["docstring"] = f"{self.model.__doc__}"
         context["self_model_name"] = self.model.__name__.lower()
         if self.model._meta.verbose_name:
-            context["class_name"] = "{}".format(self.model._meta.verbose_name.title())
+            context["class_name"] = f"{self.model._meta.verbose_name.title()}"
         else:
-            context["class_name"] = "{}".format(self.model.__name__)
+            context["class_name"] = f"{self.model.__name__}"
         return context
 
 
@@ -49,13 +48,13 @@ class BaseUpdateView(UpdateView):
     template_name = "archiv/generic_create.html"
 
     def get_context_data(self, **kwargs):
-        context = super(BaseUpdateView, self).get_context_data()
+        context = super().get_context_data()
         context["self_model_name"] = self.model.__name__.lower()
-        context["docstring"] = "{}".format(self.model.__doc__)
+        context["docstring"] = f"{self.model.__doc__}"
         if self.model._meta.verbose_name:
-            context["class_name"] = "{}".format(self.model._meta.verbose_name.title())
+            context["class_name"] = f"{self.model._meta.verbose_name.title()}"
         else:
-            context["class_name"] = "{}".format(self.model.__name__)
+            context["class_name"] = f"{self.model.__name__}"
         return context
 
 
@@ -65,7 +64,7 @@ class ArchEntDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         user = self.request.user
-        context = super(ArchEntDetailView, self).get_context_data()
+        context = super().get_context_data()
         if self.object.public or user.is_authenticated:
             context["not_logged_in"] = False
         else:
@@ -79,7 +78,7 @@ class ArchEntCreate(BaseCreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ArchEntCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ArchEntUpdate(BaseUpdateView):
@@ -87,7 +86,7 @@ class ArchEntUpdate(BaseUpdateView):
     form_class = ArchEntForm
 
     def get_context_data(self, **kwargs):
-        context = super(ArchEntUpdate, self).get_context_data()
+        context = super().get_context_data()
         instance = self.object
 
         if self.model.objects.filter(id=instance.id).filter(
@@ -109,14 +108,14 @@ class ArchEntUpdate(BaseUpdateView):
         try:
             instance = self.object
             site_poly = instance.site_id.get_geojson()
-            context["site_poly"] = "{}".format(site_poly)
+            context["site_poly"] = f"{site_poly}"
         except:  # noqa: E722
             context["site_poly"] = None
         return context
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ArchEntUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ArchEntDelete(DeleteView):
@@ -126,7 +125,7 @@ class ArchEntDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ArchEntDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class SiteDetailView(DetailView):
@@ -135,7 +134,7 @@ class SiteDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         user = self.request.user
-        context = super(SiteDetailView, self).get_context_data()
+        context = super().get_context_data()
         if (
             self.object.public and self.object.site_checked_by
         ) or user.is_authenticated:
@@ -159,7 +158,7 @@ class SiteCreate(BaseCreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(SiteCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class SiteUpdate(BaseUpdateView):
@@ -168,7 +167,7 @@ class SiteUpdate(BaseUpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(SiteUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class SiteDelete(DeleteView):
@@ -178,7 +177,7 @@ class SiteDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(SiteDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ResearchEventDetailView(DetailView):
@@ -187,7 +186,7 @@ class ResearchEventDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         user = self.request.user
-        context = super(ResearchEventDetailView, self).get_context_data()
+        context = super().get_context_data()
         if self.object.public or user.is_authenticated:
             context["not_logged_in"] = False
         else:
@@ -201,7 +200,7 @@ class ResearchEventCreate(BaseCreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ResearchEventCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ResearchEventUpdate(BaseUpdateView):
@@ -209,7 +208,7 @@ class ResearchEventUpdate(BaseUpdateView):
     form_class = ResearchEventForm
 
     def get_context_data(self, **kwargs):
-        context = super(ResearchEventUpdate, self).get_context_data()
+        context = super().get_context_data()
         if self.object.convex_hulls:
             context["convex_hulls"] = self.object.convex_hulls
         else:
@@ -218,7 +217,7 @@ class ResearchEventUpdate(BaseUpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ResearchEventUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ResearchEventDelete(DeleteView):
@@ -228,7 +227,7 @@ class ResearchEventDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ResearchEventDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class AltNameDetailView(DetailView):
@@ -237,7 +236,7 @@ class AltNameDetailView(DetailView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(AltNameDetailView, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class AltNameCreate(BaseCreateView):
@@ -246,7 +245,7 @@ class AltNameCreate(BaseCreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(AltNameCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class AltNameUpdate(BaseUpdateView):
@@ -255,7 +254,7 @@ class AltNameUpdate(BaseUpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(AltNameUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class AltNameDelete(DeleteView):
@@ -265,7 +264,7 @@ class AltNameDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(AltNameDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class PeriodDetailView(DetailView):
@@ -279,7 +278,7 @@ class PeriodCreate(BaseCreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(PeriodCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class PeriodUpdate(BaseUpdateView):
@@ -288,7 +287,7 @@ class PeriodUpdate(BaseUpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(PeriodUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class PeriodDelete(DeleteView):
@@ -298,7 +297,7 @@ class PeriodDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(PeriodDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ResearchQuestionDetailView(DetailView):
@@ -307,7 +306,7 @@ class ResearchQuestionDetailView(DetailView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ResearchQuestionDetailView, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ResearchQuestionCreate(BaseCreateView):
@@ -316,7 +315,7 @@ class ResearchQuestionCreate(BaseCreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ResearchQuestionCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ResearchQuestionUpdate(BaseUpdateView):
@@ -325,7 +324,7 @@ class ResearchQuestionUpdate(BaseUpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ResearchQuestionUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class ResearchQuestionDelete(DeleteView):
@@ -335,7 +334,7 @@ class ResearchQuestionDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ResearchQuestionDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class MonumentProtectionDetailView(DetailView):
@@ -344,7 +343,7 @@ class MonumentProtectionDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         user = self.request.user
-        context = super(MonumentProtectionDetailView, self).get_context_data()
+        context = super().get_context_data()
         if self.object.public or user.is_authenticated:
             context["not_logged_in"] = False
         else:
@@ -358,7 +357,7 @@ class MonumentProtectionCreate(BaseCreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MonumentProtectionCreate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class MonumentProtectionUpdate(BaseUpdateView):
@@ -366,18 +365,18 @@ class MonumentProtectionUpdate(BaseUpdateView):
     form_class = MonumentProtectionForm
 
     def get_context_data(self, **kwargs):
-        context = super(MonumentProtectionUpdate, self).get_context_data()
+        context = super().get_context_data()
         try:
             instance = self.object
             site_poly = instance.site_id.get_geojson()
-            context["site_poly"] = "{}".format(site_poly)
+            context["site_poly"] = f"{site_poly}"
         except:  # noqa: E722
             context["site_poly"] = None
         return context
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MonumentProtectionUpdate, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 
 class MonumentProtectionDelete(DeleteView):
@@ -387,4 +386,4 @@ class MonumentProtectionDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MonumentProtectionDelete, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)

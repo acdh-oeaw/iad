@@ -1,5 +1,6 @@
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
-from .models import Site, ArchEnt
+
+from .models import ArchEnt, Site
 
 
 class SiteSerializer(GeoFeatureModelSerializer):
